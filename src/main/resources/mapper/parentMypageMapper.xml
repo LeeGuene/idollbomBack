@@ -8,6 +8,10 @@
         values (seq_project.NEXTVAL,#{childName},#{childAge},#{childGender},#{childSpecialIssues},#{parentNumber})
     </select>
 
+    <!--  아이List 보기-->
+    <select id="selectKidsList">
+        select * from child
+    </select>
     <!--  아이삭제  -->
     <delete id="deleteKids">
         delete child

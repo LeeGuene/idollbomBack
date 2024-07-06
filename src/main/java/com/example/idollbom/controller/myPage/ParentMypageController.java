@@ -1,6 +1,7 @@
 package com.example.idollbom.controller.myPage;
 
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
+import com.example.idollbom.domain.vo.myPagevo.parentvo.kidVO;
 import com.example.idollbom.service.myPageservice.parentservice.kidsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 @Controller
 @RequestMapping("/ParentMyPage")
@@ -22,7 +24,9 @@ public class ParentMypageController {
 //  kid 페이지로 이동
     @GetMapping("/kids")
     public String getKids(Model model){
+        List<kidVO> kids = kidsService.selectKidsList();
         model.addAttribute("kid", new kidDTO());
+        model.addAttribute("kids", kids);
         return "html/myPage/parent/myKids";
     }
 
@@ -38,6 +42,7 @@ public class ParentMypageController {
         int age = period.getYears();
         kid.setChildAge(String.valueOf(age));
         kidsService.insertKids(kid);
+
         return "redirect:/ParentMyPage/kids";
     }
 

@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class kidsServiceImpl implements kidsService {
@@ -31,5 +33,10 @@ public class kidsServiceImpl implements kidsService {
         kidDTO.setParentNumber(userNumber.getParentNumber());
 
         kidsMapper.insertKids(kidVO.toEntity(kidDTO));
+    }
+
+    @Override
+    public List<kidVO> selectKidsList() {
+        return kidsMapper.selectKidsList();
     }
 }

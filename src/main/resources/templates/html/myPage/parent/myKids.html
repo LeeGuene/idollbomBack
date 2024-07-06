@@ -127,7 +127,7 @@
                 <!-- 아이 등록 후에 페이지 -->
                 <div class="mykids">
                     <div class="mykids-all">
-                        <div class="info-box">
+                        <div class="info-box" th:each="kid : ${kids}">
                             <div>
                                 <div class="action-form">
                                     <div class="actions">
@@ -137,9 +137,10 @@
                                 </div>
                                 <div class="kids">
                                     <div>
-                                        <h2>강민정</h2>
-                                        <p><strong>나이:</strong> 4세</p>
-                                        <p>아이가 좀 산만한 편입니다.</p>
+                                        <h2 th:text="${kid.childName}">강민정</h2>
+                                        <p ><strong th:text="${kid.childAge}">나이:</strong>세</p>
+                                        <p th:text="${kid.childSpecialIssues}">아이가 좀 산만한 편입니다.</p>
+                                        <input type="hidden" th:value="${kid.childNumber}">
                                     </div>
                                 </div>
 
