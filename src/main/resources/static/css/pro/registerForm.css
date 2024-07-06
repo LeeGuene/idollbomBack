@@ -1,0 +1,234 @@
+#register-form-wrapper{
+  padding-top: 100px;
+  height: 100%;
+  width: 80vw;
+  margin: 0 auto;
+}
+/* 수업등록 페이지 제목 css */
+.study-page-title{
+  margin: 100px 0 50px 0;
+}
+
+.study-page-title > h1{
+  font-size: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+/* 수업등록 폼 css */
+#register-form{
+  width: 100%;
+  padding: 20px;
+  /* border: 3px solid red; */
+}
+
+/* 수업 제목 css */
+.study-title{
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.study-title{}
+/* =============================================== */
+/* 카테고리(대) css */
+
+/* 카테고리 제목 css */
+.study-select > .category-title{
+  margin: 20px 0;
+  padding-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+}
+
+.study-select > div{
+  margin-bottom: 30px;
+  padding-left: 20px;
+}
+
+/* 카테고리(대) label, input css */
+.study-title > label{
+  display: inline-block;
+  width: 150px;
+  text-align: left;
+}
+
+.study-title > input{
+  width: 50%;
+  padding: 10px 15px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+
+/* 카테고리(대) , 카테고리(소) 제목 css */
+.study-select h2{
+  width: 100%;
+  font-size: 18px;
+  padding-bottom: 10px;
+  margin: 10px auto;
+  border-bottom: 1px solid #ccc;
+}
+
+.study-select > .category-big > h2{
+  color: #F93270;
+}
+
+.study-select > .category-small > h2{
+  color: #00B455;   
+}
+
+/* 카테고리(소) css */
+.category-big > input{
+  width: 50px;
+}
+
+#category-wrap{
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #ccc;
+  padding: 5px;
+  width: 200px;
+  margin: 10px 0 0 10px;
+}
+
+#category-wrap{}
+/* ========================================================= */
+/* 날짜 및 시간선택 css */
+.date-wrapper > h1{
+  padding-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.date-wrapper > div{
+  border-top: 3px solid #00B455;
+  border-bottom: 3px solid #00B455;
+  padding: 20px 0; 
+}
+
+.date-select{
+  display: flex;
+  align-items: center;
+}
+
+/* 날짜 선택 네비바 - 첫 번째 네비바에만 적용되는 css */
+.date-select > nav{
+  display: flex;
+  column-gap: 10px;
+  height: 30px;
+  padding-left: 30px;
+  position: relative;
+  z-index: 0;
+}
+
+
+/* 날짜 관련 css */
+.day, .month, .year, .hour{
+  overflow: hidden;
+  background-color: #fff;
+  cursor: pointer;
+  position: relative;
+}
+
+/* 마우스 hover되었을 경우, 목록이 나타나도록 설정 */
+.month:hover,
+.day:hover,
+.year:hover,
+.hour:hover{
+  height: 140px;
+}
+
+/* 마우스 스크롤바 제거 */
+.day::-webkit-scrollbar,
+.month::-webkit-scrollbar,
+.hour::-webkit-scrollbar{
+  display: none;
+}
+
+/* 연, 월, 일 안에 있는 목록 css */
+.year > li,
+.month > li,
+.day > li,
+.hour > li{
+  height: 0;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* 연, 월,일 목록을 선택한 경우의 css */
+.year > li:hover,
+.month > li:hover,
+.day > li:hover,
+.hour > li:hover{
+  color: #fff;
+  background-color: blue;
+}
+
+.year:hover > li,
+.month:hover > li,
+.day:hover > li,
+.hour:hover > li{
+  height: 30px;
+}
+
+/* 날짜(연, 월, 일)이 출력되는 공간에 대한 css */
+.year-select{
+  width: 50px;
+  text-align: right;
+  margin-top: 5px;
+}
+
+.month-select,
+.day-select,
+.hour-select{
+  width: 20px;
+  margin-top: 5px;
+}
+
+/* 드롭다운 화살표 css */
+.day > .drop-down,
+.month > .drop-down,
+.year > .drop-down,
+.hour > .drop-down{
+  margin-right: 25px;
+  position: relative;
+  top: 0;
+  left: 30%;
+} 
+
+.year-select{}
+/* =========================================================== */
+
+/* 썸머노트 css */
+.summer-note{
+  z-index: -1;
+  position: relative;
+  margin-top: 30px;
+  border-bottom: 2px solid #ddd;
+}
+
+.summer-note > h1{
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #ddd;
+}
+
+/* 수업등록 버튼 css */
+.register-button-wrap{
+  margin: 30px 0;
+}
+
+.submit-btn{
+  padding: 5px 15px; 
+  background-color: #00B455;
+  border-radius: 10px;
+  color: #fff;
+  width: 100%;
+
+}
+
+

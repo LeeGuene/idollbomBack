@@ -1,0 +1,39 @@
+/* 각 div마다 틈을 주는 css */
+.mb-3{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+.evaluation-wrap{
+    display: flex;
+    flex-direction: column;
+}
+
+.evaluation-wrap > h1{
+    font-size: 16px;
+    text-align: left;
+}
+
+.evaluation-wrap > div{
+    display: flex;
+    justify-content: space-around;
+}
+
+.evaluation-wrap > div > span{
+    font-size: 20px;
+}
+
+.evaluation-wrap > div > span:first-child{
+    color:  #00568b;
+}
+
+.profile-body{
+    width: 500px;
+    height: 700px;
+}
+
+/* 모달 위치 한번 더 잡아줌 */
+.modal-body{
+    margin-top: -350px;
+}

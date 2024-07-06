@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../static/css/layout/header.css">
+    <link rel="stylesheet" href="../../../../static/css/layout/footer.css">
+    <link rel="stylesheet" href="../../../../static/css/myPage/pro/propage_calender.css">
+    <title>전문가 캘린더 페이지</title>
+</head>
+
+<body>
+    <!-- 프로 메인 네비바 -->
+    <header id="header">
+        <div class="header_wrap">
+            <h1><a href="../../html/main/index_pro.html"><img src="../../images/logo.png" alt="IDOLL봄"></a></h1>
+
+            <nav>
+                <ul class="gnb">
+                    <li>
+                        <a href="#">수업등록</a>
+                    </li>
+                    <li>
+                        <a href="#">아이찾기</a>
+                    </li>
+                    <li>
+                        <a href="#">신청하기</a>
+                    </li>
+                    <li>
+                        <a href="#">공지사항</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="side">
+                <p><button><img src="../../images/Alarm.png" alt="알림"></button></p>
+                <p><a href="#">마이페이지</a></p>
+                <p><a href="#">로그인 /</a></p>
+                <p><a href="#">회원가입</a></p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="inincontainer">
+            <div class="mypage-main">마이페이지 > 캘린더</div>
+            <div class="incontainer">
+                <div class="menu-bar">
+                    <div class="menu-bar-option">
+                        <a href="../../html/propage/propage_fixprofile.html">내정보 수정</a>
+                    </div>
+                    <hr class="custom-hr">
+                    <div class="menu-bar-option">
+                        <a href="../../html/propage/propage_class.html">내 수업 목록</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a href="../../html/propage/propage_hateUser.html">신고 목록</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a href="../../html/propage/propage_proPost.html">내가 쓴 게시글</a>
+                    </div>
+                    <hr class="custom-hr">
+                    <div class="menu-bar-option">
+                        <p>캘린더</p>
+                    </div>
+                    <div class="myprofile">
+                        <div class="profileimage">
+                            <img src="../../images/class_list_pro 2.png" alt="profileImage" class="img">
+                        </div>
+                        <div class="Nickname">
+                            닉네임
+                        </div>
+
+                        <div class="buttonbox">
+                            <a href="#">
+                                <button class="btn-block" type="button">로그아웃</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 캘린더를 클릭시 나오는 화면 -->
+            </div>
+        </div>
+
+
+
+        <!-- 팝업 배경 -->
+        <div class="popup-bg" id="popup-bg" onclick="closePopup()"></div>
+
+        <!-- 팝업 내용 -->
+        <div class="popup" id="popup">
+            <h2>프로필 편집</h2>
+            <form class="form-signin" action="/auth/<%= userId %>/update" method="POST" enctype="multipart/form-data">
+                <div class="profileimage2">
+                    <img src="<%= result.imageUrl %>" alt="profileImage" class="img">
+                </div>
+                <div class="input-container">
+                    <label for="inputChangeNickName" class="sr-only">닉네임 변경</label>
+                    <input type="text" name="nickname" id="inputChangeNickName" class="form-control"
+                        placeholder="변경할 닉네임" autofocus required>
+                </div>
+                <div class="input-container-three">
+                    <label for="inputDetailAddress" class="sr-only">주소 변경</label>
+                    <input type="text" name="city" id="inputAddress1" class="form-control2" placeholder="시도" autofocus>
+                    <input type="text" name="district" id="inputAddress2" class="form-control2" placeholder="시군구"
+                        autofocus>
+                    <input type="text" name="town" id="inputAddress3" class="form-control2" placeholder="읍면동" autofocus>
+                </div>
+                <div class="input-container">
+                    <input type="text" name="detail" id="inputDetailAddress" class="form-control" placeholder="상세주소"
+                        autofocus required>
+                </div>
+                <div class="input-container">
+                    <label for="profileImage" class="sr-only">프로필 이미지 변경</label>
+                    <input type="file" name="profileImage" id="profileImage" class="form-control">
+                </div>
+                <button type="button" onclick="closePopup()" id="popupButton">취소</button>
+                <button type="submit" id="popupButton">저장</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showPopup() {
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('popup-bg').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('popup-bg').style.display = 'none';
+        }
+    </script>
+
+    <!-- footer -->
+    <footer id="footer">
+        <div class="footer_wrap">
+            <img src="../../images/footer_logo.png" alt="IDOLL봄">
+
+            <div>
+                <div>
+                    <p>사업자등록번호 779-81-00425</p>
+                    <p>통신판매업신고 2021-서울강남04707</p>
+                </div>
+                <address><b>본사</b> : 서울특별시 강남구 테헤란로 152 강남파이낸스센터빌딩 40층 자란다</address>
+                <div>
+                    <p>(주)자란다 대표 김성환</p>
+                    <p>개인정보보호책임자 김택주</p>
+                </div>
+            </div>
+
+            <div>
+                <ul>
+                    <li><a href="#">이용약관</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                    <li><a href="#">고객지원</a></li>
+                    <li><a href="#">운영관리방침</a></li>
+                    <li><a href="#">이메일주소</a></li>
+                </ul>
+                <ul>
+                    <li><a href="https://blog.naver.com/jaranblog" target="_blank"><img
+                                src="../../images/footer_social_blog.png" alt="블로그 바로가기"></a></li>
+                    <li><a href="https://www.instagram.com/jaranda__official" target="_blank"><img
+                                src="../../images/footer_social_insta.png" alt="인스타그램 바로가기"></a></li>
+                    <li><a href="https://www.youtube.com/channel/UCTXkxn1OlVvljxEe-hbd3Vg" target="_blank"><img
+                                src="../../images/footer_social_youtube.png" alt="유튜브 바로가기"></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

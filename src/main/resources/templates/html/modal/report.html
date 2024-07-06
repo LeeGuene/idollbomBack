@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/css/modal/modalstyle.css" />
+    <link rel="stylesheet" href="../../../static/css/modal/report.css" />
+    <title>신고하기</title>
+</head>
+
+<body>
+    <form action="#" method="get">
+        <div class="modal">
+            <div class="modal-body profile-body">
+                <div class="header">
+                    <img class="img" src="../../images/logo.png" alt="로고">
+                    <h3 id="title">신고하기</h3>
+                    <button id="close-btn"><img class="x-btn" src="../../images/closebtn.png" alt="닫기버튼"></button>
+                </div>
+                <div class="mb-3">
+                    <label for="writeform" class="form-label">게시글</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="reportType" class="form-label">신고유형</label>
+                    <select name="reportType" class="selectBox form-control">
+                        <option value="권리침해">권리침해</option>
+                        <option value="허위정보">허위정보</option>
+                        <option value="사칭피해">사칭피해</option>
+                        <option value="불법촬영물">불법촬영물</option>
+                    </select>
+                </div>
+                <div class="report-container">
+                    <label for="textarea" class="form-label reporttext">신고내용</label>
+                    <textarea id="textarea" class="form-control" placeholder="신고내용을 적어주세요." rows="6"></textarea>
+                </div>
+                <div class="modal-btn">
+                    <!-- 추가하기를 누르면 새로운 페이지로 이동 -->
+                    <button class="close-btn btn">취소하기</button>
+                    <button class="add-btn btn" type="submit">신고하기</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <button class="btn-open-modal">신고하기</button>
+    <script src="../../../static/js/modal.js"></script>
+</body>
+
+</html>

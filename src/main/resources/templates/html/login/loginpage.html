@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../../static/css/login/kologinpage.css">
+  <title>Login Page</title>
+</head>
+
+<body>
+  <div class="login-container">
+    <h3>L O G I N</h3>
+    <form id="loginForm">
+      <div class="formCss">
+        <input type="email" id="email" placeholder="Email">
+      </div>
+      <div class="formCss passwordCss">
+        <input type="password" id="password" placeholder="Password">
+        <img src="../../images/visible.png" alt="Show" class="password-icon visible">
+        <img src="../../images/hide.png" alt="Hide" class="password-icon hide">
+        <div class="error-message">
+          <img src="../../images/warning.png" alt="Warning" class="error-icon"> 이메일 또는 비밀번호를 확인해주세요
+        </div>
+      </div>
+      <div class="formCss">
+        <div class="simple-login">간편 로그인</div>
+        <div class="social-login">
+          <div class="social-box : naver">
+            <a href="https://www.naver.com" target="_blank">
+              <img src="../../images/naver.jpeg" alt="Naver">
+            </a>
+          </div>
+          <div class="social-box : kakao">
+            <a href="https://www.kakao.com" target="_blank">
+              <img src="../../images/kakao.png" alt="Kakao">
+            </a>
+          </div>
+          <div class="social-box : google">
+            <a href="https://www.google.com" target="_blank">
+              <img src="../../images/google.png" alt="Google">
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- 로그인/sign up 으로 이동 -->
+      <div class="formCss buttonCss">
+        <input type="submit" value="LOGIN">
+        <input type="button" value="SIGN UP" onclick="window.location='./registerpage.html';">
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

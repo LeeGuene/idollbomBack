@@ -1,0 +1,307 @@
+*{font-family: 'GmarketSansMedium'; }
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;}
+
+    
+form{
+    width: 30vw;
+    margin: 0 auto;
+}
+
+.modal{
+    /* 버튼을 누르기 전엔 display none, 버튼을 눌렀다면 block로 변경 */
+    position:absolute;
+    display:none;
+    
+    justify-content: center;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-body{
+    position:absolute;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 30px;
+    padding: 30px;
+
+    top: 50%;
+    text-align: center;
+
+    background-color: rgb(255,255,255); 
+    border-radius:10px; 
+    box-shadow:0 2px 3px 0 rgba(34,36,38,0.15);
+}
+
+/* 추가하기, 취소하기 버튼 css */
+.modal-btn {
+    height: 10%;        
+    padding: 15px;            
+    border-radius: 10px;
+    display: flex;        
+    justify-content: end;
+    margin-right: -10px;
+
+}
+
+.modal-btn > button{
+    width: 80px;        
+    height: 30px;        
+    border-radius: 5px;        
+    text-align: center;        
+    font-size: 14px;        
+    font-weight: bolder;        
+    padding-top: 5px;        
+    margin-left: 7px;
+}
+
+.form-label{
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+    width: 100px;
+    position: relative;
+}
+
+.form-control {
+    width: 100%;
+    padding: .5em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.btn{
+    outline: none;
+    border: none;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.add-btn{
+    background-color: #02bc20;
+}
+
+#title{
+    font-size: 23px;
+    margin: 0; /* 제목의 여백 제거 */
+    position: absolute; /* 절대 위치 설정 */
+    left: 54%; /* 왼쪽에서 50% 위치 */
+    transform: translateX(-50%); /* 중앙으로 이동 */
+    white-space: nowrap; /* 줄 바꿈을 방지하여 한 줄로 표시 */
+}
+
+.header{
+    display: flex;
+    justify-content: space-between; /* 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    padding-bottom: 15px;
+    gap: 20px; /* 요소 사이 간격 */
+    position: relative; /* 요소의 절대 위치를 설정할 수 있도록 함 */
+}
+
+.header a img {
+    height: 60px; /* 이미지 크기 조정 */
+    flex-shrink: 0; /* 이미지 크기가 줄어들지 않도록 설정 */
+}
+
+/* x버튼에 대한 css */
+#close-btn{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute; /* 절대 위치 설정 */
+    right: 0; /* 오른쪽에서 0 위치 */
+}
+
+.close-btn{
+    background-color:  #f93270;
+}
+
+/* 모든 버튼에 커서 표시 */
+button{
+    cursor: pointer;
+}
+
+/* textarea 크기 조절 차단 */
+#textarea{
+    resize: none;
+}
+
+/* 로고이미지 크기 설정*/
+.img{
+    width: 95px; /* 로고 크기 조정 */
+    height: auto;
+}
+
+/* 이미지 로고 닫는 버튼 */
+.x-btn{
+    height: 25px; /* 닫기 버튼 크기 */
+}*{font-family: 'GmarketSansMedium'; }
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;}
+
+    
+form{
+    width: 30vw;
+    margin: 0 auto;
+}
+
+.modal{
+    /* 버튼을 누르기 전엔 display none, 버튼을 눌렀다면 block로 변경 */
+    position:absolute;
+    display:none;
+    
+    justify-content: center;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-body{
+    position:absolute;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 30px;
+    padding: 30px;
+
+    top: 50%;
+    text-align: center;
+
+    background-color: rgb(255,255,255); 
+    border-radius:10px; 
+    box-shadow:0 2px 3px 0 rgba(34,36,38,0.15);
+}
+
+/* 추가하기, 취소하기 버튼 css */
+.modal-btn {
+    height: 10%;        
+    padding: 15px;            
+    border-radius: 10px;
+    display: flex;        
+    justify-content: end;
+    margin-right: -10px;
+
+}
+
+.modal-btn > button{
+    width: 80px;        
+    height: 30px;        
+    border-radius: 5px;        
+    text-align: center;        
+    font-size: 14px;        
+    font-weight: bolder;        
+    padding-top: 5px;        
+    margin-left: 7px;
+}
+
+.form-label{
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+    width: 100px;
+    position: relative;
+}
+
+.form-control {
+    width: 100%;
+    padding: .5em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.btn{
+    outline: none;
+    border: none;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.add-btn{
+    background-color: #02bc20;
+}
+
+#title{
+    font-size: 23px;
+    margin: 0; /* 제목의 여백 제거 */
+    position: absolute; /* 절대 위치 설정 */
+    left: 54%; /* 왼쪽에서 50% 위치 */
+    transform: translateX(-50%); /* 중앙으로 이동 */
+    white-space: nowrap; /* 줄 바꿈을 방지하여 한 줄로 표시 */
+}
+
+.header{
+    display: flex;
+    justify-content: space-between; /* 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    padding-bottom: 15px;
+    gap: 20px; /* 요소 사이 간격 */
+    position: relative; /* 요소의 절대 위치를 설정할 수 있도록 함 */
+}
+
+.header a img {
+    height: 60px; /* 이미지 크기 조정 */
+    flex-shrink: 0; /* 이미지 크기가 줄어들지 않도록 설정 */
+}
+
+/* x버튼에 대한 css */
+#close-btn{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute; /* 절대 위치 설정 */
+    right: 0; /* 오른쪽에서 0 위치 */
+}
+
+.close-btn{
+    background-color:  #f93270;
+}
+
+/* 모든 버튼에 커서 표시 */
+button{
+    cursor: pointer;
+}
+
+/* textarea 크기 조절 차단 */
+#textarea{
+    resize: none;
+}
+
+/* 로고이미지 크기 설정*/
+.img{
+    width: 95px; /* 로고 크기 조정 */
+    height: auto;
+}
+
+/* 이미지 로고 닫는 버튼 */
+.x-btn{
+    height: 25px; /* 닫기 버튼 크기 */
+}

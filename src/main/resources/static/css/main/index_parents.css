@@ -1,0 +1,74 @@
+@charset "utf-8";
+body,h1,h2,h3,h4,h5,h6,p,ul,ol,li,dl,dt,dd,button,form,input,textarea,hr,address,b,strong,a,th
+{margin: 0; padding: 0; list-style: none; text-decoration: none; font-style: normal; font-weight: normal; color: #000; box-sizing: border-box;}
+button{cursor: pointer; background: none; border: 0;}
+
+/* 모든 요소들 기본으로 폰트 크기 및 서체 설정 */
+*{font-size: 18px; font-family: 'GmarketSansMedium'; }
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;}
+
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;}
+
+/*부모 index*/
+/* 부모 header가 position 으로 띄워져있으므로 container에 padding-top값을 줌 */
+#container{padding-top: 100px;}
+section:not(:nth-of-type(1)){width: 1400px; margin: 0 auto; margin-bottom: 200px;}
+h2{font-size: 36px; width: 1400px; margin-bottom: 50px;}
+
+/*visual*/
+.visual{margin-bottom: 200px;}
+.visual img{width: 100%;}
+
+/*matching*/
+.matching_wrap{display: flex;}
+.matching_wrap img{display: block; margin-right: 150px;}
+.matching_wrap div p{font-size: 30px; color: rgba(0, 0, 0, 0.7); line-height: 200%; text-align: center; margin:50px 0 60px 0;}
+.matching_wrap a{display: block; width: 320px; height: 55px; border: 2px solid; border-color: rgba(0, 0, 0, 0.3); border-radius: 45px; color: #000; text-align: center; line-height: 55px; font-size: 20px; margin-left: 100px;}
+.matching_wrap span{position: absolute; color: #E8102B; margin-left: 50px; font-size: 25px;} 
+
+/*pro_recommendation*/
+.pro_recommendation>div{display: flex; justify-content: space-between;}
+.pro_recommendation>div a{display: block; width: 75px; color: #000; font-size: 18px; padding-top: 25px;}
+.pro_recommendation>div span{color: #E8102B;}
+
+.pro_recommendation ul{display: flex;}
+.pro_recommendation li{flex: 1;}
+.pro_recommendation li img{width: 400px; display: block; margin-bottom: 35px;}
+.pro_recommendation li>a>p{font-size: 25px; text-align: center; margin-bottom: 10px;}
+.pro_recommendation li div{width: 280px; margin: 0 auto; display: flex; justify-content: space-between;}
+.pro_recommendation li div p{font-size: 20px;}
+.pro_recommendation li div img{width: 185px;}
+.pro_control button{position: absolute; margin: -350px 0 0 -100px;}
+.pro_control button:nth-child(2){margin-left: 1440px;}
+
+/*kids*/
+.kids li{display: flex;}
+.kids li:first-child{margin-bottom: 50px;}
+.kids img{width: 550px; display: block; margin-right: 50px;}
+.kids div p{display: flex;}
+.kids div p:nth-of-type(1){font-size: 25px; font-family: 'GmarketSansBold'; margin-bottom: 10px;}
+.kids div p:nth-of-type(2){color: rgba(0, 0, 0, 0.7); margin-bottom: 120px;}
+.kids div p b{display: block; width: 200px; font-family: 'GmarketSansBold';}
+.kids div p:nth-of-type(3),.kids div p:nth-of-type(4){margin-bottom: 10px;}
+.kids div p:nth-of-type(5){margin-bottom: 60px;}
+.kids div a{display: block; width: 200px; height: 70px; border: 2px solid rgba(2, 188, 32, 0.5); color: rgba(2, 188, 32, 0.5); border-radius: 10px; text-align: center; line-height: 70px;}
+.kids div a:hover{border-color: #02BC20; color: #02BC20;}
+
+/*category*/
+.category>ul{width: 1400px; display: flex; flex-wrap: wrap;}
+.category>ul>li{width: 700px;}
+.category>ul>li:nth-of-type(1),.category>ul>li:nth-of-type(2){margin-bottom: 50px;}
+.category>ul p{font-size: 20px; margin-bottom: 20px; font-family: 'GmarketSansBold'}
+.category>ul ul{display: flex;}
+.category>ul ul li{width: 100px;}
+.category>ul a{display: block; width: 100%; height: 30px;}
+.category>ul a:hover{color: rgba(0, 0, 0, 0.5);}
