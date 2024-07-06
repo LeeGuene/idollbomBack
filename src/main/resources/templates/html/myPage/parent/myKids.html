@@ -4,9 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../../static/css/myPage/parent/mypage_myReview.css">
-    <link rel="stylesheet" href="../../../../static/css/layout/header.css">
-    <link rel="stylesheet" href="../../../../static/css/layout/footer.css">
+    <link rel="stylesheet" th:href="@{/css/mypage/mypage_myKids.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <!-- 공통으로 들어가는 css는 한번에 묶어둠 -->
+    <link rel="stylesheet" th:href="@{/css/modal/modalstyle.css}">
+    <link rel="stylesheet" th:href="@{/css/modal/childInfo.css}">
+    <script src="/js/"></script>
     <title>iDollbom_마이페이지</title>
 </head>
 
@@ -62,12 +66,12 @@
 
     <div class="container">
         <div class="inincontainer">
-            <div class="mypage-main">마이페이지 > 내 리뷰</div>
+            <div class="mypage-main">마이페이지 > 아이정보 추가</div>
             <!-- 사이드바 -->
             <div class="incontainer">
                 <div class="menu-bar">
                     <div class="menu-bar-option">
-                        <a href="../../html/mypage/mypage_myKids.html">아이정보 추가</a>
+                        <p>아이정보 추가</p>
                     </div>
                     <div class="menu-bar-option">
                         <a href="../../html/mypage/mypage_correction.html">내정보 수정</a>
@@ -86,7 +90,7 @@
                         <a href="../../html/mypage/mypage_myAsk.html">내 문의</a>
                     </div>
                     <div class="menu-bar-option">
-                        <p>내 리뷰</p>
+                        <a href="../../html/mypage/mypage_myrReview.html">내 리뷰</a>
                     </div>
                     <hr class="custom-hr">
                     <div class="menu-bar-option">
@@ -95,6 +99,7 @@
                     <div class="menu-bar-option">
                         <a href="../../html/mypage/mypage_mail.html">쪽지함</a>
                     </div>
+                    <hr class="custom-hr">
                     <!-- 프로필 -->
                     <div class="myprofile">
                         <div class="profileimage">
@@ -103,73 +108,88 @@
                         <div class="Nickname">
                             닉네임
                         </div>
-
                         <div class="buttonbox">
                             <a href="#">
                                 <button class="btn-block" type="button">로그아웃</button>
                             </a>
                         </div>
+
                     </div>
                 </div>
-                <!-- 리뷰목록 -->
-                <div class="mainbox">
-                    <a href="#">
-                        <div class="mypost">
+<!--                 <div class="mainbox">-->
+<!--                    <div>-->
+<!--                        <img src="../../images/logo 3.png">-->
+<!--                        <p class="kidbold">등록된 아이가 없어요.</p>-->
+<!--                        <p>아이정보를 추가해 주세요</p>-->
+<!--                        <button class="insertKids btn-open-modal">아이정보 추가</button>-->
+<!--                    </div>-->
+<!--                </div> -->
+                <!-- 아이 등록 후에 페이지 -->
+                <div class="mykids">
+                    <div class="mykids-all">
+                        <div class="info-box">
                             <div>
-                                리뷰 제목
-                            </div>
-                            <p>수업제목</p>
-                            <p>리뷰내용 ...</p>
-                            <div class="myStar">
-                                <img src="../../images/Star.png" class="star">
-                                <img src="../../images/Star.png" class="star">
-                                <img src="../../images/Star.png" class="star">
-                                <img src="../../images/Star.png" class="star">
+                                <div class="action-form">
+                                    <div class="actions">
+                                        <button onclick="editInfo()">수정</button>
+                                        <button onclick="deleteInfo()">삭제</button>
+                                    </div>
+                                </div>
+                                <div class="kids">
+                                    <div>
+                                        <h2>강민정</h2>
+                                        <p><strong>나이:</strong> 4세</p>
+                                        <p>아이가 좀 산만한 편입니다.</p>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-
-                        <p>작성한 리뷰가 아직 없습니다.</p>
-
-                    </a>
-
+                        <div class="insertKid">
+                            <button class="insertKids2 btn-open-modal">아이정보 추가</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-
-
-
-        <!-- 팝업 배경 -->
-        <div class="popup-bg" id="popup-bg" onclick="closePopup()"></div>
-
-        <!-- 팝업 내용 -->
-        <div class="popup" id="popup">
-            <h2>프로필 편집</h2>
-            <form class="form-signin" action="/auth/<%= userId %>/update" method="POST" enctype="multipart/form-data">
-                <div class="profileimage2">
-                    <img src="<%= result.imageUrl %>" alt="profileImage" class="img">
+            <!-- 아이 정보 추가 모달창 -->
+            <form th:action="@{/restParentMyPage}" method="post">
+                <input type="hidden" >
+                <div class="modal">
+                    <div class="modal-body profile-body">
+                        <div class="header">
+                            <img class="img" src="/images/logo.png" alt="로고">
+                            <h3 id="title">아이 정보 추가</h3>
+                            <button id="close-btn"><img class="x-btn" src="/images/closebtn.png"
+                                    alt="닫기버튼"></button>
+                        </div>
+                        <div class="input-wrap">
+                            <label for="name" class="form">이름</label>
+                            <input id="name" type="text" class="form-control" placeholder="김돌봄">
+                        </div>
+                        <!-- 오늘 날짜 이후에 대한 거 막아줘도 좋을듯 -->
+                        <div class="input-wrap">
+                            <label for="birthday" class="form">생년월일</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        <div class="input-wrap">
+                            <label for="gender" class="form">성별</label>
+                            <input type="radio" id="male" name="gender" value="남자" class="radio">
+                            <label for="male">남자 아이</label>
+                            <input type="radio" id="female" name="gender" value="여자" class="radio">
+                            <label for="female">여자 아이</label>
+                        </div>
+                        <!-- 글자 수 제한 하는 거 보여줘도 좋을듯 -->
+                        <div class="input-wrap introduce">
+                            <label for="intro" class="form">아이 소개</label>
+                            <textarea id="textarea" class="form-control" placeholder="아이에 대해 소개해주세요." rows="6"
+                                maxlength="500"></textarea>
+                        </div>
+                        <div class="modal-btn">
+                            <button class="close-btn btn">취소하기</button>
+                            <button class="add-btn btn" type="submit">추가하기</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="input-container">
-                    <label for="inputChangeNickName" class="sr-only">닉네임 변경</label>
-                    <input type="text" name="nickname" id="inputChangeNickName" class="form-control"
-                        placeholder="변경할 닉네임" autofocus required>
-                </div>
-                <div class="input-container-three">
-                    <label for="inputDetailAddress" class="sr-only">주소 변경</label>
-                    <input type="text" name="city" id="inputAddress1" class="form-control2" placeholder="시도" autofocus>
-                    <input type="text" name="district" id="inputAddress2" class="form-control2" placeholder="시군구"
-                        autofocus>
-                    <input type="text" name="town" id="inputAddress3" class="form-control2" placeholder="읍면동" autofocus>
-                </div>
-                <div class="input-container">
-                    <input type="text" name="detail" id="inputDetailAddress" class="form-control" placeholder="상세주소"
-                        autofocus required>
-                </div>
-                <div class="input-container">
-                    <label for="profileImage" class="sr-only">프로필 이미지 변경</label>
-                    <input type="file" name="profileImage" id="profileImage" class="form-control">
-                </div>
-                <button type="button" onclick="closePopup()" id="popupButton">취소</button>
-                <button type="submit" id="popupButton">저장</button>
             </form>
         </div>
     </div>
@@ -210,5 +230,5 @@
         </div>
     </footer>
 </body>
-
+<script src="/js/modal.js"></script>
 </html>
