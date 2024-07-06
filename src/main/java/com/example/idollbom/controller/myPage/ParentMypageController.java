@@ -5,10 +5,11 @@ import com.example.idollbom.service.myPageservice.parentservice.kidsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.time.Period;
 
 @Controller
 @RequestMapping("/ParentMyPage")
@@ -17,14 +18,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ParentMypageController {
 
     private final kidsService kidsService;
+
+//  kid 페이지로 이동
     @GetMapping("/kids")
-    public String getKids(){
-        return "/html/mypage/parent/myKids";
+    public String getKids(Model model){
+        model.addAttribute("kid", new kidDTO());
+        return "html/myPage/parent/myKids";
     }
 
-    @PostMapping
-    public String insertKids(@RequestBody kidDTO kidDTO){
-        kidsService.insertKids(kidDTO);
+//  아이등록
+    @PostMapping("/insertKids")
+    public String insertKids(@ModelAttribute kidDTO kid){
+        log.info("HTML에서 넘어온 데이터: " + kid);
+
+        LocalDate birthday = LocalDate.parse(kid.getChildAge());
+
+        LocalDate currentDate = LocalDate.now();
+        Period period = Period.between(birthday, currentDate);
+        int age = period.getYears();
+        kid.setChildAge(String.valueOf(age));
+        kidsService.insertKids(kid);
         return "redirect:/ParentMyPage/kids";
     }
 

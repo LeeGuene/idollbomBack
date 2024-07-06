@@ -23,15 +23,5 @@
         where parent_email = #{parentEmail}
     </select>
 
-    <!-- 아이추가 -->
-    <select id="insertKids">
-        insert into child
-        values (seq_project.NEXTVAL,#{childName},#{childAge},#{childGender},#{childSpecialIssues},#{parentNumber})
-    </select>
 
-    <!--  아이삭제  -->
-    <delete id="deleteKids">
-        delete child
-        where CHILD_NUMBER = #{childNumber}
-    </delete>
 </mapper>

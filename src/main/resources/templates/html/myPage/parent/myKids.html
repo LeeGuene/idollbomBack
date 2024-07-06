@@ -17,14 +17,14 @@
 <body>
     <header id="header">
         <div class="header_wrap">
-            <h1><a href="../html/main/index_parents.html"><img src="../../images/logo.png" alt="IDOLL봄"></a></h1>
+            <h1><a href="/html/main/index_parents.html"><img src="../../images/logo.png" alt="IDOLL봄"></a></h1>
 
             <nav>
                 <ul class="gnb">
                     <li>
-                        <a href="../../html/main/index_parents.html">부모님</a>
+                        <a href="/html/main/index_parents.html">부모님</a>
                         <ul>
-                            <li><a href="../../html/matching.html">매칭</a></li>
+                            <li><a href="/html/matching.html">매칭</a></li>
                         </ul>
                     </li>
                     <li>
@@ -152,7 +152,7 @@
                 </div>
             </div>
             <!-- 아이 정보 추가 모달창 -->
-            <form th:action="@{/restParentMyPage}" method="post">
+            <form th:action="@{/ParentMyPage/insertKids}" method="post" th:object="${kid}">
                 <input type="hidden" >
                 <div class="modal">
                     <div class="modal-body profile-body">
@@ -163,28 +163,28 @@
                                     alt="닫기버튼"></button>
                         </div>
                         <div class="input-wrap">
-                            <label for="name" class="form">이름</label>
-                            <input id="name" type="text" class="form-control" placeholder="김돌봄">
+                            <label for="name" class="form" >이름</label>
+                            <input id="name" type="text" class="form-control" placeholder="김돌봄" th:field="*{childName}">
                         </div>
                         <!-- 오늘 날짜 이후에 대한 거 막아줘도 좋을듯 -->
                         <div class="input-wrap">
                             <label for="birthday" class="form">생년월일</label>
-                            <input type="date" class="form-control">
+                            <input id="birthday" type="date" class="form-control" th:field="*{childAge}">
                         </div>
                         <div class="input-wrap">
-                            <label for="gender" class="form">성별</label>
-                            <input type="radio" id="male" name="gender" value="남자" class="radio">
+                            <label class="form">성별</label>
+                            <input type="radio" id="male" name="childGender"  th:value="'남자'" class="radio">
                             <label for="male">남자 아이</label>
-                            <input type="radio" id="female" name="gender" value="여자" class="radio">
+                            <input type="radio" id="female" name="childGender" th:value="'여자'" class="radio">
                             <label for="female">여자 아이</label>
                         </div>
                         <!-- 글자 수 제한 하는 거 보여줘도 좋을듯 -->
                         <div class="input-wrap introduce">
-                            <label for="intro" class="form">아이 소개</label>
+                            <label  class="form">아이 소개</label>
                             <textarea id="textarea" class="form-control" placeholder="아이에 대해 소개해주세요." rows="6"
-                                maxlength="500"></textarea>
+                                      maxlength="500" th:field="*{childSpecialIssues}"></textarea>
                         </div>
-                        <div class="modal-btn">
+                        <div class=" modal-btn" >
                             <button class="close-btn btn">취소하기</button>
                             <button class="add-btn btn" type="submit">추가하기</button>
                         </div>

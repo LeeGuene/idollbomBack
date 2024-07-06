@@ -35,6 +35,7 @@ public class ParentController {
     @PostMapping("/signup")
         public String signup(ParentDTO dto) {
         log.info("HTML에서 넘어온 데이터: " + dto.toString());
+
         parentService.save(dto);
         return "/html/mypage/parent/myPost";
 }

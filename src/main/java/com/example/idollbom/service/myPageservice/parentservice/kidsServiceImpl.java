@@ -22,8 +22,11 @@ public class kidsServiceImpl implements kidsService {
     @Override
     public void insertKids(kidDTO kidDTO) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDetails userDetails = (UserDetails)principal;
+
+//        유저id
         String username = ((UserDetails) principal).getUsername();
+
+
         ParentVO userNumber = parentMapper.selectOne(username);
         kidDTO.setParentNumber(userNumber.getParentNumber());
 
