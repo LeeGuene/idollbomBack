@@ -22,8 +22,6 @@ class ParentControllerTest {
         parentDTO.setParentNickname("asdljs");
         parentDTO.setParentPhoneNumber("23423");
         parentDTO.setParentName("d");
-        parentDTO.setParentProfileImageUrl("d");
-        parentDTO.setParentReportCount("0");
         parentService.save(parentDTO);
     }
 }

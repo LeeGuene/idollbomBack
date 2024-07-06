@@ -5,8 +5,15 @@
 
 <!--    회원 가입   -->
     <insert id="insert">
-        insert into parent
-        values (seq_project.NEXTVAL ,#{parentEmail}, #{parentPassword}, #{parentName}, #{parentNickname}, #{parentPhoneNumber}, #{parentAddress}, #{parentProfileImageUrl}, #{parentReportCount})
+        insert into parent (
+        PARENT_NUMBER,
+        PARENT_EMAIL,
+        PARENT_PASSWORD,
+        PARENT_NAME,
+        PARENT_NICKNAME,
+        PARENT_PHONE_NUMBER,
+        PARENT_ADDRESS)
+        values (seq_project.NEXTVAL,#{parentEmail}, #{parentPassword}, #{parentName}, #{parentNickname}, #{parentPhoneNumber}, #{parentAddress})
     </insert>
 
 

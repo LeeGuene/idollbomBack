@@ -25,10 +25,10 @@ public class ParentVO implements UserDetails {
     private String parentPhoneNumber;
     private String parentAddress;
     private String parentProfileImageUrl;
-    private String parentReportCount;
+    private Long parentReportCount;
 
     public static ParentVO toEntity(ParentDTO parentDTO){
-        return ParentVO.builder().parentEmail(parentDTO.getParentEmail())
+        return ParentVO.builder()
                 .parentEmail(parentDTO.getParentEmail())
                 .parentPassword(parentDTO.getParentPassword())
                 .parentName(parentDTO.getParentName())

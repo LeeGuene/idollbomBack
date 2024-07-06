@@ -1,0 +1,51 @@
+.input-wrap{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.input-wrap.introduce{
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.input-wrap > input[type="radio"]{
+    display: none;
+}
+
+.input-wrap > label{
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.input-wrap > label[for="male"]{
+    border: 2px solid #00B455;
+    cursor: pointer;
+    width: 50%;
+}
+
+.input-wrap > label[for="female"]{
+    border: 2px solid #00B455;
+    width: 50%;
+    cursor: pointer;
+}
+
+.form{
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    width: 80px;
+    position: relative;
+}
+
+/* 각 모달창 크기 */
+.profile-body{
+    width: 500px;
+    height: 650px;
+}
+
+/* 모달 위치 한번 더 잡아줌 */
+.modal-body{
+    margin-top: -325px;
+}

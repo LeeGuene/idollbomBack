@@ -4,10 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sign Up Form</title>
-<link rel="stylesheet" th:href="@{/css/login/koregisterpage.css}">
+  <link rel="stylesheet" th:href="@{/css/login/koregisterpage.css}">
 </head>
 <body>
-
 <div class="signup">
   <h1>SIGN UP</h1>
   <!-- auth 로그인 -->
@@ -16,7 +15,6 @@
     <div class="social-box : naver">
       <a href="https://www.naver.com" target="_blank">
         <img th:src="@{/images/naver.jpeg}" alt="Naver">
-
       </a>
     </div>
     <div class="social-box : kakao">
@@ -38,15 +36,15 @@
     <div class="line"></div>
   </div>
 <!-- 폼로그인 -->
-  <form id="signupForm"  th:action="@{user/signup}" method="post">
+  <form id="signupForm" th:action="@{/user/signup}" method="post">
 
     <input type="text" id="username" placeholder="이름" name="parentName" required >
 
-    <input type="text" id="nickname" placeholder="별명" name="parentNickName" required>
+    <input type="text" id="nickname" placeholder="별명" name="parentNickname" required>
 
     <!-- 틀리면 나올 경고 -->
     <div class="error-message" style="display: none;" id="nicknameError">
-      <img src="../../images/warning.png" alt="Warning" class="error-icon"> 이미 가입된 닉네임입니다
+      <img src="/images/warning.png" alt="Warning" class="error-icon"> 이미 가입된 닉네임입니다
     </div>
 
     <input type="text" id="phoneNumber" placeholder="전화번호"  name="parentPhoneNumber" required>
@@ -75,19 +73,19 @@
 <!-- 서비스 이용약관 -->
     <div class="checkbox">
       <label class="checkbox-container">
-        <input type="checkbox" id="service-terms" name="service-terms">
+        <input type="checkbox" id="service-terms" >
         <span class="checkbox-label">[필수]서비스 이용약관</span>
       </label>
       <label class="checkbox-container">
-        <input type="checkbox" id="privacy-policy" name="privacy-policy">
+        <input type="checkbox" id="privacy-policy" >
         <span class="checkbox-label">[필수]개인정보 수집 · 이용 동의</span>
       </label>
       <label class="checkbox-container">
-        <input type="checkbox" id="third-party" name="third-party">
+        <input type="checkbox" id="third-party" >
         <span class="checkbox-label">[필수]제3자 마케팅 정보 수신 동의</span>
       </label>
       <label class="checkbox-container">
-        <input type="checkbox" id="age-confirmation" name="age-confirmation">
+        <input type="checkbox" id="age-confirmation">
         <span class="checkbox-label">[필수] 14세 이상입니다</span>
       </label>
     </div>
@@ -98,6 +96,7 @@
   <p class="signinAsk">이미 계정이 있나요 <a th:href="@{user/login}">Sign In</a></p>
 </div>
 
-<script src="../js/registerpage.js"></script>
 </body>
 </html>
+
+

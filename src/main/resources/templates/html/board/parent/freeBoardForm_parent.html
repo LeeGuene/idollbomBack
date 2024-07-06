@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../../../static/css/layout/footer.css" />
+  <link rel="stylesheet" href="../../../../static/css/layout/header.css" />
+  <link rel="stylesheet" href="../../../../static/css/board/freeBoardForm.css" />
+  <title>자유 게시판 작성 폼(부모)</title>
+</head>
+
+<body>
+
+  <div id="wrapper">
+    <form class="board-form" action="#">
+      <!-- 페이지 전체 제목 -->
+      <div class="page-title-wrap">
+        <h1>자유 게시판</h1>
+        <p>아이의 부모들이 자유롭게 게시글을 작성할 수 있는 게시판입니다.</p>
+      </div>
+
+      <!-- 목록 보기 버튼 -->
+      <div class="list-btn-wrap">
+        <a href="../../html/community_parent.html">목록 보기</a>
+      </div>
+
+      <!-- 게시글 제목 -->
+      <div class="post-title-wrap">
+        <label for="title-input">제목</label>
+        <input type="text" id="title-input" />
+      </div>
+
+      <!-- 게시글 내용 -->
+      <div class="post-content-wrap">
+        <label for="content-input">내용</label>
+        <textarea id="content-input"></textarea>
+      </div>
+
+      <!-- 첨부파일 -->
+      <div class="attachment-wrap">
+        <input class="upload-name" value="첨부파일" placeholder="첨부파일" />
+        <label for="file">첨부파일</label>
+        <input type="file" id="file" />
+      </div>
+
+      <!-- 게시글 등록 버튼 -->
+      <div class="post-submitBtn-wrap">
+        <a href="#"><button type="submit">등록하기</button></a>
+      </div>
+    </form>
+  </div>
+
+  <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
+  <script src="../../../../static/js/motion.js"></script>
+  <script src="../../../../static/js/freeBoard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+@charset "utf-8";
+
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, button, form, input, textarea, hr, address, b, strong, a, th {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-style: normal;
+    font-weight: normal;
+    color: #000;
+    box-sizing: border-box;
+}
+
+button {
+    cursor: pointer;
+    background: none;
+    border: 0;
+}
+
+* {
+    font-size: 18px;
+    font-family: 'GmarketSansMedium';
+}
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'S-CoreDream-6Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 아이찾기 화면 */
+#container {
+    padding-top: 100px;
+}
+
+.findchild-container {
+    padding: 45px;
+}
+
+.findchild-text {
+    font-size: 25px;
+    color: blue;
+    text-align: center;
+    font-family: 'GmarketSansBold';
+}
+
+/* 아이찾기 메인 화면 기능 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    /* 텍스트 가운데 정렬 */
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+/* 페이지 박스부분 css */
+.pagination {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.pagination a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}

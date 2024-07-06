@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 자유게시판 상세보기 css -->
+  <link rel="stylesheet" href="../../../../static/css/board/freeBoardDetail.css" />
+  <!-- 신고하기 css -->
+  <link rel="stylesheet" href="../../../../static/css/modal/report.css" />
+  <link rel="stylesheet" href="../../../../static/css/modal/modalstyle.css" />
+  <title>자유 게시판 상세보기(부모)</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div class="page-title-wrap">
+      <h1>게시판 상세보기</h1>
+      <p>부모가 작성한 게시글에 대한 자세한 정보를 볼 수 있는 페이지입니다.</p>
+    </div>
+
+    <!-- 목록 보기 버튼 -->
+    <div class="list-btn-wrap">
+      <a href="../../html/community_parent.html">목록 보기</a>
+      <a class="report-btn btn-open-modal">신고하기</a>
+    </div>
+
+    <div class="board-form" action="#">
+      <!-- 게시글 번호 -->
+      <div class="post-number-wrap">
+        <h1>번호</h1>
+        <input type="text" value="10" readonly />
+      </div>
+
+      <!-- 게시글 제목 -->
+      <div class="post-title-wrap">
+        <h1>제목</h1>
+        <input type="text" value="OOO강사님이 진행한 OO수업이 너무 아이한테 유익한 수업이었습니다." readonly />
+      </div>
+
+      <!-- 게시글 내용 -->
+      <div class="post-content-wrap">
+        <h1>내용</h1>
+        <textarea readonly>OOO강사님이 진행한 OO수업이 너무 아이한테 유익한 수업이었습니다.</textarea>
+      </div>
+
+      <!-- 게시글 작성자 -->
+      <div class="post-writer-wrap">
+        <h1>작성자</h1>
+        <input type="text" value="이근" readonly />
+      </div>
+
+      <!-- 게시글 작성일 -->
+      <div class="post-RegisterDate-wrap">
+        <h1>작성일</h1>
+        <input type="text" value="2024년 5월 15일" readonly />
+      </div>
+
+      <!-- 게시글 조회수 -->
+      <div class="post-views-wrap">
+        <h1>조회수</h1>
+        <input type="text" value="10" readonly />
+      </div>
+
+      <!-- 게시글 첨부파일(다운로드 가능) -->
+      <div class="post-files-wrap">
+        <h1>첨부파일</h1>
+        <!-- 첨부파일 영역 -->
+        <ul class="file-area">
+          <li>1_basic.txt</li`>
+          <li>2_MVC.txt</li>
+          <li>4_myBatis.txt</li>
+          <li>6_Spring-Security.txt</li>
+          <li>6_Spring-Security.txt</li>
+          <li>6_Spring-Security.txt</li>
+          <li>6_Spring-Security.txt</li>
+          <li>6_Spring-Security.txt</li>
+          <li>6_Spring-Security.txt</li>
+        </ul>
+      </div>
+
+      <!-- 게시글 수정 및 삭제 버튼 -->
+      <div class="post-btn-wrap">
+        <a href="#"><button>수정</button></a>
+        <a href="#"><button>삭제</button></a>
+      </div>
+
+      <!-- 게시글 댓글 영역 -->
+      <!-- 댓글 작성 영역 -->
+      <form method="#" id="comment-write-area">
+        <div>
+          <label for="comment-write">댓글 남기기</label>
+          <textarea name="" id="comment-write"></textarea>
+        </div>
+        <button>댓글 작성</button>
+      </form>
+
+      <!-- 댓글 리스트 영역 -->
+      <div class="comment-list-area">
+        <h1>댓글 리스트</h1>
+        <ul class="comment-list">
+          <li>
+            <textarea name="" id="" readonly>댓글1</textarea>
+            <a href="#"><button>수정</button></a>
+            <a href="#"><button>삭제</button></a>
+          </li>
+          <li>
+            <textarea name="" id="" readonly>댓글2</textarea>
+            <a href="#"><button>수정</button></a>
+            <a href="#"><button>삭제</button></a>
+          </li>
+          <li>
+            <textarea name="" id="" readonly>댓글3</textarea>
+            <a href="#"><button>수정</button></a>
+            <a href="#"><button>삭제</button></a>
+          </li>
+          <li>
+            <textarea name="" id="" readonly>댓글4</textarea>
+            <a href="#"><button>수정</button></a>
+            <a href="#"><button>삭제</button></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- 신고하기 모달창 -->
+    <form action="#" method="get">
+      <div class="modal">
+        <div class="modal-body profile-body">
+          <div class="header">
+            <img class="img" src="../../images/logo.png" alt="로고">
+            <h3 id="title">신고하기</h3>
+            <button id="close-btn"><img class="x-btn" src="../../images/closebtn.png" alt="닫기버튼"></button>
+          </div>
+          <div class="mb-3">
+            <label for="writeform" class="form-label">게시글</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="reportType" class="form-label">신고유형</label>
+            <select name="reportType" class="selectBox form-control">
+              <option value="권리침해">권리침해</option>
+              <option value="허위정보">허위정보</option>
+              <option value="사칭피해">사칭피해</option>
+              <option value="불법촬영물">불법촬영물</option>
+            </select>
+          </div>
+          <div class="report-container">
+            <label for="textarea" class="form-label reporttext">신고내용</label>
+            <textarea id="textarea" class="form-control" placeholder="신고내용을 적어주세요." rows="6"></textarea>
+          </div>
+          <div class="modal-btn">
+            <!-- 추가하기를 누르면 새로운 페이지로 이동 -->
+            <button class="close-btn btn">취소하기</button>
+            <button class="add-btn btn" type="submit">신고하기</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script src="../../../../static/js/modal.js"></script>
+</body>
+
+</html>

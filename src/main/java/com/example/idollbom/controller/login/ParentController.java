@@ -10,10 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/user")
@@ -30,23 +27,24 @@ public class ParentController {
     }
 //  부모 회원가입화면이동
     @GetMapping("/signup")
-    public String signup(Model model) {
-        ParentDTO dto = new ParentDTO(); // 예시로 객체 생성
-        model.addAttribute("dto", dto); // "dto"라는 이름으로 모델에 객체 추가
+    public String signup() {
+        log.info("로그인으로 이동");
         return "html/login/registerpage";
     }
 //  부모 회원가입폼 제출
     @PostMapping("/signup")
-    public String signup(@ModelAttribute("dto") ParentDTO dto) {
-        log.info("html 넘어온 데이터!!!!!!!!!    " + dto.toString());
+        public String signup(ParentDTO dto) {
+        log.info("HTML에서 넘어온 데이터: " + dto.toString());
         parentService.save(dto);
-        return "redirect:/user/login";
-    }
+        return "/html/mypage/parent/myPost";
+}
 //  부모 마이페이지 이동
     @GetMapping("/myPage")
     public String getMypage() {
         return "/html/mypage/parent/myPost";
     }
+
+
 //  로그아웃화면 이동
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
