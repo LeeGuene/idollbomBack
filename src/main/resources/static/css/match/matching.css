@@ -32,6 +32,7 @@ h2{font-size: 35px; text-align: center; margin: 100px 0 50px 0;}
     height: 10px; border-bottom:1px solid; margin: 103px 0 0 50px; border-color: rgba(0, 0, 0, 0.1);}
 .sub_matching strong{width: 130px; font-size: 24px; margin:  0 50px;}
 .sub_matching select{width: 450px; height: 60px; border: 1px solid; margin: 27px 20px 0 0; text-align: left; padding-left: 20px;}
+.sub_matching input{width: 450px; height: 60px; border: 1px solid; margin: 27px 20px 0 0; text-align: left; padding-left: 20px;}
 
 /* 검색 버튼 */
 .sub_matching>div:nth-of-type(1) form input{width: 200px; height: 60px; border: 0;
@@ -44,7 +45,7 @@ h2{font-size: 35px; text-align: center; margin: 100px 0 50px 0;}
     text-align: left; font-size: 20px; padding-left: 20px; cursor: pointer; border-color: rgba(0, 0, 0, 0.3); background: #fff url(../images/matching_reset_icon.png)no-repeat right 30px center;}
 
 /* 검색을 눌렀을 경우 나올 전문가, 검색을 누르기 전까지는 display: none */
-.random_pro{display: flex; justify-content: space-between; width: 1400px; margin: 0 auto 200px auto; border: 2px solid;}
+.random_pro{display: none; justify-content: space-between; width: 1400px; margin: 0 auto 200px auto; border: 2px solid;}
 .random_pro>img{width: 300px;}
 .random_pro>div>p:nth-of-type(1){font-size: 25px; margin: 50px 0 20px 0;}
 .random_pro>div>p:nth-of-type(2){font-size: 20px; margin-bottom: 10px;}
