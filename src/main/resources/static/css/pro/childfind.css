@@ -101,3 +101,9 @@ table th {
 .pagination a:hover:not(.active) {
     background-color: #ddd;
 }
+
+/* 메일 이미지 css */
+td > button > img {
+    width: 30px;
+    height: 21px;
+}

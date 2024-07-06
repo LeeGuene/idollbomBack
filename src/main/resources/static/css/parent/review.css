@@ -1,0 +1,161 @@
+/* 공통 css */
+@charset "utf-8";
+
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, button, form, input, textarea, hr, address, b, strong, a, th {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-style: normal;
+    font-weight: normal;
+    color: #000;
+    box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+
+* {
+  font-size: 18px;
+  font-family: 'GmarketSansMedium';
+}
+
+/* 폰트 설정 */
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GmarketSansBold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+#wrapper{
+  width: 90vw;
+  margin: 80px auto;
+}
+
+/* 상세보기 페이지 제목 css */
+#wrapper > .page-title-wrap{
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+
+  text-align: center;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 50px;
+  margin-bottom: 50px;
+}
+
+#wrapper .page-title-wrap > h1{
+  font-size: 30px;
+}
+
+/* 목록 보기 button css */
+.list-btn-wrap{
+  width: 90%;
+  text-align: right;
+  margin-bottom: 50px;
+  padding-top: 80px;
+}
+
+.list-btn-wrap > a{
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: #014772ab;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.list-btn-wrap > a:hover{
+  background-color: #014772;
+}
+
+/* 게시글 상세보기 폼 css */
+/* 공통 css */
+.board-form{
+  width: 90%;
+  margin: 0 auto;
+}
+  
+.board-form > div{
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.board-form > div > h1{
+  width: 100px;
+  vertical-align: middle;
+}
+
+.board-form > div > input{
+  width: 80%;
+  height: 40px;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  transition: 0.3s;
+}
+
+.board-form > div > input:hover{
+  border-bottom: 2px solid #00B455;
+}
+
+.board-form > div > textarea:hover{
+  border-top: 2px solid #00B455;
+  border-bottom: 2px solid #00B455;
+}
+
+/* 게시글 내용 css */
+.post-content-wrap > textarea{
+  resize: none;
+  width: 80%;
+  height: 300px;
+  border: none;
+  outline: none;
+  border-top: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  transition: 0.3s;
+  padding: 20px;
+}
+
+/* 기본 스크롤바 css 제거 */
+.post-content-wrap > textarea::-webkit-scrollbar{
+  display: none;
+}
+
+/* 전문가의 정보 */
+.pro-detaillist{
+  margin-left: 5%; 
+}
+
+.pro-detaillist table tr td{
+  font-size: 30px;
+}
+.pro-detaillist table tr td img {
+  width: 100px;
+  height: 100px;
+  padding-left: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
