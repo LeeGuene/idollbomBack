@@ -1,5 +1,4 @@
 package com.example.idollbom.controller.login;
-
 import com.example.idollbom.domain.dto.logindto.ParentDTO;
 import com.example.idollbom.service.loginservice.ParentService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,6 +30,7 @@ public class ParentController {
         log.info("로그인으로 이동");
         return "html/login/registerpage";
     }
+
 //  부모 회원가입폼 제출
     @PostMapping("/signup")
         public String signup(ParentDTO dto) {
@@ -38,12 +38,12 @@ public class ParentController {
         parentService.save(dto);
         return "/html/mypage/parent/myPost";
 }
+
 //  부모 마이페이지 이동
     @GetMapping("/myPage")
     public String getMypage() {
         return "/html/mypage/parent/myPost";
     }
-
 
 //  로그아웃화면 이동
     @GetMapping("/logout")
@@ -51,7 +51,5 @@ public class ParentController {
         new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
         return "redirect:/user/login";
     }
-
-
 
 }

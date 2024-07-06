@@ -20,7 +20,7 @@
     <!--    로그인    -->
     <select id="selectOne">
         select * from parent
-        where parentEmail = #{parentEmail}
+        where parent_email = #{parentEmail}
     </select>
 
 </mapper>

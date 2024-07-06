@@ -18,6 +18,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity // 웹 보안 활성화 spring security 이용해서
 @RequiredArgsConstructor
 public class SecurityConfig {
+
     private final ParentDetailService parentDetailService;
 
     @Bean
@@ -26,7 +27,6 @@ public class SecurityConfig {
 //                .build();
         return http
                 .authorizeHttpRequests(auth -> auth
-
                         .requestMatchers(
                                 new AntPathRequestMatcher("/user/login"),
                                 new AntPathRequestMatcher("/user/signup"),
@@ -37,6 +37,7 @@ public class SecurityConfig {
                         ).permitAll() // 특정 요청에 대해서는 접근 허용
                         .anyRequest().authenticated() // 나머지 요청들은 인증 필요하게 함
                 )
+
                 .formLogin(form -> form
                         .loginPage("/user/login") // 내가 사용할 로그인페이지 요청
                         .usernameParameter("parentEmail") // 스프링 시큐리티에서 username 즉 userid가 pk 역할 짜피 아이디는 무조건 유니크자나
@@ -67,7 +68,7 @@ public class SecurityConfig {
 
 //            request.getSession().setAttribute("user", auth.getPrincipal());
 
-            response.sendRedirect("/html/mypage/parent/myPost");
+            response.sendRedirect("/user/myPage");
         };
     }
 
