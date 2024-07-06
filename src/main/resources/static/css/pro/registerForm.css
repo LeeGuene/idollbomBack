@@ -26,7 +26,19 @@
 .study-title{
   display: flex;
   align-items: center;
-  padding-bottom: 20px;
+}
+
+.study-title > label{
+  display: inline-block;
+  width: 150px;
+  text-align: left;
+}
+
+.study-title > input{
+  width: 50%;
+  padding: 10px 15px;
+  outline: none;
+  border: none;
   border-bottom: 1px solid #ccc;
 }
 
@@ -43,24 +55,10 @@
   border-bottom: 1px solid #ccc;
 }
 
+/* 카테고리 (대), (소) css */
 .study-select > div{
   margin-bottom: 30px;
   padding-left: 20px;
-}
-
-/* 카테고리(대) label, input css */
-.study-title > label{
-  display: inline-block;
-  width: 150px;
-  text-align: left;
-}
-
-.study-title > input{
-  width: 50%;
-  padding: 10px 15px;
-  outline: none;
-  border: none;
-  border-bottom: 1px solid #ccc;
 }
 
 /* 카테고리(대) , 카테고리(소) 제목 css */
@@ -212,23 +210,61 @@
 }
 
 .summer-note > h1{
+  font-weight: bold;
+  font-size: 20px;
   padding-bottom: 30px;
   margin-bottom: 30px;
   border-bottom: 2px solid #ddd;
 }
 
+/* 결제금액 css */
+.payment-wrap{
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.payment-wrap > label{
+  display: inline-block;
+  width: 150px;
+  text-align: left;
+}
+
+.payment-wrap > input{
+  width: 10%;
+  padding: 10px 15px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  text-align: right;
+}
+
 /* 수업등록 버튼 css */
 .register-button-wrap{
-  margin: 30px 0;
+  margin: 50px 0;
 }
 
-.submit-btn{
-  padding: 5px 15px; 
-  background-color: #00B455;
+.register-button-wrap > a{
+  /* layout */
+  display: block;
+  width: 60%;
+  margin: 0 auto;
+  padding: 10px 20px; 
+
+  /* style */
+  background-color: #0dac58;
   border-radius: 10px;
-  color: #fff;
-  width: 100%;
-
+  text-align: center;
+  transition: 0.3s;
 }
 
+.register-button-wrap > a > button{
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.register-button-wrap > a:hover{
+  background-color: #1df883;
+}
 
