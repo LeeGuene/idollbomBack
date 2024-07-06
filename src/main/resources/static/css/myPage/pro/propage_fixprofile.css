@@ -1,0 +1,481 @@
+header{
+    z-index: 10000;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+
+.incontainer{
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* 요소들 간의 간격을 54px로 설정 */
+    margin-top: 30px;
+}
+
+.inincontainer{
+    margin-bottom: 100px;
+    padding-top: 100px;
+}
+
+.mypage-main{
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Amatic SC';
+    margin-top: 43px !important; 
+}
+
+
+.content-container {
+    margin-left: 100px;
+    text-align: center;
+}
+
+/* 정보 수정 글씨 */
+.mypage-main1{
+    text-align: right;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-edit-container {
+    width: 100%;
+}
+
+
+.image-placeholder {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+    margin-left: auto;
+}
+
+.info {
+    flex-grow: 1;
+    margin-left: auto;
+}
+
+.info div {
+    margin-bottom: 10px;
+}
+
+.info input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.self-intro {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.self-intro textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.submit-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.submit-btn button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.menu-bar{
+    width: 183px;
+}
+
+.menu-bar-option{
+    font-size: 16px;
+    font-weight: normal;
+    font-family: 'Inter', sans-serif;
+    color: #6A6A6A;
+    margin-top: 10px;
+}
+
+.menu-bar-option a{
+    text-decoration: none;
+    color: grey;
+    
+}
+
+.menu-bar-option p{
+    color: black;
+    font-weight: bold;
+}
+
+.menu-bar-option a:hover {
+    color: darkgrey; /* 원하는 색상으로 변경하세요 */
+}
+
+hr.custom-hr{
+    width: 183px;
+    margin-top: 10px;
+    margin-left:0px;
+}
+
+.myprofile {
+    width: 183px;
+    height: 283px;
+    border-radius: 10%;
+    border: 2px solid #ADBC9F; /* 테두리 두께, 스타일, 색상 */
+    background-color: white;
+    margin-top: 60px;
+    margin-bottom: 183px;
+}
+
+.profileimage img {
+    width: 138px;
+    height: 138px;
+    border-radius: 100px;
+    margin-top: 20px;
+    margin-left: 22px;
+}
+
+
+.Nickname{
+    margin-top: 14px;
+    margin-left: 53px;
+    font-size: 25px;
+    font-family: 'Binngrae';
+    font-weight: bold;
+}
+
+.buttonbox{
+    width: 80px;
+    height: 19px;
+    margin-top: 13px;
+    margin-left: 50px;
+    background-color: white;
+    border-style: solid;
+    border-radius: 4px;
+    text-align: center;
+}
+
+
+.mainbox{
+    width: 700px;
+    margin-left: 30px;
+}
+
+.mypost h2 {
+    margin: 0; /* 제목의 위아래 여백을 없앱니다. */
+    margin-left: 15px; /* 왼쪽 여백 추가 */
+}
+
+.mypost p{
+    margin: 0;
+    margin-right: 15px; /* 오른쪽 여백 추가 */
+    color: black;
+}
+
+.mypost {
+    width: 700px;
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border-width: 1px; /* Set the width of the border */
+    border-style: solid; /* Set the style of the border */
+    border-color: black; /* Set the color of the border */
+}
+
+.mainbox a{
+    text-decoration: none;
+}
+
+.mainbox p{
+    text-decoration: none;
+    color: black;
+}
+
+.mypost h2{
+    color: black;
+}
+
+.submit{
+    /* float: right; */
+    text-align: right;
+}
+
+.submit-button{
+    width: 120px;
+    height: 50px; /* 버튼 높이를 좀 더 크게 설정 */
+    background-color: #28a745;
+    display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    border-radius: 10px;
+    /* margin-right: 30px; */ /* 요소의 오른쪽 여백을 30픽셀로 설정 */
+    margin-top: 100px;
+    margin-left: 230px;
+    color: white;
+}
+
+
+
+.popup-bg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* 40% 투명도 검은색 배경 */
+    z-index: 1000;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 730px;
+    height: 480px;
+    margin-top: -180px; /* 팝업 높이의 절반 */
+    margin-left: -365px; /* 팝업 너비의 절반 */
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 1001;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+
+.popup h2 {
+    margin-top: 0;
+}
+
+.input-container, .input-container-three {
+    margin-bottom: 10px;
+}
+
+.form-control, .form-control2 {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-container-three {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-control2 {
+    width: calc(32% - 10px);
+}
+
+.popup button {
+    margin-right: 10px;
+}
+
+/* #popupButton{
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    width: 85px;
+    height: 35px;
+} */
+
+.reset-form{
+    display: flex;
+    align-items: flex-start;
+    width: 600px;
+    margin-top: 100px;
+    margin-left: 170px;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+
+
+.reset{
+    margin-right: 30px;
+    display: flex;
+    column-gap: 20px;
+    /* justify-content: center; */
+    margin-bottom: 20px;
+    height: 40px;
+}
+
+.reset > button {
+    width: 200px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    margin-top: 5px;
+}
+
+.reset > div{
+    width: 120px;
+    padding-top: 13px;
+    margin-right: auto;
+    /* margin-bottom: 5px; */
+}
+.reset input{
+    margin-right: 230px;
+    width: 200px;
+    height: 40px;
+}
+
+.profileimage2{
+    margin-top: 30px;
+    margin-left: 290px;
+    width: 138px;
+    height: 138px;
+    border-radius: 100px;
+    background-color: aquamarine;
+    margin-bottom: 30px;
+}
+
+.profileimage2 img {
+    width: 100%; /* 이미지를 부모 요소의 너비에 맞게 조정 */
+    height: auto; 
+    border-radius: 100px; 
+}
+
+/* 프로필 이미지 css */
+.reset > input[type="file"] {
+    display: none;
+
+}
+
+.reset > label {
+    width: 100px;
+    height: 100px;
+    background-color: whitesmoke;
+    position: relative;
+    margin-right: auto;
+}
+
+.reset > label > div {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: gray;
+    border-radius: 4px;
+    text-align: center;
+    color: aliceblue;
+}
+
+/* 회원정보 수정 css */
+.main > p{
+    text-align: center;
+    font-size: 30px;
+}
+
+.reset:nth-child(1){
+    /* padding-bottom: 15px; */
+    display: flex;
+    align-items: center;
+
+}
+
+.reset-form > .reset:nth-child(7){
+    padding-right: 10px;
+}
+
+/* 자기소개 css */
+.reset-form > .reset:nth-child(7) > textarea{
+    border: none;
+    resize: none;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    height: 100px;
+    width: 72%;
+    font-size: 14px;
+    
+}
+
+/* 비밀번호 변경 css */
+#pw-change {
+    margin-left: -82%;
+    text-align: center;
+}
+
+/* 프로필 변경 css */
+#profile-change {
+    margin-right: 540px;
+}
+
+/* 주소 변경 css */
+#address-change {
+    margin-left: -85%;
+    text-align: center;
+}
+
+ /* 기존 첨부파일 제거 css */
+.attachment-wrap > input[type="file"] {
+    position: absolute;
+    height: 0;
+    overflow: hidden;
+    
+}
+
+/* 첨부파일 css */
+.attachment-wrap{
+    display: flex;
+    column-gap: 25px;
+    
+  }
+  
+  .attachment-wrap > .upload-name{
+    padding: 10px;
+    border: 1px solid #aaa;
+    width: 50%;
+    margin-left: 15%;
+  }
+  
+  .attachment-wrap > label {
+    padding: 15px 0;
+    transition: 0.3s;
+    text-align: center;
+    color: #fff;
+    background-color: #999;
+    cursor: pointer;
+    border-radius: 10px;
+    
+  }
+  
+  .attachment-wrap > label:hover {
+    background-color: #888;
+  }
+
+  .attachment-wrap > div {
+    margin-top: 15px;
+  }
+
+

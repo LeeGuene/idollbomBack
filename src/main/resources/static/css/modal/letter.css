@@ -1,0 +1,15 @@
+.mb-3 {
+    text-align: left;
+    column-gap: 15px;
+    margin-bottom: 1em;
+}
+
+.profile-body{
+    width: 500px;
+    height: 550px;
+}
+
+/* 모달 위치 한번 더 잡아줌 */
+.modal-body{
+    margin-top: -275px;
+}

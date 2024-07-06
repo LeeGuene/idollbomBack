@@ -1,0 +1,43 @@
+@charset "utf-8";
+body,h1,h2,h3,h4,h5,h6,p,ul,ol,li,dl,dt,dd,button,form,input,textarea,hr,address,b,strong,a,th
+{margin: 0; padding: 0; list-style: none; text-decoration: none; font-style: normal; font-weight: normal; color: #000; box-sizing: border-box;}
+button{cursor: pointer; background: none; border: 0;}
+
+*{font-size: 18px; font-family: 'GmarketSansMedium'; }
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;}
+
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;}
+
+#container{padding-top: 100px;}
+
+/* question */
+.question{width: 1400px; margin: 0 auto;}
+h2{font-size: 35px; text-align: center; margin: 100px 0 50px 0;}
+.question>p:nth-of-type(1){font-size: 20px; text-align: center; line-height: 150%; color: rgba(0, 0, 0, 0.7); margin-bottom: 70px;}
+
+.question>p button{display: block; width: 150px; height: 50px; line-height: 50px; background: #048D3B; color: #fff; margin-bottom: 5px;}
+
+.question dl{border-top: 2px solid #048D3B; margin-bottom: 180px;}
+.question dl dt{height: 110px; line-height: 110px; padding-left: 10px; font-size: 20px; background: url(../images/question.png)no-repeat right 30px center; border-bottom: 1px solid rgba(207,207,207,0.5);}
+.question dl dt span{color: #D0272E; font-family: 'GmarketSansBold'; margin-right: 20px;}
+.question dl dd{height: 150px; line-height: 150%; padding: 30px 30px 0 50px; display: none;}
+.question dl dd span{display: block; font-size: 20px; font-family: 'GmarketSansBold'; color: #29643D; margin-right: 20px;}
+
+/* question 페이지 버튼 */
+.question_btn{width: 300px; height: 40px; margin: 0 auto 200px auto; display: flex;}
+.question_btn img{width: 40px;}
+.question_btn ul{display: flex; margin: 0 20px;}
+.question_btn ul li{ line-height: 33px; margin: 0 20px;}
+.question_btn ul button{display: block;  font-size: 25px; width: 25px; height: 40px; color: #C6C6C6;}
+.question_btn ul li:nth-child(1) button{color: #048D3B; border-bottom: 3px solid;}
+
+

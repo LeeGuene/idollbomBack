@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../static/css/myPage/parent/mypage_myKids.css">
+    <link rel="stylesheet" href="../../../../static/css/layout/header.css">
+    <link rel="stylesheet" href="../../../../static/css/layout/footer.css">
+    <!-- 공통으로 들어가는 css는 한번에 묶어둠 -->
+    <link rel="stylesheet" href="../../../../static/css/modal/modalstyle.css">
+    <link rel="stylesheet" href="../../../../static/css/modal/childInfo.css">
+
+    <title>iDollbom_마이페이지</title>
+</head>
+
+<body>
+    <header id="header">
+        <div class="header_wrap">
+            <h1><a href="../html/main/index_parents.html"><img src="../../images/logo.png" alt="IDOLL봄"></a></h1>
+
+            <nav>
+                <ul class="gnb">
+                    <li>
+                        <a href="../../html/main/index_parents.html">부모님</a>
+                        <ul>
+                            <li><a href="../../html/matching.html">매칭</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="../../html/main/index_pro.html">전문가</a>
+                    </li>
+                    <li>
+                        <a href="../../html/class_list.html">신청하기</a>
+                        <ul>
+                            <li><a href="#">돌봄</a></li>
+                            <li><a href="#">교육</a></li>
+                            <li><a href="#">운동</a></li>
+                            <li><a href="#">예능</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="../../html/community_parent.html">커뮤니티</a>
+                        <ul>
+                            <li><a href="../../html/community_parent.html">자유게시판</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="../../html/notice.html">고객센터</a>
+                        <ul>
+                            <li><a href="../../html/question.html">문의하기</a></li>
+                            <li><a href="../../html/notice.html">공지사항</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="side">
+                <p><button onclick="window.location='../mypage/mypage_mail.html'"><img src="../../images/Alarm.png"
+                            alt="알림"></button></p>
+                <p><a href="../../html/mypage/mypage_correction.html">마이페이지</a></p>
+                <p><a href="../../html/login/loginpage.html">로그인 /</a></p>
+                <p><a href="../../html/login/registerpage.html">회원가입</a></p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="inincontainer">
+            <div class="mypage-main">마이페이지 > 아이정보 추가</div>
+            <!-- 사이드바 -->
+            <div class="incontainer">
+                <div class="menu-bar">
+                    <div class="menu-bar-option">
+                        <p>아이정보 추가</p>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_correction.html">내정보 수정</a>
+                    </div>
+                    <hr class="custom-hr">
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_hateUser.html">신고 목록</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_myFavoriteClass.html">수업찜 목록</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_ myPost .html">내가쓴 게시글</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_myAsk.html">내 문의</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_myrReview.html">내 리뷰</a>
+                    </div>
+                    <hr class="custom-hr">
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_Payment copy.html">결제 내역</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_mail.html">쪽지함</a>
+                    </div>
+                    <hr class="custom-hr">
+                    <!-- 프로필 -->
+                    <div class="myprofile">
+                        <div class="profileimage">
+                            <img src="../../images/ff581d78778b7.png" alt="profileImage" class="img">
+                        </div>
+                        <div class="Nickname">
+                            닉네임
+                        </div>
+                        <div class="buttonbox">
+                            <a href="#">
+                                <button class="btn-block" type="button">로그아웃</button>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- <div class="mainbox">
+                    <div>
+                        <img src="../../images/logo 3.png">
+                        <p class="kidbold">등록된 아이가 없어요.</p>
+                        <p>아이정보를 추가해 주세요</p>
+                        <button class="insertKids btn-open-modal">아이정보 추가</button>
+                    </div>
+                </div> -->
+                <!-- 아이 등록 후에 페이지 -->
+                <div class="mykids">
+                    <div class="mykids-all">
+                        <div class="info-box">
+                            <div>
+                                <div class="action-form">
+                                    <div class="actions">
+                                        <button onclick="editInfo()">수정</button>
+                                        <button onclick="deleteInfo()">삭제</button>
+                                    </div>
+                                </div>
+                                <div class="kids">
+                                    <div>
+                                        <h2>강민정</h2>
+                                        <p><strong>나이:</strong> 4세</p>
+                                        <p>아이가 좀 산만한 편입니다.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="insertKid">
+                            <button class="insertKids2 btn-open-modal">아이정보 추가</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 아이 정보 추가 모달창 -->
+            <form action="#" method="get">
+                <div class="modal">
+                    <div class="modal-body profile-body">
+                        <div class="header">
+                            <img class="img" src="../../images/logo.png" alt="로고">
+                            <h3 id="title">아이 정보 추가</h3>
+                            <button id="close-btn"><img class="x-btn" src="../../images/closebtn.png"
+                                    alt="닫기버튼"></button>
+                        </div>
+                        <div class="input-wrap">
+                            <label for="name" class="form">이름</label>
+                            <input id="name" type="text" class="form-control" placeholder="김돌봄">
+                        </div>
+                        <!-- 오늘 날짜 이후에 대한 거 막아줘도 좋을듯 -->
+                        <div class="input-wrap">
+                            <label for="birthday" class="form">생년월일</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        <div class="input-wrap">
+                            <label for="gender" class="form">성별</label>
+                            <input type="radio" id="male" name="gender" value="남자" class="radio">
+                            <label for="male">남자 아이</label>
+                            <input type="radio" id="female" name="gender" value="여자" class="radio">
+                            <label for="female">여자 아이</label>
+                        </div>
+                        <!-- 글자 수 제한 하는 거 보여줘도 좋을듯 -->
+                        <div class="input-wrap introduce">
+                            <label for="intro" class="form">아이 소개</label>
+                            <textarea id="textarea" class="form-control" placeholder="아이에 대해 소개해주세요." rows="6"
+                                maxlength="500"></textarea>
+                        </div>
+                        <div class="modal-btn">
+                            <button class="close-btn btn">취소하기</button>
+                            <button class="add-btn btn" type="submit">추가하기</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <div class="footer_wrap">
+            <img src="../images/footer_logo.png" alt="IDOLL봄">
+
+            <div>
+                <div>
+                    <p>사업자등록번호 779-81-00425</p>
+                    <p>통신판매업신고 2021-서울강남04707</p>
+                </div>
+                <address><b>본사</b> : 서울특별시 강남구 테헤란로 152 강남파이낸스센터빌딩 40층 자란다</address>
+                <div>
+                    <p>(주)자란다 대표 김성환</p>
+                    <p>개인정보보호책임자 김택주</p>
+                </div>
+            </div>
+
+            <div>
+                <ul>
+                    <li><a href="#">이용약관</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                    <li><a href="#">고객지원</a></li>
+                    <li><a href="#">운영관리방침</a></li>
+                    <li><a href="#">이메일주소</a></li>
+                </ul>
+                <ul>
+                    <li><a href="https://blog.naver.com/jaranblog" target="_blank"><img
+                                src="../../images/footer_social_blog.png" alt="블로그 바로가기"></a></li>
+                    <li><a href="https://www.instagram.com/jaranda__official" target="_blank"><img
+                                src="../../images/footer_social_insta.png" alt="인스타그램 바로가기"></a></li>
+                    <li><a href="https://www.youtube.com/channel/UCTXkxn1OlVvljxEe-hbd3Vg" target="_blank"><img
+                                src="../../images/footer_social_youtube.png" alt="유튜브 바로가기"></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+<!-- js도 하나에 묶어서 사용 -->
+<script src="../../../../static/js/modal.js"></script>
+
+</html>

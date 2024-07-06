@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../../static/css/login/koregisterpage.css">
+  <title>Sign Up Form</title>
+</head>
+
+<body>
+  <div class="signup">
+    <h1>SIGN UP</h1>
+    <!-- auth 로그인 -->
+    <h3>간편 회원 가입</h3>
+    <div class="social-login">
+      <div class="social-box : naver">
+        <a href="https://www.naver.com" target="_blank">
+          <img src="../../images/naver.jpeg" alt="Naver">
+        </a>
+      </div>
+      <div class="social-box : kakao">
+        <a href="https://www.kakao.com" target="_blank">
+          <img src="../../images/kakao.png" alt="Kakao">
+        </a>
+      </div>
+      <div class="social-box : google">
+        <a href="https://www.google.com" target="_blank">
+          <img src="../../images/google.png" alt="Google">
+        </a>
+      </div>
+    </div>
+    <!-- 구분자 -->
+    <div class="separator">
+      <div class="line"></div>
+      <p class="ortext">or</p>
+      <div class="line"></div>
+    </div>
+    <!-- 폼로그인 -->
+    <form id="signupForm" onsubmit="return validateForm()">
+
+      <input type="text" id="username" placeholder="이름" required>
+
+      <input type="text" id="nickname" placeholder="별명" required>
+
+      <!-- 틀리면 나올 경고 -->
+      <div class="error-message" style="display: none;" id="nicknameError">
+        <img src="../../images/warning.png" alt="Warning" class="error-icon"> 이미 가입된 닉네임입니다
+      </div>
+
+      <input type="text" id="phoneNumber" placeholder="전화번호" required>
+
+      <input type="text" id="" placeholder="주소" required>
+
+      <div class="form">
+        <input type="email" id="email" placeholder="Email" required>
+      </div>
+
+      <input type="password" id="password" placeholder="비밀번호" required>
+
+      <!-- 틀리면 나올 경고 -->
+      <div class="error-message" style="display: none;" id="passwordError">
+        <img src="../../images/warning.png" alt="Warning" class="error-icon"> 비밀번호는 6자리 이상이어야 합니다
+      </div>
+
+      <input type="password" id="confirmPassword" placeholder="비밀번호 확인" required>
+
+
+      <div class="error-message" style="display: none;" id="confirmPasswordError">
+        <img src="../../images/warning.png" alt="Warning" class="error-icon"> 비밀번호가 일치하지 않습니다
+      </div>
+
+
+      <!-- 서비스 이용약관 -->
+      <div class="checkbox">
+        <label class="checkbox-container">
+          <input type="checkbox" id="service-terms" name="service-terms">
+          <span class="checkbox-label">[필수]서비스 이용약관</span>
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" id="privacy-policy" name="privacy-policy">
+          <span class="checkbox-label">[필수]개인정보 수집 · 이용 동의</span>
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" id="third-party" name="third-party">
+          <span class="checkbox-label">[필수]제3자 마케팅 정보 수신 동의</span>
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" id="age-confirmation" name="age-confirmation">
+          <span class="checkbox-label">[필수] 14세 이상입니다</span>
+        </label>
+      </div>
+      <!-- 등록 -->
+      <button type="submit" class="signup-button" onclick="window.location='./loginpage.html'">SIGN UP</button>
+      <!-- sign in 으로 이동 -->
+    </form>
+    <p class="signinAsk">이미 계정이 있나요 <a href="../../html/login/loginpage.html">Sign In</a></p>
+  </div>
+</body>
+
+</html>
