@@ -17,4 +17,5 @@
         delete child
         where CHILD_NUMBER = #{childNumber}
     </delete>
+
 </mapper>

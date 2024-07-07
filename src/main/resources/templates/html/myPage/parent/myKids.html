@@ -10,7 +10,7 @@
     <!-- 공통으로 들어가는 css는 한번에 묶어둠 -->
     <link rel="stylesheet" th:href="@{/css/modal/modalstyle.css}">
     <link rel="stylesheet" th:href="@{/css/modal/childInfo.css}">
-    <script src="/js/"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>iDollbom_마이페이지</title>
 </head>
 
@@ -116,23 +116,24 @@
 
                     </div>
                 </div>
-<!--                 <div class="mainbox">-->
-<!--                    <div>-->
-<!--                        <img src="../../images/logo 3.png">-->
-<!--                        <p class="kidbold">등록된 아이가 없어요.</p>-->
-<!--                        <p>아이정보를 추가해 주세요</p>-->
-<!--                        <button class="insertKids btn-open-modal">아이정보 추가</button>-->
-<!--                    </div>-->
-<!--                </div> -->
+<!--             아이 한명도 없을때 보여줄것-->
+                <div class="mainbox" th:if="${#lists.isEmpty(kids)}">
+                    <div>
+                        <img src="/images/logo 3.png" alt="로고">
+                        <p class="kidbold">등록된 아이가 없어요.</p>
+                        <p>아이정보를 추가해 주세요</p>
+                        <button class="insertKids btn-open-modal">아이정보 추가</button>
+                    </div>
+                </div>
                 <!-- 아이 등록 후에 페이지 -->
-                <div class="mykids">
+                <div class="mykids" th:if="${not #lists.isEmpty(kids)}">
                     <div class="mykids-all">
                         <div class="info-box" th:each="kid : ${kids}">
                             <div>
                                 <div class="action-form">
                                     <div class="actions">
                                         <button onclick="editInfo()">수정</button>
-                                        <button onclick="deleteInfo()">삭제</button>
+                                        <button class="delete-button" th:data-kid-number="${kid.childNumber}">삭제</button>
                                     </div>
                                 </div>
                                 <div class="kids">
@@ -140,7 +141,6 @@
                                         <h2 th:text="${kid.childName}">강민정</h2>
                                         <p ><strong th:text="${kid.childAge}">나이:</strong>세</p>
                                         <p th:text="${kid.childSpecialIssues}">아이가 좀 산만한 편입니다.</p>
-                                        <input type="hidden" th:value="${kid.childNumber}">
                                     </div>
                                 </div>
 
@@ -232,4 +232,5 @@
     </footer>
 </body>
 <script src="/js/modal.js"></script>
+<script src="/js/kids.js"></script>
 </html>

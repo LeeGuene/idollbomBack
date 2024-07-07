@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/ParentMyPage")
@@ -46,6 +47,12 @@ public class ParentMypageController {
         return "redirect:/ParentMyPage/kids";
     }
 
-
+//  아이삭제
+    @PostMapping("/deleteKids")
+    public String deleteKids(@RequestBody Long kidNumber){
+        log.info("받은거"+kidNumber);
+        kidsService.deleteKids(kidNumber);
+        return "redirect:/ParentMyPage/kids";
+    }
 
 }

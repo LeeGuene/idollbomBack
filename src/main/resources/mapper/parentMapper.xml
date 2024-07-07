@@ -23,5 +23,4 @@
         where parent_email = #{parentEmail}
     </select>
 
-
 </mapper>

@@ -10,4 +10,6 @@ public interface KidsMapper {
     void insertKids(kidVO kidVO);
 
     List<kidVO> selectKidsList();
+
+    void deleteKids(Long kidNumber);
 }

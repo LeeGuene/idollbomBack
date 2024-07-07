@@ -39,4 +39,9 @@ public class kidsServiceImpl implements kidsService {
     public List<kidVO> selectKidsList() {
         return kidsMapper.selectKidsList();
     }
+
+    @Override
+    public void deleteKids(Long kidNumber) {
+        kidsMapper.deleteKids(kidNumber);
+    }
 }

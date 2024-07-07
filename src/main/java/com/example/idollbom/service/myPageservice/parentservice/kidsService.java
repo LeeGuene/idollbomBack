@@ -11,4 +11,6 @@ public interface kidsService {
     public void insertKids(kidDTO kidDTO);
 
     List<kidVO> selectKidsList();
+
+    public void deleteKids(Long kidNumber);
 }
