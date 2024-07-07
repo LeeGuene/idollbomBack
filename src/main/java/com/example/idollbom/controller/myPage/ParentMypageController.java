@@ -1,8 +1,12 @@
 package com.example.idollbom.controller.myPage;
 
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
+import com.example.idollbom.domain.vo.myPagevo.parentvo.askVO;
 import com.example.idollbom.domain.vo.myPagevo.parentvo.kidVO;
+import com.example.idollbom.domain.vo.myPagevo.parentvo.reportVO;
+import com.example.idollbom.service.myPageservice.parentservice.askService;
 import com.example.idollbom.service.myPageservice.parentservice.kidsService;
+import com.example.idollbom.service.myPageservice.parentservice.reportService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -21,6 +25,8 @@ import java.util.Map;
 public class ParentMypageController {
 
     private final kidsService kidsService;
+    private final reportService reportService;
+    private final askService askService;
 
 //  kid 페이지로 이동
     @GetMapping("/kids")
@@ -62,5 +68,20 @@ public class ParentMypageController {
         return "redirect:/ParentMyPage/kids";
     }
 
+    // 신고목록 페이지 이동
+    @GetMapping("/reportPage")
+    public String selectReport(Model model){
+      List<reportVO> reportUser = reportService.selectReportList();
+        model.addAttribute("reportUser", reportUser);
+        return "html/myPage/parent/hateUser";
+    }
+
+    // 문의목록 페이지 이동
+    @GetMapping("/askPage")
+    public String selectAsk(Model model){
+        List<askVO> askList = askService.selectAskList();
+        model.addAttribute("askList",askList );
+        return "html/myPage/parent/myAsk";
+    }
 
 }

@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../../static/css/myPage/parent/mypage_myAsk.css">
-    <link rel="stylesheet" href="../../../../static/css/layout/header.css">
-    <link rel="stylesheet" href="../../../../static/css/layout/footer.css">
+    <link rel="stylesheet" href="/css/myPage/parent/mypage_myAsk.css">
+    <link rel="stylesheet" href="/css/layout/header.css">
+    <link rel="stylesheet" href="/css/layout/footer.css">
     <title>iDollbom_마이페이지</title>
 </head>
 
@@ -111,20 +111,18 @@
                     </div>
                 </div>
                 <!-- 문의목록 -->
-                <div class="mainbox">
-                    <a href="/write/getWritedPage?postId=<%= post.postId %>">
-                        <div class="mypost">
-                            <div>
-                                문의제목
+                <div th:if="${not #lists.isEmpty(askList)}">
+                    <div class="mainbox" th:each="ask:${askList}">
+                        <a href="/write/getWritedPage?postId=<%= post.postId %>">
+                            <div class="mypost">
+                                <div th:text="${ask.questionTitle}"></div>
+                                <p th:text="${ask.questionContent}"></p>
+                                <p th:text="${#dates.format(ask.questionRegisterDate, 'yyyy-MM-dd HH:mm:ss')}"></p>
                             </div>
-                            <p>문의내용</p>
-                            <p>2022/05/24</p>
-                        </div>
-
-                        <p>작성된 문의가 아직 없습니다.</p>
-
-                    </a>
+                        </a>
+                    </div>
                 </div>
+                <p th:if="${#lists.isEmpty(askList)}">작성된 문의가 아직 없습니다.</p>
             </div>
         </div>
     </div>

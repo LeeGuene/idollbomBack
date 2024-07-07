@@ -42,4 +42,6 @@ public class parentMyPageRestController {
         // 클라이언트에게 추가 정보를 반환하지 않음
         return ResponseEntity.noContent().build();
     }
+
+
 }
