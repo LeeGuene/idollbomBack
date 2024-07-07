@@ -74,7 +74,7 @@ public class SecurityConfig {
 
 //            request.getSession().setAttribute("user", auth.getPrincipal());
 
-            response.sendRedirect("/user/myPage");
+            response.sendRedirect("/ParentMyPage/kids");
         };
     }
 

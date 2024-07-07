@@ -3,9 +3,11 @@ package com.example.idollbom.controller.myPage;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
 import com.example.idollbom.domain.vo.myPagevo.parentvo.askVO;
 import com.example.idollbom.domain.vo.myPagevo.parentvo.kidVO;
+import com.example.idollbom.domain.vo.myPagevo.parentvo.myPostVO;
 import com.example.idollbom.domain.vo.myPagevo.parentvo.reportVO;
 import com.example.idollbom.service.myPageservice.parentservice.askService;
 import com.example.idollbom.service.myPageservice.parentservice.kidsService;
+import com.example.idollbom.service.myPageservice.parentservice.myPostService;
 import com.example.idollbom.service.myPageservice.parentservice.reportService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +29,7 @@ public class ParentMypageController {
     private final kidsService kidsService;
     private final reportService reportService;
     private final askService askService;
+    private final myPostService myPostService;
 
 //  kid 페이지로 이동
     @GetMapping("/kids")
@@ -84,4 +87,11 @@ public class ParentMypageController {
         return "html/myPage/parent/myAsk";
     }
 
+    //내가쓴 글 페이지 이동
+    @GetMapping("/myPost")
+    public String selectMyPostList(Model model){
+        List<myPostVO> postList = myPostService.selectPostList();
+        model.addAttribute("myPost", postList);
+        return "html/myPage/parent/myPost";
+    }
 }

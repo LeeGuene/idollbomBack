@@ -40,11 +40,6 @@ public class ParentController {
         return "/html/mypage/parent/myPost";
 }
 
-//  부모 마이페이지 이동
-    @GetMapping("/myPage")
-    public String getMypage() {
-        return "/html/mypage/parent/myPost";
-    }
 
 //  로그아웃화면 이동
     @GetMapping("/logout")
