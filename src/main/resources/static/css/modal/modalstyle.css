@@ -224,6 +224,29 @@ form{
     margin-left: 7px;
 }
 
+.modal-btn > div{
+    width: 80px;
+    height: 25px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bolder;
+    padding-top: 5px;
+    margin-left: 7px;
+}
+
+.modal2-btn > div{
+    width: 80px;
+    height: 25px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bolder;
+    padding-top: 5px;
+    margin-left: 7px;
+}
+
+
 .form-label{
     font-size: 15px;
     font-weight: bold;
