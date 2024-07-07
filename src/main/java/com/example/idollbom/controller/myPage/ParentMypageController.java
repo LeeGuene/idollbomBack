@@ -1,14 +1,8 @@
 package com.example.idollbom.controller.myPage;
 
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
-import com.example.idollbom.domain.vo.myPagevo.parentvo.askVO;
-import com.example.idollbom.domain.vo.myPagevo.parentvo.kidVO;
-import com.example.idollbom.domain.vo.myPagevo.parentvo.myPostVO;
-import com.example.idollbom.domain.vo.myPagevo.parentvo.reportVO;
-import com.example.idollbom.service.myPageservice.parentservice.askService;
-import com.example.idollbom.service.myPageservice.parentservice.kidsService;
-import com.example.idollbom.service.myPageservice.parentservice.myPostService;
-import com.example.idollbom.service.myPageservice.parentservice.reportService;
+import com.example.idollbom.domain.vo.myPagevo.parentvo.*;
+import com.example.idollbom.service.myPageservice.parentservice.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -30,6 +24,7 @@ public class ParentMypageController {
     private final reportService reportService;
     private final askService askService;
     private final myPostService myPostService;
+    private final reviewService reviewService;
 
 //  kid 페이지로 이동
     @GetMapping("/kids")
@@ -93,5 +88,17 @@ public class ParentMypageController {
         List<myPostVO> postList = myPostService.selectPostList();
         model.addAttribute("myPost", postList);
         return "html/myPage/parent/myPost";
+    }
+
+    //내가쓴 리뷰 페이지로 이동
+    @GetMapping("/Review")
+    public String selectReviewList(Model model){
+        List<reviewVO> reviewList = reviewService.selectRiviewList();
+//        for(int i=0; i<reviewList.size(); i++){
+//            Long parentId = reviewList.get(i).getParentNumber();
+//
+//        }
+        model.addAttribute("ReviewList", reviewList);
+        return "html/myPage/parent/myReview";
     }
 }

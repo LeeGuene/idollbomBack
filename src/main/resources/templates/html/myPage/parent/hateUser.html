@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../../static/css/myPage/parent/mypage_Declaration.css">
-    <link rel="stylesheet" href="../../../../static/css/layout/header.css">
-    <link rel="stylesheet" href="../../../../static/css/layout/footer.css">
+    <link rel="stylesheet" href="/css/myPage/parent/mypage_Declaration.css">
+    <link rel="stylesheet" href="/css/layout/header.css">
+    <link rel="stylesheet" href="/css/layout/footer.css">
     <title>iDollbom_마이페이지</title>
 </head>
 
@@ -67,7 +67,7 @@
             <div class="incontainer">
                 <div class="menu-bar">
                     <div class="menu-bar-option">
-                        <a href="../../html/mypage/mypage_myKids.html">아이정보 추가</a>
+                        <a th:href="@{/ParentMyPage/kids}">아이정보 추가</a>
                     </div>
                     <div class="menu-bar-option">
                         <a href="../../html/mypage/mypage_correction.html">내정보 수정</a>
@@ -83,10 +83,10 @@
                         <a href="../../html/mypage/mypage_ myPost .html">내가쓴 게시글</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a href="../../html/mypage/mypage_myAsk.html">내 문의</a>
+                        <a th:href="@{/ParentMyPage/askPage}">내 문의</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a href="../../html/mypage/mypage_myrReview.html">내 리뷰</a>
+                        <a th:href="@{/ParentMyPage/Review}">내 리뷰</a>
                     </div>
                     <hr class="custom-hr">
                     <div class="menu-bar-option">
@@ -112,22 +112,18 @@
                     </div>
                 </div>
                 <!-- 신고글 -->
-                <div class="mainbox">
-                    <a href="/write/getWritedPage?postId=<%= post.postId %>">
-                        <div class="mypost">
-                            <div>
-                                게시글제목
+                <div th:if="${not #lists.isEmpty(reportUser)}">
+                    <div class="mainbox" th:each="report:${reportUser}">
+                        <a href="/write/getWritedPage?postId=<%= post.postId %>">
+                            <div class="mypost">
+                                <div th:text="${report.parentReportType}"></div>
+                                <p th:text="${report.parentReportContent}"></p>
+                                <p th:text="${#dates.format(report.parentReportRegisterDate,'yyyy-MM-dd HH:mm:ss')}"></p>
                             </div>
-                            <p>신고내용</p>
-                            <button>취소</button>
-
-                        </div>
-
-                        <p>저장한 게시글이 아직 없습니다.</p>
-
-                    </a>
-
+                        </a>
+                    </div>
                 </div>
+                <p th:if="${#lists.isEmpty(reportUser)}">저장한 게시글이 아직 없습니다.</p>
             </div>
         </div>
     </div>

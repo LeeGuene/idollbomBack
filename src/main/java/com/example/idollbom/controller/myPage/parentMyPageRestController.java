@@ -43,5 +43,5 @@ public class parentMyPageRestController {
         return ResponseEntity.noContent().build();
     }
 
-
+//
 }

@@ -14,6 +14,6 @@ public class reportVO {
     private Long parentReportNumber;
     private String parentReportType;
     private String parentReportContent;
-    private Date parentReportRegisterEate;
+    private Date parentReportRegisterDate;
     private Long parentPostNumber;
 }
