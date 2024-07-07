@@ -132,8 +132,8 @@
                             <div>
                                 <div class="action-form">
                                     <div class="actions">
-                                        <button onclick="editInfo()">수정</button>
-                                        <button class="delete-button" th:data-kid-number="${kid.childNumber}">삭제</button>
+                                        <button class="insertKids updateBt btn-update-modal" th:data-kid-number="${kid.childNumber}">수정</button>
+                                        <button class="insertKids delete-button" th:data-kid-number="${kid.childNumber}">삭제</button>
                                     </div>
                                 </div>
                                 <div class="kids">
@@ -152,19 +152,19 @@
                     </div>
                 </div>
             </div>
+
             <!-- 아이 정보 추가 모달창 -->
             <form th:action="@{/ParentMyPage/insertKids}" method="post" th:object="${kid}">
-                <input type="hidden" >
                 <div class="modal">
                     <div class="modal-body profile-body">
                         <div class="header">
                             <img class="img" src="/images/logo.png" alt="로고">
-                            <h3 id="title">아이 정보 추가</h3>
-                            <button id="close-btn"><img class="x-btn" src="/images/closebtn.png"
-                                    alt="닫기버튼"></button>
+                            <h3 id="kidtitle">아이 정보 추가</h3>
+                            <b class="close-btnen"><img class="x-btn" src="/images/closebtn.png"
+                                    alt="닫기버튼"></b>
                         </div>
                         <div class="input-wrap">
-                            <label for="name" class="form" >이름</label>
+                            <labele for="name" class="form" >이름</labele>
                             <input id="name" type="text" class="form-control" placeholder="김돌봄" th:field="*{childName}">
                         </div>
                         <!-- 오늘 날짜 이후에 대한 거 막아줘도 좋을듯 -->
@@ -173,11 +173,14 @@
                             <input id="birthday" type="date" class="form-control" th:field="*{childAge}">
                         </div>
                         <div class="input-wrap">
-                            <label class="form">성별</label>
-                            <input type="radio" id="male" name="childGender"  th:value="'남자'" class="radio">
-                            <label for="male">남자 아이</label>
-                            <input type="radio" id="female" name="childGender" th:value="'여자'" class="radio">
-                            <label for="female">여자 아이</label>
+                            <div class="input-wrap">
+                                <label class="form">성별</label>
+                                <input type="radio" id="kidmale" name="childGender"  th:field="*{childGender}"  th:value="'남자'" class="radio">
+                                <label for="kidmale">남자 아이</label>
+                                <input type="radio" id="kidfemale" name="childGender" th:value="'여자'"  th:field="*{childGender}" class="radio">
+                                <label for="kidfemale">여자 아이</label>
+                            </div>
+
                         </div>
                         <!-- 글자 수 제한 하는 거 보여줘도 좋을듯 -->
                         <div class="input-wrap introduce">
@@ -188,6 +191,48 @@
                         <div class=" modal-btn" >
                             <button class="close-btn btn">취소하기</button>
                             <button class="add-btn btn" type="submit">추가하기</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+<!--         아이정보 수정 모달창-->
+            <form method="post" id="update-form">
+                <input name="childNumber" id="childNumber" type="hidden" >
+                <input name="parentNumber" id="parentNumber" type="hidden">
+                <div class="modal2">
+                    <div class="modal2-body profile-body">
+                        <div class="header">
+                            <img class="img" src="/images/logo.png" alt="로고">
+                            <h3 id="title">아이 정보 추가</h3>
+                            <b class="close-btnen2"><img class="x-btn" src="/images/closebtn.png"
+                                                   alt="닫기버튼"></b>
+                        </div>
+                        <div class="input-wrap">
+                            <labele for="Kidname" class="form" >이름</labele>
+                            <input name="childName" id="Kidname" type="text" class="form-control" placeholder="김돌봄" >
+                        </div>
+                        <!-- 오늘 날짜 이후에 대한 거 막아줘도 좋을듯 -->
+                        <div class="input-wrap">
+                            <label for="Kidbirthday" class="form">생년월일</label>
+                            <input name="childAge" id="Kidbirthday" type="date" class="form-control">
+                        </div>
+                        <div class="input-wrap">
+                            <label class="form">성별</label>
+                            <input type="radio" id="male" name="childGender"  class="radio" value="남자" >
+                            <label for="male">남자 아이</label>
+                            <input type="radio" id="female" name="childGender"  class="radio" value="여자">
+                            <label for="female">여자 아이</label>
+                        </div>
+                        <!-- 글자 수 제한 하는 거 보여줘도 좋을듯 -->
+                        <div class="input-wrap introduce">
+                            <label  class="form">아이 소개</label>
+                            <textarea name=" childSpecialIssues" id="Kidtextarea" class="form-control" placeholder="아이에 대해 소개해주세요." rows="6"
+                                      maxlength="500" ></textarea>
+                        </div>
+                        <div class=" modal2-btn" >
+                            <button class="close-btn btn">취소하기</button>
+                            <button class="add-btn btn" type="submit" >추가하기</button>
                         </div>
                     </div>
                 </div>

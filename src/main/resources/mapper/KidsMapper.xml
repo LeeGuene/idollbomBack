@@ -12,10 +12,28 @@
     <select id="selectKidsList">
         select * from child
     </select>
+
     <!--  아이삭제  -->
     <delete id="deleteKids">
         delete child
         where CHILD_NUMBER = #{childNumber}
     </delete>
 
+<!--  아이id 로 가져오기  -->
+    <select id="selectByKidsId">
+        select * from child
+        where CHILD_NUMBER = #{childNumber}
+    </select>
+
+<!--  아이 update-->
+    <update id="updateByKidId">
+        update child
+        set
+            CHILD_NAME = #{childName},
+            CHILD_AGE = #{childAge},
+            CHILD_GENDER = #{childGender},
+            CHILD_SPECIAL_ISSUES = #{childSpecialIssues}
+
+        where CHILD_NUMBER = #{childNumber}
+    </update>
 </mapper>

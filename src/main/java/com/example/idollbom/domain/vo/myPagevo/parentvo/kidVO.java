@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Builder
 @AllArgsConstructor
 public class kidVO {
-    private String childNumber;
+    private Long childNumber;
     private String childName;
     private String childAge;
     private String childGender;
@@ -30,6 +30,7 @@ public class kidVO {
                 .childAge(kidDTO.getChildAge())
                 .childGender(kidDTO.getChildGender())
                 .childSpecialIssues(kidDTO.getChildSpecialIssues())
+                .childNumber(kidDTO.getChildNumber())
                 .build();
 
     }

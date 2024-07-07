@@ -36,23 +36,31 @@ public class ParentMypageController {
     public String insertKids(@ModelAttribute kidDTO kid){
         log.info("HTML에서 넘어온 데이터: " + kid);
 
+        //      날짜 문자열 뽑기
         LocalDate birthday = LocalDate.parse(kid.getChildAge());
-
+        //      현재 날짜
         LocalDate currentDate = LocalDate.now();
+        //      둘사이 기간
         Period period = Period.between(birthday, currentDate);
+        //      년도만 뽑아서 저장
         int age = period.getYears();
         kid.setChildAge(String.valueOf(age));
+
+
         kidsService.insertKids(kid);
 
         return "redirect:/ParentMyPage/kids";
+
+
     }
 
-//  아이삭제
+    //  아이삭제
     @PostMapping("/deleteKids")
     public String deleteKids(@RequestBody Long kidNumber){
         log.info("받은거"+kidNumber);
         kidsService.deleteKids(kidNumber);
         return "redirect:/ParentMyPage/kids";
     }
+
 
 }

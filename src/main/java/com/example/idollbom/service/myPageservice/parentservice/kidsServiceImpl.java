@@ -5,10 +5,8 @@ import com.example.idollbom.domain.vo.loginvo.ParentVO;
 import com.example.idollbom.domain.vo.myPagevo.parentvo.kidVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.mapper.myPagemapper.parentmapper.KidsMapper;
-import com.example.idollbom.service.loginservice.ParentDetailService;
-import com.example.idollbom.service.loginservice.ParentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -17,6 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class kidsServiceImpl implements kidsService {
 
     private final KidsMapper kidsMapper;
@@ -43,5 +42,17 @@ public class kidsServiceImpl implements kidsService {
     @Override
     public void deleteKids(Long kidNumber) {
         kidsMapper.deleteKids(kidNumber);
+    }
+
+    @Override
+    public kidVO selectKidById(Long kidNumber) {
+        return kidsMapper.selectByKidsId(kidNumber);
+    }
+
+    @Override
+    public void updateByKidId(kidDTO kid) {
+       kidVO newKidInfo =  kidVO.toEntity(kid);
+       log.info(newKidInfo.getChildName());
+       kidsMapper.updateByKidId(newKidInfo);
     }
 }
