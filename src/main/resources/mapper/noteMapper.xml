@@ -3,7 +3,9 @@
 
 <mapper namespace="com.example.idollbom.mapper.myPagemapper.parentmapper.noteMapper">
     <select id="selectNoteById">
-        select * from parent_note
+        select *
+        from parent_note pn
+                 join pro pr on pn.pro_number = pr.pro_number
         where parent_number = #{parentNumber}
     </select>
 
