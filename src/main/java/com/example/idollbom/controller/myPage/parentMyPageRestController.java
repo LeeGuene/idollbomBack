@@ -1,9 +1,12 @@
 package com.example.idollbom.controller.myPage;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.mailDTO;
+import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.domain.vo.kidVO;
+import com.example.idollbom.service.loginservice.ParentDetailService;
 import com.example.idollbom.service.myPageservice.parentservice.kidsService;
 import com.example.idollbom.service.myPageservice.parentservice.noteService;
+import com.example.idollbom.service.myPageservice.parentservice.parentInfoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -51,6 +54,5 @@ public class parentMyPageRestController {
     public mailDTO selectMailId(@RequestParam(value = "mailId", required = true) Long mailId){
         return noteService.selectOneMail(mailId);
     }
-
 
 }

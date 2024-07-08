@@ -25,6 +25,7 @@ public class ParentMypageController {
     private final myPostService myPostService;
     private final reviewService reviewService;
     private final noteService noteService;
+    private final parentInfoService parentInfoService;
 
 //  kid 페이지로 이동
     @GetMapping("/kids")
@@ -116,5 +117,13 @@ public class ParentMypageController {
         List<mailDTO> noteList = noteService.selectAllMyNote();
         model.addAttribute("myNotes", noteList);
         return "html/myPage/parent/mail";
+    }
+
+    //  내정보 받아오기
+    @GetMapping("/myInformation")
+    public String selectMailId(Model model){
+       ParentVO parentInfo = parentInfoService.selectParentInfo();
+       model.addAttribute("parentInfo", parentInfo);
+        return "html/myPage/parent/correction";
     }
 }

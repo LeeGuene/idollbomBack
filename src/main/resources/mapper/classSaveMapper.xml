@@ -4,5 +4,6 @@
 <mapper namespace="com.example.idollbom.mapper.myPagemapper.parentmapper.classSaveMapper">
     <select id="selectAll">
         select * from class_save
+        where parent_number = #{parentNumber}
     </select>
 </mapper>
