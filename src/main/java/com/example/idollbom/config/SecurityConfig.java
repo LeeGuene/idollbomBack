@@ -24,7 +24,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 //       return http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
-//                .build();
         return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
@@ -33,7 +32,9 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/user/myPage"),
                                 new AntPathRequestMatcher("/css/**"),
                                 new AntPathRequestMatcher("/js/**"),
-                                new AntPathRequestMatcher("/images/**")
+                                new AntPathRequestMatcher("/images/**"),
+                                new AntPathRequestMatcher("/match"),
+                                new AntPathRequestMatcher("/class/**")
                         ).permitAll() // 특정 요청에 대해서는 접근 허용
                         .anyRequest().authenticated() // 나머지 요청들은 인증 필요하게 함
                 )
