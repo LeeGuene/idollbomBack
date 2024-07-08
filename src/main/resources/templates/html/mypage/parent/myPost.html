@@ -27,7 +27,7 @@
                     </div>
                     <hr class="custom-hr">
                     <div class="menu-bar-option">
-                        <a th:href="@{/html/mypage/mypage_hateUser.html}">신고 목록</a>
+                        <a th:href="@{/ParentMyPage/reportPage}">신고 목록</a>
                     </div>
                     <div class="menu-bar-option">
                         <a th:href="@{/html/mypage/mypage_myFavoriteClass.html}">수업찜 목록</a>
@@ -36,7 +36,7 @@
                         <p>내가쓴 게시글</p>
                     </div>
                     <div class="menu-bar-option">
-                        <a th:href="@{/html/mypage/mypage_myAsk.html}">내 문의</a>
+                        <a th:href="@{/ParentMyPage/askPage}">내 문의</a>
                     </div>
                     <div class="menu-bar-option">
                         <a th:href="@{/html/mypage/mypage_myrReview.html}">내 리뷰</a>
@@ -64,18 +64,19 @@
                     </div>
                     <!-- 게시글박스 -->
                 </div>
-                <div class="mainbox">
-                    <a th:href="@{/board/freeBoardDetail_parent.html}">
-                        <div class="mypost">
-                            <div>
-                                게시글제목
+                <div th:if="${not #lists.isEmpty(myPost)}">
+                    <div class="mainbox" th:each="post:${myPost}">
+                        <a th:href="@{/board/freeBoardDetail_parent.html}">
+                            <div class="mypost" >
+                                <div th:text="${post.parentPostTitle}">
+                                </div>
+                                <p th:text="${post.parentPostContent}"></p>
+                                <p th:text="${#dates.format(post.parentPostUpdateDate,'yyyy-MM-dd HH:mm:ss')}"></p>
                             </div>
-                            <p>게시글 내용</p>
-                            <p>2022.07.18</p>
-                        </div>
-                            <p>저장한 게시글이 아직 없습니다.</p>
-                    </a>
-            </div>
+                        </a>
+                    </div>
+                </div>
+                <p th:if="${#lists.isEmpty(myPost)}">저장한 게시글이 아직 없습니다.</p>
             </div>
         </div>
     </div>

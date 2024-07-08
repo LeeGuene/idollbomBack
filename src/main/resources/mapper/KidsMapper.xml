@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.idollbom.mapper.myPagemapper.parentmapper.KidsMapper">
+    <!-- 아이추가 -->
+    <select id="insertKids">
+        insert into child
+        values (seq_project.NEXTVAL,#{childName},#{childAge},#{childGender},#{childSpecialIssues},#{parentNumber})
+    </select>
+
+    <!--  아이List 보기-->
+    <select id="selectKidsList">
+        select * from child
+    </select>
+
+    <!--  아이삭제  -->
+    <delete id="deleteKids">
+        delete child
+        where CHILD_NUMBER = #{childNumber}
+    </delete>
+
+<!--  아이id 로 가져오기  -->
+    <select id="selectByKidsId">
+        select * from child
+        where CHILD_NUMBER = #{childNumber}
+    </select>
+
+<!--  아이 update-->
+    <update id="updateByKidId">
+        update child
+        set
+            CHILD_NAME = #{childName},
+            CHILD_AGE = #{childAge},
+            CHILD_GENDER = #{childGender},
+            CHILD_SPECIAL_ISSUES = #{childSpecialIssues}
+
+        where CHILD_NUMBER = #{childNumber}
+    </update>
+</mapper>

@@ -4,7 +4,7 @@
 <mapper namespace="com.example.idollbom.mapper.loginmapper.ParentMapper">
 
 <!--    회원 가입   -->
-    <insert id="insert">
+    <insert id="insert" parameterType="ParentVO">
         insert into parent (
         PARENT_NUMBER,
         PARENT_EMAIL,
@@ -18,20 +18,9 @@
 
 
     <!--    로그인    -->
-    <select id="selectOne">
+    <select id="selectOne" parameterType="string">
         select * from parent
         where parent_email = #{parentEmail}
     </select>
 
-    <!-- 아이추가 -->
-    <select id="insertKids">
-        insert into child
-        values (seq_project.NEXTVAL,#{childName},#{childAge},#{childGender},#{childSpecialIssues},#{parentNumber})
-    </select>
-
-    <!--  아이삭제  -->
-    <delete id="deleteKids">
-        delete child
-        where CHILD_NUMBER = #{childNumber}
-    </delete>
 </mapper>
