@@ -9,4 +9,11 @@
         where parent_number = #{parentNumber}
     </select>
 
+    <select id="selectNoteByNoteId">
+        select *
+        from parent_note pn
+                 join pro pr on pn.pro_number = pr.pro_number
+        where parent_note_number = #{parentNoteNumber}
+    </select>
+
 </mapper>

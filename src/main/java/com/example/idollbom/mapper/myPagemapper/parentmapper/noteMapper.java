@@ -9,4 +9,6 @@ import java.util.List;
 @Mapper
 public interface noteMapper {
     List<mailDTO> selectNoteById(Long parentNumber);
+
+    mailDTO selectNoteByNoteId(Long mailId);
 }

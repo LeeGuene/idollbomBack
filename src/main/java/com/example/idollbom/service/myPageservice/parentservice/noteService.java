@@ -9,4 +9,6 @@ import java.util.List;
 @Service
 public interface noteService {
     List<mailDTO> selectAllMyNote();
+
+    mailDTO selectOneMail(Long mailid);
 }

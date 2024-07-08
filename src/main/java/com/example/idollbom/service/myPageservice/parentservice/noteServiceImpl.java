@@ -30,4 +30,9 @@ public class noteServiceImpl implements noteService {
         List<mailDTO> maildto = noteMapper.selectNoteById(parent.getParentNumber());
         return maildto;
     }
+
+    @Override
+    public mailDTO selectOneMail(Long mailId) {
+        return noteMapper.selectNoteByNoteId(mailId);
+    }
 }
