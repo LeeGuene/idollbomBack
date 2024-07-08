@@ -1,4 +1,4 @@
-package com.example.idollbom.domain.vo.loginvo;
+package com.example.idollbom.domain.vo;
 
 import com.example.idollbom.domain.dto.logindto.ParentDTO;
 import lombok.*;

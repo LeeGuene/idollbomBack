@@ -1,8 +1,8 @@
 package com.example.idollbom.service.myPageservice.parentservice;
 
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
-import com.example.idollbom.domain.vo.loginvo.ParentVO;
-import com.example.idollbom.domain.vo.myPagevo.parentvo.kidVO;
+import com.example.idollbom.domain.vo.ParentVO;
+import com.example.idollbom.domain.vo.kidVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.mapper.myPagemapper.parentmapper.KidsMapper;
 import lombok.RequiredArgsConstructor;

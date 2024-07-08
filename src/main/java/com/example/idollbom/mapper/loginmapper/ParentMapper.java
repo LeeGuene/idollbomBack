@@ -1,5 +1,5 @@
 package com.example.idollbom.mapper.loginmapper;
-import com.example.idollbom.domain.vo.loginvo.ParentVO;
+import com.example.idollbom.domain.vo.ParentVO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

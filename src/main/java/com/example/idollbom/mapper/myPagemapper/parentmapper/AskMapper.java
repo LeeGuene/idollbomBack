@@ -1,7 +1,6 @@
 package com.example.idollbom.mapper.myPagemapper.parentmapper;
 
-import com.example.idollbom.domain.vo.myPagevo.parentvo.askVO;
-import com.example.idollbom.domain.vo.myPagevo.parentvo.kidVO;
+import com.example.idollbom.domain.vo.askVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

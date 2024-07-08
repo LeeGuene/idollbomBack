@@ -1,6 +1,6 @@
 package com.example.idollbom.service.myPageservice.parentservice;
 
-import com.example.idollbom.domain.vo.myPagevo.parentvo.reviewVO;
+import com.example.idollbom.domain.vo.reviewVO;
 import com.example.idollbom.mapper.myPagemapper.parentmapper.ReviewMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

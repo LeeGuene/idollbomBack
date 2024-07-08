@@ -1,13 +1,12 @@
 package com.example.idollbom.controller.myPage;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
-import com.example.idollbom.domain.vo.myPagevo.parentvo.kidVO;
+import com.example.idollbom.domain.vo.kidVO;
 import com.example.idollbom.service.myPageservice.parentservice.kidsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Console;
 import java.time.LocalDate;
 import java.time.Period;
 

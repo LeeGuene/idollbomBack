@@ -1,7 +1,7 @@
 package com.example.idollbom.service.myPageservice.parentservice;
 
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
-import com.example.idollbom.domain.vo.myPagevo.parentvo.kidVO;
+import com.example.idollbom.domain.vo.kidVO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.example.idollbom.controller.myPage;
 
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
-import com.example.idollbom.domain.vo.myPagevo.parentvo.*;
+import com.example.idollbom.domain.vo.*;
 import com.example.idollbom.service.myPageservice.parentservice.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/ParentMyPage")
@@ -25,6 +24,7 @@ public class ParentMypageController {
     private final askService askService;
     private final myPostService myPostService;
     private final reviewService reviewService;
+    private final classSaveService classSaveService;
 
 //  kid 페이지로 이동
     @GetMapping("/kids")
@@ -50,12 +50,9 @@ public class ParentMypageController {
         int age = period.getYears();
         kid.setChildAge(String.valueOf(age));
 
-
         kidsService.insertKids(kid);
 
         return "redirect:/ParentMyPage/kids";
-
-
     }
 
     //  아이삭제
@@ -101,4 +98,15 @@ public class ParentMypageController {
         model.addAttribute("ReviewList", reviewList);
         return "html/myPage/parent/myReview";
     }
+
+    //찜한 목록으로 이동
+//    @GetMapping("/classSave")
+//    public String selectClassList(Model model){
+//        List<classSaveVO> classList = classSaveService.selectClassList();
+//        for(int i=0; i<classList.size(); i++){
+//
+//        }
+//        model.addAttribute("myPost", postList);
+//        return "html/myPage/parent/myPost";
+//    }
 }

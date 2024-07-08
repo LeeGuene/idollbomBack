@@ -1,11 +1,11 @@
 package com.example.idollbom.service.myPageservice.parentservice;
 
-import com.example.idollbom.domain.vo.myPostVO;
+import com.example.idollbom.domain.vo.classSaveVO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public interface myPostService {
-    public List<myPostVO> selectPostList();
+public interface classSaveService {
+    List<classSaveVO> selectClassList();
 }

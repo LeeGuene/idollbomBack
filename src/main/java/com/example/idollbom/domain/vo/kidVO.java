@@ -1,12 +1,7 @@
-package com.example.idollbom.domain.vo.myPagevo.parentvo;
+package com.example.idollbom.domain.vo;
 
-import com.example.idollbom.domain.dto.logindto.ParentDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
-import com.example.idollbom.domain.vo.loginvo.ParentVO;
 import lombok.*;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Getter
 @ToString
