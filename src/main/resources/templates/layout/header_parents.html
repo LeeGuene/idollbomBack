@@ -8,47 +8,47 @@
 </head>
 
 <body>
-    <header id="header">
+    <header id="header" th:fragment="header_parents">
         <div class="header_wrap">
-            <h1><a href="../html/main/index_parents.html"><img src="../images/logo.png" alt="IDOLL봄"></a></h1>
+            <h1><a href="#"><img th:src="@{/images/logo.png}" alt="IDOLL봄"></a></h1>
 
             <nav>
                 <ul class="gnb">
                     <li>
-                        <a href="sub1.html">부모님</a>
+                        <a herf="#">부모님</a>
                         <ul>
-                            <li><a href="sub1.html">매칭</a></li>
+                            <li><a href="#">매칭</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="sub2.html">전문가</a>
+                        <a href="#">전문가</a>
                     </li>
                     <li>
-                        <a href="sub3.html">신청하기</a>
+                        <a href="#">신청하기</a>
                         <ul>
-                            <li><a href="sub3.html">돌봄</a></li>
-                            <li><a href="sub3_2.html">교육</a></li>
-                            <li><a href="sub3.html">운동</a></li>
-                            <li><a href="sub3_2.html">예능</a></li>
+                            <li><a href="#">돌봄</a></li>
+                            <li><a href="#">운동</a></li>
+                            <li><a href="#">교육</a></li>
+                            <li><a href="#">예능</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="sub4.html">커뮤니티</a>
+                        <a href="#">커뮤니티</a>
                         <ul>
-                            <li><a href="sub4.html">자유게시판</a></li>
+                            <li><a href="#">자유게시판</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="sub5.html">고객센터</a>
+                        <a href="#">고객센터</a>
                         <ul>
-                            <li><a href="sub5.html">문의하기</a></li>
-                            <li><a href="sub5_2.html">공지사항</a></li>
+                            <li><a href="#">문의하기</a></li>
+                            <li><a href="#">공지사항</a></li>
                         </ul>
                     </li>
                 </ul>
             </nav>
             <div class="side">
-                <p><button><img src="../images/Alarm.png" alt="알림"></button></p>
+                <p><button><img th:src="@{/images/Alarm.png}" alt="알림"></button></p>
                 <p><a href="#">마이페이지</a></p>
                 <p><a href="#">로그인 /</a></p>
                 <p><a href="#">회원가입</a></p>
@@ -58,6 +58,6 @@
 </body>
 
 <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
-<script src="../../static/js/motion.js"></script>
+<script th:src="@{/js/motion.js}"></script>
 
 </html>
