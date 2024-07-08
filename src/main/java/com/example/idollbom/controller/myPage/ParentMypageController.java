@@ -1,5 +1,4 @@
 package com.example.idollbom.controller.myPage;
-
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
 import com.example.idollbom.domain.vo.*;
 import com.example.idollbom.service.myPageservice.parentservice.*;
@@ -24,7 +23,7 @@ public class ParentMypageController {
     private final askService askService;
     private final myPostService myPostService;
     private final reviewService reviewService;
-    private final classSaveService classSaveService;
+    private final noteService noteService;
 
 //  kid 페이지로 이동
     @GetMapping("/kids")
@@ -109,4 +108,12 @@ public class ParentMypageController {
 //        model.addAttribute("myPost", postList);
 //        return "html/myPage/parent/myPost";
 //    }
+
+//    쪽지 목록으로 이동
+    @GetMapping("/myNote")
+    public String selectMyNoteList(Model model){
+        List<noteVO> noteList = noteService.selectAllMyNote();
+        model.addAttribute("myNotes", noteList);
+        return "html/myPage/parent/mail";
+    }
 }

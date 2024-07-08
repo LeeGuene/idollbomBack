@@ -1,0 +1,267 @@
+*{font-family: 'GmarketSansMedium'; }
+
+h1 {
+    font-weight: lighter;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 25px;
+}
+
+h3 {
+    font-weight: lighter;
+    color: gray;
+    text-align: center;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: auto;
+}
+
+/*이 페이지의 전체적인 너비, 배경 조정하는 부분, 여기 없으면 옆으로 쫙 늘어남*/
+.signup{
+    background: white;
+    padding: 20px;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/*소셜 회원가입 : 네이버,카카오, 구글*/
+.social-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.social-box {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+    line-height: 30px;
+    text-align: center;
+    background: none;
+}
+
+
+.social-box img {
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+}
+
+/*---or--- 부분 css*/
+.separator{
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.line {
+    flex: 1;
+    height: 1px;
+    background-color: #ccc;
+}
+
+.ortext{
+    margin: 0 10px;
+    color: #888;
+}
+
+/*폼 작성부분 css*/
+.form{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+
+/*빨간색 에러 : (1) 일반 (2) 이메일 - 배치가 버튼 옆이여서 이리 수정*/
+.error-icon {
+    margin-right: 5px;
+    vertical-align: middle;
+    height: 1em;
+    width: auto;
+}
+
+.error-icon-text {
+    display: flex;
+    align-items: center;
+    color: red;
+    font-size: 0.8em;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 10px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.emailerror-message {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top : 10px;
+}
+
+/*텍스트, 이메일, 비밀번호, 인증번호*/
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="num"] {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    margin-top: 5px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="num"]:focus {
+    outline: none;
+    border-bottom: 2px solid #555;
+}
+
+/*이메일 인증확인 버튼*/
+.emailverify-button {
+    padding: 10px 15px;
+    width : 32vh;
+    border: none;
+    border-radius: 4px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    width: auto;
+}
+
+/*인증번호 재전송, 인증번호 확인*/
+.reverify-button,
+.confirmverify-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    flex-basis: 49%;
+}
+
+.buttonCss {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+
+/*회원등록 부분*/
+.signup-button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #4CAF50; /* 녹색 배경색 */
+    border: 1px solid #333; /* 검은색 테두리 */
+    border-radius: 10px; /* 모서리를 둥글게 */
+
+}
+
+
+/*체크 박스 부분*/
+.checkbox{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    text-decoration: underline;
+}
+
+.checkbox-container {
+    width: 48%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+    color: #333;
+}
+
+/*생일 선택 부분*/
+.birthday-select {
+    display: flex;
+    align-items: center;
+    margin-top : 2vh;
+}
+
+.birthday-select label {
+    margin-right: 5vh;
+}
+
+.birthday-select select {
+    width : 10vh;
+    border-radius: 8%;
+    border-color: black;
+    border-width: 2px;
+    margin-right: 20px;
+}
+
+
+/*이미 계정있는지? Sign in 부분*/
+.signinAsk {
+    margin-top: 20px;
+    font-size: 0.9em;
+    text-align: center;
+    color: #ccc;
+}
+
+.signinAsk a {
+    color: #555;
+    text-decoration: none;
+}
+
+.signinAsk a:hover {
+    text-decoration: underline;
+}
+
+.file{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.myprofile{
+    height: 400px;
+}
+
+
