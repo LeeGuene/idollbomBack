@@ -37,7 +37,7 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/user/signup"),
                                 new AntPathRequestMatcher("/user/myPage"),
                                 new AntPathRequestMatcher("/css/**"),
-                                new AntPathRequestMatcher("/js/**"),
+                                new AntPathRequestMatcher("/js/**"),git
                                 new AntPathRequestMatcher("/images/**")
                         ).permitAll() // 특정 요청에 대해서는 접근 허용
                         .anyRequest().authenticated() // 나머지 요청들은 인증 필요하게 함
