@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/../../../static/css/myPage/parent/mypage_payment.css">
-    <link rel="stylesheet" href="../../../../static/css/layout/header.css">
-    <link rel="stylesheet" href="../../../../static/css/layout/footer.css">
+    <link rel="stylesheet" href="/css/myPage/parent/mypage_payment.css">
+    <link rel="stylesheet" href="/css/layout/header.css">
+    <link rel="stylesheet" href="/css/layout/footer.css">
     <title>iDollbom_마이페이지</title>
 </head>
 
@@ -20,26 +20,26 @@
             <div class="incontainer">
                 <div class="menu-bar">
                     <div class="menu-bar-option">
-                        <a href="../../html/mypage/mypage_myKids.html">아이정보 추가</a>
+                        <a th:href="@{/ParentMyPage/kids}">아이정보 추가</a>
                     </div>
                     <div class="menu-bar-option">
                         <a href="../../html/mypage/mypage_correction.html">내정보 수정</a>
                     </div>
                     <hr class="custom-hr">
                     <div class="menu-bar-option">
-                        <a href="../../html/mypage/mypage_hateUser.html">신고 목록</a>
+                        <a th:href="@{/ParentMyPage/reportPage}">신고 목록</a>
                     </div>
                     <div class="menu-bar-option">
                         <a href="../../html/mypage/mypage_myFavoriteClass.html">수업찜 목록</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a href="../../html/mypage/mypage_ myPost .html">내가쓴 게시글</a>
+                        <a th:href="@{/ParentMyPage/myPost}">내가쓴 게시글</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a href="../../html/mypage/mypage_myAsk.html">내 문의</a>
+                        <a th:href="@{/ParentMyPage/askPage}">내 문의</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a href="../../html/mypage/mypage_myrReview.html">내 리뷰</a>
+                        <a th:href="@{/ParentMyPage/Review}">내 리뷰</a>
                     </div>
                     <hr class="custom-hr">
                     <div class="menu-bar-option">
@@ -71,47 +71,15 @@
                             <thead>
                                 <tr>
                                     <th>번호</th>
-                                    <th>쪽지 제목</th>
                                     <th>쪽지 내용</th>
                                     <th>전송 날짜</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>01</td>
-                                    <td>저 수업잘해요</td>
-                                    <td>돌봄서비스 제공합니다~</td>
-                                    <td>2024.5.2</td>
-                                </tr>
-                                <tr>
-                                    <td>02</td>
-                                    <td>저 수업잘해요</td>
-                                    <td>돌봄서비스 제공합니다~</td>
-                                    <td>2024.5.2</td>
-                                </tr>
-                                <tr>
-                                    <td>03</td>
-                                    <td>저 수업잘해요</td>
-                                    <td>돌봄서비스 제공합니다~</td>
-                                    <td>2024.5.2</td>
-                                </tr>
-                                <tr>
-                                    <td>04</td>
-                                    <td>저 수업잘해요</td>
-                                    <td>돌봄서비스 제공합니다~</td>
-                                    <td>2024.5.2</td>
-                                </tr>
-                                <tr>
-                                    <td>05</td>
-                                    <td>저 수업잘해요</td>
-                                    <td>돌봄서비스 제공합니다~</td>
-                                    <td>2024.5.2</td>
-                                </tr>
-                                <tr>
-                                    <td>06</td>
-                                    <td>저 수업잘해요</td>
-                                    <td>돌봄서비스 제공합니다~</td>
-                                    <td>2024.5.2</td>
+                            <tbody th:if="${not #lists.isEmpty(myNotes)}">
+                                <tr th:each="note, stat : ${myNotes}">
+                                    <td th:text="${stat.count}">01</td>
+                                    <td th:text="${note.parentNoteContent}">요</td>
+                                    <td th:text="${#temporals.format(note.parentNoteSendTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 </tr>
                             </tbody>
                         </table>

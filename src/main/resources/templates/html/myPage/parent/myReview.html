@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/myPage/parent/mypage_myReview.css">
+    <link rel="stylesheet" href="/css/layout/header.css">
+    <link rel="stylesheet" href="/css/layout/footer.css">
+    <title>iDollbom_마이페이지</title>
+</head>
+
+<body>
+<div id="header" th:replace="~{/layout/header_parents :: header_parents}"></div>
+
+<div class="container">
+        <div class="inincontainer">
+            <div class="mypage-main">마이페이지 > 내 리뷰</div>
+            <!-- 사이드바 -->
+            <div class="incontainer">
+                <div class="menu-bar">
+                    <div class="menu-bar-option">
+                        <a th:href="@{/ParentMyPage/kids}">아이정보 추가</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_correction.html">내정보 수정</a>
+                    </div>
+                    <hr class="custom-hr">
+                    <div class="menu-bar-option">
+                        <a th:href="@{/ParentMyPage/reportPage}">신고 목록</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_myFavoriteClass.html">수업찜 목록</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_ myPost .html">내가쓴 게시글</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a th:href="@{/ParentMyPage/askPage}">내 문의</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <p>내 리뷰</p>
+                    </div>
+                    <hr class="custom-hr">
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_Payment copy.html">결제 내역</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a th:href="@{/ParentMyPage/myNote}">쪽지함</a>
+                    </div>
+                    <!-- 프로필 -->
+                    <div class="myprofile">
+                        <div class="profileimage">
+                            <img src="../../images/ff581d78778b7.png" alt="profileImage" class="img">
+                        </div>
+                        <div class="Nickname">
+                            닉네임
+                        </div>
+
+                        <div class="buttonbox">
+                            <a href="#">
+                                <button class="btn-block" type="button">로그아웃</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 리뷰목록 -->
+                <div th:if="${not #lists.isEmpty(ReviewList)}"></div>
+                    <div class="mainbox" th:each="review:${ReviewList}" >
+                        <a href="#">
+                            <div class="mypost">
+                                <div th:text="${review.classNumber}">
+                                    리뷰 제목
+                                </div>
+                                <p th:text="${review.reviewNumber}">수업제목</p>
+                                <p th:text="${review.reviewContent}">리뷰내용 ...</p>
+                                <div class="myStar" >
+                                    <img th:each="starCount : ${#numbers.sequence(1, 5)}"
+                                         th:src="@{'/images/Star' + (${starCount le review.reviewEvaluationPoint ? ' 19' : ''}) + '.png'}"
+                                         class="star" alt="Star">
+                                </div>
+                            </div>
+
+                            <p>작성한 리뷰가 아직 없습니다.</p>
+
+                        </a>
+<!--                  <div th:if="${not #lists.isEmpty(askList)}">
+                    <div class="mainbox" th:each="ask:${askList}">
+                        <a href="/write/getWritedPage?postId=<%= post.postId %>">
+                            <div class="mypost">
+                                <div th:text="${ask.questionTitle}"></div>
+                                <p th:text="${ask.questionContent}"></p>
+                                <p th:text="${#dates.format(ask.questionRegisterDate, 'yyyy-MM-dd HH:mm:ss')}"></p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <p th:if="${#lists.isEmpty(askList)}">작성된 문의가 아직 없습니다.</p>    -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- 팝업 배경 -->
+        <div class="popup-bg" id="popup-bg" onclick="closePopup()"></div>
+
+        <!-- 팝업 내용 -->
+        <div class="popup" id="popup">
+            <h2>프로필 편집</h2>
+            <form class="form-signin" action="/auth/<%= userId %>/update" method="POST" enctype="multipart/form-data">
+                <div class="profileimage2">
+                    <img src="<%= result.imageUrl %>" alt="profileImage" class="img">
+                </div>
+                <div class="input-container">
+                    <label for="inputChangeNickName" class="sr-only">닉네임 변경</label>
+                    <input type="text" name="nickname" id="inputChangeNickName" class="form-control"
+                        placeholder="변경할 닉네임" autofocus required>
+                </div>
+                <div class="input-container-three">
+                    <label for="inputDetailAddress" class="sr-only">주소 변경</label>
+                    <input type="text" name="city" id="inputAddress1" class="form-control2" placeholder="시도" autofocus>
+                    <input type="text" name="district" id="inputAddress2" class="form-control2" placeholder="시군구"
+                        autofocus>
+                    <input type="text" name="town" id="inputAddress3" class="form-control2" placeholder="읍면동" autofocus>
+                </div>
+                <div class="input-container">
+                    <input type="text" name="detail" id="inputDetailAddress" class="form-control" placeholder="상세주소"
+                        autofocus required>
+                </div>
+                <div class="input-container">
+                    <label for="profileImage" class="sr-only">프로필 이미지 변경</label>
+                    <input type="file" name="profileImage" id="profileImage" class="form-control">
+                </div>
+                <button type="button" onclick="closePopup()" id="popupButton">취소</button>
+                <button type="submit" id="popupButton">저장</button>
+            </form>
+        </div>
+    </div>
+
+<div id="footer" th:replace="~{/layout/footer :: footer}"></div>
+</body>
+
+</html>

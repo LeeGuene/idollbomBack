@@ -35,15 +35,11 @@ public class ParentController {
     @PostMapping("/signup")
         public String signup(ParentDTO dto) {
         log.info("HTML에서 넘어온 데이터: " + dto.toString());
+
         parentService.save(dto);
-        return "/html/mypage/parent/myPost";
+        return "redirect:/ParentMyPage/kids";
 }
 
-//  부모 마이페이지 이동
-    @GetMapping("/myPage")
-    public String getMypage() {
-        return "/html/mypage/parent/myPost";
-    }
 
 //  로그아웃화면 이동
     @GetMapping("/logout")
