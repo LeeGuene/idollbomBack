@@ -22,9 +22,9 @@ public class ClassListController {
 
     // 돌봄 페이지
     @GetMapping("/classcare")
-    public String classCare(Model model) {
-        List<ClassListDTO> classListDTO = classListService.findAllClass();
-        int count = classListService.classCount();
+    public String classCare(@RequestParam(value = "category", defaultValue = "등/하원") String category, Model model) {
+        List<ClassListDTO> classListDTO = classListService.findAllClass(category);
+        int count = classListService.classCount(category);
 
         model.addAttribute("count", count);
         model.addAttribute("classLists", classListDTO);
