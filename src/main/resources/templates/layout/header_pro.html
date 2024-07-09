@@ -10,7 +10,7 @@
 <body>
     <header id="header" th:fragment="header_pro">
         <div class="header_wrap">
-            <h1><a href="../html/main/index_pro.html"><img src="../images/logo.png" alt="IDOLL봄"></a></h1>
+            <h1><a href="../html/main/index_pro.html"><img th:src="@{/images/logo.png}" alt="IDOLL봄"></a></h1>
 
             <nav>
                 <ul class="gnb">
@@ -29,7 +29,7 @@
                 </ul>
             </nav>
             <div class="side">
-                <p><button><img src="../images/Alarm.png" alt="알림"></button></p>
+                <p><button><img th:src="@{/images/Alarm.png}" alt="알림"></button></p>
                 <p><a href="#">마이페이지</a></p>
                 <p><a href="#">로그인 /</a></p>
                 <p><a href="#">회원가입</a></p>
