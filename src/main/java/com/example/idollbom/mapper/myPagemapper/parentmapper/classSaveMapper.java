@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface classSaveMapper {
     List<classSaveVO> selectAll();
+    // 수업 찜 목록 추가
+    int insertClass(Long classNumber, Long parentNumber);
 }

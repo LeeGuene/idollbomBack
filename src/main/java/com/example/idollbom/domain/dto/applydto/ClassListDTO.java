@@ -10,4 +10,6 @@ public class ClassListDTO {
     private String proAddress;
     private String className;
     private String classContent;
+    private Long classNumber;
+    private Long proNumber;
 }

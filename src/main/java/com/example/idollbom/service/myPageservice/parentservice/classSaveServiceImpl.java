@@ -17,4 +17,10 @@ public class classSaveServiceImpl implements classSaveService {
     public List<classSaveVO> selectClassList() {
         return classSaveMapper.selectAll();
     }
+
+    // 수업 찜 목록 추가
+    @Override
+    public int saveClass(Long classNumber, Long parentNumber) {
+        return classSaveMapper.insertClass(classNumber, parentNumber);
+    }
 }

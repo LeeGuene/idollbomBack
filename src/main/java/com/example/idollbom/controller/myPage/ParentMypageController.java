@@ -24,6 +24,7 @@ public class ParentMypageController {
     private final myPostService myPostService;
     private final reviewService reviewService;
     private final noteService noteService;
+    private final classSaveService classSaveService;
 
 //  kid 페이지로 이동
     @GetMapping("/kids")
@@ -103,7 +104,7 @@ public class ParentMypageController {
 //    public String selectClassList(Model model){
 //        List<classSaveVO> classList = classSaveService.selectClassList();
 //        for(int i=0; i<classList.size(); i++){
-//
+
 //        }
 //        model.addAttribute("myPost", postList);
 //        return "html/myPage/parent/myPost";
@@ -116,4 +117,19 @@ public class ParentMypageController {
         model.addAttribute("myNotes", noteList);
         return "html/myPage/parent/mail";
     }
+
+    // 수업 찜 목록 추가
+    @PostMapping("/favoriteClass")
+    public String selectFavoriteClass(@RequestParam(value= "classNumber") Long classNumber,
+                                      @RequestParam(value= "parentNumber") Long parentNumber,
+                                      Model model){
+        int insertRow = classSaveService.saveClass(classNumber, parentNumber);
+
+
+
+        model.addAttribute("");
+        return "html/myPage/parent/myFavoriteClass";
+    }
+
+
 }
