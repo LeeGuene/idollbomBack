@@ -80,7 +80,6 @@ public class ClassListController {
     }
 
     // 수업 상세보기 페이지
-
     // 수업 상세보기
 //    @GetMapping("/detail/{proNumber}")
 //    public String detail(@PathVariable("proNumber") Long proNumber, Model model) {
@@ -90,7 +89,5 @@ public class ClassListController {
 
 //        return "/html/parent/studyDetail";
 //    }
-
-
 
 }
