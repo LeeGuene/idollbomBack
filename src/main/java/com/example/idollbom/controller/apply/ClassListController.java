@@ -31,6 +31,7 @@ public class ClassListController {
         return "/html/apply/class_list_care";
     }
 
+
     // 운동 페이지 - default 축구
     @GetMapping("/classsport")
     public String classSport(@RequestParam(value = "category", defaultValue = "축구") String category, Model model) {
@@ -89,5 +90,5 @@ public class ClassListController {
 
 //        return "/html/parent/studyDetail";
 //    }
-
 }
+
