@@ -91,4 +91,3 @@ public class ClassListController {
 //        return "/html/parent/studyDetail";
 //    }
 }
-
