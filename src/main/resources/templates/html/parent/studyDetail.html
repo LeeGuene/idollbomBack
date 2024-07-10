@@ -127,7 +127,7 @@
         <p th:text="*{proName}">이근</p>
         <!-- 해당 강사의 프로필 보기 페이지로 넘어갈 때 주소에 넘겨줄 데이터만 작성함. -->
         <!-- 컨트롤러는 만들어지지 않아서 아직 작성하지 않음. -->
-        <a th:href="@{/pro/detail/{proNumber}(proNumber=*{proNumber}, )}">프로필 보기</a>
+        <a th:href="@{/pro/detail(classNumber=*{classNumber}, proNumber=*{proNumber})}">프로필 보기</a>
       </div>
 
       <!-- 수업 제목 -->
@@ -164,8 +164,46 @@
         <a th:href="@{/ParentMyPage/favoriteClass(classNumber=${class_info.classNumber}, parentNumber=${class_info.parentNumber})}">
           수업 찜하기
         </a>
+
+        <!-- 리뷰 작성 폼 -->
         <div>
-          <a href="#">수업리뷰 쓰기</a>
+          <form method="#" id="review-write-area">
+            <div>
+              <label for="review-write">리뷰 남기기</label>
+              <textarea name="review-write" id="review-write"></textarea>
+            </div>
+            <button type="button" class="review-write-btn">리뷰 작성</button>
+          </form>
+        </div>
+
+        <!-- 리뷰를 동적으로 추가, 수정, 삭제 (비동기 통신) -->
+        <!-- 리뷰 전체 목록 -->
+        <div class="review-list-wrap">
+          <h1>리뷰 리스트</h1>
+          <ul class="review-list">
+            <li class="review-item" th:each="review : ${reviews}" th:object="${review}">
+              <input type="hidden" th:field="*{reviewNumber}" />
+              <textarea th:field="*{reviewContent}" name="review-content" class="review-content" readonly>리뷰1</textarea>
+              <div>
+                <p>작성자 : <span th:text="*{parentName}"></span></p>
+                <p>등록일 : <span th:text="*{reviewRegisterDate}"></span></p>
+                <p>수정일 : <span th:text="*{reviewUpdateDate}"></span></p>
+              </div>
+              <a href="#"><button>수정</button></a>
+              <a href="#"><button>삭제</button></a>
+            </li>
+            <!-- 반복되는 코드 -->
+            <li class="review-item">
+              <textarea name="" class="review-content" readonly>리뷰2</textarea>
+              <a href="#"><button>수정</button></a>
+              <a href="#"><button>삭제</button></a>
+            </li>
+            <li class="review-item">
+              <textarea name="" class="review-content" readonly>리뷰3</textarea>
+              <a href="#"><button>수정</button></a>
+              <a href="#"><button>삭제</button></a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

@@ -412,26 +412,142 @@ html{
   background-color: #fd1760;
 }
 
-.payment-button-wrap > div:nth-child(2){
+/* 수업 리뷰 작성 폼 css */
+#review-write-area{
   display: flex;
-  justify-content: center;
-  text-align: center;
+  text-align: left;
+  flex-direction: column;
   width: 100%;
-  margin: 0 auto;
-  margin-left: 10px;
+  row-gap: 30px;
 }
 
-.payment-button-wrap > div:nth-child(2) > a{
-  display: block;
+#review-write-area > div{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+#review-write-area > div > label{
+  padding-bottom: 20px;
+  border-bottom: 2px solid #bbb;
+  font-size: 18px;
+}
+
+#review-write-area > div > textarea{
   width: 100%;
-  padding: 10px 20px;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 255, 0.5);
-  font-weight: bold;
+  height: 100px;
+  margin: 0 auto;
+  resize: none;
+  outline: none;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+#review-write-area > div > textarea:focus{
+  border: 2px solid #06b759;
+}
+
+/* 리뷰 작성 button css */
+#review-write-area > button{
+  align-self: flex-end;
+  background-color: #00b45488;
   color: #fff;
+  border-radius: 10px;
+  padding: 10px 20px;
   transition: 0.3s;
 }
 
-.payment-button-wrap > div:nth-child(2) > a:hover{
-  background-color: rgb(18, 18, 242);
+#review-write-area > button:hover{
+  background-color: #00b454;
+}
+
+/* 리뷰 리스트 영역 css */
+.review-list-wrap{
+  width: 90%;
+  margin-top: 50px;
+}
+
+/* 리뷰 리스트 layout css */
+.board-form > .review-list-wrap{
+  flex-direction: column;
+  width: 100%;
+}
+
+/* 리뷰 리스트 제목 css */
+.board-form > .review-list-wrap > h1{
+  font-size: 24px;
+  width: 100%;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.review-list{
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.review-list > li{
+  height: 150px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  position: relative;
+  padding: 20px;
+  transition: 0.3s;
+}
+
+.review-list > li:hover{
+  border: 2px solid #00b454;
+}
+
+/* 리뷰 목록 내 textarea css */
+.review-list > li > textarea{
+  width: 80%;
+  height: 100px;
+  resize: none;
+  outline: none;
+}
+
+/* 리뷰 목록 내 button css */
+.review-list button{
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 10px;
+  margin-top: 5px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.review-list > li > a:nth-child(2) > button{
+  background-color: #029a49b5;
+}
+
+.review-list > li > a:nth-child(3) > button{
+  background-color: #f93271a6;
+}
+
+.review-list > li > a:nth-child(2) > button:hover{
+  background-color: #029a49;
+}
+
+.review-list > li > a:nth-child(3) > button:hover{
+  background-color: #f93271;
+}
+
+/* 리뷰 목록 버튼 position css */
+.review-list > li > a{
+  position: absolute;
+  bottom: 10px;
+}
+
+.review-list > li > a:nth-child(2){
+  right: 100px;
+}
+
+.review-list > li > a:nth-child(3){
+  right: 20px;
 }

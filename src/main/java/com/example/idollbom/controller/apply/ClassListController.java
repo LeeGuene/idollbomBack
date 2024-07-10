@@ -2,8 +2,7 @@ package com.example.idollbom.controller.apply;
 
 import com.example.idollbom.domain.dto.applydto.ClassDetailDTO;
 import com.example.idollbom.domain.dto.applydto.ClassListDTO;
-import com.example.idollbom.domain.dto.parentdto.ReviewDTO;
-import com.example.idollbom.domain.dto.parentdto.ReviewListDTO;
+import com.example.idollbom.domain.dto.parentdto.ReviewOneListDTO;
 import com.example.idollbom.service.applyservice.ClassDetailService;
 import com.example.idollbom.service.applyservice.ClassListService;
 import com.example.idollbom.service.applyservice.ClassReviewService;
@@ -176,7 +175,10 @@ public class ClassListController {
                          Model model) {
 
         ClassDetailDTO class_info = classDetailService.classDetail(proNumber, classNumber);
+        List<ReviewOneListDTO> reviews = classReviewService.findOneReviewList(classNumber);
+
         model.addAttribute("class_info", class_info);
+        model.addAttribute("reviews", reviews);
 
         return "/html/parent/studyDetail";
     }
