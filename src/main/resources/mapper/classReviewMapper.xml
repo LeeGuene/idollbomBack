@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.idollbom.mapper.applymapper.ClassReviewMapper">
+    <!-- 특정 전문가 수업의 모든 리뷰 조회 -->
+    <select id="selectAllReview" resultType="ReviewListDTO">
+        SELECT LIST.*, P.PARENT_NAME
+        FROM (
+                SELECT
+                    r.REVIEW_NUMBER,
+                    r.REVIEW_CONTENT,
+                    r.REVIEW_EVALUTION_POINT,
+                    r.REVIEW_REGISTER_DATE,
+                    r.REVIEW_UPDATE_DATE,
+                    r.PARENT_NUMBER
+                FROM class c JOIN review r
+                    ON c.CLASS_NUMBER = r.CLASS_NUMBER
+                    AND c.CLASS_NUMBER = #{classNumber}
+                ORDER BY r.REVIEW_UPDATE_DATE desc
+        ) LIST JOIN PARENT P
+        ON LIST.PARENT_NUMBER = P.PARENT_NUMBER
+    </select>
+
+    <!-- 특정 전문가 수업의 리뷰 추가하기 -->
+
+    <!-- 특정 전문가 수업의 리뷰 수정하기 -->
+
+    <!-- 특정 전문가 수업의 리뷰 삭제하기 -->
+</mapper>

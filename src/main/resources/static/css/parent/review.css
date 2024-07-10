@@ -243,7 +243,7 @@ button {
 }
 
 .review-list > li{
-  height: 150px;
+  height: 220px;
   border: 2px solid #ccc;
   border-radius: 5px;
   position: relative;
@@ -273,19 +273,19 @@ button {
   transition: 0.3s;
 }
 
-.review-list > li > a:nth-child(2) > button{
+.review-list > li > a:nth-last-of-type(1) > button{
   background-color: #029a49b5;
 }
 
-.review-list > li > a:nth-child(3) > button{
+.review-list > li > a:nth-last-of-type(2) > button{
   background-color: #f93271a6;
 }
 
-.review-list > li > a:nth-child(2) > button:hover{
+.review-list > li > a:nth-last-of-type(1) > button:hover{
   background-color: #029a49;
 }
 
-.review-list > li > a:nth-child(3) > button:hover{
+.review-list > li > a:nth-last-of-type(2) > button:hover{
   background-color: #f93271;
 }
 
@@ -295,12 +295,12 @@ button {
   bottom: 10px;
 }
 
-.review-list > li > a:nth-child(2){
-  right: 100px;
+.review-list > li > a:nth-last-of-type(1){
+  right: 20px;
 }
 
-.review-list > li > a:nth-child(3){
-  right: 20px;
+.review-list > li > a:nth-last-of-type(2){
+  right: 100px;
 }
 
 

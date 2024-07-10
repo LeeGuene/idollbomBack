@@ -6,23 +6,4 @@
         select * from review
     </select>
 
-    <!-- 특정 전문가 수업의 모든 리뷰 조회 -->
-    <select id="select" resultType="ReviewListDTO">
-        select p.PARENT_NAME, r.*
-        from parent p join review r
-            on p.PARENT_NUMBER = r.PARENT_NUMBER
-            and REVIEW_NUMBER = #{reviewNumber}
-        order by REVIEW_UPDATE_DATE desc
-
-        select *
-        from class c join review r
-        on c.CLASS_NUMBER = r.CLASS_NUMBER
-    </select>
-
-    <!-- 특정 전문가 수업의 리뷰 추가하기 -->
-
-    <!-- 특정 전문가 수업의 리뷰 수정하기 -->
-
-    <!-- 특정 전문가 수업의 리뷰 삭제하기 -->
-
 </mapper>

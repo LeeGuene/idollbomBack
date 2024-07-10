@@ -372,28 +372,66 @@ html{
 /* 수업 결제, 수업 찜하기 버튼 css */
 .payment-button-wrap{
   display: flex;
-  justify-content: space-between;
-  margin: 0 20px;
+  flex-direction: column;
+  row-gap: 10px;
+  margin: 0 auto;
+  width: 90%;
 }
 
-.payment-button-wrap > a{
-  padding: 5px 10px;
+.payment-button-wrap > div:nth-child(1){
+  width: 100%;
   border-radius: 10px;
-  width: 45%;
+  padding: 10px;
+  display: flex;
+  column-gap: 50px;
+}
+
+.payment-button-wrap > div:nth-child(1) > button{
+  width: 50%;
+  padding: 10px 20px;
+  background-color: red;
+  color: #fff;
+  border-radius: 10px;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.payment-button-wrap > div:nth-child(1) > button:nth-child(1){
+  background-color: #189050df;
+}
+
+.payment-button-wrap > div:nth-child(1) > button:nth-child(1):hover{
+  background-color: #00B455;
+}
+
+.payment-button-wrap > div:nth-child(1) > button:nth-child(2){
+  background-color: #f93271c5;
+}
+
+.payment-button-wrap > div:nth-child(1) > button:nth-child(2):hover{
+  background-color: #fd1760;
+}
+
+.payment-button-wrap > div:nth-child(2){
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+  margin-left: 10px;
+}
+
+.payment-button-wrap > div:nth-child(2) > a{
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 255, 0.5);
+  font-weight: bold;
   color: #fff;
   transition: 0.3s;
 }
 
-.payment-button-wrap > a:nth-child(1){
-  background-color: #00B455;
-}
-.payment-button-wrap > a:nth-child(2){
-  background-color: #e7356e;
-}
-
-.payment-button-wrap > a:nth-child(1):hover{
-  background-color: #00d564;
-}
-.payment-button-wrap > a:nth-child(2):hover{
-  background-color: #ff0051;
+.payment-button-wrap > div:nth-child(2) > a:hover{
+  background-color: rgb(18, 18, 242);
 }
