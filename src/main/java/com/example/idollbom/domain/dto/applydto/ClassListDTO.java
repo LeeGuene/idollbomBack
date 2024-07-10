@@ -9,6 +9,7 @@ public class ClassListDTO {
     private String proProfileImageUrl;
     private String proName;
     private String proAddress;
+    private Long classNumber;
     private String className;
     private String classCategorySmall;
     private String classContent;
