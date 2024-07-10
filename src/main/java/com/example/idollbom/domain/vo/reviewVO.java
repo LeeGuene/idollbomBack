@@ -1,5 +1,6 @@
 package com.example.idollbom.domain.vo;
 
+import com.example.idollbom.domain.dto.parentdto.ReviewDTO;
 import lombok.*;
 
 import java.util.Date;
@@ -10,11 +11,34 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 public class reviewVO {
-    private Long reviewNumber;
-    private String reviewContent;
-    private Long reviewEvaluationPoint;
-    private Date reviewRegisterDate;
-    private Date reviewUpdateDate;
-    private Long parentNumber;
-    private Long classNumber;
+    private Long reviewNumber;              // pk
+    private String reviewContent;           // 리뷰 내용
+    private Long reviewEvaluationPoint;     // 별점
+    private Date reviewRegisterDate;        // 리뷰 등록일
+    private Date reviewUpdateDate;          // 리뷰 수정일
+    private Long parentNumber;              // fk (부모 번호)
+    private Long classNumber;               // fk (수업 번호)
+
+    @Builder
+    public reviewVO(Long reviewNumber, String reviewContent, Long reviewEvaluationPoint, Date reviewRegisterDate, Long parentNumber, Long classNumber) {
+        this.reviewNumber = reviewNumber;
+        this.reviewContent = reviewContent;
+        this.reviewEvaluationPoint = reviewEvaluationPoint;
+        this.reviewRegisterDate = reviewRegisterDate;
+        this.parentNumber = parentNumber;
+        this.classNumber = classNumber;
+    }
+
+    public static reviewVO toEntity(ReviewDTO dto){
+        return reviewVO.builder()
+                .reviewNumber(dto.getReviewNumber())
+                .reviewContent(dto.getReviewContent())
+                .reviewEvaluationPoint(dto.getReviewEvaluationPoint())
+                .reviewRegisterDate(dto.getReviewRegisterDate())
+                .reviewUpdateDate(dto.getReviewUpdateDate())
+                .parentNumber(dto.getParentNumber())
+                .classNumber(dto.getClassNumber())
+                .build();
+    }
+
 }

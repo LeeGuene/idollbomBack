@@ -30,6 +30,7 @@
     <!-- 목록 보기 버튼 -->
     <div class="list-btn-wrap">
       <a href="../html/prolist.html">목록 보기</a>
+      <a href="#">리뷰 작성</a>
     </div>
 
     <div class="board-form" action="#">
@@ -65,6 +66,48 @@
       <div class="post-views-wrap">
         <h1>조회수</h1>
         <input type="text" value="100" readonly />
+      </div>
+
+      <!-- 추가한 html -->
+      <!-- 리뷰 작성 폼 -->
+      <form method="#" id="review-write-area">
+        <div>
+          <label for="review-write">리뷰 남기기</label>
+          <textarea name="review-write" id="review-write"></textarea>
+        </div>
+        <div class="evaluation-wrap">
+          <label for="evaluation-point" class="form-label">별점</label>
+          <select id="evaluation-point" name="evaluation-point">
+            <option value="1">★</option>
+            <option value="2">★★</option>
+            <option value="3">★★★</option>
+            <option value="4">★★★★</option>
+            <option value="5">★★★★★</option>
+          </select>
+        </div>
+        <button type="button" class="review-write-btn">리뷰 작성</button>
+      </form>
+
+      <!-- 리뷰 전체 목록 -->
+      <div class="review-list-wrap">
+        <h1>리뷰 리스트</h1>
+        <ul class="review-list">
+          <li class="review-item">
+            <textarea name="" class="review-content" readonly>리뷰1</textarea>
+            <a href="#"><button>수정</button></a>
+            <a href="#"><button>삭제</button></a>
+          </li>
+          <li class="review-item">
+            <textarea name="" class="review-content" readonly>리뷰2</textarea>
+            <a href="#"><button>수정</button></a>
+            <a href="#"><button>삭제</button></a>
+          </li>
+          <li class="review-item">
+            <textarea name="" class="review-content" readonly>리뷰3</textarea>
+            <a href="#"><button>수정</button></a>
+            <a href="#"><button>삭제</button></a>
+          </li>
+        </ul>
       </div>
 
     </div>

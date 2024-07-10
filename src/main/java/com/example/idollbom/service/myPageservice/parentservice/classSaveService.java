@@ -9,5 +9,5 @@ import java.util.List;
 public interface classSaveService {
     List<classSaveVO> selectClassList();
 
-    int saveClass(Long classNumber, Long parentNumber);
+    void saveClass(Long classNumber, Long parentNumber);
 }

@@ -127,7 +127,7 @@
         <p th:text="*{proName}">이근</p>
         <!-- 해당 강사의 프로필 보기 페이지로 넘어갈 때 주소에 넘겨줄 데이터만 작성함. -->
         <!-- 컨트롤러는 만들어지지 않아서 아직 작성하지 않음. -->
-        <a th:href="@{/{proNumber}(proNumber=*{proNumber})}">프로필 보기</a>
+        <a th:href="@{/class/review/(classNumber=*{classNumber})}">프로필 보기</a>
       </div>
 
       <!-- 수업 제목 -->
@@ -165,7 +165,6 @@
           수업 찜하기
         </a>
       </div>
-
     </div>
   </div>
 

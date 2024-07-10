@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../../static/css/myPage/parent/mypage_payment.css">
-    <link rel="stylesheet" href="../../../../static/css/layout/header.css">
-    <link rel="stylesheet" href="../../../../static/css/layout/footer.css">
+    <link rel="stylesheet" th:href="@{/css/myPage/parent/mypage_payment.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
     <title>iDollbom_마이페이지</title>
 </head>
 
 <body>
-<div id="header" th:replace="~{/layout/header_parents :: header_parents}"></div>
+    <div id="header" th:replace="~{/layout/header_parents :: header_parents}"></div>
 
-<div class="container">
+    <div class="container">
         <div class="inincontainer">
             <div class="mypage-main">마이페이지 > 결제 내역</div>
             <!-- 사이드바 -->
@@ -64,6 +64,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- 결제내역 -->
                 <div class="mainbox">
                     <div class="payment_container ">
@@ -75,6 +76,7 @@
                                     <th>수업 제목</th>
                                     <th>예약 날짜</th>
                                     <th>결제 금액</th>
+                                    <th>리뷰</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -83,36 +85,42 @@
                                     <td>영어 놀이</td>
                                     <td>2024 / 05 / 29</td>
                                     <td>23000원</td>
+                                    <td><a href="#"><i class="fa-regular fa-comment-dots"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td>02</td>
                                     <td>영어 놀이</td>
                                     <td>2024 / 05 / 29</td>
                                     <td>23000원</td>
+                                    <td><a href="#"><i class="fa-regular fa-comment-dots"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td>03</td>
                                     <td>영어 놀이</td>
                                     <td>2024 / 05 / 29</td>
                                     <td>23000원</td>
+                                    <td><a href="#"><i class="fa-regular fa-comment-dots"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td>04</td>
                                     <td>영어 놀이</td>
                                     <td>2024 / 05 / 29</td>
                                     <td>23000원</td>
+                                    <td><a href="#"><i class="fa-regular fa-comment-dots"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td>05</td>
                                     <td>영어 놀이</td>
                                     <td>2024 / 05 / 29</td>
                                     <td>23000원</td>
+                                    <td><a href="#"><i class="fa-regular fa-comment-dots"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td>06</td>
                                     <td>영어 놀이</td>
                                     <td>2024 / 05 / 29</td>
                                     <td>23000원</td>
+                                    <td><a href="#"><i class="fa-regular fa-comment-dots"></i></a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -121,8 +129,10 @@
             </div>
         </div>
     </div>
+    <div id="footer" th:replace="~{/layout/footer :: footer}"></div>
+    <script>
 
-<div id="footer" th:replace="~{/layout/footer :: footer}"></div>
+    </script>
 </body>
 
 </html>

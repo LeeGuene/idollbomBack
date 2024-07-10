@@ -10,7 +10,7 @@
         WHERE cv.parent_number = #{parentNumber};
     </select>
 
-    <!-- 수업 찜목록 추가 -->
+    <!-- 수업 찜목록 추가 ( 쿼리문 수정해야 함. ) -->
     <insert id="insertClass">
         INSERT INTO CLASS_SAVE (CLASS_NUMBER, PARENT_NUMBER)
         VALUES(#{classNumber}, #{parentNumber});

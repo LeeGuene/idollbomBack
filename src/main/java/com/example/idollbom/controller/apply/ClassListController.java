@@ -82,8 +82,10 @@ public class ClassListController {
 
     // 수업 상세보기 페이지
     // 수업 상세보기
-//    @GetMapping("/detail/{proNumber}")
-//    public String detail(@PathVariable("proNumber") Long proNumber, Model model) {
+//    @GetMapping("/detail")
+//    public String detail(@RequestParam("classNumber") Long classNumber,
+//                         @RequestParam("proNumber") Long proNumber,
+//                         ,Model model) {
 
 //        ClassDetailDTO class_info = classDetailService.classDetail(proNumber, classNumber);
 //        model.addAttribute("class_info", class_info);
