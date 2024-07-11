@@ -12,7 +12,7 @@
 <body>
     <div id="container">
         <h2>매칭</h2>
-        <p>돌봄과 배움을 함께, 우리아이 단짝쌤 찾기<br>아이에게 필요한 모든것을 추천합니다.</p>
+        <p>우리아이 단짝쌤 찾기<br>아이에게 필요한 모든것을 추천합니다.</p>
         <form th:action="@{/match/submit}">
             <div class="sub_matching">
                 <div>
@@ -62,15 +62,17 @@
         <p>전문가 추천</p>
         <p>검색결과를 바탕으로 가장 적합한 전문가를 찾아드립니다.</p>
         <!-- 평소엔 none이었다가 검색을 누르면 none없애기 -->
-        <div class="random_pro">
-            <img src="../images/index_recommendation.png">
+        <div class="random_pro" th:object="${match}">
+            <input type="hidden" th:value="*{proNumber}">
+            <input type="hidden" th:value="*{classNumber}">
+            <img th:src="*{proProfileImageUrl}">
             <div>
-                <p>유가람</p>
-                <p>모든아이의 교육을 책임집니다!<span>(돌봄/교육)</span></p>
-                <p>제가 맡은 모든 아이들의 성적이 향상 되었습니다 만족하지 못할 시 환불해드립니다</p>
+                <p th:text="*{proName + '(' + reviewCount + ')'}"></p>
+                <p th:text="*{className + '(' + classCategoryBig + ')'}"></p>
+                <p th:text="*{classContent}"></p>
+                <p th:text="*{proAddress}"></p>
+                <p th:text="*{classRegisterDate}"></p>
                 <div>
-                    <img src="../images/4.5rating.png">
-                    <p>(97)</p>
                 </div>
             </div>
                 <!-- 이 버튼을 누르면 해당 전문가에 대한 수업 상세보기 보여줌 -->

@@ -23,8 +23,8 @@ public class ClassListServiceImpl implements ClassListService {
     }
 
     @Override
-    public List<ClassListDTO> searchClassList(String searchWord, String searchType, String category) {
-        return classListMapper.searchClassList(searchWord, searchType, category);
+    public List<ClassListDTO> searchClassList(String searchWord, String searchType, String category, int pageNo, int pageSize) {
+        return classListMapper.searchClassList(searchWord, searchType, category, pageNo, pageSize);
     }
 
     @Override

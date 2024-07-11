@@ -92,17 +92,17 @@
             <div class="class_list_btn">
                 <ul class="pagination">
                     <li th:classappend="${startPage == 1} ? 'disabled' : ''" class="page-item">
-                        <a class="page-link" th:href="@{/class/classcare(category=${category}, pageNo=${startPage - 1}, pageSize=${pageSize})}" aria-label="Previous">
+                        <a class="page-link" th:href="@{/class/classcare(category=${category},  pageNo=${startPage - 1}, pageSize=${pageSize})}" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
 
                     <li th:each="i : ${#numbers.sequence(startPage, endPage)}" th:classappend="${currentPage == i} ? 'active' : ''" class="page-item">
-                        <a th:href="@{/class/classcare(category=${category},pageNo=${i}, pageSize=${pageSize})}" class="page-link" th:text="${i}"></a>
+                        <a th:href="@{/class/classcare(category=${category}, pageNo=${i}, pageSize=${pageSize})}" class="page-link" th:text="${i}"></a>
                     </li>
 
                     <li th:classappend="${endPage == totalPages} ? 'disabled' : ''" class="page-item">
-                        <a class="page-link" th:href="@{/class/classcare(category=${category},pageNo=${endPage + 1}, pageSize=${pageSize})}" aria-label="Next">
+                        <a class="page-link" th:href="@{/class/classcare(category=${category}, pageNo=${endPage + 1}, pageSize=${pageSize})}" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

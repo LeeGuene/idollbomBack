@@ -28,7 +28,7 @@ h2{font-size: 35px; text-align: center; margin: 100px 0 50px 0;}
 .sub_matching{width: 1400px; margin: 0 auto; border: 1px solid; height: 230px; border-color: rgba(0, 0, 0, 0.3);}
 .sub_matching>div{display: flex; line-height: 115px;}
 .sub_matching>div>div{display: flex;}
-.sub_matching>div>div:nth-child(1)::after{content: ''; position: absolute; width: 1045px;
+.sub_matching>div>:nth-child(1)::after{content: ''; position: absolute; width: 1045px;
     height: 10px; border-bottom:1px solid; margin: 103px 0 0 50px; border-color: rgba(0, 0, 0, 0.1);}
 .sub_matching strong{width: 130px; font-size: 24px; margin:  0 50px;}
 .sub_matching select{width: 450px; height: 60px; border: 1px solid; margin: 27px 20px 0 0; text-align: left; padding-left: 20px;}
