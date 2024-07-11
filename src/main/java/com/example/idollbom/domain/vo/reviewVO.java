@@ -16,8 +16,8 @@ public class reviewVO {
     private Long reviewNumber;                      // pk
     private String reviewContent;                   // 리뷰 내용
     private Long reviewEvaluationPoint;             // 별점
-    private LocalDate reviewRegisterDate;       // 리뷰 등록일
-    private LocalDate reviewUpdateDate;         // 리뷰 수정일
+    private LocalDate reviewRegisterDate;           // 리뷰 등록일
+    private LocalDate reviewUpdateDate;             // 리뷰 수정일
     private Long parentNumber;                      // fk (부모 번호)
     private Long classNumber;                       // fk (수업 번호)
 

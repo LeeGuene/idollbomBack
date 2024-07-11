@@ -35,7 +35,7 @@ public class ProDetailController {
         ProDetailDTO pro_info = proDetailService.findProDetailByNumber(proNumber);
 
         // 특정 전문가에 대한 전체 리뷰 조회
-        List<ReviewAllListDTO> reviews = classReviewService.findAllReviewList(classNumber);
+        List<ReviewAllListDTO> reviews = classReviewService.findAllReviewList(proNumber);
 
         model.addAttribute("pro_info", pro_info);
         model.addAttribute("reviews", reviews);

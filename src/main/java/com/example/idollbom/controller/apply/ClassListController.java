@@ -175,7 +175,7 @@ public class ClassListController {
                          Model model) {
 
         ClassDetailDTO class_info = classDetailService.classDetail(proNumber, classNumber);
-        List<ReviewOneListDTO> reviews = classReviewService.findOneReviewList(classNumber);
+        List<ReviewOneListDTO> reviews = classReviewService.findOneReviewList(classNumber, proNumber);
 
         model.addAttribute("class_info", class_info);
         model.addAttribute("reviews", reviews);
