@@ -4,7 +4,7 @@
 <mapper namespace="com.example.idollbom.mapper.proMapper.ProDetailMapper">
 
     <!-- 전문가 프로필 상세보기  -->
-    <select id="selectProDetail" resultType="ProDetailDTO">
+    <select id="selectProDetail" parameterType="Long">
         select * from PRO
         where PRO_NUMBER = #{proNumber}
     </select>
