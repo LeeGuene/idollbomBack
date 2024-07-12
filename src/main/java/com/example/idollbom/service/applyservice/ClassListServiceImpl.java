@@ -13,8 +13,11 @@ public class ClassListServiceImpl implements ClassListService {
     private final ClassListMapper classListMapper;
 
     @Override
-    public List<ClassListDTO> findAllClass(String category, int pageNo, int pageSize) {
-        return classListMapper.findAllClass(category, pageNo, pageSize);
+    public List<ClassListDTO> findAllClass(String category, int page, int pageSize) {
+        int startRow = (page - 1) * pageSize;
+        int endRow = page * pageSize;
+
+        return classListMapper.findAllClass(category, startRow, endRow);
     }
 
     @Override
@@ -23,8 +26,11 @@ public class ClassListServiceImpl implements ClassListService {
     }
 
     @Override
-    public List<ClassListDTO> searchClassList(String searchWord, String searchType, String category) {
-        return classListMapper.searchClassList(searchWord, searchType, category);
+    public List<ClassListDTO> searchClassList(String searchWord, String searchType, String category, int page, int pageSize) {
+        int startRow = (page - 1) * pageSize;
+        int endRow = page * pageSize;
+
+        return classListMapper.searchClassList(searchWord, searchType, category, startRow, endRow);
     }
 
     @Override
