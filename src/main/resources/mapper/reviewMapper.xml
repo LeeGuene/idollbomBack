@@ -6,4 +6,6 @@
         select * from review
         where parent_number = #{parentNumber}
     </select>
+
+
 </mapper>

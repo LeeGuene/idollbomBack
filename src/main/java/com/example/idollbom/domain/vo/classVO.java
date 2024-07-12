@@ -2,6 +2,9 @@ package com.example.idollbom.domain.vo;
 
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @ToString
 @NoArgsConstructor
 @Builder
@@ -15,4 +18,5 @@ public class classVO {
     private String classContent;
     private Long classPaymentAccount;
     private Long proNumber;
+    private LocalDateTime classRegisterDate;
 }

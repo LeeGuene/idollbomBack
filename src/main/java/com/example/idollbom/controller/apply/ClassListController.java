@@ -1,7 +1,11 @@
 package com.example.idollbom.controller.apply;
 
+import com.example.idollbom.domain.dto.applydto.ClassDetailDTO;
 import com.example.idollbom.domain.dto.applydto.ClassListDTO;
+import com.example.idollbom.domain.dto.parentdto.ReviewOneListDTO;
+import com.example.idollbom.service.applyservice.ClassDetailService;
 import com.example.idollbom.service.applyservice.ClassListService;
+import com.example.idollbom.service.applyservice.ClassReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -20,9 +24,12 @@ import java.util.List;
 public class ClassListController {
 
     private final ClassListService classListService;
+    private final ClassDetailService classDetailService;
+    private final ClassReviewService classReviewService;
 
     // 페이지 전부 페이징 처리 구현하기
     // 돌봄 페이지, default는 등하원으로
+    @GetMapping("/classcare")
     public String classCare(@RequestParam(value = "category", defaultValue = "등/하원") String category,
                             @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
                             @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
@@ -53,6 +60,7 @@ public class ClassListController {
 
         return "/html/apply/class_list_care";
     }
+
 
     // 운동 페이지 - default 축구
     @GetMapping("/classsport")
@@ -182,14 +190,19 @@ public class ClassListController {
     }
 
     // 수업 상세보기 페이지
-    // 수업 상세보기
-//    @GetMapping("/detail/{proNumber}")
-//    public String detail(@PathVariable("proNumber") Long proNumber, Model model) {
+    @GetMapping("/detail")
+    public String detail(@RequestParam("classNumber") Long classNumber,
+                         @RequestParam("proNumber") Long proNumber,
+                         Model model) {
 
-//        ClassDetailDTO class_info = classDetailService.classDetail(proNumber, classNumber);
-//        model.addAttribute("class_info", class_info);
+        ClassDetailDTO class_info = classDetailService.classDetail(proNumber, classNumber);
+        List<ReviewOneListDTO> reviews = classReviewService.findOneReviewList(classNumber, proNumber);
 
-//        return "/html/parent/studyDetail";
-//    }
+        model.addAttribute("class_info", class_info);
+        model.addAttribute("reviews", reviews);
+
+        return "/html/parent/studyDetail";
+    }
+
 
 }

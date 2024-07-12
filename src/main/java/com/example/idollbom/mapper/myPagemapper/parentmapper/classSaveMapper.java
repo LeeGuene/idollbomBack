@@ -16,4 +16,5 @@ public interface classSaveMapper {
 
     // 수업 찜 목록 삭제
     void deleteClass(Long classNumber);
+    // 수업 찜 목록 추가 ( 쿼리문 수정해야 됨. )
 }

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/myPage/parent/mypage_payment.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
+    <title>iDollbom_마이페이지</title>
+</head>
+
+<body>
+    <div id="header" th:replace="~{/layout/header_parents :: header_parents}"></div>
+
+    <div class="container">
+        <div class="inincontainer">
+            <div class="mypage-main">마이페이지 > 결제 내역</div>
+            <!-- 사이드바 -->
+            <div class="incontainer">
+                <div class="menu-bar">
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_myKids.html">아이정보 추가</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_correction.html">내정보 수정</a>
+                    </div>
+                    <hr class="custom-hr">
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_hateUser.html">신고 목록</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_myFavoriteClass.html">수업찜 목록</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_ myPost .html">내가쓴 게시글</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_myAsk.html">내 문의</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_myrReview.html">내 리뷰</a>
+                    </div>
+                    <hr class="custom-hr">
+                    <div class="menu-bar-option">
+                        <p>결제 내역</p>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a href="../../html/mypage/mypage_mail.html">쪽지함</a>
+                    </div>
+                    <!-- 프로필 -->
+                    <div class="myprofile">
+                        <div class="profileimage">
+                            <img src="../../images/ff581d78778b7.png" alt="profileImage" class="img">
+                        </div>
+                        <div class="Nickname">
+                            닉네임
+                        </div>
+
+                        <div class="buttonbox">
+                            <a href="#">
+                                <button class="btn-block" type="button">로그아웃</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 결제내역 -->
+                <div class="mainbox">
+                    <div class="payment_container ">
+                        <h1>결제 내역 리스트</h1>
+                        <table class="payment-table">
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>수업 제목</th>
+                                    <th>예약 날짜</th>
+                                    <th>결제 금액</th>
+                                    <th>리뷰</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>01</td>
+                                    <td>영어 놀이</td>
+                                    <td>2024 / 05 / 29</td>
+                                    <td>23000원</td>
+                                    <td><a href="#"><i class="fa-regular fa-comment-dots"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>02</td>
+                                    <td>영어 놀이</td>
+                                    <td>2024 / 05 / 29</td>
+                                    <td>23000원</td>
+                                    <td><a href="#"><i class="fa-regular fa-comment-dots"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>03</td>
+                                    <td>영어 놀이</td>
+                                    <td>2024 / 05 / 29</td>
+                                    <td>23000원</td>
+                                    <td><a href="#"><i class="fa-regular fa-comment-dots"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>04</td>
+                                    <td>영어 놀이</td>
+                                    <td>2024 / 05 / 29</td>
+                                    <td>23000원</td>
+                                    <td><a href="#"><i class="fa-regular fa-comment-dots"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>05</td>
+                                    <td>영어 놀이</td>
+                                    <td>2024 / 05 / 29</td>
+                                    <td>23000원</td>
+                                    <td><a href="#"><i class="fa-regular fa-comment-dots"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>06</td>
+                                    <td>영어 놀이</td>
+                                    <td>2024 / 05 / 29</td>
+                                    <td>23000원</td>
+                                    <td><a href="#"><i class="fa-regular fa-comment-dots"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer" th:replace="~{/layout/footer :: footer}"></div>
+    <script>
+
+    </script>
+</body>
+
+</html>

@@ -2,7 +2,6 @@ package com.example.idollbom.service.myPageservice.parentservice;
 
 import com.example.idollbom.domain.dto.myPagedto.parentdto.classSaveDTO;
 import com.example.idollbom.domain.vo.ParentVO;
-import com.example.idollbom.domain.vo.classSaveVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.mapper.myPagemapper.parentmapper.classSaveMapper;
 import lombok.RequiredArgsConstructor;
@@ -34,8 +33,8 @@ public class classSaveServiceImpl implements classSaveService {
 
     // 수업 찜 목록 추가
     @Override
-    public int saveClass(Long classNumber, Long parentNumber) {
-        return classSaveMapper.insertClass(classNumber, parentNumber);
+    public void saveClass(Long classNumber, Long parentNumber) {
+        classSaveMapper.insertClass(classNumber, parentNumber);
     }
 
     @Override

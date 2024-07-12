@@ -1,6 +1,5 @@
-package com.example.idollbom.mapper.applymapper;
+package com.example.idollbom.mapper.proMapper;
 
-import com.example.idollbom.mapper.proMapper.ProDetailMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +9,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Slf4j
-class ClassDetailMapperTest {
+class ProDetailMapperTest {
 
     @Autowired
     private ProDetailMapper proDetailMapper;
 
     @Test
     void test(){
-        log.info(proDetailMapper.selectProDetail(9999L).toString());
+        log.info(proDetailMapper.selectProDetail(4L).toString());
     }
 }

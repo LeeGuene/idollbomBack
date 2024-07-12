@@ -10,7 +10,7 @@ import java.util.List;
 public interface classSaveService {
     List<classSaveDTO> selectClassList();
 
-    int saveClass(Long classNumber, Long parentNumber);
+    void saveClass(Long classNumber, Long parentNumber);
 
     void deleteClass(Long classNumber);
 }

@@ -146,9 +146,9 @@ public class ParentMypageController {
     public String selectFavoriteClass(@RequestParam(value= "classNumber") Long classNumber,
                                       @RequestParam(value= "parentNumber") Long parentNumber,
                                       Model model){
-        int insertRow = classSaveService.saveClass(classNumber, parentNumber);
+        classSaveService.saveClass(classNumber, parentNumber);
 
-        model.addAttribute("");
+//        model.addAttribute("");
         return "html/myPage/parent/myFavoriteClass";
     }
 
