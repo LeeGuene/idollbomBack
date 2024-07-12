@@ -8,6 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.management.ValueExp;
+import java.util.List;
 
 @Controller
 @RequestMapping("/match")
@@ -19,19 +23,27 @@ public class MatchingController {
 
     // 처음 들어가는 화면
     @GetMapping()
-    public String match(Model model) {
-        MatchingDTO match = matchingService.matchClass();
-
-        model.addAttribute("match", match);
+    public String match() {
         return "/html/match/matching";
     }
 
     // 검색 버튼을 눌렀을 때
     @GetMapping("/submit")
-    public String submit(Model model) {
-        MatchingDTO match = matchingService.matchClass();
+    public String submit(@RequestParam(value = "category", defaultValue = "돌봄") String category,
+                         @RequestParam(value = "data", defaultValue = "등/하원") String data,
+                         @RequestParam(value = "dateTime", required = false) String dateTime,
+                         @RequestParam(value = "time", defaultValue = "14") String time,
+                         Model model) {
 
-        model.addAttribute("match", match);
+        // 검색버튼을 누르면 입력한 데이터와 비교하여 조건과 일치하는 수업을 가져옴
+        List<MatchingDTO> match = matchingService.matchClass(category, data, dateTime, time);
+
+        System.out.println("==============================="  + category);
+        System.out.println("==============================="  + data);
+        System.out.println("==============================="  + dateTime);
+        System.out.println("==============================="  + time);
+
+        model.addAttribute("matches", match);
         return "/html/match/matching";
     }
 }

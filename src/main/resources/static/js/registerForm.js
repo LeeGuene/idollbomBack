@@ -1,80 +1,87 @@
-const dayContainer = document.querySelector(".day");
-const monthContainer = document.querySelector(".month");
-const yearContainer = document.querySelector(".year");
-const hourContainer = document.querySelector(".hour");
+const dollbom = document.querySelector('.category-dollbom')
+const sport = document.querySelector('.category-sport')
+const study = document.querySelector('.category-study')
+const entertainment = document.querySelector('.category-entertainment')
 
+// 각 라디오 버튼의 값을 가져오는 js
+document.querySelectorAll('input[name="category-item"]').forEach((elem) => {
+  elem.addEventListener("change", function(event) {
+    const selectedValue = event.target.value;
+    console.log("선택된 카테고리:", selectedValue);
+    // 여기서 원하는 작업을 수행
+    if(selectedValue === 'care'){
+      dollbom.style.display="flex";
+      sport.style.display="none";
+      study.style.display="none";
+      entertainment.style.display="none";
+    }
 
-const days = document.querySelectorAll(".day > li");
-const months = document.querySelectorAll(".month > li");
-const years = document.querySelectorAll(".year > li");
-const hours = document.querySelectorAll(".hour > li");
+    else if(selectedValue === 'education'){
+      dollbom.style.display="none";
+      sport.style.display="none";
+      study.style.display="flex";
+      entertainment.style.display="none";
+    }
 
-const dayResult = document.querySelector(".day-select");
-const monthResult = document.querySelector(".month-select");
-const yearResult = document.querySelector(".year-select");
-const hourResult = document.querySelector(".hour-select");
+    else if(selectedValue === 'sport'){
+      dollbom.style.display="none";
+      sport.style.display="flex";
+      study.style.display="none";
+      entertainment.style.display="none";
+    }
 
-// day와 관련된 이벤트 (마우스 over, leave)
-dayContainer.addEventListener("mouseleave", (e)=>{
-  e.currentTarget.style.overflow = 'hidden';
-});
-
-dayContainer.addEventListener("mouseover", (e)=>{
-  e.currentTarget.style.overflow = 'scroll';
-});
-
-// =============================================
-
-// month와 관련된 이벤트 (마우스 over, leave)
-monthContainer.addEventListener("mouseleave", (e)=>{
-  e.currentTarget.style.overflow = 'hidden';
-});
-
-monthContainer.addEventListener("mouseover", (e)=>{
-  e.currentTarget.style.overflow = 'scroll';
-});
-
-// =============================================
-
-// year와 관련된 이벤트 (마우스 over, leave)
-yearContainer.addEventListener("mouseleave", (e)=>{
-  e.currentTarget.style.overflow = 'hidden';
-});
-
-
-// hour와 관련된 이벤트 (마우스 over, leave)
-hourContainer.addEventListener("mouseover", (e)=>{
-  e.currentTarget.style.overflow = 'scroll';
-});
-
-hourContainer.addEventListener("mouseleave", (e)=>{
-  e.currentTarget.style.overflow = 'hidden';
-});
-
-// select한 연, 월, 일 및 시간이 출력되도록 한다.
-days.forEach((day) =>{
-  day.addEventListener("click", (e)=>{
-
-    dayResult.textContent = e.currentTarget.textContent;
+    else if(selectedValue === 'entertainment'){
+      dollbom.style.display="none";
+      sport.style.display="none";
+      study.style.display="none";
+      entertainment.style.display="flex";
+    }
   })
+})
+
+// 써머노트 부분
+$(document).ready(function() {
+  initializeSummernote();
 });
 
-months.forEach((month) =>{
-  month.addEventListener("click", (e)=>{
-    monthResult.textContent = e.currentTarget.textContent;
-  })
-});
+function initializeSummernote() {
+  $('#classContent').summernote({
+    height: 300,
+    tabsize: 2,
+    placeholder: '내용을 입력하세요.',
+    callbacks: {
+      onImageUpload: function(files) {
+        for (let i = 0; i < files.length; i++) {
+          uploadImage(files[i], this);
+        }
+      }
+    }
+  });
+}
+function uploadImage(file) {
+  let data = new FormData();
+  data.append("file", file);
+  $.ajax({
+    url: '/upload/image',
+    cache: false, // 캐시 데이터 사용하지 않음
+    contentType: false, // 파일 업로드 시, 헤더가 파일로 자동으로 설정
+    processData: false, // 문자열로 바뀌지 않게 설정
+    enctype : 'multipart/form-data',
+    data: data,
+    method: "post",
+    success: function(url) {
+      console.log(url)
+      insertImageToSummernote(url);
+    },
+    error: function(data) {
+      console.error(data);
+    }
+  });
+}
 
-years.forEach((year) =>{
-  year.addEventListener("click", (e)=>{
-    yearResult.textContent = e.currentTarget.textContent;
-  })
-});
-
-hours.forEach((hour) =>{
-  hour.addEventListener("click", (e)=>{
-    hourResult.textContent = e.currentTarget.textContent;
-  })
-});
-
-
+function insertImageToSummernote(url) {
+  const img = document.createElement('img');
+  img.src = url;
+  img.style.width = '100%';
+  $('#classContent').summernote('insertNode', img);
+}

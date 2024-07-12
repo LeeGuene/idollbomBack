@@ -39,6 +39,7 @@ public class ClassListController {
         int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
         int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
 
+        System.out.println("Category: " + category);  // 로그 출력
 
         model.addAttribute("count", count);
         model.addAttribute("category", category);
@@ -152,8 +153,8 @@ public class ClassListController {
     @GetMapping("/search")
     public String classSearch(@RequestParam(name = "searchWord") String searchWord,
                               @RequestParam(name = "searchType") String searchType,
-                              @RequestParam(value = "category", defaultValue = "등/하원") String category,
-                              @RequestParam(value="pageNo", defaultValue = "3") int pageNo,
+                              @RequestParam(value = "category", required = false, defaultValue = "등/하원") String category,
+                              @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
                               @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                               Model model) {
 
@@ -162,11 +163,14 @@ public class ClassListController {
 
         int totalPages = (int) Math.ceil((double) count / pageSize);
 
+        System.out.println("Category: " + category);
+
         int pageGroupSize = 3;
         int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
         int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
 
         model.addAttribute("count", count);
+        model.addAttribute("category", category);
         model.addAttribute("classLists", classListDTO);
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("pageSize", pageSize);

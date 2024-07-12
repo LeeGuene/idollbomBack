@@ -40,6 +40,7 @@
                 <div>
                     <!-- 검색을 누르면 해당 리스트들 가져오기 -->
                     <form id="searchForm" th:action="@{/class/search}" method="get">
+                        <input type="hidden" name="category" th:value="${category}">
                         <select name="searchType" th:value="${searchType}">
                             <option value="all">전체</option>
                             <option value="title">제목</option>
@@ -66,7 +67,7 @@
                     <tr th:each="classList : ${classLists}" th:object="${classList}">
                         <input type="hidden" th:value="*{proNumber}">
                         <input type="hidden" th:value="*{classNumber}">
-                        <td><img th:src="*{proProfileImageUrl}"></td>
+                        <td><img th:src="@{/images/{filename}(filename=${classList.proProfileImageUrl})}"></td>
                         <td>
                             <div>
                                 <p th:text="*{proName}"></p>
@@ -98,6 +99,7 @@
                     </li>
 
                     <li th:each="i : ${#numbers.sequence(startPage, endPage)}" th:classappend="${currentPage == i} ? 'active' : ''" class="page-item">
+                        <input type="hidden" name="category" th:value="${category}">
                         <a th:href="@{/class/classcare(category=${category}, pageNo=${i}, pageSize=${pageSize})}" class="page-link" th:text="${i}"></a>
                     </li>
 

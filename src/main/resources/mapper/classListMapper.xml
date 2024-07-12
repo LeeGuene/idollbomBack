@@ -54,7 +54,7 @@
                 )
             WHERE rownum &lt;= #{endRow}
         )
-        WHERE rnum &gt;= #{startRow}
+        WHERE rnum &gt; #{startRow}
         ORDER BY CLASS_REGISTER_DATE
     </select>
 
@@ -102,7 +102,7 @@
                     ) c
                 WHERE rownum &lt;= #{endRow}
                 )
-            WHERE rnum &gt;= #{startRow}
+            WHERE rnum &gt; #{startRow}
             ORDER BY CLASS_REGISTER_DATE
     </select>
 
