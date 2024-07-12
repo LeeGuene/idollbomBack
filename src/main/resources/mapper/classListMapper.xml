@@ -60,30 +60,50 @@
 
     <!-- 검색 기능을 구현하는 select -->
     <select id="searchClassList">
-        SELECT p.PRO_NUMBER, p.PRO_PROFILE_IMAGE_URL , p.PRO_NAME, c.CLASS_NUMBER, c.CLASS_NAME, c.CLASS_CONTENT, c.CLASS_CATEGORY_SMALL, p.PRO_ADDRESS,
-               TO_CHAR(c.CLASS_REGISTER_DATE, 'YYYY"년 "MM"월 "DD"일') as CLASS_REGISTER_DATE, COALESCE(COUNT(v.CLASS_NUMBER), 0) AS REVIEW_COUNT
-        FROM PRO p
-         JOIN CLASS c ON p.PRO_NUMBER = c.PRO_NUMBER AND c.CLASS_CATEGORY_SMALL = #{category}
-         LEFT JOIN REVIEW v ON v.CLASS_NUMBER = c.CLASS_NUMBER
-        <where>
-            <if test="searchWord !=null">
-                <choose>
-                    <when test="searchType == 'title'">
-                        c.CLASS_NAME LIKE '%' || #{searchWord} || '%'
-                    </when>
-                    <when test="searchType == 'content'">
-                        c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
-                    </when>
-                    <when test="searchType == 'all'">
-                        c.CLASS_NAME LIKE '%' || #{searchWord} || '%' or c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
-                    </when>
-                </choose>
-            </if>
-        </where>
-        <if test="searchWord != null">
-            GROUP BY p.PRO_NUMBER, p.PRO_PROFILE_IMAGE_URL, p.PRO_NAME, c.CLASS_NUMBER c.CLASS_NAME, c.CLASS_CONTENT, c.CLASS_CATEGORY_SMALL, p.PRO_ADDRESS, c.CLASS_REGISTER_DATE
+        SELECT *
+        FROM (
+        SELECT rownum AS rnum,
+            PRO_NUMBER,
+            PRO_PROFILE_IMAGE_URL,
+            PRO_NAME,
+            CLASS_NUMBER,
+            CLASS_NAME,
+            CLASS_CONTENT,
+            CLASS_CATEGORY_SMALL,
+            PRO_ADDRESS,
+            TO_CHAR(CLASS_REGISTER_DATE, 'YYYY"년 "MM"월 "DD"일') AS CLASS_REGISTER_DATE,
+            COALESCE((SELECT COUNT(CLASS_NUMBER) FROM REVIEW WHERE CLASS_NUMBER = c.CLASS_NUMBER), 0) AS REVIEW_COUNT
+                FROM (
+                SELECT p.PRO_NUMBER,
+                p.PRO_PROFILE_IMAGE_URL,
+                p.PRO_NAME,
+                c.CLASS_NUMBER,
+                c.CLASS_NAME,
+                c.CLASS_CONTENT,
+                c.CLASS_CATEGORY_SMALL,
+                p.PRO_ADDRESS,
+                c.CLASS_REGISTER_DATE
+                    FROM PRO p
+                    JOIN CLASS c ON p.PRO_NUMBER = c.PRO_NUMBER AND c.CLASS_CATEGORY_SMALL = #{category}
+                    WHERE
+                    <if test="searchWord != null">
+                        <choose>
+                            <when test="searchType == 'title'">
+                                c.CLASS_NAME LIKE '%' || #{searchWord} || '%'
+                            </when>
+                            <when test="searchType == 'content'">
+                                c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
+                            </when>
+                            <when test="searchType == 'all'">
+                                c.CLASS_NAME LIKE '%' || #{searchWord} || '%' OR c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
+                            </when>
+                        </choose>
+                    </if>
+                    ) c
+                WHERE rownum &lt;= #{endRow}
+                )
+            WHERE rnum &gt; #{startRow}
             ORDER BY CLASS_REGISTER_DATE
-        </if>
     </select>
 
     <!-- 검색결과에 따른 갯수를 가져오는 select -->

@@ -44,6 +44,7 @@ public class ClassListController {
         int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
         int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
 
+        System.out.println("Category: " + category);  // 로그 출력
 
         model.addAttribute("count", count);
         model.addAttribute("category", category);
@@ -154,17 +155,36 @@ public class ClassListController {
     }
 
     // 검색 기능 구현
+    // 검색한 결과도 많을 수도 있기에, 페이징 처리해야한다.
     @GetMapping("/search")
     public String classSearch(@RequestParam(name = "searchWord") String searchWord,
                               @RequestParam(name = "searchType") String searchType,
-                              @RequestParam(value = "category", defaultValue = "등/하원") String category,
+                              @RequestParam(value = "category", required = false, defaultValue = "등/하원") String category,
+                              @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
+                              @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                               Model model) {
 
-        List<ClassListDTO> classListDTO = classListService.searchClassList(searchWord, searchType, category);
+        List<ClassListDTO> classListDTO = classListService.searchClassList(searchWord, searchType, category, pageNo, pageSize);
         int count = classListService.countClasses(category,searchType, searchWord);
 
+        int totalPages = (int) Math.ceil((double) count / pageSize);
+
+        System.out.println("Category: " + category);
+
+        int pageGroupSize = 3;
+        int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
+        int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
+
         model.addAttribute("count", count);
+        model.addAttribute("category", category);
         model.addAttribute("classLists", classListDTO);
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("totalPages", totalPages);
+
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
         return "/html/apply/class_list_care";
     }
 

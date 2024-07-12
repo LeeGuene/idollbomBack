@@ -16,7 +16,7 @@ public interface ClassListService {
     int classCount(String category);
 
     // 검색 구현 select
-    List<ClassListDTO> searchClassList(String searchWord, String searchType, String category);
+    List<ClassListDTO> searchClassList(String searchWord, String searchType, String category, int PageNo, int pageSize);
 
     // 검색한 수업에 대한 갯수를 가져오는 select
     int countClasses(String category, String searchType, String searchWord);

@@ -19,7 +19,9 @@ public interface ClassListMapper {
     // 검색 기능 구현 select
     List<ClassListDTO> searchClassList(@Param("searchWord") String searchWord,
                                        @Param("searchType") String searchType,
-                                       @Param("category") String category);
+                                       @Param("category") String category,
+                                       @Param("startRow") int startRow,
+                                       int endRow);
 
     // 검색한 수업에 대한 갯수를 가져오는 select
     int countClasses(@Param("category") String category,

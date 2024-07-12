@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.idollbom.mapper.matchmapper.MatchingMapper">
+   <select id="matchClass" resultType="MatchingDTO">
+      SELECT p.PRO_NUMBER, p.PRO_PROFILE_IMAGE_URL , p.PRO_NAME, c.CLASS_NUMBER, C.CLASS_NAME, C.CLASS_CONTENT, C.CLASS_CATEGORY_BIG, P.PRO_ADDRESS,
+             TO_CHAR(C.CLASS_REGISTER_DATE, 'YYYY"년 "MM"월 "DD"일') as CLASS_REGISTER_DATE, COALESCE(COUNT(v.CLASS_NUMBER), 0) AS REVIEW_COUNT
+      FROM PRO p
+        JOIN CLASS c ON p.PRO_NUMBER = C.PRO_NUMBER
+        LEFT JOIN REVIEW v ON v.CLASS_NUMBER = C.CLASS_NUMBER
+        JOIN RESERVATION_DATE rd ON c.CLASS_NUMBER = rd.CLASS_NUMBER
+        JOIN RESERVATION_TIME rt ON rd.RESERVATION_DATE_NUMBER = rt.RESERVATION_DATE_NUMBER
+        WHERE c.CLASS_CATEGORY_BIG= #{category} AND c.CLASS_CATEGORY_SMALL = #{data}
+        AND TO_CHAR(rd.RESERVATION_DATE, 'YYYY-MM-DD') = #{dateTime}
+        AND TO_CHAR(rt.RESERVATION_TIME, 'HH24') = #{time}
+      GROUP BY p.PRO_NUMBER, p.PRO_PROFILE_IMAGE_URL , p.PRO_NAME, C.CLASS_NUMBER, C.CLASS_NAME, C.CLASS_CONTENT, C.CLASS_CATEGORY_BIG, P.PRO_ADDRESS,
+               C.CLASS_REGISTER_DATE
+   </select>
+</mapper>
