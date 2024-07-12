@@ -46,6 +46,9 @@ public class parentInfoServiceImpl implements parentInfoService {
 //      parent VO 찾아서 아이디 찾기
         ParentVO parent = parentMapper.selectOne(currentUserName);
 
+        System.out.println(file.isEmpty());
+        log.info("파일"+file.getOriginalFilename());
+
         parentDTO.setParentEmail(parent.getParentEmail());
         parentDTO.setParentReportCount(parent.getParentReportCount());
         parentDTO.setParentProfileImageUrl(saveImage(file));

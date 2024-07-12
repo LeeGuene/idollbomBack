@@ -4,9 +4,8 @@ import lombok.Data;
 
 @Data
 public class classSaveDTO {
+    private String classNumber;
     private String className;
-    private String childAge;
-    private String childGender;
-    private String childSpecialIssues;
-    private Long parentNumber;
+    private String classRegisterDate;
+    private String imageFileUrl;
 }

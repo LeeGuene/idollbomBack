@@ -11,7 +11,7 @@ public interface KidsMapper {
     void insertKids(kidVO kidVO);
 
 //   내 아이 목록 가져오기
-    List<kidVO> selectKidsList();
+    List<kidVO> selectKidsList(Long parentNumber);
 
 //   내 아이 삭제
     void deleteKids(Long kidNumber);
