@@ -6,11 +6,13 @@
     <select id="insertKids">
         insert into child
         values (seq_project.NEXTVAL,#{childName},#{childAge},#{childGender},#{childSpecialIssues},#{parentNumber})
+        where parent_number = #{parentNumber}
     </select>
 
     <!--  아이List 보기-->
     <select id="selectKidsList">
         select * from child
+        where parent_number = #{parentNumber}
     </select>
 
     <!--  아이삭제  -->

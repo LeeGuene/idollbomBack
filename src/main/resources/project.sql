@@ -407,9 +407,19 @@ FROM class_save cv
 WHERE cv.parent_number = 4;
 
 
-
-
-
+SELECT
+    rd.reservation_date,
+    cv.class_number,
+    cv.class_name,
+    cv.class_payment_account,
+FROM
+    reservation rv
+        JOIN
+    reservation_date rd ON rv.reservation_date_number = rd.reservation_date_number
+        JOIN
+    class cv ON rd.class_number = cv.class_number
+WHERE
+    rv.parentNumber = #{parentNumber}
 
 
 

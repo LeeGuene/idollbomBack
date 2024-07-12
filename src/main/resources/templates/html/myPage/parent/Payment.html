@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/myPage/parent/mypage_Declaration.css">
+    <link rel="stylesheet" href="/css/myPage/parent/mypage_payment.css">
     <link rel="stylesheet" href="/css/layout/header.css">
     <link rel="stylesheet" href="/css/layout/footer.css">
     <title>iDollbom_마이페이지</title>
@@ -15,7 +15,7 @@
 
 <div class="container">
         <div class="inincontainer">
-            <div class="mypage-main">마이페이지 > 신고 목록</div>
+            <div class="mypage-main">마이페이지 > 결제 내역</div>
             <!-- 사이드바 -->
             <div class="incontainer">
                 <div class="menu-bar">
@@ -51,7 +51,7 @@
                     <!-- 프로필 -->
                     <div class="myprofile">
                         <div class="profileimage">
-                            <img src="../../images/ff581d78778b7.png" alt="profileImage" class="img">
+                            <img src="/images/ff581d78778b7.png" alt="profileImage" class="img">
                         </div>
                         <div class="Nickname">
                             닉네임
@@ -64,19 +64,30 @@
                         </div>
                     </div>
                 </div>
-                <!-- 신고글 -->
-                <div th:if="${not #lists.isEmpty(reportUser)}">
-                    <div class="mainbox" th:each="report:${reportUser}">
-                        <a href="/write/getWritedPage?postId=<%= post.postId %>">
-                            <div class="mypost">
-                                <div th:text="${report.parentReportType}"></div>
-                                <p th:text="${report.parentReportContent}"></p>
-                                <p th:text="${#dates.format(report.parentReportRegisterDate,'yyyy-MM-dd HH:mm:ss')}"></p>
-                            </div>
-                        </a>
+                <!-- 결제내역 -->
+                <div class="mainbox">
+                    <div class="payment_container ">
+                        <h1>결제 내역 리스트</h1>
+                        <table class="payment-table">
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>수업 제목</th>
+                                    <th>예약 날짜</th>
+                                    <th>결제 금액</th>
+                                </tr>
+                            </thead>
+                            <tbody th:if="${not #lists.isEmpty(Mypayment)}">
+                                <tr th:each="payment, stat : ${Mypayment}">
+                                    <td th:text="${stat.count}"></td>
+                                    <td th:text="${payment.className}"></td>
+                                    <td th:text="${#dates.format(payment.reservationDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td th:text="${payment.classPaymentAccount}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <p th:if="${#lists.isEmpty(reportUser)}">저장한 게시글이 아직 없습니다.</p>
             </div>
         </div>
     </div>

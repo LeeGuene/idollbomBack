@@ -38,7 +38,7 @@ h2{font-size: 35px; text-align: center; margin: 100px 0 50px 0;}
 .class_list_search>p span{font-size: 25px; font-family: 'GmarketSansBold'; color: #E41F26;}
 
 .class_list_search>div{display: flex;}
-.class_list_search select{width: 100px; height: 35PX; text-align: left; padding-left: 5px; border: 0; border-bottom: 2px solid #000000; color: #626262; font-size: 20PX; font-family: 'GmarketSansBold'; outline: none;}
+.class_list_search>div select{width: 100px; height: 35PX; text-align: left; padding-left: 5px; border: 0; border-bottom: 2px solid #000000; color: #626262; font-size: 20PX; font-family: 'GmarketSansBold'; outline: none;}
 .class_list_search>div form{width: 430px; height: 35px; border-bottom: 2px solid; margin-left: 30px;}
 .class_list_search>div form input:nth-child(1){width: 90%; border: 0; outline: none;}
 

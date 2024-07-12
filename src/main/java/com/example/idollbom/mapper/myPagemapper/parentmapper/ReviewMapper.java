@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface ReviewMapper {
-   List<reviewVO> selectAll();
+   List<reviewVO> selectAll(Long parentNumber);
 }

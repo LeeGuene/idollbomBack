@@ -1,7 +1,9 @@
 package com.example.idollbom.controller.myPage;
 import com.example.idollbom.domain.dto.logindto.ParentDTO;
+import com.example.idollbom.domain.dto.myPagedto.parentdto.classSaveDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.mailDTO;
+import com.example.idollbom.domain.dto.myPagedto.parentdto.paymentDTO;
 import com.example.idollbom.domain.vo.*;
 import com.example.idollbom.service.myPageservice.parentservice.*;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Console;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
@@ -30,6 +33,7 @@ public class ParentMypageController {
     private final noteService noteService;
     private final parentInfoService parentInfoService;
     private final classSaveService classSaveService;
+    private final paymentService paymentService;
 
 //  kid 페이지로 이동
     @GetMapping("/kids")
@@ -105,15 +109,14 @@ public class ParentMypageController {
     }
 
     //찜한 목록으로 이동
-//    @GetMapping("/classSave")
-//    public String selectClassList(Model model){
-//        List<classSaveVO> classList = classSaveService.selectClassList();
-//        for(int i=0; i<classList.size(); i++){
-//
-//        }
-//        model.addAttribute("myPost", postList);
-//        return "html/myPage/parent/myPost";
-//    }
+    @GetMapping("/classSave")
+    public String selectClassList(Model model){
+        List<classSaveDTO> classList = classSaveService.selectClassList();
+
+        model.addAttribute("saveClass", classList);
+        log.info(String.valueOf(classList.size()));
+        return "html/myPage/parent/myFavoriteClass";
+    }
 
 //    쪽지 목록으로 이동
     @GetMapping("/myNote")
@@ -133,8 +136,8 @@ public class ParentMypageController {
 
     // 내정보 update
     @PostMapping("/updateMyInfo")
-    public String updateParentInfo(ParentDTO parentDTO, @RequestParam("files") MultipartFile files) throws IOException {
-        parentInfoService.update(parentDTO,files);
+    public String updateParentInfo(@ModelAttribute ParentDTO parentDTO, @RequestParam("file") MultipartFile file) throws IOException {
+        parentInfoService.update(parentDTO,file);
         return "redirect:/ParentMyPage/myInformation";
     }
 
@@ -145,11 +148,22 @@ public class ParentMypageController {
                                       Model model){
         int insertRow = classSaveService.saveClass(classNumber, parentNumber);
 
-
-
         model.addAttribute("");
         return "html/myPage/parent/myFavoriteClass";
     }
 
+//  수업 찜 목록 삭제
+    @GetMapping("/deleteFavorite/{classNumber}")
+    public String deleteFavorite(@PathVariable(name = "classNumber") Long classNumber){
+        classSaveService.deleteClass(classNumber);
+        return "redirect:/ParentMyPage/classSave";
+    }
 
+//  결제한 수업내역 보기
+    @GetMapping("/myPayment")
+    public String selectMyPayment(Model model){
+        List<paymentDTO> payment = paymentService.paymentList();
+        model.addAttribute("Mypayment",  payment);
+        return "html/myPage/parent/Payment";
+    }
 }

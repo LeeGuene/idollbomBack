@@ -30,23 +30,30 @@
                         <a th:href="@{/ParentMyPage/kids}">아이정보 추가</a>
                     </div>
                     <div class="menu-bar-option">
-                        <p>내정보 수정</p>
+                        <a th:href="@{/ParentMyPage/myInformation}">내정보 수정</a>
                     </div>
                     <hr class="custom-hr">
                     <div class="menu-bar-option">
                         <a th:href="@{/ParentMyPage/reportPage}">신고 목록</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a >수업찜 목록</a>
+                        <a th:href="@{/ParentMyPage/classSave}">수업찜 목록</a>
                     </div>
                     <div class="menu-bar-option">
                         <a th:href="@{/ParentMyPage/myPost}">내가쓴 게시글</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a >내 문의</a>
+                        <p>내 문의</p>
                     </div>
                     <div class="menu-bar-option">
                         <a th:href="@{/ParentMyPage/Review}">내 리뷰</a>
+                    </div>
+                    <hr class="custom-hr">
+                    <div class="menu-bar-option">
+                        <a th:href="@{/ParentMyPage/myPayment}">결제 내역</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a th:href="@{/ParentMyPage/myNote}">쪽지함</a>
                     </div>
                     <hr class="custom-hr">
                     <div class="menu-bar-option">
@@ -74,8 +81,9 @@
                 <!-- 내정보수정 -->
                 <div class="mainbox">
                     <form  method="post" th:action="@{/ParentMyPage/updateMyInfo}" class="reset-form" enctype="multipart/form-data" th:object="${parentInfo}">
-                        <input type="file" id="myfie" onchange="handleFileChange(this)" style="display: none;" multiple="multiple" name="files"/>
-                        <input type="hidden" id="hiddenPassword" name="hiddenPassword" value="">
+                        <input type="file" id="myfile" onchange="handleFileChange(this)" style="display: none;" multiple="multiple" name="file"/>
+
+                        <input type="hidden" id="hiddenPassword" th:field="*{password}">
                         <div class="reset">
                             <div> 이름</div>
                             <input type="text" th:field="*{parentName}">
@@ -105,10 +113,10 @@
                         <!--            주소담는곳-->
                         <div class="form-group">
                             <input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="addr1" id="addr1" type="text" readonly="readonly" >
-                            <button type="button" class="btn btn-default" ><i class="fa fa-search"></i> 우편번호 찾기</button>
                         </div>
                         <div class="form-group">
                             <input class="form-control" style="top: 5px;" placeholder="도로명 주소" name="addr2" id="addr2" type="text" readonly="readonly" th:field="*{parentAddress}"/>
+                            <button type="button" class="btn btn-default" ><i class="fa fa-search"></i> 우편번호 찾기</button>
                         </div>
                         <div class="form-group">
                             <input class="form-control" placeholder="상세주소" name="addr3" id="addr3" type="text"  />
@@ -172,7 +180,7 @@
                         <div class="modal-btn">
                             <!-- 추가하기를 누르면 새로운 페이지로 이동 -->
                             <button id="imgnon" class="close-profile-btn btn">취소하기</button>
-                            <button id="submit" class="add-btn btn" >등록하기</button>
+                            <button id="submit" class="add-btn btn" onclick="">등록하기</button>
                         </div>
                     </div>
                 </div>
