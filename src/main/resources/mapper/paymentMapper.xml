@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.idollbom.mapper.myPagemapper.parentmapper.paymentMapper">
+    <select id="selectAll">
+        SELECT
+            rd.reservation_date,
+            cv.class_number,
+            cv.class_name,
+            cv.class_payment_account
+        FROM
+            reservation rv
+                JOIN
+            reservation_date rd ON rv.reservation_date_number = rd.reservation_date_number
+                JOIN
+            class cv ON rd.class_number = cv.class_number
+        WHERE
+            rv.parent_number = #{parentNumber}
+    </select>
+</mapper>

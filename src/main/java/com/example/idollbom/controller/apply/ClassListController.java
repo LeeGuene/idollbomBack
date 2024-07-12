@@ -23,7 +23,6 @@ public class ClassListController {
 
     // 페이지 전부 페이징 처리 구현하기
     // 돌봄 페이지, default는 등하원으로
-    @GetMapping("/classcare")
     public String classCare(@RequestParam(value = "category", defaultValue = "등/하원") String category,
                             @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
                             @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
@@ -192,4 +191,5 @@ public class ClassListController {
 
 //        return "/html/parent/studyDetail";
 //    }
+
 }

@@ -3,16 +3,22 @@
 
 <mapper namespace="com.example.idollbom.mapper.myPagemapper.parentmapper.classSaveMapper">
     <select id="selectAll">
-        SELECT *
+        SELECT cv.*, cl.*, im.*
         FROM class_save cv
-                 JOIN class cl ON cv.class_number = cl.class_number
-                 JOIN img im ON im.class_number = cv.class_number
-        WHERE cv.parent_number = #{parentNumber};
+                 LEFT JOIN class cl ON cv.class_number = cl.class_number
+                 LEFT JOIN img im ON im.class_number = cl.class_number
+        WHERE cv.parent_number = #{parentNumber}
     </select>
 
     <!-- 수업 찜목록 추가 -->
     <insert id="insertClass">
         INSERT INTO CLASS_SAVE (CLASS_NUMBER, PARENT_NUMBER)
-        VALUES(#{classNumber}, #{parentNumber});
+        VALUES(#{classNumber}, #{parentNumber})
+        where parent_number = #{parentNumber}
     </insert>
+
+    <delete id="deleteClass">
+        delete class_save
+        where class_number =#{classNumber}
+    </delete>
 </mapper>

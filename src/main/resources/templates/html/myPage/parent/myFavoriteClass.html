@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../../static/css/myPage/parent/mypage_myFavorite.css">
-    <link rel="stylesheet" href="../../../../static/css/layout/header.css">
-    <link rel="stylesheet" href="../../../../static/css/layout/footer.css">
+    <link rel="stylesheet" href="/css/myPage/parent/mypage_myFavorite.css">
+    <link rel="stylesheet" href="/css/layout/header.css">
+    <link rel="stylesheet" href="/css/layout/footer.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>iDollbom_마이페이지</title>
 </head>
-
 <body>
 <div id="header" th:replace="~{/layout/header_parents :: header_parents}"></div>
 
@@ -20,33 +20,33 @@
             <div class="incontainer">
                 <div class="menu-bar">
                     <div class="menu-bar-option">
-                        <a href="../../html/mypage/mypage_myKids.html">아이정보 추가</a>
+                        <a th:href="@{/ParentMyPage/kids}">아이정보 추가</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a href="../../html/mypage/mypage_correction.html">내정보 수정</a>
-                    </div>
-                    <hr class="custom-hr">
-                    <div class="menu-bar-option">
-                        <a href="../../html/mypage/mypage_hateUser.html">신고 목록</a>
-                    </div>
-                    <div class="menu-bar-option">
-                        <p>수업찜 목록</p>
-                    </div>
-                    <div class="menu-bar-option">
-                        <a href="../../html/mypage/mypage_ myPost .html">내가쓴 게시글</a>
-                    </div>
-                    <div class="menu-bar-option">
-                        <a href="../../html/mypage/mypage_myAsk.html">내 문의</a>
-                    </div>
-                    <div class="menu-bar-option">
-                        <a href="../../html/mypage/mypage_myrReview.html">내 리뷰</a>
+                        <a th:href="@{/ParentMyPage/myInformation}">내정보 수정</a>
                     </div>
                     <hr class="custom-hr">
                     <div class="menu-bar-option">
-                        <a href="../../html/mypage/mypage_Payment copy.html">결제 내역</a>
+                        <a th:href="@{/ParentMyPage/reportPage}">신고 목록</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a href="../../html/mypage/mypage_mail.html">쪽지함</a>
+                        <a th:href="@{/ParentMyPage/classSave}">수업찜 목록</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a th:href="@{/ParentMyPage/myPost}">내가쓴 게시글</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <p>내 문의</p>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a th:href="@{/ParentMyPage/Review}">내 리뷰</a>
+                    </div>
+                    <hr class="custom-hr">
+                    <div class="menu-bar-option">
+                        <a th:href="@{/ParentMyPage/myPayment}">결제 내역</a>
+                    </div>
+                    <div class="menu-bar-option">
+                        <a th:href="@{/ParentMyPage/myNote}">쪽지함</a>
                     </div>
                     <hr class="custom-hr">
                     <!-- 프로필 -->
@@ -66,35 +66,20 @@
                     </div>
                 </div>
                 <!-- 찜한 수업목록 -->
-                <div class="mainbox">
-                    <div class="mypost">
+                <div class="mainbox" th:if="${not #lists.isEmpty(saveClass)}">
+                    <div class="mypost" th:each="class : ${saveClass}">
                         <div class="img-box">
-                            <img src="../../images/ff581d78778b7.png" alt="productImage" class="img">
+                            <img src="/images/ff581d78778b7.png" alt="productImage" class="img" th:src="@{${class.imageFileUrl}}">
                         </div>
                         <h2>
-                            <div class="FavoriteClassName">제목</div>
-                            <p>기간: 23/4/5~23/4/10</p>
-                            <p>참여인원:4명</p>
-                            <div class="favorite">
-                                <img src="../../images/favorite.png">
+                            제목<div class="FavoriteClassName" th:text="${class.className}"></div>
+                            <p th:text="${class.classRegisterDate}"></p>
+                            <div class="favorite" onclick="favoriteNull()">
+                                <img src="../../images/favorite.png" th:data-class-number="${class.classNumber}" onclick="deleteClass(this)">
                             </div>
                         </h2>
                     </div>
-
-                    <div class="mypost">
-                        <div class="img-box">
-                            <img src="../../images/section08_banner04.jpg" alt="productImage" class="img">
-                        </div>
-                        <h2>
-                            <div class="FavoriteClassName">제목</div>
-                            <p>기간: 23/4/5~23/4/10</p>
-                            <p>참여인원:4명</p>
-                            <div class="favorite">
-                                <img src="../../images/favorite.png">
-                            </div>
-                        </h2>
-                    </div>
-                    <p>찜한 수업이 아직 없습니다.</p>
+                    <p th:if="${#lists.isEmpty(saveClass)}">찜한 수업이 아직 없습니다.</p>
                 </div>
             </div>
         </div>
@@ -102,5 +87,11 @@
 
 <div id="footer" th:replace="~{/layout/footer :: footer}"></div>
 </body>
-
+<script>
+    function deleteClass(element) {
+        let classNumber = $(element).attr('data-class-number');
+        console.log(classNumber);
+        window.location.href = '/ParentMyPage/deleteFavorite/' + classNumber;
+    }
+</script>
 </html>

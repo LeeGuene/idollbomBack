@@ -10,5 +10,4 @@ import java.io.IOException;
 public interface ParentService {
     public void save(ParentDTO dto);
 
-
 }
