@@ -49,7 +49,7 @@
     <!-- 리뷰 내용, 별점, 수정일만 수정함. -->
     <update id="updateReview" parameterType="reviewVO">
         update REVIEW
-        set REVIEW_CONTENT = #{reviewContent}, REVIEW_EVALUTION_POINT = #{reviewEvaluationPoint}, REVIEW_UPDATE_DATE = sysdate
+        set REVIEW_CONTENT = #{reviewContent}, REVIEW_UPDATE_DATE = sysdate
         where REVIEW_NUMBER = #{reviewNumber}
     </update>
 

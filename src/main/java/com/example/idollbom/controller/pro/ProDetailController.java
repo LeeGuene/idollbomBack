@@ -3,6 +3,7 @@ package com.example.idollbom.controller.pro;
 import com.example.idollbom.domain.dto.parentdto.ReviewAllListDTO;
 import com.example.idollbom.domain.dto.parentdto.ReviewOneListDTO;
 import com.example.idollbom.domain.dto.prodto.ProDetailDTO;
+import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.service.applyservice.ClassReviewService;
 import com.example.idollbom.service.proService.ProDetailService;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class ProDetailController {
     // 하단에 전문가 수업에 달린 모든 리뷰 목록 표시
     @GetMapping("/detail")
     public String detail(@RequestParam("proNumber") Long proNumber,
-                         @RequestParam("classNumber") Long classNumber,
+                         @RequestParam("parent_info") ParentVO parent_info,
                          Model model) {
 
         // 특정 전문가 프로필 상세보기
@@ -39,6 +40,7 @@ public class ProDetailController {
 
         model.addAttribute("pro_info", pro_info);
         model.addAttribute("reviews", reviews);
+        model.addAttribute("parent_info", parent_info);
 
         return "/html/parent/review";
     }

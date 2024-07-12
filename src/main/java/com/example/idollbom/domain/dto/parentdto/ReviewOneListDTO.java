@@ -15,6 +15,4 @@ public class ReviewOneListDTO {
     private LocalDate reviewUpdateDate;
     private Long parentNumber;
     private Long classNumber;
-    private String parentName;             // 리뷰 작성자 이름
-
 }

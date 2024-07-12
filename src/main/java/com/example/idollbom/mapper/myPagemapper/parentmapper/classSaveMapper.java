@@ -12,9 +12,8 @@ public interface classSaveMapper {
     List<classSaveDTO> selectAll(Long parentId);
 
     // 수업 찜 목록 추가
-    int insertClass(Long classNumber, Long parentNumber);
+    void insertClass(Long classNumber, Long parentNumber);
 
     // 수업 찜 목록 삭제
     void deleteClass(Long classNumber);
-    // 수업 찜 목록 추가 ( 쿼리문 수정해야 됨. )
 }

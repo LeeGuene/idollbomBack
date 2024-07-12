@@ -13,7 +13,7 @@
         PARENT_NICKNAME,
         PARENT_PHONE_NUMBER,
         PARENT_ADDRESS)
-        values (seq_project.NEXTVAL,#{parentEmail}, #{parentPassword}, #{parentName}, #{parentNickname}, #{parentPhoneNumber}, #{parentAddress})
+        values (seq_project.NEXTVAL, #{parentEmail}, #{parentPassword}, #{parentName}, #{parentNickname}, #{parentPhoneNumber}, #{parentAddress})
     </insert>
 
 

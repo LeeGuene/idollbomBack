@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
   <meta charset="UTF-8">
@@ -123,6 +123,7 @@
     <div class="detail-right-area" th:object="${class_info}">
       <!-- 강사명 및 프로필 보기 버튼 -->
       <div class="pro-profile-wrap">
+<!--        <input type="hidden" name="classNumber" th:value="*{classNumber}" readonly/>-->
         <h1>강사명</h1>
         <p th:text="*{proName}">이근</p>
         <!-- 해당 강사의 프로필 보기 페이지로 넘어갈 때 주소에 넘겨줄 데이터만 작성함. -->
@@ -161,16 +162,28 @@
       <!-- 수업 결제, 수업 찜하기 버튼 -->
       <div class="payment-button-wrap">
         <a href="#">수업 결제하기</a>
-        <a th:href="@{/ParentMyPage/favoriteClass(classNumber=${class_info.classNumber}, parentNumber=${class_info.parentNumber})}">
+        <a th:href="@{/ParentMyPage/insertSaveClass(classNumber=${class_info.classNumber}, parentNumber=${parent_info.parentNumber})}">
           수업 찜하기
         </a>
 
         <!-- 리뷰 작성 폼 -->
-        <div>
-          <form method="post" id="review-write-area">
+        <!-- 로그인 한 계정만 리뷰 추가 가능 -->
+        <div sec:authorize="isAuthenticated()">
+          <form th:method="@{/reviews(parentNumber=${parent_info.parentNumber}, classNumber=${class_info.classNumber})}" id="review-write-area" th:object="${review}">
+<!--            <input type="hidden" th:field="*{reviewNumber}" />-->
             <div>
               <label for="review-write">리뷰 남기기</label>
-              <textarea name="review-write" id="review-write"></textarea>
+<!--              <textarea th:field="*{reviewContent}" name="review-write" id="review-write"></textarea>-->
+            </div>
+            <div>
+              <p>별점 : </p>
+              <select name="review-evaluation" id="review-evaluation">
+                <option value="1">★</option>
+                <option value="2">★★</option>
+                <option value="3">★★★</option>
+                <option value="4">★★★★</option>
+                <option value="5">★★★★★</option>
+              </select>
             </div>
             <button type="button" class="review-write-btn">리뷰 작성</button>
           </form>
@@ -178,30 +191,20 @@
 
         <!-- 리뷰를 동적으로 추가, 수정, 삭제 (비동기 통신) -->
         <!-- 리뷰 전체 목록 -->
-        <div class="review-list-wrap">
+        <div class="review-list-wrap" sec:authorize="isAuthenticated()">
           <h1>리뷰 리스트</h1>
           <ul class="review-list">
             <li class="review-item" th:each="review : ${reviews}" th:object="${review}">
-              <input type="hidden" th:field="*{reviewNumber}" />
+
+              <input type="hidden" name="reviewNumber" th:field="*{reviewNumber}" />
               <textarea th:field="*{reviewContent}" name="review-content" class="review-content" readonly>리뷰1</textarea>
               <div>
-                <p>작성자 : <span th:text="*{parentName}"></span></p>
+                <p>작성자 : <span th:text="${parent_info.parentName}"></span></p>
                 <p>등록일 : <span th:text="*{reviewRegisterDate}"></span></p>
                 <p>수정일 : <span th:text="*{reviewUpdateDate}"></span></p>
               </div>
-              <a href="#"><button>수정</button></a>
-              <a href="#"><button>삭제</button></a>
-            </li>
-            <!-- 반복되는 코드 -->
-            <li class="review-item">
-              <textarea name="" class="review-content" readonly>리뷰2</textarea>
-              <a href="#"><button>수정</button></a>
-              <a href="#"><button>삭제</button></a>
-            </li>
-            <li class="review-item">
-              <textarea name="" class="review-content" readonly>리뷰3</textarea>
-              <a href="#"><button>수정</button></a>
-              <a href="#"><button>삭제</button></a>
+              <button onclick="goUpdate()">수정</button>
+              <button onclick="goDelete()">삭제</button>
             </li>
           </ul>
         </div>

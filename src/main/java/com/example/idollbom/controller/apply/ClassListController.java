@@ -2,7 +2,10 @@ package com.example.idollbom.controller.apply;
 
 import com.example.idollbom.domain.dto.applydto.ClassDetailDTO;
 import com.example.idollbom.domain.dto.applydto.ClassListDTO;
+import com.example.idollbom.domain.dto.myPagedto.parentdto.classSaveDTO;
 import com.example.idollbom.domain.dto.parentdto.ReviewOneListDTO;
+import com.example.idollbom.domain.vo.ParentVO;
+import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.service.applyservice.ClassDetailService;
 import com.example.idollbom.service.applyservice.ClassListService;
 import com.example.idollbom.service.applyservice.ClassReviewService;
@@ -26,6 +29,7 @@ public class ClassListController {
     private final ClassListService classListService;
     private final ClassDetailService classDetailService;
     private final ClassReviewService classReviewService;
+    private final ParentMapper parentMapper;
 
     // 페이지 전부 페이징 처리 구현하기
     // 돌봄 페이지, default는 등하원으로
@@ -40,6 +44,8 @@ public class ClassListController {
         int totalPages = (int) Math.ceil((double) count / pageSize);
 
         List<ClassListDTO> classListDTO = classListService.findAllClass(category, pageNo, pageSize);
+
+        System.out.println(classListDTO);
 
         int pageGroupSize = 3;
         int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
@@ -193,13 +199,16 @@ public class ClassListController {
     @GetMapping("/detail")
     public String detail(@RequestParam("classNumber") Long classNumber,
                          @RequestParam("proNumber") Long proNumber,
+                         @RequestParam("parentEmail") String parentEmail,
                          Model model) {
 
         ClassDetailDTO class_info = classDetailService.classDetail(proNumber, classNumber);
         List<ReviewOneListDTO> reviews = classReviewService.findOneReviewList(classNumber, proNumber);
+        ParentVO parent_info = parentMapper.selectOne(parentEmail); // 수업 상세보기로 넘어갈 때부터 parentNumber 를 넘기기 위한 조치
 
         model.addAttribute("class_info", class_info);
         model.addAttribute("reviews", reviews);
+        model.addAttribute("parent_info", parent_info);
 
         return "/html/parent/studyDetail";
     }

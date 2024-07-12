@@ -18,13 +18,13 @@ public class ReviewRestController {
     @PostMapping
     public ResponseEntity<?> addReview(@RequestParam("parentNumber") Long parentNumber,
                                        @RequestParam("classNumber") Long classNumber,
-                                       @RequestBody ReviewDTO reviewDTO){
+                                       @RequestBody ReviewDTO review){
         // View 에서 부모 pk, 수업 pk를 받아온 다음, 쿼리문 실행
         // 부모 pk 정보는 어디서 받아오지?? >> 로그인할 때
-        reviewDTO.setParentNumber(parentNumber);
-        reviewDTO.setClassNumber(classNumber);
+        review.setParentNumber(parentNumber);
+        review.setClassNumber(classNumber);
         
-        classReviewService.saveReview(reviewDTO);
+        classReviewService.saveReview(review);
 
         return ResponseEntity.ok().build();
     }
@@ -35,7 +35,8 @@ public class ReviewRestController {
         classReviewService.deleteReview(reviewNumber);
         return ResponseEntity.ok().build();
     }
-
+    
+    // 특정 수업에 대한 리뷰 수정
     @PutMapping("/{reviewNumber}")
     public ResponseEntity<?> updateReview(@PathVariable("reviewNumber") Long reviewNumber,
                                           @RequestBody ReviewDTO reviewDTO){
@@ -43,6 +44,7 @@ public class ReviewRestController {
         // 주소로 받아온 reviewNumber로 채워준 다음, 쿼리문 실행
         reviewDTO.setReviewNumber(reviewNumber);
         classReviewService.updateReview(reviewDTO);
+
         return ResponseEntity.ok().build();
     }
 
