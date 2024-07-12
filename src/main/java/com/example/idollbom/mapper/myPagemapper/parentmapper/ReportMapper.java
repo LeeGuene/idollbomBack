@@ -8,5 +8,5 @@ import java.util.List;
 @Mapper
 public interface ReportMapper {
 
-   List<reportVO> reportList();
+   List<reportVO> reportList(Long parentNumber);
 }

@@ -245,7 +245,7 @@ CREATE TABLE RESERVATION_TIME(
 -- 예약 내역 (결제 내역) 테이블
 CREATE TABLE RESERVATION(
 	RESERVATION_DATE_NUMBER NUMBER,					-- FK (예약 날짜 테이블)
-    RESERVATION_TIME_NUMBER NUMBER,					-- FK (예약 시간 테이블)
+	RESERVATION_TIME_NUMBER NUMBER,					-- FK (예약 시간 테이블)
 	PARENT_NUMBER NUMBER,							-- FK (부모 테이블)
 	CHILD_NUMBER NUMBER,							-- FK (아이 테이블)
 	CONSTRAINT FK_DATE_TO_RESERVATION FOREIGN KEY(RESERVATION_DATE_NUMBER)
@@ -463,6 +463,21 @@ SELECT * FROM PRO;
 
 select * from PRO
 where PRO_NUMBER = 15;
+
+SELECT
+    rd.reservation_date,
+    cv.class_number,
+    cv.class_name,
+    cv.class_payment_account,
+FROM
+    reservation rv
+        JOIN
+    reservation_date rd ON rv.reservation_date_number = rd.reservation_date_number
+        JOIN
+    class cv ON rd.class_number = cv.class_number
+WHERE
+    rv.parentNumber = #{parentNumber}
+
 
 
 

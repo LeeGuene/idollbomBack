@@ -1,9 +1,14 @@
 package com.example.idollbom.service.myPageservice.parentservice;
 
+import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.domain.vo.reportVO;
+import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.mapper.myPagemapper.parentmapper.ReportMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +19,16 @@ import java.util.List;
 public class reportServiceImpl implements reportService {
 
     private final ReportMapper reportMapper;
+    private final ParentMapper parentMapper;
     @Override
     public List<reportVO> selectReportList() {
-        return reportMapper.reportList();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String currentUserName = userDetails.getUsername();
+
+//      parent VO 찾아서 아이디 찾기
+        ParentVO parent = parentMapper.selectOne(currentUserName);
+        return reportMapper.reportList(parent.getParentNumber());
     }
 }

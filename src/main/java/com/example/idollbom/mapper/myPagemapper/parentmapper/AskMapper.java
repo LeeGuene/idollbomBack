@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface AskMapper {
-   List<askVO> selectAll();
+   List<askVO> selectAll(Long parentNumber);
 }

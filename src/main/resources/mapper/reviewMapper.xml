@@ -4,6 +4,7 @@
 <mapper namespace="com.example.idollbom.mapper.myPagemapper.parentmapper.ReviewMapper">
     <select id="selectAll">
         select * from review
+        where parent_number = #{parentNumber}
     </select>
 
 
