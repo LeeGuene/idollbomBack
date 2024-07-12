@@ -76,4 +76,30 @@ h2{font-size: 35px; text-align: center; margin: 100px 0 50px 0;}
 .class_list_btn ul button{display: block;  font-size: 25px; width: 25px; height: 40px; color: #C6C6C6;}
 .class_list_btn ul li:nth-child(1) button{color: #048D3B; border-bottom: 3px solid;}
 
-
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.pagination .page-item {
+    margin: 0 5px;
+}
+.pagination .page-item .page-link {
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #4CAF50;
+    border: 1px solid #ddd;
+}
+.pagination .page-item .page-link:hover {
+    background-color: #ddd;
+}
+.pagination .page-item.active .page-link {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+.pagination .page-item.disabled .page-link {
+    color: #ccc;
+    pointer-events: none;
+    border: 1px solid #ddd;
+}

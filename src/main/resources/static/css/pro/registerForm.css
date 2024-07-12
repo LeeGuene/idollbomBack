@@ -1,18 +1,20 @@
 #register-form-wrapper{
   padding-top: 100px;
   height: 100%;
-  width: 80vw;
+  width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
 }
 /* 수업등록 페이지 제목 css */
 .study-page-title{
   margin: 100px 0 50px 0;
+  text-align: center;
 }
 
 .study-page-title > h1{
   font-size: 30px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #ccc;
+  font-weight: bold;
 }
 
 /* 수업등록 폼 css */
@@ -203,7 +205,7 @@
 
 /* 썸머노트 css */
 .summer-note{
-  z-index: -1;
+  /*z-index: -1;*/
   position: relative;
   margin-top: 30px;
   border-bottom: 2px solid #ddd;
@@ -241,14 +243,10 @@
 
 /* 수업등록 버튼 css */
 .register-button-wrap{
-  margin: 50px 0;
-}
-
-.register-button-wrap > a{
   /* layout */
   display: block;
   width: 60%;
-  margin: 0 auto;
+  margin: 50px auto;
   padding: 10px 20px; 
 
   /* style */
@@ -258,13 +256,11 @@
   transition: 0.3s;
 }
 
-.register-button-wrap > a > button{
+.register-button-wrap > button{
   font-size: 20px;
   font-weight: bold;
   color: #fff;
+  width: 100%;
 }
 
-.register-button-wrap > a:hover{
-  background-color: #1df883;
-}
-
+.category-study, .category-sport, .category-entertainment{display: none}
