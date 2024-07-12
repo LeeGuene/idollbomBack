@@ -17,6 +17,7 @@ import java.util.List;
 //spring 시큐리티의 userDeatils 권한을 지정받아
 //해당 객채를 사용하여 사용자의 인증 및 권한을 처리할 수 있다.
 public class ParentVO implements UserDetails {
+
     private Long parentNumber;
     private String parentEmail;
     private String parentPassword;

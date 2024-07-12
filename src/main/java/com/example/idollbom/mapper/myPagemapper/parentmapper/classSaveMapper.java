@@ -9,6 +9,6 @@ import java.util.List;
 public interface classSaveMapper {
     List<classSaveVO> selectAll(Long parentId);
 
-    // 수업 찜 목록 추가 ( 쿼리문 수정해야 됨. )
+    // 수업 찜 목록 추가
     void insertClass(Long classNumber, Long parentNumber);
 }

@@ -139,13 +139,11 @@ public class ParentMypageController {
     }
 
     // 수업 찜 목록 추가
-    @PostMapping("/favoriteClass")
+    @GetMapping("/insertSaveClass")
     public String selectFavoriteClass(@RequestParam(value= "classNumber") Long classNumber,
-                                      @RequestParam(value= "parentNumber") Long parentNumber,
-                                      Model model){
-        classSaveService.saveClass(classNumber, parentNumber);
+                                      @RequestParam(value= "parentNumber") Long parentNumber){
 
-//        model.addAttribute("");
+        classSaveService.saveClass(classNumber, parentNumber);
         return "html/myPage/parent/myFavoriteClass";
     }
 
