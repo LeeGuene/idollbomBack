@@ -202,12 +202,16 @@ public class ClassListController {
                          @RequestParam("parentEmail") String parentEmail,
                          Model model) {
 
+        log.info(parentEmail);
+
         ClassDetailDTO class_info = classDetailService.classDetail(proNumber, classNumber);
         List<ReviewOneListDTO> reviews = classReviewService.findOneReviewList(classNumber, proNumber);
+
         ParentVO parent_info = parentMapper.selectOne(parentEmail); // 수업 상세보기로 넘어갈 때부터 parentNumber 를 넘기기 위한 조치
 
         model.addAttribute("class_info", class_info);
         model.addAttribute("reviews", reviews);
+
         model.addAttribute("parent_info", parent_info);
 
         return "/html/parent/studyDetail";

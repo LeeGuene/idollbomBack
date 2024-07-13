@@ -1,4 +1,4 @@
-package com.example.idollbom.controller;
+package com.example.idollbom.controller.pro;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
