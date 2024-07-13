@@ -421,46 +421,7 @@ INSERT INTO REVIEW
 (REVIEW_NUMBER, REVIEW_CONTENT, REVIEW_EVALUTION_POINT, REVIEW_REGISTER_DATE, REVIEW_UPDATE_DATE, PARENT_NUMBER, CLASS_NUMBER)
 VALUES(SEQ_PROJECT.nextval, '이 수업은 ', 4, sysdate, sysdate, 1, 19);
 
-
-
-select * from review;
-
-
-SELECT
-    rd.reservation_date,
-    cv.class_number,
-    cv.class_name,
-    cv.class_payment_account,
-FROM
-    reservation rv
-        JOIN
-    reservation_date rd ON rv.reservation_date_number = rd.reservation_date_number
-        JOIN
-    class cv ON rd.class_number = cv.class_number
-WHERE
-    rv.parentNumber = #{parentNumber}
-
-
-
-SELECT
-    CLASS.PRO_NUMBER,
-    CLASS.PRO_NAME,
-    CLASS.CLASS_NUMBER,
-    CLASS.CLASS_NAME,
-    CLASS.CLASS_CATEGORY_BIG,
-    CLASS.CLASS_CATEGORY_SMALL,
-    CLASS.CLASS_CONTENT,
-    CLASS.CLASS_PAYMENT_ACCOUNT,
-    TO_CHAR(CLASS.CLASS_REGISTER_DATE, 'YYYY-MM-DD / HH24') || '시'  AS CLASS_REGISTER_DATE
-FROM
-    (
-        SELECT *
-        FROM PRO P JOIN CLASS C
-        ON P.PRO_NUMBER = C.PRO_NUMBER
-        AND C.PRO_NUMBER = 1
-    ) CLASS
-WHERE CLASS.CLASS_NUMBER = 20;
-
+-- classDetailMapper.xml 테스트
 SELECT CLASS.PRO_NUMBER,
        CLASS.PRO_NAME,
        CLASS.CLASS_NUMBER,
@@ -484,7 +445,65 @@ FROM (SELECT P.*,
       ) CLASS
 WHERE CLASS.CLASS_NUMBER = 20;
 
+-- 아이 찾기 SQL문 테스트
+SELECT P.PRO_NUMBER
+FROM PRO P JOIN CLASS C
+ON P.PRO_NUMBER = 15;
+
 SELECT * FROM CLASS;
+SELECT * FROM CLASS_SAVE;
+SELECT * FROM PARENT;
+
+INSERT INTO CLASS_SAVE
+VALUES (26, 11);
+
+SELECT
+       P.PARENT_NAME,
+       P.PARENT_NUMBER,
+       P.PARENT_EMAIL,
+       SAVE.CLASS_NAME,
+       SAVE.CLASS_CONTENT,
+       SAVE.CLASS_CATEGORY_BIG,
+       SAVE.CLASS_CATEGORY_SMALL
+FROM (SELECT *
+    FROM (SELECT *
+          FROM PRO P JOIN CLASS C
+          ON P.PRO_NUMBER = #{proNumber}
+         ) CLASS JOIN CLASS_SAVE S
+           ON CLASS.CLASS_NUMBER = S.CLASS_NUMBER
+) SAVE JOIN PARENT P
+ON SAVE.PARENT_NUMBER = P.PARENT_NUMBER;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

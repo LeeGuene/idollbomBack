@@ -1,7 +1,6 @@
 package com.example.idollbom.service.proService;
 
 import com.example.idollbom.domain.dto.prodto.ProDetailDTO;
-import com.example.idollbom.mapper.myPagemapper.parentmapper.ReviewMapper;
 import com.example.idollbom.mapper.proMapper.ProDetailMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

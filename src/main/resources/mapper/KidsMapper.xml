@@ -39,6 +39,4 @@
         where CHILD_NUMBER = #{childNumber}
     </update>
 
-    <!-- 아이찾기 (전문가) -->
-
 </mapper>
