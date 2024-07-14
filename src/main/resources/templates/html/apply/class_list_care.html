@@ -68,7 +68,7 @@
                     <tr th:each="classList : ${classLists}" th:object="${classList}">
                         <input type="hidden" th:value="*{proNumber}">
                         <input type="hidden" th:value="*{classNumber}">
-                        <td><img th:src="*{proProfileImageUrl}"></td>
+                        <td><img th:src="@{/images/{filename}(filename=${classList.proProfileImageUrl})}"></td>
                         <td>
                             <div>
                                 <p th:text="*{proName}"></p>

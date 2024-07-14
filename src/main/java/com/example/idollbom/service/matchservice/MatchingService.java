@@ -8,5 +8,5 @@ import java.util.List;
 @Service
 public interface MatchingService {
     // 매칭 정보를 가져오는 select
-    List<MatchingDTO> matchClass(String category, String data, String dateTime, String time);
+    List<MatchingDTO> matchClass(String category, String categoryData, String selectedDate, String selectedTime);
 }
