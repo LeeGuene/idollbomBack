@@ -4,33 +4,33 @@ const study = document.querySelector('.category-study')
 const entertainment = document.querySelector('.category-entertainment')
 
 // 각 라디오 버튼의 값을 가져오는 js
-document.querySelectorAll('input[name="category-item"]').forEach((elem) => {
+document.querySelectorAll('input[name="classCategoryBig"]').forEach((elem) => {
   elem.addEventListener("change", function(event) {
     const selectedValue = event.target.value;
     console.log("선택된 카테고리:", selectedValue);
     // 여기서 원하는 작업을 수행
-    if(selectedValue === 'care'){
+    if(selectedValue === '돌봄'){
       dollbom.style.display="flex";
       sport.style.display="none";
       study.style.display="none";
       entertainment.style.display="none";
     }
 
-    else if(selectedValue === 'education'){
+    else if(selectedValue === '교육'){
       dollbom.style.display="none";
       sport.style.display="none";
       study.style.display="flex";
       entertainment.style.display="none";
     }
 
-    else if(selectedValue === 'sport'){
+    else if(selectedValue === '운동'){
       dollbom.style.display="none";
       sport.style.display="flex";
       study.style.display="none";
       entertainment.style.display="none";
     }
 
-    else if(selectedValue === 'entertainment'){
+    else if(selectedValue === '예능'){
       dollbom.style.display="none";
       sport.style.display="none";
       study.style.display="none";
@@ -50,6 +50,7 @@ function initializeSummernote() {
     tabsize: 2,
     placeholder: '내용을 입력하세요.',
     callbacks: {
+      // 이부분이 안되네..
       onImageUpload: function(files) {
         for (let i = 0; i < files.length; i++) {
           uploadImage(files[i], this);

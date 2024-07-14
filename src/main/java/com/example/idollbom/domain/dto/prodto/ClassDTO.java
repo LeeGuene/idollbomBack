@@ -1,18 +1,11 @@
-package com.example.idollbom.domain.vo;
+package com.example.idollbom.domain.dto.prodto;
 
-import com.example.idollbom.domain.dto.prodto.ClassDTO;
-import lombok.*;
+import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@ToString
-@NoArgsConstructor
-@Builder
-@AllArgsConstructor
-@Getter
-public class classVO {
-    private Long classNumber;
+@Data
+public class ClassDTO {
     private String className;
     private String classCategoryBig;
     private String classCategorySmall;
