@@ -14,7 +14,7 @@ public class MatchingServiceImpl implements MatchingService {
     private final MatchingMapper matchingMapper;
 
     @Override
-    public List<MatchingDTO> matchClass(String category, String data, String dateTime, String time) {
-        return matchingMapper.matchClass(category, data, dateTime, time);
+    public List<MatchingDTO> matchClass(String category, String categoryData, String selectedDate, String selectedTime) {
+        return matchingMapper.matchClass(category, categoryData, selectedDate, selectedTime);
     }
 }
