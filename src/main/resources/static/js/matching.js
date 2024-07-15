@@ -53,28 +53,13 @@ pro_search.addEventListener("click", () => {
     if (today.toISOString().substring(0, 10) === date.value) {
         // alert창 말고 밑에 트렌드에 맞게 바꿔보기
         alert('해당 날짜는 안됩니다.');
-        return;
     }
-
-    // random_pro_container 안의 모든 random_pro 요소들에 대해 스타일을 flex로 변경
-    const random_pro_elements = random_pro_container.querySelectorAll('.random_pro');
-    random_pro_elements.forEach(element => {
-        element.style.display = "flex";
-    })
-})
-
-// 초기화 버튼을 누르면 none 처리
-pro_reset.addEventListener("click", () =>{
-    // random_pro_container 안의 모든 random_pro 요소들에 대해 스타일을 flex로 변경
-    const random_pro_elements = random_pro_container.querySelectorAll('.random_pro');
-    random_pro_elements.forEach(element => {
-        element.style.display = "none";
-    })
 })
 
 // 검색버튼을 눌렀을 때 비동기로 sql문 실행하기
 // 현재 로그인된 아이디도 가져와야함
 function autoSubmit() {
+
     const category = selectbox.options[selectbox.selectedIndex].value;
 
     let categoryData;
@@ -115,29 +100,34 @@ function autoSubmit() {
             const randomProContainer = $('#random_pro_container');
             randomProContainer.empty();
 
+            // 랜덤 돌려서 딱 한개만 나오게 하기
+            const randomIndex = Math.floor(Math.random() * data.length);
+            const randomMatch = data[randomIndex];
+
+
+            
             // 만약, 데이터가 없다면
             if (data.length === 0) {
                 randomProContainer.append('<p style="text-align: center; margin-bottom: 50px">검색한 정보에 대한 수업이 존재하지 않습니다.</p>');
             }
             else{
-                data.forEach(function(match) {
-                    const html = `
-                    <div class="random_pro">
-                        <input type="hidden" value="${match.proNumber}">
-                        <input type="hidden" value="${match.classNumber}">
-                        <img src="${match.proProfileImageUrl}">
-                        <div>
-                            <p>${match.proName} (${match.reviewCount})</p>
-                            <p>${match.className} (${match.classCategoryBig})</p>
-                            <p>${match.classContent}</p>
-                            <p>${match.proAddress}</p>
-                            <p>${match.classRegisterDate}</p>
-                        </div>
-                        <p><a href="/child/studyDetail.html?classNumber=${match.classNumber}">수업 상세보기</a></p>
+                const html = `
+                <div class="random_pro">
+                    <input type="hidden" value="${randomMatch.proNumber}">
+                    <input type="hidden" value="${randomMatch.classNumber}">
+                    <img src="../images/${randomMatch.proProfileImageUrl}">
+                    <div>
+                        <p>${randomMatch.proName} (${randomMatch.reviewCount})</p>
+                        <p>${randomMatch.className} (${randomMatch.classCategoryBig})</p>
+                        <p>${randomMatch.classContent}</p>
+                        <p>${randomMatch.proAddress}</p>
+                        <p>${randomMatch.classRegisterDate}</p>
                     </div>
-                `
+                    <!-- 근님이 수정해줘야하는 부분  -->
+                    <p><a href="/child/studyDetail.html?classNumber=${randomMatch.classNumber}">수업 상세보기</a></p>
+                </div>
+            `
                     randomProContainer.append(html);
-                })
             }
             },
         error: function (xhr, status, error) {

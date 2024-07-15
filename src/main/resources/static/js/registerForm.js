@@ -50,9 +50,9 @@ function initializeSummernote() {
     tabsize: 2,
     placeholder: '내용을 입력하세요.',
     callbacks: {
-      // 이부분이 안되네..
       onImageUpload: function(files) {
-        for (let i = 0; i < files.length; i++) {
+        uploadImage(files[0])
+        for (let i = 1; i < files.length; i++) {
           uploadImage(files[i], this);
         }
       }
