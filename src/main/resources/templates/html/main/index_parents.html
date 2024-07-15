@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../../../static/css/main/index_parents.css">
-    <link rel="stylesheet" href="../../../static/css/layout/header.css">
-    <link rel="stylesheet" href="../../../static/css/layout/footer.css">
+    <link rel="stylesheet" th:href="@{/css/main/index_parents.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
     <title>IDOLL봄</title>
 </head>
 
 <!-- 헤더 -->
 <header id="header">
     <div class="header_wrap">
-        <h1><a href="../main/index_parents.html"><img src="../../images/logo.png" alt="IDOLL봄"></a></h1>
+        <h1><a th:href="@{/main/index_parents.html}"><img th:src="@{/images/logo.png}" alt="IDOLL봄"></a></h1>
 
         <nav>
             <ul class="gnb">
                 <li>
-                    <a href="../../html/main/index_parents.html">부모님</a>
+                    <a th:href="@{/html/main/index_parents.html}">부모님</a>
                     <ul>
-                        <li><a href="../../html/matching.html">매칭</a></li>
+                        <li><a th:href="@{/html/matching.html}">매칭</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="../../html/main/index_pro.html">전문가</a>
+                    <a th:href="@{/html/main/index_pro.html}">전문가</a>
                 </li>
                 <li>
-                    <a href="../../html/class_list.html">신청하기</a>
+                    <a th:href="@{/html/class_list.html}">신청하기</a>
                     <ul>
                         <li><a href="#">돌봄</a></li>
                         <li><a href="#">교육</a></li>
@@ -35,223 +35,226 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="../../html/community_parent.html">커뮤니티</a>
+                    <a th:href="@{/html/community_parent.html}">커뮤니티</a>
                     <ul>
-                        <li><a href="../../html/community_parent.html">자유게시판</a></li>
+                        <li><a th:href="@{/html/community_parent.html}">자유게시판</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="../../html/notice.html">고객센터</a>
+                    <a th:href="@{/html/notice.html}">고객센터</a>
                     <ul>
-                        <li><a href="../../html/question.html">문의하기</a></li>
-                        <li><a href="../../html/notice.html">공지사항</a></li>
+                        <li><a th:href="@{/html/question.html}">문의하기</a></li>
+                        <li><a th:href="@{/html/notice.html}">공지사항</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
         <div class="side">
             <p><button onclick="window.location='../mypage/mypage_mail.html'"><img src="../../images/Alarm.png"
-                        alt="알림"></button></p>
-            <p><a href="../../html/mypage/mypage_correction.html">마이페이지</a></p>
-            <p><a href="../../html/login/loginpage.html">로그인 /</a></p>
-            <p><a href="../../html/login/registerpage.html">회원가입</a></p>
+                                                                                   alt="알림"></button></p>
+            <p><a th:href="@{/html/mypage/mypage_correction.html}">마이페이지</a></p>
+            <p><a th:href="@{/html/login/loginpage.html}">로그인</a></p>
+            <p><a th:href="@{/html/login/registerpage.html}">회원가입</a></p>
         </div>
     </div>
 </header>
 
 <body>
-    <div id="container">
-        <!-- 부모 메인페이지 비쥬얼 이미지 -->
-        <section class="visual">
+<div id="container">
+    <!-- 부모 메인페이지 비쥬얼 이미지 -->
+    <section class="visual">
+        <div>
+            <img th:src="@{/images/main_visual-rebranded.webp}">
+        </div>
+    </section>
+
+    <!-- 자동매칭 바로가기 -->
+    <section class="matching">
+        <h2>자동매칭</h2>
+        <div class="matching_wrap">
+            <img th:src="@{/images/index_matching.jpg}">
             <div>
-                <img src="../../images/main_visual-rebranded.webp">
-            </div>
-        </section>
+                <p>돌봄과 배움을 함께, 우리아이 단짝쌤 찾기<br>
+                    아이에게 필요한 모든것을 추천합니다.</p>
 
-        <!-- 자동매칭 바로가기 -->
-        <section class="matching">
-            <h2>자동매칭</h2>
-            <div class="matching_wrap">
-                <img src="../../images/index_matching.jpg">
-                <div>
-                    <p>돌봄과 배움을 함께, 우리아이 단짝쌤 찾기<br>
-                        아이에게 필요한 모든것을 추천합니다.</p>
 
-                    <a href="../matching.html">자세히 보기<span>+</span></a>
-                </div>
-            </div>
-        </section>
+                <a th:href="@{/match}" sec:authorize="isAuthenticated()">자세히 보기<span>+</span>
+                    <a class="logincheck" th:href="@{/match}" sec:authorize="!isAuthenticated()">자세히 보기<span>+</span></a>
 
-        <!-- 전문가 추천 리스트 전문가 클릭 시 수업 상세 페이지로 이동 -->
-        <section class="pro_recommendation">
-            <div>
-                <h2>전문가 추천</h2>
-                <a href="../class_list.html">더보기<span>+</span></a>
-            </div>
-            <ul>
-                <li>
-                    <a href="#">
-                        <img src="../../images/index_recommendation.png">
-                        <p>유가람</p>
-                        <div>
-                            <p>후기</p>
-                            <img src="../../images/4.5rating.png">
-                            <p>(97)</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="../../images/index_recommendation.png">
-                        <p>유가람</p>
-                        <div>
-                            <p>후기</p>
-                            <img src="../../images/4.5rating.png">
-                            <p>(97)</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="../../images/index_recommendation.png">
-                        <p>유가람</p>
-                        <div>
-                            <p>후기</p>
-                            <img src="../../images/4.5rating.png">
-                            <p>(97)</p>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <div class="pro_control">
-                <button><img src="../../images/pro_button_pre.png" alt="이전 메뉴 보기"></button>
-                <button><img src="../../images/pro_button_next.png" alt="다음 메뉴 보기"></button>
-            </div>
-        </section>
-
-        <!-- 키즈존 추천 예약하기 클릭 시 네이버 지도로 이동 -->
-        <section class="kids">
-            <h2>키즈존 추천</h2>
-            <ul>
-                <li>
-                    <img src="../../images/kids1.jpg">
-                    <div>
-                        <p>[공덕 프론트원] 자란다 키즈존</p>
-                        <p>프론트원은 110개의 스타트업이 모여있는 세계 최대 스타트업 공간입니다.</p>
-                        <p><b>위치</b>서울특별시 마포구 마포대로 122 1층</p>
-                        <p><b>이용 연령</b>4세 ~ 13세(일반인 이용가능)</p>
-                        <p><b>이용 시간</b>평일 9:00 ~ 19:00</p>
-                        <p><a href="#">키즈존 예약하기</a></p>
-                    </div>
-                </li>
-                <li>
-                    <img src="../../images/kids2.jpg">
-                    <div>
-                        <p>[역삼 마루 360] 자란다 키즈존</p>
-                        <p>강남 창업가 거리에 위치한 MARU는 기업가 정신을 실천하고 확산하는 사람들을 위한 공간입니다.</p>
-                        <p><b>위치</b>서울특별시 강남구 역삼로 172 2층</p>
-                        <p><b>이용 연령</b>4세 ~ 13세(일반인 이용가능)</p>
-                        <p><b>이용 시간</b>평일 9:00 ~ 19:00</p>
-                        <p><a href="#">키즈존 예약하기</a></p>
-                    </div>
-                </li>
-            </ul>
-        </section>
-
-        <!-- 모든 수업 리스트 클릭 시 수업신청 목록 페이지로 이동 -->
-        <section class="category">
-            <h2>모든수업</h2>
-            <ul>
-                <li>
-                    <div>
-                        <p>돌봄</p>
-                        <ul>
-                            <li><a href="../class_list.html">등/하원</a></li>
-                            <li><a href="../class_list.html">실내놀이</a></li>
-                            <li><a href="../class_list.html">책읽기</a></li>
-                            <li><a href="../class_list.html">놀이터</a></li>
-                            <li><a href="../class_list.html">견학/체험</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <p>교육</p>
-                        <ul>
-                            <li><a href="../class_list.html">초등국어</a></li>
-                            <li><a href="../class_list.html">초등영어</a></li>
-                            <li><a href="../class_list.html">초등수학</a></li>
-                            <li><a href="../class_list.html">코딩</a></li>
-                            <li><a href="../class_list.html">초등과학</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <p>운동</p>
-                        <ul>
-                            <li><a href="../class_list.html">축구</a></li>
-                            <li><a href="../class_list.html">줄넘기</a></li>
-                            <li><a href="../class_list.html">배드민턴</a></li>
-                            <li><a href="../class_list.html">자전거</a></li>
-                            <li><a href="../class_list.html">야구</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <p>예능</p>
-                        <ul>
-                            <li><a href="../class_list.html">그리기</a></li>
-                            <li><a href="../class_list.html">리코더</a></li>
-                            <li><a href="../class_list.html">피아노</a></li>
-                            <li><a href="../class_list.html">바이올린</a></li>
-                            <li><a href="../class_list.html">방송댄스</a></li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </section>
-    </div>
-
-    <!-- 푸터 -->
-    <footer id="footer">
-        <div class="footer_wrap">
-            <img src="../../images/footer_logo.png" alt="IDOLL봄">
-
-            <div>
-                <div>
-                    <p>사업자등록번호 779-81-00425</p>
-                    <p>통신판매업신고 2021-서울강남04707</p>
-                </div>
-                <address><b>본사</b> : 서울특별시 강남구 테헤란로 152 강남파이낸스센터빌딩 40층 자란다</address>
-                <div>
-                    <p>(주)자란다 대표 김성환</p>
-                    <p>개인정보보호책임자 김택주</p>
-                </div>
-            </div>
-
-            <div>
-                <ul>
-                    <li><a href="#">이용약관</a></li>
-                    <li><a href="#">개인정보처리방침</a></li>
-                    <li><a href="#">고객지원</a></li>
-                    <li><a href="#">운영관리방침</a></li>
-                    <li><a href="#">이메일주소</a></li>
-                </ul>
-                <ul>
-                    <li><a href="https://blog.naver.com/jaranblog" target="_blank"><img
-                                src="../../images/footer_social_blog.png" alt="블로그 바로가기"></a></li>
-                    <li><a href="https://www.instagram.com/jaranda__official" target="_blank"><img
-                                src="../../images/footer_social_insta.png" alt="인스타그램 바로가기"></a></li>
-                    <li><a href="https://www.youtube.com/channel/UCTXkxn1OlVvljxEe-hbd3Vg" target="_blank"><img
-                                src="../../images/footer_social_youtube.png" alt="유튜브 바로가기"></a></li>
-                </ul>
             </div>
         </div>
-    </footer>
+    </section>
+
+    <!-- 전문가 추천 리스트 전문가 클릭 시 수업 상세 페이지로 이동 -->
+    <section class="pro_recommendation">
+        <div>
+            <h2>전문가 추천</h2>
+            <a href="#">더보기<span>+</span></a>
+        </div>
+        <ul>
+            <li>
+                <a href="#">
+                    <img src="../../images/index_recommendation.png">
+                    <p>유가람</p>
+                    <div>
+                        <p>후기</p>
+                        <img src="../../images/4.5rating.png">
+                        <p>(97)</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="../../images/index_recommendation.png">
+                    <p>유가람</p>
+                    <div>
+                        <p>후기</p>
+                        <img src="../../images/4.5rating.png">
+                        <p>(97)</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="../../images/index_recommendation.png">
+                    <p>유가람</p>
+                    <div>
+                        <p>후기</p>
+                        <img src="../../images/4.5rating.png">
+                        <p>(97)</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <div class="pro_control">
+            <button><img th:src="@{/images/pro_button_pre.png}" alt="이전 메뉴 보기"></button>
+            <button><img th:src="@{/images/pro_button_next.png}" alt="다음 메뉴 보기"></button>
+        </div>
+    </section>
+
+    <!-- 키즈존 추천 예약하기 클릭 시 네이버 지도로 이동 -->
+    <section class="kids">
+        <h2>키즈존 추천</h2>
+        <ul>
+            <li>
+                <img src="../../images/kids1.jpg">
+                <div>
+                    <p>[공덕 프론트원] 자란다 키즈존</p>
+                    <p>프론트원은 110개의 스타트업이 모여있는 세계 최대 스타트업 공간입니다.</p>
+                    <p><b>위치</b>서울특별시 마포구 마포대로 122 1층</p>
+                    <p><b>이용 연령</b>4세 ~ 13세(일반인 이용가능)</p>
+                    <p><b>이용 시간</b>평일 9:00 ~ 19:00</p>
+                    <p><a href="#">키즈존 예약하기</a></p>
+                </div>
+            </li>
+            <li>
+                <img src="../../images/kids2.jpg">
+                <div>
+                    <p>[역삼 마루 360] 자란다 키즈존</p>
+                    <p>강남 창업가 거리에 위치한 MARU는 기업가 정신을 실천하고 확산하는 사람들을 위한 공간입니다.</p>
+                    <p><b>위치</b>서울특별시 강남구 역삼로 172 2층</p>
+                    <p><b>이용 연령</b>4세 ~ 13세(일반인 이용가능)</p>
+                    <p><b>이용 시간</b>평일 9:00 ~ 19:00</p>
+                    <p><a href="#">키즈존 예약하기</a></p>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <!-- 모든 수업 리스트 클릭 시 수업신청 목록 페이지로 이동 -->
+    <section class="category">
+        <h2>모든수업</h2>
+        <ul>
+            <li>
+                <div>
+                    <p>돌봄</p>
+                    <ul>
+                        <li><a href="../class_list.html">등/하원</a></li>
+                        <li><a href="../class_list.html">실내놀이</a></li>
+                        <li><a href="../class_list.html">책읽기</a></li>
+                        <li><a href="../class_list.html">놀이터</a></li>
+                        <li><a href="../class_list.html">견학/체험</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <p>교육</p>
+                    <ul>
+                        <li><a href="../class_list.html">초등국어</a></li>
+                        <li><a href="../class_list.html">초등영어</a></li>
+                        <li><a href="../class_list.html">초등수학</a></li>
+                        <li><a href="../class_list.html">코딩</a></li>
+                        <li><a href="../class_list.html">초등과학</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <p>운동</p>
+                    <ul>
+                        <li><a href="../class_list.html">축구</a></li>
+                        <li><a href="../class_list.html">줄넘기</a></li>
+                        <li><a href="../class_list.html">배드민턴</a></li>
+                        <li><a href="../class_list.html">자전거</a></li>
+                        <li><a href="../class_list.html">야구</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <p>예능</p>
+                    <ul>
+                        <li><a href="../class_list.html">그리기</a></li>
+                        <li><a href="../class_list.html">리코더</a></li>
+                        <li><a href="../class_list.html">피아노</a></li>
+                        <li><a href="../class_list.html">바이올린</a></li>
+                        <li><a href="../class_list.html">방송댄스</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </section>
+</div>
+
+<!-- 푸터 -->
+<footer id="footer">
+    <div class="footer_wrap">
+        <img src="../../images/footer_logo.png" alt="IDOLL봄">
+
+        <div>
+            <div>
+                <p>사업자등록번호 779-81-00425</p>
+                <p>통신판매업신고 2021-서울강남04707</p>
+            </div>
+            <address><b>본사</b> : 서울특별시 강남구 테헤란로 152 강남파이낸스센터빌딩 40층 자란다</address>
+            <div>
+                <p>(주)자란다 대표 김성환</p>
+                <p>개인정보보호책임자 김택주</p>
+            </div>
+        </div>
+
+        <div>
+            <ul>
+                <li><a href="#">이용약관</a></li>
+                <li><a href="#">개인정보처리방침</a></li>
+                <li><a href="#">고객지원</a></li>
+                <li><a href="#">운영관리방침</a></li>
+                <li><a href="#">이메일주소</a></li>
+            </ul>
+            <ul>
+                <li><a href="https://blog.naver.com/jaranblog" target="_blank"><img
+                        src="../../images/footer_social_blog.png" alt="블로그 바로가기"></a></li>
+                <li><a href="https://www.instagram.com/jaranda__official" target="_blank"><img
+                        src="../../images/footer_social_insta.png" alt="인스타그램 바로가기"></a></li>
+                <li><a href="https://www.youtube.com/channel/UCTXkxn1OlVvljxEe-hbd3Vg" target="_blank"><img
+                        src="../../images/footer_social_youtube.png" alt="유튜브 바로가기"></a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
 </body>
 <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
-<script src="../../../static/js/motion.js"></script>
+<script th:src="@{/js/motion.js}"></script>
 
 </html>

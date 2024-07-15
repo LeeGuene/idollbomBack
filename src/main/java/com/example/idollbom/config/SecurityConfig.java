@@ -40,7 +40,8 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/js/**"),
                                 new AntPathRequestMatcher("/match/**"),
                                 new AntPathRequestMatcher("/class/**"),
-                                new AntPathRequestMatcher("/pro/**")
+                                new AntPathRequestMatcher("/pro/**"),
+                                new AntPathRequestMatcher("/parentmain/**")
 
                         ).permitAll() // 특정 요청에 대해서는 접근 허용
                         .anyRequest().authenticated() // 나머지 요청들은 인증 필요하게 함

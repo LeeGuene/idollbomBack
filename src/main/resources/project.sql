@@ -317,7 +317,7 @@ SELECT * FROM ANSWER;
 -- 모든 테이블 INSERT 쿼리문
 INSERT INTO PARENT
 (PARENT_NUMBER, PARENT_EMAIL, PARENT_PASSWORD, PARENT_NAME, PARENT_NICKNAME, PARENT_PHONE_NUMBER, PARENT_ADDRESS, PARENT_PROFILE_IMAGE_URL, PARENT_REPORT_COUNT)
-VALUES(0, '', '', '', '', '', '', '', 0);
+VALUES(2, 'cdsf577@naver.com', '20198diff', '김시도', '김밥', '01023370987', '김해', 'kim.img', 35);
 
 INSERT INTO CHILD
 (CHILD_NUMBER, CHILD_NAME, CHILD_AGE, CHILD_GENDER, CHILD_SPECIAL_ISSUES, PARENT_NUMBER)
@@ -345,7 +345,7 @@ VALUES(0, '', '', '', 0, 0);
 
 INSERT INTO PRO
 (PRO_NUMBER, PRO_EMAIL, PRO_PASSWORD, PRO_NAME, PRO_NICKNAME, PRO_PHONE_NUMBER, PRO_ADDRESS, PRO_PROFILE_IMAGE_URL, PRO_FILE, PRO_INTRO)
-VALUES(SEQ_PROJECT.nextval, 'dssd@nsdsfdk.com', '1234', '전문가1', '전문', '030-245-3434', '서울시 강북구', 'SSD.MPG', 'SDS', '전문가입니다.');
+VALUES(SEQ_PROJECT.nextval, 'ds221@nffdfffdk.com', '123344244', '나는 전문가', '프로이죠', '010-2233-3324', '수원', 'pro.jpg', 'sd', '안녕하세요.');
 
 INSERT INTO PRO_POST
 (PRO_POST_NUMBER, PRO_POST_TITLE, PRO_POST_CONTENT, PRO_POST_VIEWS, PRO_POST_REGISTER_DATE, PRO_POST_UPDATE_DATE, PRO_NUMBER)
@@ -460,6 +460,23 @@ FROM
         AND C.PRO_NUMBER = 1
     ) CLASS
 WHERE CLASS.CLASS_NUMBER = 20;
+
+
+SELECT
+    p.pro_profile_image_url, -- 전문가 이미지
+    p.pro_name, -- 전문가 이름
+    COALESCE(AVG(r.review_evaluation_point), 0) AS averageRating, -- 평균 평점, NULL 값은 0으로 대체
+    COUNT(r.review_number) AS reviewCount -- 리뷰 개수
+FROM
+    pro p -- 전문가 테이블
+        LEFT JOIN
+    review r ON p.pro_number = r.class_number -- 리뷰 테이블을 전문가 테이블과 LEFT JOIN
+GROUP BY
+    p.pro_name, -- 전문가 이름으로 그룹화
+    p.pro_profile_image_url -- 전문가 이미지 URL로 그룹화
+ORDER BY
+    averageRating DESC, -- 평균 평점이 높은 순으로 정렬
+    reviewCount DESC;
 
 
 
