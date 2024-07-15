@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.idollbom.mapper.MatchingMapper">
+<mapper namespace="com.example.idollbom.mapper.proMapper.RegisterFormMapper">
+    <!-- 현재 시퀀스값을 가져오는 SELECT -->
+    <select id="currentSeq" resultType="Long">
+        select seq_project.CURRVAL
+        from dual
+    </select>
+    <!-- 수업 등록(class) insert -->
+    <!-- 현재 33은 proNumber자리 -->
+    <insert id="classInsert">
+        insert into class
+        values (seq_project.NEXTVAL, #{className}, #{classCategoryBig}, #{classCategorySmall}, #{classContent},
+                #{classPaymentAccount}, 33, sysdate)
+    </insert>
 
+    <!-- 수업 날짜 insert -->
+    <insert id="classDateInsert">
+        insert into reservation_date
+        values (seq_project.NEXTVAL, #{reservationDate}, #{classNumber})
+    </insert>
+
+    <!-- 수업 시간 insert -->
+    <insert id="classTimeInsert">
+        insert into reservation_time
+        values (seq_project.NEXTVAL, #{reservationTime}, #{reservationDateNumber})
+    </insert>
+
+    <!-- 수업에 대한 이미지 insert -->
+    <insert id="imageInsert">
+        insert into img
+        values (seq_project.NEXTVAL, #{imageFileUrl}, #{classNumber})
+    </insert>
 </mapper>
