@@ -3,6 +3,7 @@ package com.example.idollbom.controller.apply;
 import com.example.idollbom.domain.dto.applydto.ClassDetailDTO;
 import com.example.idollbom.domain.dto.applydto.ClassListDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.classSaveDTO;
+import com.example.idollbom.domain.dto.parentdto.ReviewDTO;
 import com.example.idollbom.domain.dto.parentdto.ReviewOneListDTO;
 import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
@@ -202,16 +203,13 @@ public class ClassListController {
                          @RequestParam("parentEmail") String parentEmail,
                          Model model) {
 
-        log.info(parentEmail);
-
         ClassDetailDTO class_info = classDetailService.classDetail(proNumber, classNumber);
-        List<ReviewOneListDTO> reviews = classReviewService.findOneReviewList(classNumber, proNumber);
+        List<ReviewOneListDTO> reviews = classReviewService.findOneReviewList(proNumber, classNumber);
 
         ParentVO parent_info = parentMapper.selectOne(parentEmail); // 수업 상세보기로 넘어갈 때부터 parentNumber 를 넘기기 위한 조치
 
         model.addAttribute("class_info", class_info);
         model.addAttribute("reviews", reviews);
-
         model.addAttribute("parent_info", parent_info);
 
         return "/html/parent/studyDetail";

@@ -1,7 +1,6 @@
 package com.example.idollbom.controller.pro;
 
 import com.example.idollbom.domain.dto.parentdto.ReviewAllListDTO;
-import com.example.idollbom.domain.dto.prodto.ChildFindDTO;
 import com.example.idollbom.domain.dto.prodto.ProDetailDTO;
 import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.service.applyservice.ClassReviewService;
@@ -41,6 +40,8 @@ public class ProController {
         // 특정 전문가에 대한 전체 리뷰 조회
         List<ReviewAllListDTO> reviews = classReviewService.findAllReviewList(proNumber);
 
+        reviews.stream().map(ReviewAllListDTO::toString).forEach(log::info);
+
         model.addAttribute("pro_info", pro_info);
         model.addAttribute("reviews", reviews);
         model.addAttribute("parent_info", parent_info);
@@ -52,9 +53,11 @@ public class ProController {
     public String find(@PathVariable("proNumber") Long proNumber,
                        Model model){
 
-        List<ChildFindDTO> saveLists = childFindService.findAllParent(proNumber);
+//        List<ChildFindDTO> saveLists = childFindService.findAllParent(proNumber);
 
-        model.addAttribute("saveLists", saveLists);
+//        saveLists.stream().map(ChildFindDTO::toString).forEach(log::info);
+
+//        model.addAttribute("saveLists", saveLists);
 
         return "/html/pro/childfind";
     }

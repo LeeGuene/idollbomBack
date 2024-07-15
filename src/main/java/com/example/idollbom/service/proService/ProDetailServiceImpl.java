@@ -11,7 +11,6 @@ public class ProDetailServiceImpl implements ProDetailService {
 
     private final ProDetailMapper proDetailMapper;
 
-    // 전문가 프로필 상세보기 서비스
     @Override
     public ProDetailDTO findProDetailByNumber(Long proNumber) {
         return proDetailMapper.selectProDetail(proNumber);

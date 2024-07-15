@@ -68,45 +68,22 @@ moreBtn.addEventListener('click', ()=>{
 });
 
 // =========================================================
-// 리뷰 수정
-function goUpdate() {
-  if (!confirm('리뷰를 수정하시겠습니까?')) {
-    return; // 사용자가 취소를 선택한 경우 아무 것도 하지 않습니다.
-  }
 
-  let reviewNumber = document.querySelector('input[name="reviewNumber"]').value;
-  window.location.href = '/reviews/' + reviewNumber;
-}
-
-// 리뷰 삭제
-function goDelete() {
-  if (confirm('리뷰를 삭제하시겠습니까?')) {
-    // 사용자가 '확인'을 선택했을 경우, 삭제 절차 진행
-    let reviewNumber = document.querySelector('input[name="reviewNumber"]').value;
-
-    const form = document.createElement('form');
-    form.method = 'post';
-    form.action = '/reviews/' + reviewNumber;
-    document.body.appendChild(form);
-    form.submit();
-  }
-  // 사용자가 '취소'를 선택한 경우, 함수를 종료하고 아무것도 하지 않습니다.
-}
-
+// 부모 pk (parentNumber)
 const loginId = $('input[name="loginId"]').val();
 
 // 날짜 포맷
 function formatDate(dateString) {
   const now = new Date();
-  const commentDate = new Date(dateString); // 문자열을 Date 객체로 변환
+  const reviewDate = new Date(dateString); // 문자열을 Date 객체로 변환
 
   const nowYear = now.getFullYear();
   const nowMonth = now.getMonth();
   const nowDate = now.getDate();
 
-  const commentYear = commentDate.getFullYear();
-  const commentMonth = commentDate.getMonth();
-  const commentDateDate = commentDate.getDate();
+  const reviewYear = reviewDate.getFullYear();
+  const reviewMonth = reviewDate.getMonth();
+  const reviewDateDate = reviewDate.getDate();
 
   let displayText = "";
 
@@ -115,44 +92,34 @@ function formatDate(dateString) {
   //     displayText = "오늘";
   // } else {
   // 그 외의 경우, 정해진 포맷으로 표시
-  const yy = commentYear.toString().slice(-2); // 마지막 두 자리를 가지고 옴.
-  const M = commentMonth + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
-  const d = commentDateDate;
-  const HH = commentDate.getHours().toString().padStart(2, '0');
-  const mm = commentDate.getMinutes().toString().padStart(2, '0'); // 두자리 수 일 때 앞에 0을 붙임.
+  const yy = reviewYear.toString().slice(-2); // 마지막 두 자리를 가지고 옴.
+  const M = reviewMonth + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
+  const d = reviewDateDate;
+  const HH = reviewDate.getHours().toString().padStart(2, '0');
+  const mm = reviewDate.getMinutes().toString().padStart(2, '0'); // 두자리 수 일 때 앞에 0을 붙임.
 
   displayText = `${yy}년 ${M}월 ${d}일 ${HH}시 ${mm}분`;
   // }
   return displayText;
 }
 
-
-
-// 페이지가 처음 로드 될 때 댓글 목록 조회 함수가 실행되도록 한다.
-$(document).ready(function () {
-  let reviewNumber = $('input[name="reviewNumber"]').val();
-  getComments(reviewNumber);
-})
-
-// 댓글 목록 조회 함수
-function getComments(reviewNumber) {
+function getReviews(classNumber) {
   $.ajax({
     method : 'get',
-    url : '/reivews/' + reviewNumber,
+    url : '/reviews/' + classNumber,
     success : function(reviews) {
       let reviewListArea = $('.review-list')
-
-      // 댓글이 작성될 해당 섹션 비우기.
+      // 리뷰가 작성될 해당 섹션 비우기.
       reviewListArea.empty();
 
-      // 댓글 없을 때 표시할 html
+      // 리뷰가 없을 때 표시할 html
       if(reviews.length === 0){
         reviewListArea.append(
-            `<div>첫번째 댓글을 남겨주세요!</div>`
+            `<div>첫번째 리뷰를 남겨주세요!</div>`
         );
       }
 
-      // 리뷰 있을 때 목록을 뿌려줄 반복문.
+      // 리뷰가 있을 때 목록을 뿌려줄 반복문.
       reviews.forEach(function(review) {
         let reviewDate = formatDate(review.reviewRegisterDate);
         let buttons = '';
@@ -160,78 +127,77 @@ function getComments(reviewNumber) {
 
         // 작성일과 수정일을 비교해서 html 에 다른 모양으로 표시.
         if(review.reviewUpdateDate !== review.reviewRegisterDate){
-          commentDate = formatDate(review.reviewUpdateDate);
+          reviewDate = formatDate(review.reviewUpdateDate);
           editStr = ' (수정)';
         }
 
         // 현재 로그인된 계정과 리뷰 작성자가 동일하다면 만들어줄 버튼
-        if(loginId === review.providerId){
+        // 내가 작성한 댓글만 수정가능하도록 한다.
+        if(loginId === review.parentNumber){
           buttons = `
                         <div class="comment-actions">
-                            <button onclick="updateComment(${review.commentId})" class="btn btn-primary">수정</button>
-                            <button onclick="deleteComment(${review.commentId})" class="btn btn-danger">삭제</button>
+                            <button onclick="updateComment(${review.reviewNumber})">수정</button>
+                            <button onclick="deleteComment(${review.reviewNumber})">삭제</button>
                         </div>
                     `
         }
 
         // 종합적으로 뿌려줄 html
-        let commentElement = `
-                    <div class="comment-card" id="comment-${comment.commentId}">
+        let reviewElement = `
+                    <li class="review-item" id="review-${review.reviewNumber}">
                         <div class="comment-body">
-                            <div class="comment-title">${comment.name}</div>
-                            <div class="comment-subtitle">${commentDate}${editStr}</div>
-                            <p class="comment-text">${comment.commentContent}</p>
+                            <div class="comment-title">${parent_info.parentName}</div>
+                            <div class="comment-subtitle">${reviewDate}${editStr}</div>
+                            <p class="comment-text">${review.reviewContent}</p>
                             <!-- 수정, 삭제 버튼 -->
                             ${buttons}
                         </div>
-                    </div>
+                    </li>
                 `
-        // 해당 섹션에 추가
-        // 댓글의 갯 수 만큼 차례대로 추가될 것이다.
-        commentListArea.append(commentElement);
+        // 리뷰의 개수만큼 추가
+        reviewListArea.append(reviewElement);
       })
     },
-    error : function(data) {
-      console.error(data, "불러오기 실패");
+    error : function(reviews) {
+      console.error(reviews, "불러오기 실패");
     }
   })
 }
 
-// 댓글 추가
-function addComment(){
-  let boardId = $('input[name="boardId"]').val();
-  let commentContent = $('#commentContent').val();
+// 리뷰 추가
+function addReview(){
+  let classNumber = $('input[name="classNumber"]').val();
+  let reviewContent = $('#review-write').val();
+  let reviewEvaluationPoint = $('select[name="review-evaluation"]').val();
 
   // textarea 비어 있으면 경고
-  if(!commentContent){
+  if(!reviewContent){
     alert('내용을 입력하세요!');
-    return
+    return;
   }
 
   $.ajax({
     method : 'post',
-    url: '/comments',
+    url: '/reviews',
     contentType: 'application/json',
     data: JSON.stringify({
-      boardId: boardId,
-      commentContent: commentContent,
-      providerId : loginId
+      classNumber: classNumber,
+      reviewContent: reviewContent,
+      reviewEvaluationPoint : reviewEvaluationPoint,
+      parentNumber : loginId
     }),
-    success : function(data) {
-      $('#commentContent').val('')
-      getComments(boardId);
+    success : function(reviews) {
+      $('#review-write').val(''); // 리뷰 추가되면, textarea 값 초기화
+      getReviews(classNumber);
     },
-    error : function(data) {
-      console.error(data);
+    error : function(reviews) {
+      console.error(reviews);
     }
   })
 }
 
 // 댓글 삭제
-function deleteComment(commentId){
-  // 매개 변수로 pk 잘 넘어왔는지 확인.
-  // alert(commentId)
-  // console.log(commentId)
+function deleteReview(classNumber){
 
   if(!confirm('정말로 삭제하시겠습니까?')){
     return;
@@ -239,19 +205,19 @@ function deleteComment(commentId){
 
   $.ajax({
     method : 'delete',
-    url : '/comments/' + commentId,
+    url : '/comments/' + classNumber,
     success : function(data) {
-      console.log(data, '삭제 성공')
-      getComments($('input[name="boardId"]').val());
+      console.log(data, '삭제 성공');
+      getReviews($('input[name="classNumber"]').val());
     },
     error : function(data) {
-      console.error(data, '삭제 실패')
+      console.error(data, '삭제 실패');
     }
-  })
+  });
 }
 
 // 댓글 수정 폼 생성 함수
-function createEditForm(commentId, currentContent){
+function createEditForm(reviewNumber, currentReview){
   return `
         <div class="mb-3">
             <textarea class="form-control comment-edit-content" rows="3">${currentContent}</textarea>

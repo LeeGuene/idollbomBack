@@ -1,10 +1,13 @@
 package com.example.idollbom.controller.parent;
 
 import com.example.idollbom.domain.dto.parentdto.ReviewDTO;
+import com.example.idollbom.domain.dto.parentdto.ReviewOneListDTO;
 import com.example.idollbom.service.applyservice.ClassReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/reviews")
@@ -13,37 +16,33 @@ public class ReviewRestController {
 
     private final ClassReviewService classReviewService;
 
-    // 특정 전문가에 대한 리뷰 추가
-    // 부모 pk, 수업 pk를 주소(경로)에 받아서 넘어온다. ( view -> controller )
-    @PostMapping
-    public ResponseEntity<?> addReview(@RequestParam("parentNumber") Long parentNumber,
-                                       @RequestParam("classNumber") Long classNumber,
-                                       @RequestBody ReviewDTO review){
-        // View 에서 부모 pk, 수업 pk를 받아온 다음, 쿼리문 실행
-        // 부모 pk 정보는 어디서 받아오지?? >> 로그인할 때
-        review.setParentNumber(parentNumber);
-        review.setClassNumber(classNumber);
-        
-        classReviewService.saveReview(review);
+    // 특정 수업에 대한 전체 리뷰 조회
+    @GetMapping("/{classNumber}")
+    public ResponseEntity<?> getReview(@PathVariable("classNumber") Long classNumber) {
+        List<ReviewDTO> reviews = classReviewService.findReviews(classNumber);
+        return ResponseEntity.ok(reviews);
+    }
 
+    // 특정 전문가에 대한 리뷰 추가
+    @PostMapping
+    public ResponseEntity<?> addReview(@RequestBody ReviewDTO review){
+        // 수업 상세보기 페이지에서 받아온 사용자 데이터로 쿼리문 실행
+        classReviewService.saveReviews(review);
         return ResponseEntity.ok().build();
     }
 
     // 특정 수업에 대한 리뷰 삭제
-    @DeleteMapping("/{reviewNumber}")
-    public ResponseEntity<?> deleteReview(@PathVariable("reviewNumber") Long reviewNumber){
-        classReviewService.deleteReview(reviewNumber);
+    @DeleteMapping("/{classNumber}")
+    public ResponseEntity<?> deleteReview(@PathVariable("classNumber") Long classNumber){
+        classReviewService.deleteReviews(classNumber);
         return ResponseEntity.ok().build();
     }
-    
+
     // 특정 수업에 대한 리뷰 수정
-    @PutMapping("/{reviewNumber}")
-    public ResponseEntity<?> updateReview(@PathVariable("reviewNumber") Long reviewNumber,
+    @PutMapping("/{classNumber}")
+    public ResponseEntity<?> updateReview(@PathVariable("classNumber") Long classNumber,
                                           @RequestBody ReviewDTO reviewDTO){
-        // view 단에서 DTO 안에는 reviewNumber 는 비어있는 상태임.
-        // 주소로 받아온 reviewNumber로 채워준 다음, 쿼리문 실행
-        reviewDTO.setReviewNumber(reviewNumber);
-        classReviewService.updateReview(reviewDTO);
+
 
         return ResponseEntity.ok().build();
     }

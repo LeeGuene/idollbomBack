@@ -123,12 +123,13 @@
     <div class="detail-right-area" th:object="${class_info}">
       <!-- 강사명 및 프로필 보기 버튼 -->
       <div class="pro-profile-wrap">
-<!--        <input type="hidden" name="classNumber" th:value="*{classNumber}" readonly/>-->
+        <!-- 동적으로 리뷰를 추가하기 위해 필요한 classNumber -->
+        <input type="hidden" name="classNumber" th:value="*{classNumber}" readonly/>
         <h1>강사명</h1>
         <p th:text="*{proName}">이근</p>
         <!-- 해당 강사의 프로필 보기 페이지로 넘어갈 때 주소에 넘겨줄 데이터만 작성함. -->
         <!-- 컨트롤러는 만들어지지 않아서 아직 작성하지 않음. -->
-        <a th:href="@{/pro/detail(classNumber=*{classNumber}, proNumber=*{proNumber})}">프로필 보기</a>
+        <a th:href="@{/pro/detail(proNumber=*{proNumber})}">프로필 보기</a>
       </div>
 
       <!-- 수업 제목 -->
@@ -161,7 +162,7 @@
 
       <!-- 수업 결제, 수업 찜하기 버튼 -->
       <div class="payment-button-wrap">
-        <a href="#">수업 결제하기</a>
+        <a th:href="@{/paymentcheck(classNumber=${class_info.classNumber})}">수업 결제하기</a>
         <a th:href="@{/ParentMyPage/insertSaveClass(classNumber=${class_info.classNumber}, parentNumber=${parent_info.parentNumber})}">
           수업 찜하기
         </a>
@@ -169,11 +170,11 @@
         <!-- 리뷰 작성 폼 -->
         <!-- 로그인 한 계정만 리뷰 추가 가능 -->
         <div sec:authorize="isAuthenticated()">
-          <form th:method="@{/reviews(parentNumber=${parent_info.parentNumber}, classNumber=${class_info.classNumber})}" id="review-write-area" th:object="${review}">
-            <input type="hidden" th:field="*{reviewNumber}" />
+          <form method="post" id="review-write-area">
+            <input type="hidden" name="loginId" th:value="${parent_info.parentNumber}" />
             <div>
               <label for="review-write">리뷰 남기기</label>
-              <textarea th:field="*{reviewContent}" name="review-write" id="review-write"></textarea>
+              <textarea name="review-write" id="review-write"></textarea>
             </div>
             <div>
               <p>별점 : </p>
@@ -185,7 +186,7 @@
                 <option value="5">★★★★★</option>
               </select>
             </div>
-            <button type="button" class="review-write-btn">리뷰 작성</button>
+            <button onclick="addReview()" type="button" class="review-write-btn">리뷰 작성</button>
           </form>
         </div>
 
@@ -200,11 +201,14 @@
               <textarea th:field="*{reviewContent}" name="review-content" class="review-content" readonly>리뷰1</textarea>
               <div>
                 <p>작성자 : <span th:text="${parent_info.parentName}"></span></p>
-                <p>등록일 : <span th:text="*{reviewRegisterDate}"></span></p>
-                <p>수정일 : <span th:text="*{reviewUpdateDate}"></span></p>
+                <p>등록일 : <span th:text="*{#temporals.format(reviewRegisterDate, 'yy년 M월 d일')}"></span></p>
+                <p>수정일 : <span th:text="*{#temporals.format(reviewUpdateDate, 'yy년 M월 d일')}"></span></p>
               </div>
-              <button onclick="goUpdate()">수정</button>
-              <button onclick="goDelete()">삭제</button>
+              <!-- 현재 로그인한 부모 pk와 리뷰 작성자인 부모 pk가 일치한다면 수정, 삭제하도록 한다. -->
+              <div th:if="${parent_info.parentNumber == review.parentNumber}">
+                <button onclick="">수정</button>
+                <button onclick="deleteReview()">삭제</button>
+              </div>
             </li>
           </ul>
         </div>

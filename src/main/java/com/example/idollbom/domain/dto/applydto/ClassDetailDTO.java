@@ -12,7 +12,7 @@ public class ClassDetailDTO {
     private String classCategorySmall;      // 수업 카테고리(소)
     private String classContent;            // 수업 내용
     private String classPaymentAccount;     // 수업 결제금액
-    private String classRegisterDate;       // 수업 등록일
+    private String classRegisterDate;        // 수업 등록일
     private Long proNumber;                 // fk ( 전문가 pk )
     private String proName;                 // 전문가 이름
 

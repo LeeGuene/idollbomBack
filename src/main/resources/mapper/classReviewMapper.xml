@@ -25,37 +25,73 @@
     <!-- 특정 전문가의 하나의 수업에 대한 모든 리뷰 조회 -->
     <!-- 가져올 정보는 수정해야 함. -->
     <select id="selectOneAllReview" resultType="ReviewOneListDTO">
-        SELECT CLASS.*, P.*
+        SELECT
+            R.REVIEW_NUMBER,
+            R.REVIEW_CONTENT,
+            R.REVIEW_EVALUTION_POINT,
+            R.REVIEW_REGISTER_DATE,
+            R.REVIEW_UPDATE_DATE,
+            R.PARENT_NUMBER,
+            R.CLASS_NUMBER
         FROM (
-                SELECT *
-                FROM class c JOIN review r
-                    ON c.CLASS_NUMBER = r.CLASS_NUMBER
-                    AND c.CLASS_NUMBER = #{classNumber}
-                ORDER BY r.REVIEW_UPDATE_DATE desc
-        ) CLASS JOIN PRO P
-        ON CLASS.PRO_NUMBER = P.PRO_NUMBER
-        AND CLASS.PRO_NUMBER = #{proNumber}
+                 SELECT
+                     P.PRO_NAME,
+                     C.CLASS_NUMBER,
+                     C.CLASS_CATEGORY_BIG,
+                     C.CLASS_CATEGORY_SMALL,
+                     C.CLASS_CONTENT
+                 FROM PRO P JOIN CLASS C
+                     ON P.PRO_NUMBER = C.PRO_NUMBER
+                     AND P.PRO_NUMBER = #{proNumber}
+                     AND C.CLASS_NUMBER = #{classNumber}
+             ) DETAIL JOIN REVIEW R
+               ON DETAIL.CLASS_NUMBER = R.CLASS_NUMBER;
     </select>
 
-    <!-- 특정 전문가 수업의 리뷰 추가하기 -->
-    <!-- 수업 상세 페이지에서 리뷰 작성 버튼 클릭시 실행 -->
-    <insert id="insertReview" parameterType="reviewVO">
+    <!-- 특정 수업에 대한 모든 리뷰 조회 ( 비동기 통신 ) -->
+    <select id="selectReviews" resultType="ReviewDTO">
+        SELECT * FROM REVIEW R
+        WHERE R.CLASS_NUMBER = #{classNumber}
+    </select>
+
+    <!-- 특정 수업에 대한 리뷰 추가 -->
+    <insert id="insertReviews">
         insert into REVIEW (REVIEW_NUMBER, REVIEW_CONTENT, REVIEW_EVALUTION_POINT, REVIEW_REGISTER_DATE, REVIEW_UPDATE_DATE,
                             PARENT_NUMBER, CLASS_NUMBER)
         values (SEQ_PROJECT.nextval, #{reviewContent}, #{reviewEvaluationPoint}, sysdate, sysdate, #{parentNumber}, #{classNumber})
     </insert>
 
-    <!-- 특정 전문가 수업의 리뷰 수정하기 -->
-    <!-- 리뷰 내용, 별점, 수정일만 수정함. -->
-    <update id="updateReview" parameterType="reviewVO">
-        update REVIEW
-        set REVIEW_CONTENT = #{reviewContent}, REVIEW_UPDATE_DATE = sysdate
-        where REVIEW_NUMBER = #{reviewNumber}
-    </update>
-
-    <!-- 특정 전문가 수업의 리뷰 삭제하기 -->
-    <delete id="deleteReview">
+    <!-- 특정 수업에 대한 리뷰 삭제 -->
+    <delete id="deleteReviews">
         delete from REVIEW
-        where REVIEW_NUMBER = #{reviewNumber}
+        where REVIEW_NUMBER = #{classNumber};
     </delete>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </mapper>

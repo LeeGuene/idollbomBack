@@ -8,11 +8,10 @@ import java.time.LocalDate;
 @Data
 public class ReviewOneListDTO {
 
+    private Long parentNumber;
     private Long reviewNumber;
     private String reviewContent;
     private Long reviewEvaluationPoint;
     private LocalDate reviewRegisterDate;
     private LocalDate reviewUpdateDate;
-    private Long parentNumber;
-    private Long classNumber;
 }
