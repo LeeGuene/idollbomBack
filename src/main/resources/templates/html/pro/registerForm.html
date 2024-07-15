@@ -20,12 +20,12 @@
     </div>
 
     <!-- 수업등록 폼 -->
-    <form id="register-form" th:action="@{/pro/register}" enctype="multipart/form-data">
+    <form id="register-form" th:action="@{/pro/register}" enctype="multipart/form-data" method="post">
 
       <!-- 수업 제목 -->
       <div class="study-title">
         <label for="title">수업 제목</label>
-        <input id="title" type="text" name="title" placeholder="수업 제목" required />
+        <input id="title" type="text" name="className" placeholder="수업 제목">
       </div>
 
       <div class="study-select">
@@ -34,20 +34,20 @@
         <!-- 수업 카테코리(대) 선택 -->
         <div class="category-big">
           <h2>카테고리(대)</h2>
-          <input id="care" type="radio" name="category-item" value="care" checked/>
+          <input id="care" type="radio" name="classCategoryBig" value="돌봄" checked/>
           <label for="care">돌봄</label>
-          <input id="education" type="radio" name="category-item" value="education" />
+          <input id="education" type="radio" name="classCategoryBig" value="교육" />
           <label for="education">교육</label>
-          <input id="sport" type="radio" name="category-item" value="sport" />
+          <input id="sport" type="radio" name="classCategoryBig" value="운동" />
           <label for="sport">운동</label>
-          <input id="entertainment" type="radio" name="category-item" value="entertainment" />
+          <input id="entertainment" type="radio" name="classCategoryBig" value="예능" />
           <label for="entertainment">예능</label>
         </div>
 
         <!-- 수업 카테고리(소) 선택 -->
         <div class="category-small">
           <h2>카테고리(소)</h2>
-          <select class="category-dollbom" th:value="${data}">
+          <select class="category-dollbom" name="care">
             <option value="등/하원">등/하원</option>
             <option value="실내놀이">실내놀이</option>
             <option value="책읽기">책읽기</option>
@@ -55,7 +55,7 @@
             <option value="견학/체험">견학/체험</option>
           </select>
 
-          <select class="category-study" th:value="${data}">
+          <select class="category-study" name="education">
             <option value="초등국어">초등국어</option>
             <option value="초등수학">초등수학</option>
             <option value="초등영어">초등영어</option>
@@ -63,7 +63,7 @@
             <option value="코딩">코딩</option>
           </select>
 
-          <select class="category-sport" th:value="${data}">
+          <select class="category-sport" name="sport">
             <option value="축구">축구</option>
             <option value="줄넘기">줄넘기</option>
             <option value="배드민턴">배드민턴</option>
@@ -71,7 +71,7 @@
             <option value="야구">야구</option>
           </select>
 
-          <select class="category-entertainment" th:value="${data}">
+          <select class="category-entertainment" name="entertainment">
             <option value="그리기">그리기</option>
             <option value="리코더">리코더</option>
             <option value="피아노">피아노</option>
@@ -93,24 +93,24 @@
               <!-- 연 선택 -->
               <!-- 연이 출력되는 공간 -->
               <div class="year-select"></div>
-              <input type="date">
+              <input type="date" name="resDate">
             </nav>
 
             <nav>
               <!-- 시간 선택 -->
               <!-- 시간 출력공간 -->
               <div class="hour-select"></div>
-              <select>
-                <option>9시</option>
-                <option>10시</option>
-                <option>11시</option>
-                <option>12시</option>
-                <option>13시</option>
-                <option>14시</option>
-                <option>15시</option>
-                <option>16시</option>
-                <option>17시</option>
-                <option>18시</option>
+              <select class="time" name="resTime">
+                <option value="9">9시</option>
+                <option value="10">10시</option>
+                <option value="11">11시</option>
+                <option value="12">12시</option>
+                <option value="13">13시</option>
+                <option value="14">14시</option>
+                <option value="15">15시</option>
+                <option value="16">16시</option>
+                <option value="17">17시</option>
+                <option value="18">18시</option>
               </select>
             </nav>
           </div>
@@ -127,7 +127,7 @@
       <!-- 결제금액 영역 -->
       <div class="payment-wrap">
         <label for="payment-amount">결제 금액</label>
-        <input id="payment-amount" type="text" />원
+        <input id="payment-amount" type="text" name="classPaymentAccount"/>원
       </div>
 
       <!-- 수업 등록 버튼 -->
@@ -135,8 +135,11 @@
           <button class="submit-btn" type="submit">수업 등록하기</button>
       </div>
 
+      <!-- 현재 로그인된 전문가를 가져와서 name 속성으로 넘긴다 -->
+      <input type="hidden">
     </form>
   </div>
+
 <div th:replace="~{/layout/footer :: footer}"></div>
 <script src="https://kit.fontawesome.com/96adc9c597.js" crossorigin="anonymous"></script>
 <!--<script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>-->
