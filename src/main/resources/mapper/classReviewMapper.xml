@@ -19,7 +19,7 @@
                  FROM CLASS C JOIN REVIEW R
                        ON C.CLASS_NUMBER = R.CLASS_NUMBER
              ) CLASS JOIN PRO P
-        ON CLASS.PRO_NUMBER = #{proNumber};
+        ON CLASS.PRO_NUMBER = #{proNumber}
     </select>
 
     <!-- 특정 전문가의 하나의 수업에 대한 모든 리뷰 조회 -->
@@ -45,12 +45,15 @@
                      AND P.PRO_NUMBER = #{proNumber}
                      AND C.CLASS_NUMBER = #{classNumber}
              ) DETAIL JOIN REVIEW R
-               ON DETAIL.CLASS_NUMBER = R.CLASS_NUMBER;
+               ON DETAIL.CLASS_NUMBER = R.CLASS_NUMBER
     </select>
 
     <!-- 특정 수업에 대한 모든 리뷰 조회 ( 비동기 통신 ) -->
     <select id="selectReviews" resultType="ReviewDTO">
-        SELECT * FROM REVIEW R
+        SELECT P.PARENT_NAME,
+               R.*
+            FROM REVIEW R JOIN PARENT P
+            ON R.PARENT_NUMBER = P.PARENT_NUMBER
         WHERE R.CLASS_NUMBER = #{classNumber}
     </select>
 
@@ -64,7 +67,7 @@
     <!-- 특정 수업에 대한 리뷰 삭제 -->
     <delete id="deleteReviews">
         delete from REVIEW
-        where REVIEW_NUMBER = #{classNumber};
+        where REVIEW_NUMBER = #{classNumber}
     </delete>
 
 

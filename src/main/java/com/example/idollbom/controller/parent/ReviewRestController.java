@@ -39,13 +39,13 @@ public class ReviewRestController {
     }
 
     // 특정 수업에 대한 리뷰 수정
-    @PutMapping("/{classNumber}")
-    public ResponseEntity<?> updateReview(@PathVariable("classNumber") Long classNumber,
-                                          @RequestBody ReviewDTO reviewDTO){
-
-
-        return ResponseEntity.ok().build();
-    }
+//    @PutMapping("/{classNumber}")
+//    public ResponseEntity<?> updateReview(@PathVariable("classNumber") Long classNumber,
+//                                          @RequestBody ReviewDTO reviewDTO){
+//
+//
+//        return ResponseEntity.ok().build();
+//    }
 
 
 

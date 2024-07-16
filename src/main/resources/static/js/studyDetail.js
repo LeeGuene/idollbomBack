@@ -69,9 +69,6 @@ moreBtn.addEventListener('click', ()=>{
 
 // =========================================================
 
-// 부모 pk (parentNumber)
-const loginId = $('input[name="loginId"]').val();
-
 // 날짜 포맷
 function formatDate(dateString) {
   const now = new Date();
@@ -103,11 +100,22 @@ function formatDate(dateString) {
   return displayText;
 }
 
+// 부모 pk (parentNumber)
+const loginId = $('input[name="loginId"]').val();
+
+// 페이지 로딩 시 실행되는 함수
+$(document).ready(function () {
+  const classNumber = $('input[name="classNumber"]').val();
+  getReviews(classNumber);
+});
+
+// 특정 수업에 대한 전체 리뷰 조회
 function getReviews(classNumber) {
   $.ajax({
     method : 'get',
     url : '/reviews/' + classNumber,
     success : function(reviews) {
+      console.log("쿼리문 실행 결과 : " + reviews);
       let reviewListArea = $('.review-list')
       // 리뷰가 작성될 해당 섹션 비우기.
       reviewListArea.empty();
@@ -135,9 +143,9 @@ function getReviews(classNumber) {
         // 내가 작성한 댓글만 수정가능하도록 한다.
         if(loginId === review.parentNumber){
           buttons = `
-                        <div class="comment-actions">
-                            <button onclick="updateComment(${review.reviewNumber})">수정</button>
-                            <button onclick="deleteComment(${review.reviewNumber})">삭제</button>
+                        <div>
+                            <button onclick="updateReview(${review.reviewNumber})">수정</button>
+                            <button onclick="deleteReview(${review.reviewNumber})">삭제</button>
                         </div>
                     `
         }
@@ -145,15 +153,16 @@ function getReviews(classNumber) {
         // 종합적으로 뿌려줄 html
         let reviewElement = `
                     <li class="review-item" id="review-${review.reviewNumber}">
-                        <div class="comment-body">
-                            <div class="comment-title">${parent_info.parentName}</div>
-                            <div class="comment-subtitle">${reviewDate}${editStr}</div>
-                            <p class="comment-text">${review.reviewContent}</p>
+                            <input type="hidden" name="reviewNumber"  />
+                            <textarea value="${review.reviewContent}" name="review-content" class="review-content" readonly></textarea>
+                            <div>
+                              <p>작성자 : <span>${review.parentName}</span></p>
+                              <p>작성일 : <span>${reviewDate}${editStr}</span></p>
+                            </div>
                             <!-- 수정, 삭제 버튼 -->
-                            ${buttons}
-                        </div>
+                            ${buttons}  
                     </li>
-                `
+                `;
         // 리뷰의 개수만큼 추가
         reviewListArea.append(reviewElement);
       })
@@ -196,8 +205,8 @@ function addReview(){
   })
 }
 
-// 댓글 삭제
-function deleteReview(classNumber){
+// 리뷰 삭제
+function deleteReview(reviewNumber){
 
   if(!confirm('정말로 삭제하시겠습니까?')){
     return;
@@ -205,7 +214,7 @@ function deleteReview(classNumber){
 
   $.ajax({
     method : 'delete',
-    url : '/comments/' + classNumber,
+    url : '/reviews/' + reviewNumber,
     success : function(data) {
       console.log(data, '삭제 성공');
       getReviews($('input[name="classNumber"]').val());
@@ -216,53 +225,21 @@ function deleteReview(classNumber){
   });
 }
 
-// 댓글 수정 폼 생성 함수
-function createEditForm(reviewNumber, currentReview){
-  return `
-        <div class="mb-3">
-            <textarea class="form-control comment-edit-content" rows="3">${currentContent}</textarea>
-        </div>
-        <button class="btn btn-primary" onClick="editComment(${commentId})">수정완료</button>
-        <button class="btn btn-secondary" onClick="cancelEdit()">취소</button>
-    `;
-}
+// 선택한 날짜, 시간 정보를 "결제하기" 버튼 클릭시 전달하기
+const reservation = document.querySelector('select[name="reservation-select"]').value;
+// 예약 날짜, 시간 문자열로 저장
+let reservationDate = reservation.substring(0, 10);
+let reservationTime = reservation.substring(11, 14);
 
-// 수정 삭제 버튼 중 수정을 눌렀을 때
-function updateComment(commentId) {
-  // 기존 댓글 내용을 가지고 와서, 수정 폼에 넣는다.
-  let comment = $(`#comment-${commentId}`);
-  let content = comment.find('.comment-text').text()
-  comment.find('.comment-body').html(createEditForm(commentId, content))
-}
+// 결제하기 버튼
+const paymentBtn = document.querySelector('.payment-btn');
+// 예약선택 폼
+const reservationForm = document.querySelector('#reservation-form');
 
-// 수정 완료 버튼 눌렀을 때
-function editComment(commentId){
-  let comment = $(`#comment-${commentId}`);
-  // textarea 는 속성이 두개 있다.
-  // 데이터를 뿌려줄 때는 text, 입력한 데이터를 가져올 때는 value.
-  let updateContent = comment.find('.comment-edit-content').val();
-
-  $.ajax({
-    method : 'put',
-    url : '/comments/' + commentId,
-    contentType: 'application/json',
-    data: JSON.stringify({
-      commentContent : updateContent
-    }),
-    success : function(data) {
-      console.log('수정 성공')
-      getComments($('input[name="boardId"]').val());
-    },
-    error : function(data) {
-      console.log('수정 삭제')
-    }
-  })
-}
-
-// 취소 버튼 눌렀을 때
-function cancelEdit(){
-  getComments($('input[name="boardId"]').val());
-}
-
-
+paymentBtn.addEventListener('click', e=>{
+  reservationForm.method = 'get';
+  // 주소에 값을 전달 ( 선택한 예약날짜, 시간 및 수업 pk )
+  reservationForm.action = '/paymentcheck/' + reservationDate + reservationTime;
+  reservationForm.submit();
+});
 

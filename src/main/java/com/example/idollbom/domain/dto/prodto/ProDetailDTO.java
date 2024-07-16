@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class ProDetailDTO {
 
-    private Long proNumber;
     private String proName;
-    private String proProfileImageUrl;
     private String proIntro;
+    private Long parentNumber;
+    private Long classNumber;
 
 }

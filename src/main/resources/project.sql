@@ -287,38 +287,8 @@ START WITH 1
 INCREMENT BY 1
 NOCACHE;
 
-select SEQ_PROJECT.nextval from dual;
-drop sequence SEQ_PROJECT;
-
-SELECT * FROM PARENT;
-SELECT * FROM CHILD;
-SELECT * FROM PRO;
-SELECT * FROM CLASS;
-SELECT * FROM REVIEW;
-
--- 더미 데이터 ( 부모 테이블 )
-INSERT INTO PARENT (PARENT_NUMBER, PARENT_EMAIL, PARENT_PASSWORD, PARENT_NAME, PARENT_NICKNAME, PARENT_PHONE_NUMBER, PARENT_ADDRESS, PARENT_PROFILE_IMAGE_URL, PARENT_REPORT_COUNT)
-VALUES (SEQ_PROJECT.nextval, 'park.eun@naver.com', 'pass9101', '박은지', '은지', '010-3456-7890', '대전광역시 서구 둔산동 789', NULL, 2);
-
-INSERT INTO PARENT (PARENT_NUMBER, PARENT_EMAIL, PARENT_PASSWORD, PARENT_NAME, PARENT_NICKNAME, PARENT_PHONE_NUMBER, PARENT_ADDRESS, PARENT_PROFILE_IMAGE_URL, PARENT_REPORT_COUNT)
-VALUES (SEQ_PROJECT.nextval, 'choi.hyun@naver.com', 'pass1122', '최현준', '현준이', '010-4567-8901', '인천광역시 남동구 구월동 101', 'http://example.com/images/choi.jpg', 0);
-
-INSERT INTO PARENT (PARENT_NUMBER, PARENT_EMAIL, PARENT_PASSWORD, PARENT_NAME, PARENT_NICKNAME, PARENT_PHONE_NUMBER, PARENT_ADDRESS, PARENT_PROFILE_IMAGE_URL, PARENT_REPORT_COUNT)
-VALUES (SEQ_PROJECT.nextval, 'jeong.hee@daum.net', 'pass3344', '정희수', '희수', '010-5678-9012', '경기도 성남시 분당구 정자동 202', NULL, 1);
-
-
--- 더미 데이터 ( 전문가 테이블 )
-INSERT INTO PRO (PRO_NUMBER, PRO_EMAIL, PRO_PASSWORD, PRO_NAME, PRO_NICKNAME, PRO_PHONE_NUMBER, PRO_ADDRESS, PRO_PROFILE_IMAGE_URL, PRO_FILE, PRO_INTRO)
-VALUES (SEQ_PROJECT.nextval, 'kim.kyungsoo@example.com', 'password1234', '김경수', '경수님', '010-1234-5678', '서울특별시 강남구 테헤란로 123', 'http://example.com/profile1.jpg', 'http://example.com/file1.pdf', '안녕하세요! 김경수입니다. 다양한 분야에서 전문가로 활동하고 있습니다.');
-
-INSERT INTO PRO (PRO_NUMBER, PRO_EMAIL, PRO_PASSWORD, PRO_NAME, PRO_NICKNAME, PRO_PHONE_NUMBER, PRO_ADDRESS, PRO_PROFILE_IMAGE_URL, PRO_FILE, PRO_INTRO)
-VALUES (SEQ_PROJECT.nextval, 'lee.jiwon@example.com', 'password5678', '이지원', '지원님', '010-2345-6789', '부산광역시 해운대구 우동 456', 'http://example.com/profile2.jpg', 'http://example.com/file2.pdf', '안녕하세요, 이지원입니다. 다양한 프로젝트에서 도움을 드리고 있습니다.');
-
-INSERT INTO PRO (PRO_NUMBER, PRO_EMAIL, PRO_PASSWORD, PRO_NAME, PRO_NICKNAME, PRO_PHONE_NUMBER, PRO_ADDRESS, PRO_PROFILE_IMAGE_URL, PRO_FILE, PRO_INTRO)
-VALUES (SEQ_PROJECT.nextval, 'choi.minho@example.com', 'password91011', '최민호', '민호님', '010-3456-7890', '인천광역시 남동구 구월동 789', 'http://example.com/profile3.jpg', 'http://example.com/file3.pdf', '안녕하세요. 최민호입니다. 문제 해결과 컨설팅을 전문으로 하고 있습니다.');
-
-INSERT INTO PRO (PRO_NUMBER, PRO_EMAIL, PRO_PASSWORD, PRO_NAME, PRO_NICKNAME, PRO_PHONE_NUMBER, PRO_ADDRESS, PRO_PROFILE_IMAGE_URL, PRO_FILE, PRO_INTRO)
-VALUES (SEQ_PROJECT.nextval, 'park.soojin@example.com', 'password121314', '박수진', '수진님', '010-4567-8901', '대전광역시 유성구 가정동 101', 'http://example.com/profile4.jpg', 'http://example.com/file4.pdf', '안녕하세요. 박수진입니다. 다양한 분야에서 경력을 쌓아왔습니다.');
+select SEQ_PROJECT.currval from dual; -- 현재 시퀀스 조회
+drop sequence SEQ_PROJECT; -- 시퀀스 삭제
 
 -- 더미 데이터 ( 수업 테이블 )
 INSERT INTO CLASS (CLASS_NUMBER, CLASS_NAME, CLASS_CATEGORY_BIG, CLASS_CATEGORY_SMALL, CLASS_CONTENT, CLASS_PAYMENT_ACCOUNT, CLASS_REGISTER_DATE, PRO_NUMBER)
@@ -382,117 +352,7 @@ VALUES (SEQ_PROJECT.nextval, '강사의 전문성이 돋보였으며, 수업이 
 INSERT INTO REVIEW (REVIEW_NUMBER, REVIEW_CONTENT, REVIEW_EVALUTION_POINT, REVIEW_REGISTER_DATE, REVIEW_UPDATE_DATE, PARENT_NUMBER, CLASS_NUMBER)
 VALUES (SEQ_PROJECT.nextval, '강의 내용이 좋았지만, 실습 시간이 부족했습니다. 추가적인 실습 시간이 필요합니다.', 3, SYSDATE, SYSDATE, 3, 17);
 
-
 -- 테스트 코드
--- classDetailMapper.xml 테스트
-SELECT CLASS.PRO_NUMBER,
-       CLASS.PRO_NAME,
-       CLASS.CLASS_NUMBER,
-       CLASS.CLASS_NAME,
-       CLASS.CLASS_CATEGORY_BIG,
-       CLASS.CLASS_CATEGORY_SMALL,
-       CLASS.CLASS_CONTENT,
-       CLASS.CLASS_PAYMENT_ACCOUNT,
-       TO_CHAR(CLASS.CLASS_REGISTER_DATE, 'YYYY-MM-DD / HH24') || '시' AS CLASS_REGISTER_DATE
-FROM (SELECT P.*,
-             C.CLASS_CATEGORY_BIG,
-             C.CLASS_CATEGORY_SMALL,
-             C.CLASS_CONTENT,
-             C.CLASS_NAME,
-             C.CLASS_NUMBER,
-             C.CLASS_PAYMENT_ACCOUNT,
-             C.CLASS_REGISTER_DATE
-      FROM PRO P JOIN CLASS C
-            ON P.PRO_NUMBER = C.PRO_NUMBER
-            AND C.PRO_NUMBER = 4
-      ) CLASS
-WHERE CLASS.CLASS_NUMBER = 20;
-
-SELECT
-    P.PARENT_NAME,
-    P.PARENT_NUMBER,
-    P.PARENT_EMAIL,
-    SAVE.CLASS_NAME,
-    SAVE.CLASS_CONTENT,
-    SAVE.CLASS_CATEGORY_BIG,
-    SAVE.CLASS_CATEGORY_SMALL
-FROM (
-         SELECT *
-         FROM (
-                  SELECT
-                      P.*,
-                      C.CLASS_NUMBER,
-                      C.CLASS_NAME,
-                      C.CLASS_CATEGORY_BIG,
-                      C.CLASS_CATEGORY_SMALL,
-                      C.CLASS_CONTENT,
-                      C.CLASS_PAYMENT_ACCOUNT,
-                      C.CLASS_REGISTER_DATE
-                  FROM PRO P JOIN CLASS C
-                    ON P.PRO_NUMBER = 4
-                    AND P.PRO_NUMBER = C.PRO_NUMBER
-              ) CLASS JOIN CLASS_SAVE S
-                    ON CLASS.CLASS_NUMBER = S.CLASS_NUMBER
-     ) SAVE JOIN PARENT P
-         ON SAVE.PARENT_NUMBER = P.PARENT_NUMBER
-WHERE SAVE.PARENT_NUMBER = P.PARENT_NUMBER;
-
-SELECT
-    P.PARENT_NAME,
-    P.PARENT_NUMBER,
-    P.PARENT_EMAIL,
-    SAVE.CLASS_NAME,
-    SAVE.CLASS_CONTENT,
-    SAVE.CLASS_CATEGORY_BIG,
-    SAVE.CLASS_CATEGORY_SMALL
-FROM (
-         SELECT *
-         FROM (
-                  SELECT
-                      P.*,
-                      C.CLASS_NUMBER,
-                      C.CLASS_NAME,
-                      C.CLASS_CATEGORY_BIG,
-                      C.CLASS_CATEGORY_SMALL,
-                      C.CLASS_CONTENT,
-                      C.CLASS_PAYMENT_ACCOUNT,
-                      C.CLASS_REGISTER_DATE
-                  FROM PRO P JOIN CLASS C
-                                  ON P.PRO_NUMBER = #{proNumber}
-                            AND P.PRO_NUMBER = C.PRO_NUMBER
-              ) CLASS JOIN CLASS_SAVE S
-                           ON CLASS.CLASS_NUMBER = S.CLASS_NUMBER
-     ) SAVE JOIN PARENT P
-                 ON SAVE.PARENT_NUMBER = P.PARENT_NUMBER
-                     AND SAVE.PARENT_NUMBER = P.PARENT_NUMBER
-
-SELECT
-       CLASS.CL,
-       CLASS.CLASS_NAME,
-       CLASS.PRO_NUMBER,
-       CLASS.REVIEW_NUMBER,
-       CLASS.REVIEW_CONTENT
-FROM (
-         SELECT
-             C.CLASS_NUMBER AS CL,
-             C.*,
-             R.REVIEW_NUMBER,
-             R.REVIEW_CONTENT,
-             R.REVIEW_EVALUTION_POINT,
-             R.REVIEW_REGISTER_DATE,
-             R.REVIEW_UPDATE_DATE
-         FROM class c JOIN review r
-            ON c.CLASS_NUMBER = r.CLASS_NUMBER
-            AND c.CLASS_NUMBER = 25
-         ORDER BY r.REVIEW_UPDATE_DATE desc
-     ) CLASS JOIN PRO P
-          ON CLASS.PRO_NUMBER = P.PRO_NUMBER
-          AND CLASS.PRO_NUMBER = 15;
-
-SELECT * FROM CLASS;
-SELECT * FROM PRO;
-SELECT * FROM REVIEW;
-SELECT * FROM PARENT;
 
 -- 특정 전문가가 진행하는 특정 수업에 대한 모든 리뷰조회
 SELECT R.REVIEW_NUMBER,
@@ -519,28 +379,6 @@ SELECT R.REVIEW_NUMBER,
 SELECT * FROM REVIEW;
 SELECT * FROM PRO;
 SELECT * FROM CLASS;
-
-SELECT
-    R.REVIEW_NUMBER,
-    R.REVIEW_CONTENT,
-    R.REVIEW_EVALUTION_POINT,
-    R.REVIEW_REGISTER_DATE,
-    R.REVIEW_UPDATE_DATE,
-    R.PARENT_NUMBER,
-    R.CLASS_NUMBER
-FROM (
-         SELECT
-             P.PRO_NAME,
-             C.CLASS_NUMBER,
-             C.CLASS_CATEGORY_BIG,
-             C.CLASS_CATEGORY_SMALL,
-             C.CLASS_CONTENT
-         FROM PRO P JOIN CLASS C
-                    ON P.PRO_NUMBER = C.PRO_NUMBER
-                    AND P.PRO_NUMBER = 4
-                    AND C.CLASS_NUMBER = 8
-     ) DETAIL JOIN REVIEW R
-     ON DETAIL.CLASS_NUMBER = R.CLASS_NUMBER;
 
 -- 수업 등록에서 추가할 때, 등록된 예약 날짜 및 시간을 들고와서, 수업 상세보기 페이지에서 뿌려줘야 한다.
 SELECT
@@ -585,86 +423,43 @@ FROM RESERVATION_DATE D JOIN RESERVATION_TIME T
 WHERE RESERVATION_DATE = TO_DATE('2024-05-24')
 AND RESERVATION_TIME = TO_DATE('2024-05-24 10:00:00', 'YY-MM-DD HH24:MI:SS');
 
--- 사용자로부터 받아올 데이터 : PRO_NUMBER, RESERVATION_DATE_NUMBER, RESERVATION_DATE, RESERVATION_TIME
--- 화면에 뿌려줄 데이터(수업 상세보기) :
-SELECT *
-FROM (
-        SELECT
-            I.IMAGE_FILE_URL,
-            I.IMAGE_NUMBER,
-            CLASS.PRO_NUMBER,
-            CLASS.PRO_NAME,
-            CLASS.CLASS_NUMBER,
-            CLASS.CLASS_NAME,
-            CLASS.CLASS_CATEGORY_BIG,
-            CLASS.CLASS_CATEGORY_SMALL,
-            CLASS.CLASS_CONTENT,
-            CLASS.CLASS_PAYMENT_ACCOUNT,
-            TO_CHAR(CLASS.CLASS_REGISTER_DATE, 'YYYY-MM-DD / HH24') || '시'  AS CLASS_REGISTER_DATE
-        FROM
-            (
-                SELECT
-                    P.*,
-                    C.CLASS_CATEGORY_BIG,
-                    C.CLASS_CATEGORY_SMALL,
-                    C.CLASS_CONTENT,
-                    C.CLASS_NAME,
-                    C.CLASS_NUMBER,
-                    C.CLASS_PAYMENT_ACCOUNT,
-                    C.CLASS_REGISTER_DATE
-                FROM PRO P JOIN CLASS C
-                    ON P.PRO_NUMBER = C.PRO_NUMBER
-                    AND C.PRO_NUMBER = 4
-            ) CLASS JOIN IMG I
-             ON CLASS.CLASS_NUMBER = I.CLASS_NUMBER
-    ) CL JOIN
-    (
-        SELECT *
-        FROM(
-                SELECT
-                    D.RESERVATION_DATE_NUMBER,
-                    D.CLASS_NUMBER,
-                    D.RESERVATION_DATE,
-                    T.RESERVATION_TIME
-                FROM RESERVATION_DATE D JOIN RESERVATION_TIME T
-                     ON D.RESERVATION_DATE_NUMBER = T.RESERVATION_DATE_NUMBER
-                     AND D.RESERVATION_DATE_NUMBER = 56
-            )
-        WHERE RESERVATION_DATE = TO_DATE('2024-05-24')
-        AND RESERVATION_TIME = TO_DATE('2024-05-24 10:00:00', 'YY-MM-DD HH24:MI:SS')
-    ) RE
-    ON CL.CLASS_NUMBER = RE.CLASS_NUMBER;
-
--- 56번
+-- 56번 (2024-05-24) / 175번 (2024-06-15)
 insert into RESERVATION_DATE (RESERVATION_DATE_NUMBER, RESERVATION_DATE, CLASS_NUMBER)
-values (SEQ_PROJECT.nextval, TO_DATE('2024-05-24'), 8);
+values (SEQ_PROJECT.nextval, TO_DATE('2024-06-15'), 8);
 
--- 68번
+-- 68번 ( 2024-05-24 ) , 196번 (2024-07-10 )
 insert into RESERVATION_DATE (RESERVATION_DATE_NUMBER, RESERVATION_DATE, CLASS_NUMBER)
-values (SEQ_PROJECT.nextval, TO_DATE('2024-05-24'), 9);
+values (SEQ_PROJECT.nextval, TO_DATE('2024-07-10'), 9);
 
--- 91번
+-- 91번 ( 2024-05-24) , 195번 ( 2024-07-10 )
 insert into RESERVATION_DATE (RESERVATION_DATE_NUMBER, RESERVATION_DATE, CLASS_NUMBER)
-values (SEQ_PROJECT.nextval, TO_DATE('2024-05-24'), 10);
+values (SEQ_PROJECT.nextval, TO_DATE('2024-07-10'), 10);
 
--- 102번
+-- 102번 (2024-07-10), 211번 (2024-05-24)
 insert into RESERVATION_DATE (RESERVATION_DATE_NUMBER, RESERVATION_DATE, CLASS_NUMBER)
-values (SEQ_PROJECT.nextval, TO_DATE('2024-07-10'), 11);
+values (SEQ_PROJECT.nextval, TO_DATE('2024-05-24'), 11);
 
--- 113번
+-- 113번 (2024-07-10), 222번 (2024-05-24)
 insert into RESERVATION_DATE (RESERVATION_DATE_NUMBER, RESERVATION_DATE, CLASS_NUMBER)
-values (SEQ_PROJECT.nextval, TO_DATE('2024-07-10'), 12);
+values (SEQ_PROJECT.nextval, TO_DATE('2024-05-24'), 12);
 
--- 124번
+-- 124번 (2024-07-10), 229번 (2024-05-24)
 insert into RESERVATION_DATE (RESERVATION_DATE_NUMBER, RESERVATION_DATE, CLASS_NUMBER)
-values (SEQ_PROJECT.nextval, TO_DATE('2024-07-10'), 13);
+values (SEQ_PROJECT.nextval, TO_DATE('2024-05-24'), 13);
 
-DELETE FROM RESERVATION_TIME;
+SELECT * FROM RESERVATION_DATE;
+SELECT * FROM RESERVATION_TIME;
+
+DELETE FROM RESERVATION_TIME
+WHERE RESERVATION_TIME_NUMBER = 244;
+SELECT * FROM RESERVATION_TIME
+WHERE RESERVATION_DATE_NUMBER = 68;
+
 
 -- 11번 수업에 대해서만 예약 시간(09 ~ 18시) 추가 ( 2024-07-10 )
 -- 8, 9번 수업에 대한 예약 날짜, 시간 추가 ( 56, 68번 - 2024-05-24 )
 INSERT INTO RESERVATION_TIME (RESERVATION_TIME_NUMBER, RESERVATION_TIME, RESERVATION_DATE_NUMBER)
-VALUES (SEQ_PROJECT.nextval, TO_DATE('2024-05-24 12:00:00', 'YY-MM-DD HH24:MI:SS'), 56);
+VALUES (1, TO_DATE('2024-07-10 14:00:00', 'YY-MM-DD HH24:MI:SS'), 124);
 
 -- 날짜에서 시간 데이터만 DATE타입으로 저장하는 방법
 -- TO_DATE(TO_CHAR(TO_DATE('2024-07-10 18:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'HH24:MI:SS'), 'HH24:MI:SS')
@@ -674,21 +469,87 @@ SELECT * FROM RESERVATION_DATE;
 SELECT * FROM RESERVATION_TIME;
 SELECT * FROM PRO;
 SELECT * FROM IMG;
+SELECT * FROM REVIEW;
 
+-- 이미지 더미 데이터 추가
 insert into IMG (IMAGE_NUMBER, IMAGE_FILE_URL, CLASS_NUMBER)
-values (SEQ_PROJECT.nextval, 'content-img1.jpg', 11);
+values (SEQ_PROJECT.nextval, 'content-img4.jpg', 13);
 
+SELECT * FROM CLASS;
+SELECT * FROM IMG;
 
+-- 이미지가 등록된 전문가의 특정 수업을 조회
+SELECT
+    I.IMAGE_FILE_URL,
+    I.IMAGE_NUMBER,
+    CLASS.PRO_NUMBER,
+    CLASS.PRO_NAME,
+    CLASS.CLASS_NUMBER,
+    CLASS.CLASS_NAME,
+    CLASS.CLASS_CATEGORY_BIG,
+    CLASS.CLASS_CATEGORY_SMALL,
+    CLASS.CLASS_CONTENT,
+    CLASS.CLASS_PAYMENT_ACCOUNT,
+    TO_CHAR(CLASS.CLASS_REGISTER_DATE, 'YYYY-MM-DD / HH24') || '시'  AS CLASS_REGISTER_DATE
+FROM
+    (
+        SELECT
+            P.*,
+            C.CLASS_CATEGORY_BIG,
+            C.CLASS_CATEGORY_SMALL,
+            C.CLASS_CONTENT,
+            C.CLASS_NAME,
+            C.CLASS_NUMBER,
+            C.CLASS_PAYMENT_ACCOUNT,
+            C.CLASS_REGISTER_DATE
+        FROM PRO P JOIN CLASS C
+                        ON P.PRO_NUMBER = C.PRO_NUMBER
+                            AND C.PRO_NUMBER = 4
+    ) CLASS JOIN IMG I
+     ON CLASS.CLASS_NUMBER = I.CLASS_NUMBER;
+--     AND CLASS.CLASS_NUMBER = 8;
 
+SELECT * FROM RESERVATION_DATE;
 
+-- 특정 수업에 대한 특정 예약날짜 정보와 모든 예약시간 정보 조회
+SELECT *
+FROM(
+        SELECT
+            D.RESERVATION_DATE_NUMBER,
+            D.CLASS_NUMBER,
+            D.RESERVATION_DATE,
+            T.RESERVATION_TIME
+        FROM RESERVATION_DATE D JOIN RESERVATION_TIME T
+                                     ON D.RESERVATION_DATE_NUMBER = T.RESERVATION_DATE_NUMBER
+    )
+WHERE CLASS_NUMBER = 10;
 
+SELECT P.PARENT_NAME,
+       R.*
+FROM REVIEW R JOIN PARENT P
+                   ON R.PARENT_NUMBER = P.PARENT_NUMBER
+WHERE R.CLASS_NUMBER = 10;
 
+SELECT * FROM RESERVATION_DATE;
 
+SELECT
+    TO_CHAR(RESERVATION_TIME, 'HH24') AS HOUR
+FROM
+    RESERVATION_TIME
+WHERE TO_CHAR(RESERVATION_TIME, 'HH24') > 8 AND TO_CHAR(RESERVATION_TIME, 'HH24') < 20
+ORDER BY HOUR;
 
-
-
-
-
+SELECT *
+FROM(
+        SELECT
+            D.RESERVATION_DATE_NUMBER,
+            D.CLASS_NUMBER,
+            D.RESERVATION_DATE,
+            TO_CHAR(T.RESERVATION_TIME, 'HH24') AS RESERVATION_TIME
+        FROM RESERVATION_DATE D JOIN RESERVATION_TIME T
+        ON D.RESERVATION_DATE_NUMBER = T.RESERVATION_DATE_NUMBER
+    )
+WHERE CLASS_NUMBER = 10;
 
 
 

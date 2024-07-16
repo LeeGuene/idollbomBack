@@ -2,6 +2,7 @@ package com.example.idollbom.controller.pro;
 
 import com.example.idollbom.domain.dto.parentdto.ReviewAllListDTO;
 import com.example.idollbom.domain.dto.prodto.ProDetailDTO;
+import com.example.idollbom.domain.dto.prodto.ProReviewListDTO;
 import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.service.applyservice.ClassReviewService;
 import com.example.idollbom.service.proService.ChildFindService;
@@ -34,13 +35,11 @@ public class ProController {
                          @RequestParam("parent_info") ParentVO parent_info,
                          Model model) {
 
-        // 특정 전문가 프로필 상세보기
+        // 특정 전문가 프로필 상세보기 조회
         ProDetailDTO pro_info = proDetailService.findProDetailByNumber(proNumber);
 
-        // 특정 전문가에 대한 전체 리뷰 조회
-        List<ReviewAllListDTO> reviews = classReviewService.findAllReviewList(proNumber);
-
-        reviews.stream().map(ReviewAllListDTO::toString).forEach(log::info);
+        // 특정 전문가의 전체 리뷰 조회
+        List<ProReviewListDTO> reviews = proDetailService.findAllReviewList(proNumber);
 
         model.addAttribute("pro_info", pro_info);
         model.addAttribute("reviews", reviews);
