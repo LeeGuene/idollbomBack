@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.idollbom.mapper.boardmapper.CommunityMapper">
+
+    <!--  게시글 목록 가져오기  -->
+    <select id="selectAll" resultType="CommunityListDTO">
+        SELECT
+            p.PARENT_POST_TITLE,
+            p.PARENT_NUMBER,
+            p1.PARENT_NICKNAME
+        FROM parent_post p
+                JOIN PARENT P1
+                ON p.PARENT_NUMBER = p1.PARENT_NUMBER
+    </select>
+    <!--  총 게시글의 갯수  -->
+    <select id="countCommunity">
+        select count(*)
+        from parent_post
+    </select>
+
+    <!--  다음 시퀀스를 가져오는 쿼리문  -->
+    <!--  community insert 시 사용할 예정  -->
+    <select id="getSeq" resultType="int">
+        select SEQ_PROJECT.nextval from dual
+    </select>
+
+    <!-- 게시글 작성 쿼리문 -->
+    <insert id="saveCommunity">
+        insert into parent_post
+        values(#{parent_post_number}, #{parent_post_title}, #{parent_post_content}, 0, sysdate, sysdate, #{parent_number})
+    </insert>
+
+    <!--  게시글 상세보기  -->
+    <select id="selectCommunityDetail" resultType="CommunityDetailDTO">
+        SELECT
+            P.PARENT_POST_NUMBER,
+            P.PARENT_POST_TITLE,
+            P.PARENT_POST_CONTENT,
+            U.PARENT_NAME,
+            P.PARENT_POST_VIEWS,
+            P.PARENT_POST_REGISTER_DATE,
+            (SELECT COUNT(*) FROM PARENT_FILE PF WHERE PF.PARENT_POST_NUMBER = P.PARENT_POST_NUMBER) AS FILE_COUNT
+        FROM
+            PARENT_POST P JOIN PARENT U ON U.PARENT_NAME = P.PARENT_NAME
+        where p.PARENT_NAME = #{parentName}
+    </select>
+
+    <!--  조회 수 +1  -->
+    <update id="plusView">
+        update parent_post
+        set parent_post_views = parent_post_views + 1
+        where parent_post_number = #{parentpostNumber}
+    </update>
+
+    <!--  게시글 수정하기  -->
+    <update id="updateCommunity">
+        update parent_post
+        set PARENT_POST_TITLE = #{parentPostTitle},
+            PARENT_POST_CONTENT = #{parentPostContent},
+            PARENT_POST_UPDATE_DATE = sysdate
+        where parent_post_number = #{parentPostNumber}
+    </update>
+
+    <!--  게시글 삭제하기  -->
+    <delete id="deleteCommunity">
+        delete from parent_post
+        where parent_post_number = #{parentPostNumber}
+    </delete>
+
+
+
+
+
+    <!--  검색과 정렬을 페이지 이동 없이 하는 쿼리문들  -->
+    <!--  게시글 제목 순  -->
+    <select id="selectAllByDateASC" resultType="CommunityListDTO">
+        SELECT *
+        FROM (
+                 SELECT ROWNUM AS RN, POST.*
+                 FROM (
+                          SELECT
+                              P.PARENT_POST_NUMBER,
+                              P.PARENT_POST_TITLE,
+                              U.PARENT_NAME,
+                              P.PARENT_POST_VIEWS,
+                              P.PARENT_POST_REGISTER_DATE,
+                              P.PARENT_POST_UPDATE_DATE,
+                              U.PARENT_NUMBER,
+                              (SELECT COUNT(*) FROM PARENT_FILE PF WHERE PF.PARENT_POST_NUMBER = P.PARENT_POST_NUMBER) AS FILE_COUNT
+                          FROM
+                              PARENT_POST P JOIN PARENT U
+                                                 ON
+                                                     U.PARENT_NUMBER = P.PARENT_NUMBER
+                          ORDER BY
+                              P.PARENT_POST_TITLE ASC
+                      ) POST
+                 WHERE ROWNUM &lt;= #{endRow}
+             )
+        WHERE rn &gt; #{startRow}
+    </select>
+
+    <!--  게시글 내용 순  -->
+    <select id="selectAllByViews" resultType="CommunityListDTO">
+        SELECT *
+        FROM (
+                 SELECT ROWNUM AS RN, POST.*
+                 FROM (
+                          SELECT
+                              P.PARENT_POST_NUMBER,
+                              P.PARENT_POST_TITLE,
+                              U.PARENT_NAME,
+                              P.PARENT_POST_VIEWS,
+                              P.PARENT_POST_REGISTER_DATE,
+                              P.PARENT_POST_UPDATE_DATE,
+                              U.PARENT_NUMBER,
+                              (SELECT COUNT(*) FROM PARENT_FILE PF WHERE PF.PARENT_POST_NUMBER = P.PARENT_POST_NUMBER) AS FILE_COUNT
+                          FROM
+                              PARENT_POST P JOIN PARENT U
+                                                 ON
+                                                     U.PARENT_NUMBER = P.PARENT_NUMBER
+                          ORDER BY
+                              P.PARENT_POST_CONTENT ASC
+                      ) POST
+                 WHERE ROWNUM &lt;= #{endRow}
+             )
+        WHERE rn &gt; #{startRow}
+    </select>
+
+    <!-- 동적 쿼리 -->
+    <select id="selectD" resultType="CommunityListDTO">
+        SELECT *
+        FROM (
+        SELECT ROWNUM AS RN, POST.*
+        FROM (
+        SELECT
+        P.PARENT_POST_NUMBER,
+        P.PARENT_POST_TITLE,
+        U.PARENT_NAME,
+        P.PARENT_POST_VIEWS,
+        P.PARENT_POST_REGISTER_DATE,
+        P.PARENT_POST_UPDATE_DATE,
+        U.PARENT_NUMBER,
+        (SELECT COUNT(*) FROM PARENT_FILE PF WHERE PF.PARENT_POST_NUMBER = P.PARENT_POST_NUMBER) AS FILE_COUNT
+        FROM
+        PARENT_POST P JOIN PARENT U
+        ON
+        U.PARENT_NUMBER = P.PARENT_NUMBER
+        <where>
+            <if test="search != null">
+                <choose>
+                    <when test="searchType == 'title'">P.PARENT_POST_TITLE LIKE '%' || #{search} || '%'</when>
+                    <when test="searchType == 'content'">P.PARENT_POST_CONTENT LIKE '%' || #{search} || '%'</when>
+                </choose>
+            </if>
+        </where>
+        ORDER BY
+        <choose>
+            <when test="sort == 'views'">P.PARENT_POST_VIEWS DESC</when>
+            <when test="sort == 'oldest'">P.PARENT_POST_UPDATE_DATE ASC</when>
+            <otherwise>P.PARENT_POST_UPDATE_DATE DESC</otherwise>
+        </choose>
+        ) BOARD
+        WHERE ROWNUM &lt;= #{endRow}
+        )
+        WHERE rn &gt; #{startRow}
+    </select>
+
+    <!--  총 게시글의 갯수 검색어까지 포함. -->
+    <select id="countDCommunity">
+        select count(*)
+        from parent_post
+        <where>
+            <if test="search != null">
+                <choose>
+                    <when test="searchType == 'title'">PARENT_POST_TITLE LIKE '%' || #{search} || '%'</when>
+                    <when test="searchType == 'content'">PARENT_POST_CONTENT LIKE '%' || #{search} || '%'</when>
+                </choose>
+            </if>
+        </where>
+    </select>
+
+</mapper>
