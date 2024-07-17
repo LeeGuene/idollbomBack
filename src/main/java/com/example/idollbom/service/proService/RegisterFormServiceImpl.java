@@ -25,6 +25,7 @@ public class RegisterFormServiceImpl implements RegisterFormService {
     @Override
     @Transactional
     public void registerClass(ClassDTO classDTO, ReservationDateDTO reservationDateDTO, ReservationTimeDTO resTimeDTO, MultipartFile imageFileUrl) {
+        System.out.println(classDTO);
         registerFormMapper.classInsert(classDTO);
         // 이미지 테이블에 들어가야하는 코드 필요
         // 날짜 테이블 삽입
@@ -32,11 +33,13 @@ public class RegisterFormServiceImpl implements RegisterFormService {
         Long classNumber = registerFormMapper.currentSeq();
         saveFile(classNumber, imageFileUrl);
         reservationDateDTO.setClassNumber(classNumber);
+        System.out.println(reservationDateDTO);
         registerFormMapper.classDateInsert(reservationDateDTO);
 
         // 현재 reservationNumber를 받아옴
         Long reservationNumber = registerFormMapper.currentSeq();
         resTimeDTO.setReservationDateNumber(reservationNumber);
+        System.out.println(resTimeDTO);
         registerFormMapper.classTimeInsert(resTimeDTO);
     }
 
@@ -48,8 +51,8 @@ public class RegisterFormServiceImpl implements RegisterFormService {
         System.out.println(imgUrl);
 
         try {
-            // 파일 저장 경로 설정
-            Path directoryPath = Paths.get("C:/uploads/");
+            // 수업 썸네일 저장 경로
+            Path directoryPath = Paths.get("src/main/resources/static/backImage/class/");
             if (!Files.exists(directoryPath)) {
                 Files.createDirectories(directoryPath); // 폴더가 없으면 생성
             }

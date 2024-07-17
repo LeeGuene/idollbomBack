@@ -11,8 +11,7 @@
     <!-- 현재 33은 proNumber자리 -->
     <insert id="classInsert">
         insert into class
-        values (seq_project.NEXTVAL, #{className}, #{classCategoryBig}, #{classCategorySmall}, #{classContent},
-                #{classPaymentAccount}, 33, sysdate)
+        values (seq_project.NEXTVAL, #{className}, #{classCategoryBig}, #{classCategorySmall}, #{classContent}, #{classPaymentAccount}, 33, sysdate, #{classIntro})
     </insert>
 
     <!-- 수업 날짜 insert -->
