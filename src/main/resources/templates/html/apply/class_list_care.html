@@ -68,7 +68,7 @@
                     <tr th:each="classList : ${classLists}" th:object="${classList}">
                         <input type="hidden" th:value="*{proNumber}">
                         <input type="hidden" th:value="*{classNumber}">
-                        <td><img th:src="*{proProfileImageUrl}"></td>
+                        <td><img th:src="@{/images/{filename}(filename=${classList.proProfileImageUrl})}"></td>
                         <td>
                             <div>
                                 <p th:text="*{proName}"></p>
@@ -76,7 +76,7 @@
                                 <p th:text="'('+ *{reviewCount} +')'"></p>
                             </div>
                             <p th:text="*{className}"></p>
-                            <p th:text="*{classContent}"></p>
+                            <p th:utext="*{classContent}"></p>
                             <p th:text="*{proAddress}"></p>
                             <p th:text="*{classRegisterDate}"></p>
                         </td>
@@ -93,13 +93,23 @@
 
             <!-- 페이징 처리 부분 -->
             <div class="class_list_btn">
-                <button><img th:src="@{images/pro_button_pre.png}"></button>
-                <ul>
-                    <li><button>1</button></li>
-                    <li><button>2</button></li>
-                    <li><button>3</button></li>
+                <ul class="pagination">
+                    <li th:classappend="${startPage == 1} ? 'disabled' : ''" class="page-item">
+                        <a class="page-link" th:href="@{/class/classcare(category=${category}, pageNo=${startPage - 1}, pageSize=${pageSize})}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <li th:each="i : ${#numbers.sequence(startPage, endPage)}" th:classappend="${currentPage == i} ? 'active' : ''" class="page-item">
+                        <a th:href="@{/class/classcare(category=${category},pageNo=${i}, pageSize=${pageSize})}" class="page-link" th:text="${i}"></a>
+                    </li>
+
+                    <li th:classappend="${endPage == totalPages} ? 'disabled' : ''" class="page-item">
+                        <a class="page-link" th:href="@{/class/classcare(category=${category},pageNo=${endPage + 1}, pageSize=${pageSize})}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
                 </ul>
-                <button><img th:src="@{/images/pro_button_next.png}"></button>
             </div>
         </div>
     </div>
@@ -107,52 +117,5 @@
 </body>
 <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
 <script th:src="@{/js/motion.js}"></script>
-<script>
-    // 버튼 클릭 시 css 적용 바꾸기
-    // 부모요소에서 가져오는 class
-    // 페이지 로딩 후 실행될 함수
-    document.addEventListener("DOMContentLoaded", function() {
-        // 각 링크 요소에 클릭 이벤트 리스너 추가
-        document.getElementById("one").addEventListener("click", function() {
-            // 다른 링크들의 폰트 색상 초기화
-            resetFontColors();
-            // 클릭된 링크의 폰트 색상 변경
-            this.style.color = "#048D3B";
-            // 추가적으로 필요한 동작을 여기에 작성할 수 있습니다.
-        });
-
-        document.getElementById("two").addEventListener("click", function() {
-            resetFontColors();
-            this.style.color = "#048D3B";
-        });
-
-        document.getElementById("three").addEventListener("click", function() {
-            resetFontColors();
-            this.style.color = "#048D3B";
-        });
-
-        document.getElementById("four").addEventListener("click", function() {
-            resetFontColors();
-            this.style.color = "#048D3B";
-        });
-
-        document.getElementById("five").addEventListener("click", function() {
-            resetFontColors();
-            this.style.color = "#048D3B";
-        });
-
-        // 폰트 색상을 초기화하는 함수
-        function resetFontColors() {
-            var links = document.querySelectorAll(".category a");
-            links.forEach(function(link) {
-                link.style.color = ""; // 기본 값으로 설정
-            });
-        }
-    });
-
-    // 검색하기를 눌렀을 때 일어나는 이벤트
-    function submitForm() {
-        document.getElementById("searchForm").submit();
-    }
-</script>
+<script th:src="@{js/classList.js}"></script>
 </html>

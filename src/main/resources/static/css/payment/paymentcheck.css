@@ -65,6 +65,7 @@ button{cursor: pointer; background: none; border: 0;}
 .class-image-section {
     flex: 1.5; /* 공간을 최대한 활용 */
     margin-right: 10px;
+    margin-bottom: 25px;
 }
 
 .image-label {

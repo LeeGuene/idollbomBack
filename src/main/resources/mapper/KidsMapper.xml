@@ -2,11 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.idollbom.mapper.myPagemapper.parentmapper.KidsMapper">
-    <!-- 아이추가 -->
+    <!--  아이추가 -->
     <select id="insertKids">
         insert into child
         values (seq_project.NEXTVAL,#{childName},#{childAge},#{childGender},#{childSpecialIssues},#{parentNumber})
     </select>
+
 
     <!--  아이List 보기-->
     <select id="selectKidsList">

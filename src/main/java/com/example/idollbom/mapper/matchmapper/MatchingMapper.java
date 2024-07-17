@@ -9,8 +9,8 @@ import java.util.List;
 @Mapper
 public interface MatchingMapper {
     // 매칭 정보를 가져오는 select
-    List<MatchingDTO> matchClass(@Param("category") String category,
-                                 @Param("data") String data,
-                                 @Param("dateTime") String dateTime,
-                                 @Param("time") String time);
+    List<MatchingDTO> matchClass(String category,
+                                 String categoryData,
+                                 String selectedDate,
+                                 String selectedTime);
 }
