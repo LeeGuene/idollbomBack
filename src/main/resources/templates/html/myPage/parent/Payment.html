@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="/css/myPage/parent/mypage_payment.css">
     <link rel="stylesheet" href="/css/layout/header.css">
     <link rel="stylesheet" href="/css/layout/footer.css">
+    <link rel="stylesheet" href="/css/modal/modalstyle.css" />
+    <link rel="stylesheet" href="/css/modal/review.css" />
+    <script src="/js/review.js"></script>
     <title>iDollbom_마이페이지</title>
 </head>
 
@@ -75,6 +78,7 @@
                                     <th>수업 제목</th>
                                     <th>예약 날짜</th>
                                     <th>결제 금액</th>
+                                    <th>리뷰 작성</th>
                                 </tr>
                             </thead>
                             <tbody th:if="${not #lists.isEmpty(Mypayment)}">
@@ -83,16 +87,66 @@
                                     <td th:text="${payment.className}"></td>
                                     <td th:text="${#dates.format(payment.reservationDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                     <td th:text="${payment.classPaymentAccount}"></td>
+                                    <td><button type="button"
+                                                th:if="${payment.reviewCompleted == 0}"
+                                                th:data-class-number="${payment.classNumber}"
+                                                th:data-class-name="${payment.className}"
+                                                th:data-pro-name="${payment.proName}"
+                                                onclick="openModal(this)">리뷰작성
+                                        </button>
+                                        <button th:if="${payment.reviewCompleted != 0}">이미 작성되었습니다</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+
+                    <form th:action="@{/ParentMyPage/writeReview}" method="post" th:object="${review}" class="modal">
+                             <input type="hidden" th:field="*{classNumber}" id="classNumber" name="classNumber">
+                             <div class="modal-body profile-body">
+                                <div class="header">
+                                    <img class="img" src="/images/logo.png" alt="로고">
+                                    <h3 id="title">수업 후기 작성</h3>
+                                    <button id="close-btn"><img class="x-btn" src="/images/closebtn.png" alt="닫기버튼"></button>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="modalClassName" class="form-label">수업명</label>
+                                    <input id="modalClassName" type="text" class="form-control" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="proName" class="form-label">강사명</label>
+                                    <input id="proName" type="text" class="form-control" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="childInstruct" class="form-label">수업 후기</label>
+                                    <textarea  th:field="*{reviewContent}" id="childInstruct" class="form-control" placeholder="수업 후기를 작성해주세요." rows="6" name="reviewContent"></textarea>
+                                </div>
+                                <!-- 별점은 어려울 거 같으면 셀렉트 박스로 하기 -->
+                                <div class="mb-3">
+                                    <label for="childInstruct" class="form-label">별점</label>
+                                    <div class="evaluation-wrap">
+                                        <div>
+                                            <span class="star">☆</span>
+                                            <span class="star">☆</span>
+                                            <span class="star">☆</span>
+                                            <span class="star">☆</span>
+                                            <span class="star">☆</span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="rating" th:field="*{reviewEvaluationPoint}" name="reviewEvaluationPoint" >
+                                </div>
+                                <div class="modal-btn">
+                                    <!-- 추가하기를 누르면 새로운 페이지로 이동 -->
+                                    <button class="close-btn btn">취소하기</button>
+                                    <button class="add-btn btn" type="submit">작성하기</button>
+                                </div>
+                            </div>
+                      </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
 <div id="footer" th:replace="~{/layout/footer :: footer}"></div>
 </body>
-
+<script th:src="@{/js/review.js}"></script>
 </html>

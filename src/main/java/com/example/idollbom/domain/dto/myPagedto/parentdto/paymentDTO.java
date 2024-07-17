@@ -6,7 +6,12 @@ import java.util.Date;
 
 @Data
 public class paymentDTO {
+    private Long classNumber;
     private String className;
     private Date reservationDate;
     private Long classPaymentAccount;
+    private String proName;
+    private Long proNumber;
+    private Long reviewCompleted;
+
 }

@@ -4,6 +4,7 @@ import com.example.idollbom.domain.dto.myPagedto.parentdto.classSaveDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.mailDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.paymentDTO;
+import com.example.idollbom.domain.dto.parentdto.ReviewDTO;
 import com.example.idollbom.domain.vo.*;
 import com.example.idollbom.service.myPageservice.parentservice.*;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +35,8 @@ public class ParentMypageController {
     private final parentInfoService parentInfoService;
     private final classSaveService classSaveService;
     private final paymentService paymentService;
-
+    private final reservationService reservationService;
+    private final reservationDateService reservationDateService;
 //  kid 페이지로 이동
     @GetMapping("/kids")
     public String getKids(Model model){
@@ -161,7 +163,22 @@ public class ParentMypageController {
     @GetMapping("/myPayment")
     public String selectMyPayment(Model model){
         List<paymentDTO> payment = paymentService.paymentList();
+        model.addAttribute("review", new ReviewDTO());
         model.addAttribute("Mypayment",  payment);
+        log.info("Review object: " + model.getAttribute("Mypayment"));
         return "html/myPage/parent/Payment";
     }
+
+//  리뷰쓰기
+    @PostMapping("/writeReview")
+    public String insertReview(@ModelAttribute ReviewDTO reviewDTO){
+        System.out.println("Received ReviewDTO: " + reviewDTO);
+        reviewService.insertReview(reviewDTO);
+
+        ReservationDateVO reservationDate = reservationDateService.selectReservationDate(reviewDTO.getClassNumber());
+        log.info(reservationDate.getReservationDateNumber().toString());
+        reservationService.reviewUpdate(reservationDate.getReservationDateNumber());
+        return "redirect:/ParentMyPage/myPayment";
+    }
+
 }

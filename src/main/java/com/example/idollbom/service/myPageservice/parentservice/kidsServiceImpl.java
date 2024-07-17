@@ -21,16 +21,18 @@ public class kidsServiceImpl implements kidsService {
 
     private final KidsMapper kidsMapper;
     private final ParentMapper parentMapper;
+
+//    아이등록
     @Override
     public void insertKids(kidDTO kidDTO) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String currentUserName = userDetails.getUsername();
 
-//        유저id
-        String username = ((UserDetails) principal).getUsername();
+//      parent VO 찾아서 아이디 찾기
+        ParentVO parent = parentMapper.selectOne(currentUserName);
 
-
-        ParentVO userNumber = parentMapper.selectOne(username);
-        kidDTO.setParentNumber(userNumber.getParentNumber());
+        kidDTO.setParentNumber(parent.getParentNumber());
 
         kidsMapper.insertKids(kidVO.toEntity(kidDTO));
     }

@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <!-- 리뷰목록 -->
-                <div th:if="${not #lists.isEmpty(ReviewList)}"></div>
+                <div th:if="${not #lists.isEmpty(ReviewList)}">
                     <div class="mainbox" th:each="review:${ReviewList}" >
                         <a href="#">
                             <div class="mypost">
@@ -82,11 +82,10 @@
                                          class="star" alt="Star">
                                 </div>
                             </div>
-
-                            <p>작성한 리뷰가 아직 없습니다.</p>
-
                         </a>
                     </div>
+                </div>
+                <p th:if="${#lists.isEmpty(ReviewList)}">작성한 리뷰가 아직 없습니다.</p>
                 </div>
             </div>
         </div>

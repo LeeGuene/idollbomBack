@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.idollbom.mapper.myPagemapper.parentmapper.ReservationMapper">
+<!--    리뷰작성 완료 표시 -->
+    <update id="insertReview">
+        update reservation
+        set reservation_completed = 1
+        where parent_number = #{parentNumber}
+        and reservation_date_number = #{reservationDateNumber}
+    </update>
+
+</mapper>
