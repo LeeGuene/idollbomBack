@@ -11,7 +11,7 @@ const today = new Date()
 date.value = new Date().toISOString().substring(0,10)
 
 selectbox.addEventListener('change', () => {
-    const category = selectbox.options[selectbox.selectedIndex].value             
+    const category = selectbox.options[selectbox.selectedIndex].value
 
     if(category === '돌봄'){
        dollbom.style.display="flex";
@@ -124,7 +124,7 @@ function autoSubmit() {
                         <p>${randomMatch.classRegisterDate}</p>
                     </div>
                     <!-- 근님이 수정해줘야하는 부분  -->
-                    <p><a href="/child/studyDetail.html?classNumber=${randomMatch.classNumber}">수업 상세보기</a></p>
+                    <p><a href="../../templates/html/parent/studyDetail.html">수업 상세보기</a></p>
                 </div>
             `
                     randomProContainer.append(html);

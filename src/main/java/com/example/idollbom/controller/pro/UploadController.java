@@ -1,4 +1,4 @@
-package com.example.idollbom.controller;
+package com.example.idollbom.controller.pro;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

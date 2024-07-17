@@ -1,4 +1,4 @@
-package com.example.idollbom.controller;
+package com.example.idollbom.controller.pro;
 
 import com.example.idollbom.domain.dto.prodto.ClassDTO;
 import com.example.idollbom.domain.dto.prodto.ClassImgDTO;

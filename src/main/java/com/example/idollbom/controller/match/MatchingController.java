@@ -22,7 +22,7 @@ public class MatchingController {
     private final MatchingService matchingService;
 
     // 자동매칭 들어가는 첫 화면
-    @GetMapping()
+    @GetMapping
     public String match() {
         return "/html/match/matching";
     }

@@ -15,4 +15,5 @@ public class ReviewOneListDTO {
     private LocalDate reviewUpdateDate;
     private Long parentNumber;
     private Long classNumber;
+
 }

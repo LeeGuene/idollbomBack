@@ -82,16 +82,16 @@
                         </td>
                         <td>
                             <!-- 찜하기 버튼 -->
-                            <button><img th:src="@{/images/class_list_pick_n.png}"></button>
+                            <button id="save-btn"><img th:src="@{/images/class_list_pick_n.png}"></button>
                             <!--자세기 보기를 누르면 수업 상세 페이지로 이동-->
                             <!-- 이근 수정 부분 -->
-                            <p><a th:href="@{/class//detail(classNumber=*{classNumber}, proNumber=*{proNumber})}">자세히 보기</a></p>
+                            <p><a th:href="@{/class/detail(classNumber=*{classNumber}, proNumber=*{proNumber})}">자세히 보기</a></p>
                         </td>
                     </tr>
                 </tbody>
             </table>
 
-            <!-- 페이징 처리 부분 -->
+            <<!-- 페이징 처리 부분 -->
             <div class="class_list_btn">
                 <ul class="pagination">
                     <li th:classappend="${startPage == 1} ? 'disabled' : ''" class="page-item">

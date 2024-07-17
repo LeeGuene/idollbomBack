@@ -147,6 +147,7 @@ public class ParentMypageController {
                                       @RequestParam(value= "parentNumber") Long parentNumber){
 
         classSaveService.saveClass(classNumber, parentNumber);
+
         return "html/myPage/parent/myFavoriteClass";
     }
 
