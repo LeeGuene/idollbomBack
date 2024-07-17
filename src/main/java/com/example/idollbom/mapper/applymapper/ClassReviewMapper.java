@@ -17,12 +17,4 @@ public interface ClassReviewMapper {
     // 특정 전문가의 모든 수업에 대한 리뷰를 조회
     List<ReviewAllListDTO> selectAllReview(Long proNumber);
 
-    // 특정 수업에 대한 모든 리뷰 조회 (비동기 통신)
-    List<ReviewDTO> selectReviews(Long classNumber);
-
-    // 특정 수업에 대한 리뷰 추가
-    void insertReviews(reviewVO review);
-    
-    // 특정 수업에 대한 리뷰 삭제
-    void deleteReviews(Long reviewNumber);
 }

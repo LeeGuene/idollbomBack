@@ -48,53 +48,5 @@
                ON DETAIL.CLASS_NUMBER = R.CLASS_NUMBER
     </select>
 
-    <!-- 특정 수업에 대한 모든 리뷰 조회 ( 비동기 통신 ) -->
-    <select id="selectReviews" resultType="ReviewDTO">
-        SELECT P.PARENT_NAME,
-               R.*
-            FROM REVIEW R JOIN PARENT P
-            ON R.PARENT_NUMBER = P.PARENT_NUMBER
-        WHERE R.CLASS_NUMBER = #{classNumber}
-    </select>
-
-    <!-- 특정 수업에 대한 리뷰 추가 -->
-    <insert id="insertReviews">
-        insert into REVIEW (REVIEW_NUMBER, REVIEW_CONTENT, REVIEW_EVALUTION_POINT, REVIEW_REGISTER_DATE, REVIEW_UPDATE_DATE,
-                            PARENT_NUMBER, CLASS_NUMBER)
-        values (SEQ_PROJECT.nextval, #{reviewContent}, #{reviewEvaluationPoint}, sysdate, sysdate, #{parentNumber}, #{classNumber})
-    </insert>
-
-    <!-- 특정 수업에 대한 리뷰 삭제 -->
-    <delete id="deleteReviews">
-        delete from REVIEW
-        where REVIEW_NUMBER = #{classNumber}
-    </delete>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </mapper>
+

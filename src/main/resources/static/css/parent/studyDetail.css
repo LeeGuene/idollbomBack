@@ -53,7 +53,7 @@ html{
 
 /* 가람님 코드에서 덮어쓰기 한 부분 */
 #header{
-  margin-top: -10px;
+  /*margin-top: -10px;*/
 }
 
 #main-wrapper{
@@ -232,10 +232,6 @@ html{
   bottom: 50px;
   z-index: 0;
 
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-
   overflow-y: scroll;
   width: 40%;
   padding: 100px 30px;
@@ -248,33 +244,37 @@ html{
   display: none;
 }
 
-.detail-right-area:hover > .study-title-wrap > p,
-.detail-right-area:hover > .payAmount-wrap,
-.detail-right-area:hover > .study-date-wrap,
-.detail-right-area:hover > .study-content-wrap,
-.detail-right-area:hover > .pro-profile-wrap > p{
+.detail-right-area:hover .study-title-wrap > p,
+.detail-right-area:hover .payAmount-wrap,
+.detail-right-area:hover .study-date-wrap,
+.detail-right-area:hover .study-content-wrap,
+.detail-right-area:hover .pro-profile-wrap > p{
   border-bottom: 2px solid #00B455
 }
 
 .detail-right-area:hover{
   border: 2px solid #00B455;
+}
 
+.detail-right-area > form:nth-child(1) {
+  margin-bottom: 100px;
 }
 
 /* 강사명 및 프로필 보기 버튼  */
 .pro-profile-wrap{
   display: flex;
+  margin-bottom: 30px;
 }
 
 .pro-profile-wrap > h1{
   font-weight: bold;
   font-size: 16px;
-  width: 25%;
+  width: 20%;
 }
 
 .pro-profile-wrap > p{
   border-bottom: 2px solid #ddd;
-  width: 50%;
+  width: 60%;
   font-size: 16px;
 }
 
@@ -282,7 +282,7 @@ html{
 .pro-profile-wrap > a{
   text-align: center;
   width: 20%;
-  font-size: 15px;
+  font-size: 16px;
   padding: 5px 10px;
   margin-left: 30px;
   border-radius: 10px;
@@ -305,13 +305,14 @@ html{
 .study-title-wrap > h1{
   font-weight: bold;
   font-size: 16px;
-  width: 140px;
+  width: 20%;
 }
 
 .study-title-wrap > p{
   border-bottom: 2px solid #ddd;
   width: 80%;
   font-size: 16px;
+  padding-bottom: 20px;
 }
 
 /* 수업 내용 css */
@@ -326,7 +327,7 @@ html{
 .study-content-wrap > h1{
   font-weight: bold;
   font-size: 16px;
-  width: 140px;
+  width: 20%;
 }
 
 .study-content-wrap > p{
@@ -346,11 +347,23 @@ html{
 .study-date-wrap > h1{
   font-size: 16px;
   font-weight: bold;
+  width: 200px;
 }
 
-.study-date-wrap > span{
-  font-size: 15px;
+.study-date-wrap > select {
+  width: 300px;
+  overflow: hidden;
 }
+
+.study-date-wrap > select > option{
+  height: 0;
+}
+
+.study-date-wrap > select > option > input {
+  display: none;
+  height: 0;
+}
+
 
 /* 결제 금액 css */
 .payAmount-wrap{
@@ -391,10 +404,10 @@ html{
   column-gap: 50px;
 }
 
-.payment-button-wrap > div:nth-child(1) > a{
+.payment-button-wrap > div:nth-child(1) > a,
+.payment-button-wrap > div:nth-child(1) > button{
   padding: 10px 20px;
   width: 50%;
-  background-color: red;
   color: #fff;
   border-radius: 10px;
   transition: 0.3s;
@@ -402,22 +415,22 @@ html{
   text-align: center;
 }
 
-
-.payment-button-wrap > div:nth-child(1) > a:nth-child(1){
+.payment-button-wrap > div:nth-child(1) > button{
   background-color: #189050df;
 }
 
-.payment-button-wrap > div:nth-child(1) > a:nth-child(1):hover{
+.payment-button-wrap > div:nth-child(1) > button:hover{
   background-color: #00B455;
 }
 
-.payment-button-wrap > div:nth-child(1) > a:nth-child(2){
+.payment-button-wrap > div:nth-child(1) > a{
   background-color: #f93271c5;
 }
 
-.payment-button-wrap > div:nth-child(1) > a:nth-child(2):hover{
+.payment-button-wrap > div:nth-child(1) > a:hover{
   background-color: #fd1760;
 }
+
 
 /* 수업 리뷰 작성 폼 css */
 #review-write-area{
@@ -482,18 +495,13 @@ html{
 
 /* 리뷰 리스트 영역 css */
 .review-list-wrap{
-  width: 90%;
-  margin-top: 50px;
-}
-
-/* 리뷰 리스트 layout css */
-.board-form > .review-list-wrap{
-  flex-direction: column;
   width: 100%;
+  margin-top: 50px;
+  flex-direction: column;
 }
 
 /* 리뷰 리스트 제목 css */
-.board-form > .review-list-wrap > h1{
+.review-list-wrap > h1{
   font-size: 24px;
   width: 100%;
   border-bottom: 2px solid #ccc;

@@ -69,177 +69,51 @@ moreBtn.addEventListener('click', ()=>{
 
 // =========================================================
 
-// 날짜 포맷
-function formatDate(dateString) {
-  const now = new Date();
-  const reviewDate = new Date(dateString); // 문자열을 Date 객체로 변환
+// paymentcheck.html 로 넘어갈 때, 예약 날짜 pk 넘기기
+window.onload = function(){
+    const reservationArea = document.querySelector('#reservation-select');
+    const reservationForm = document.querySelector('.detail-right-area > form:nth-child(1)');
+    const paymentBtn = document.querySelector('.payment-btn');
+    // 수업 날짜 리스트 (select 안에 option 채우기 전)
+    let reservationList;
 
-  const nowYear = now.getFullYear();
-  const nowMonth = now.getMonth();
-  const nowDate = now.getDate();
+    let selectedReservation; // 선택된 예약정보 (select태그)
+    const classNumber = document.querySelector('input[name="classNumber"]').value;
+    let reservationDateNumber; // 예약 날짜 pk
 
-  const reviewYear = reviewDate.getFullYear();
-  const reviewMonth = reviewDate.getMonth();
-  const reviewDateDate = reviewDate.getDate();
+  // 수업 날짜 리스트 ( option 태그 채우기 )
+    reservationList = document.querySelectorAll('.study-date-wrap option');
+    // 모든 option을 select태그 하위 태그로 추가
+    reservationList.forEach(reservation=>{
+      reservationArea.appendChild(reservation);
+    });
 
-  let displayText = "";
+    // 선택한 예약정보에서 예약날짜 pk만 저장
+    reservationArea.addEventListener("change", ()=>{
+      selectedReservation = reservationArea.options[reservationArea.selectedIndex];
+      reservationDateNumber = selectedReservation.querySelector('#reservationDateNumber').value;
+    });
 
-  // 년, 월, 일이 모두 같은 경우 "오늘"로 표시
-  // if (nowYear === commentYear && nowMonth === commentMonth && nowDate === commentDateDate) {
-  //     displayText = "오늘";
-  // } else {
-  // 그 외의 경우, 정해진 포맷으로 표시
-  const yy = reviewYear.toString().slice(-2); // 마지막 두 자리를 가지고 옴.
-  const M = reviewMonth + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
-  const d = reviewDateDate;
-  const HH = reviewDate.getHours().toString().padStart(2, '0');
-  const mm = reviewDate.getMinutes().toString().padStart(2, '0'); // 두자리 수 일 때 앞에 0을 붙임.
+    // 결제하기 버튼 클릭시, 서버로 요청
+    paymentBtn.addEventListener("click", ()=>{
+      reservationForm.method = 'get';
+      reservationForm.action = '/paymentcheck/' + reservationDateNumber + '/' + classNumber;
+      reservationForm.submit();
+    });
 
-  displayText = `${yy}년 ${M}월 ${d}일 ${HH}시 ${mm}분`;
-  // }
-  return displayText;
-}
+};
 
-// 부모 pk (parentNumber)
-const loginId = $('input[name="loginId"]').val();
 
-// 페이지 로딩 시 실행되는 함수
-$(document).ready(function () {
-  const classNumber = $('input[name="classNumber"]').val();
-  getReviews(classNumber);
-});
 
-// 특정 수업에 대한 전체 리뷰 조회
-function getReviews(classNumber) {
-  $.ajax({
-    method : 'get',
-    url : '/reviews/' + classNumber,
-    success : function(reviews) {
-      console.log("쿼리문 실행 결과 : " + reviews);
-      let reviewListArea = $('.review-list')
-      // 리뷰가 작성될 해당 섹션 비우기.
-      reviewListArea.empty();
 
-      // 리뷰가 없을 때 표시할 html
-      if(reviews.length === 0){
-        reviewListArea.append(
-            `<div>첫번째 리뷰를 남겨주세요!</div>`
-        );
-      }
 
-      // 리뷰가 있을 때 목록을 뿌려줄 반복문.
-      reviews.forEach(function(review) {
-        let reviewDate = formatDate(review.reviewRegisterDate);
-        let buttons = '';
-        let editStr = '';
 
-        // 작성일과 수정일을 비교해서 html 에 다른 모양으로 표시.
-        if(review.reviewUpdateDate !== review.reviewRegisterDate){
-          reviewDate = formatDate(review.reviewUpdateDate);
-          editStr = ' (수정)';
-        }
 
-        // 현재 로그인된 계정과 리뷰 작성자가 동일하다면 만들어줄 버튼
-        // 내가 작성한 댓글만 수정가능하도록 한다.
-        if(loginId === review.parentNumber){
-          buttons = `
-                        <div>
-                            <button onclick="updateReview(${review.reviewNumber})">수정</button>
-                            <button onclick="deleteReview(${review.reviewNumber})">삭제</button>
-                        </div>
-                    `
-        }
 
-        // 종합적으로 뿌려줄 html
-        let reviewElement = `
-                    <li class="review-item" id="review-${review.reviewNumber}">
-                            <input type="hidden" name="reviewNumber"  />
-                            <textarea value="${review.reviewContent}" name="review-content" class="review-content" readonly></textarea>
-                            <div>
-                              <p>작성자 : <span>${review.parentName}</span></p>
-                              <p>작성일 : <span>${reviewDate}${editStr}</span></p>
-                            </div>
-                            <!-- 수정, 삭제 버튼 -->
-                            ${buttons}  
-                    </li>
-                `;
-        // 리뷰의 개수만큼 추가
-        reviewListArea.append(reviewElement);
-      })
-    },
-    error : function(reviews) {
-      console.error(reviews, "불러오기 실패");
-    }
-  })
-}
 
-// 리뷰 추가
-function addReview(){
-  let classNumber = $('input[name="classNumber"]').val();
-  let reviewContent = $('#review-write').val();
-  let reviewEvaluationPoint = $('select[name="review-evaluation"]').val();
 
-  // textarea 비어 있으면 경고
-  if(!reviewContent){
-    alert('내용을 입력하세요!');
-    return;
-  }
 
-  $.ajax({
-    method : 'post',
-    url: '/reviews',
-    contentType: 'application/json',
-    data: JSON.stringify({
-      classNumber: classNumber,
-      reviewContent: reviewContent,
-      reviewEvaluationPoint : reviewEvaluationPoint,
-      parentNumber : loginId
-    }),
-    success : function(reviews) {
-      $('#review-write').val(''); // 리뷰 추가되면, textarea 값 초기화
-      getReviews(classNumber);
-    },
-    error : function(reviews) {
-      console.error(reviews);
-    }
-  })
-}
 
-// 리뷰 삭제
-function deleteReview(reviewNumber){
 
-  if(!confirm('정말로 삭제하시겠습니까?')){
-    return;
-  }
 
-  $.ajax({
-    method : 'delete',
-    url : '/reviews/' + reviewNumber,
-    success : function(data) {
-      console.log(data, '삭제 성공');
-      getReviews($('input[name="classNumber"]').val());
-    },
-    error : function(data) {
-      console.error(data, '삭제 실패');
-    }
-  });
-}
-
-// 선택한 날짜, 시간 정보를 "결제하기" 버튼 클릭시 전달하기
-const reservation = document.querySelector('select[name="reservation-select"]').value;
-// 예약 날짜, 시간 문자열로 저장
-let reservationDate = reservation.substring(0, 10);
-let reservationTime = reservation.substring(11, 14);
-
-// 결제하기 버튼
-const paymentBtn = document.querySelector('.payment-btn');
-// 예약선택 폼
-const reservationForm = document.querySelector('#reservation-form');
-
-paymentBtn.addEventListener('click', e=>{
-  reservationForm.method = 'get';
-  // 주소에 값을 전달 ( 선택한 예약날짜, 시간 및 수업 pk )
-  reservationForm.action = '/paymentcheck/' + reservationDate + reservationTime;
-  reservationForm.submit();
-});
 

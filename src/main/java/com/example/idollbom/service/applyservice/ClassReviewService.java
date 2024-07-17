@@ -14,16 +14,8 @@ public interface ClassReviewService {
     // 특정 전문가의 특정 수업의 모든 리뷰를 조회하는 서비스
     List<ReviewOneListDTO> findOneReviewList(Long proNumber, Long classNumber);
 
-    // 특정 전문가에 대한 모든 수업에 대한 리뷰를 조회하는 서비스
+    // 특정 전문가의 모든 수업에 대한 리뷰를 조회하는 서비스
     List<ReviewAllListDTO> findAllReviewList(Long proNumber);
-
-    // 특정 수업에 대한 모든 리뷰 조회 (비동기 통신)
-    List<ReviewDTO> findReviews(Long classNumber);
-
-    // 특정 수업에 대한 리뷰 추가
-    void saveReviews(ReviewDTO review);
-
-    // 특정 수업에 대한 리뷰 삭제
-    void deleteReviews(Long classNumber);
+    
 }
 

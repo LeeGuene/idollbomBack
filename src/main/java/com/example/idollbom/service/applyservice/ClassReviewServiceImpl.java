@@ -28,22 +28,4 @@ public class ClassReviewServiceImpl implements ClassReviewService {
         return classReviewMapper.selectAllReview(proNumber);
     }
 
-    // 특정 수업에 대한 모든 리뷰 조회 (비동기 통신)
-    @Override
-    public List<ReviewDTO> findReviews(Long classNumber) {
-        return classReviewMapper.selectReviews(classNumber);
-    }
-
-    // 특정 수업에 대한 리뷰 추가
-    @Override
-    public void saveReviews(ReviewDTO review) {
-        classReviewMapper.insertReviews(reviewVO.toEntity(review));
-    }
-
-    // 특정 수업에 대한 리뷰 삭제
-    @Override
-    public void deleteReviews(Long classNumber) {
-        classReviewMapper.deleteReviews(classNumber);
-    }
-
 }

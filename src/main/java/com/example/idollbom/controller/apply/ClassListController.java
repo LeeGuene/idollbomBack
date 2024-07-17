@@ -13,6 +13,9 @@ import com.example.idollbom.service.applyservice.ClassListService;
 import com.example.idollbom.service.applyservice.ClassReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -201,19 +204,29 @@ public class ClassListController {
     @GetMapping("/detail")
     public String detail(@RequestParam("classNumber") Long classNumber,
                          @RequestParam("proNumber") Long proNumber,
-                         @RequestParam("parentEmail") String parentEmail,
                          Model model) {
-    
+
+        // 부모 정보를 받아오는 코드
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String currentUserName = userDetails.getUsername();
+        
         // 특정 수업에 대한 상세정보
         ClassDetailDTO class_info = classDetailService.findClassDetail(proNumber, classNumber);
+
+        // 특정 수업에 대한 모든 리뷰 조회
+        List<ReviewOneListDTO> reviews = classReviewService.findOneReviewList(proNumber, classNumber);
+
+        reviews.stream().map(ReviewOneListDTO::toString).forEach(log::info);
 
         // 특정 수업에 대한 모든 예약날짜 및 시간정보
         List<ReservationInfoDTO> reservation_infos = classDetailService.findReservation(classNumber);
 
-        ParentVO parent_info = parentMapper.selectOne(parentEmail); // 수업 상세보기로 넘어갈 때부터 parentNumber 를 넘기기 위한 조치
+        ParentVO parent_info = parentMapper.selectOne(currentUserName); // 수업 상세보기로 넘어갈 때부터 parentNumber 를 넘기기 위한 조치
 
         model.addAttribute("class_info", class_info);
         model.addAttribute("reservation_infos", reservation_infos);
+        model.addAttribute("reviews", reviews);
         model.addAttribute("parent_info", parent_info);
 
         return "/html/parent/studyDetail";
