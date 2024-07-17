@@ -13,4 +13,5 @@ public class ClassDTO {
     private Long classPaymentAccount;
     private Long proNumber;
     private LocalDateTime classRegisterDate;
+    private String classIntro;
 }
