@@ -20,6 +20,7 @@
             PRO_NAME,
             CLASS_NUMBER,
             CLASS_NAME,
+            CLASS_INTRO,
             CLASS_CONTENT,
             CLASS_CATEGORY_SMALL,
             PRO_ADDRESS,
@@ -32,6 +33,7 @@
                 p.PRO_NAME,
                 c.CLASS_NUMBER,
                 c.CLASS_NAME,
+                c.CLASS_INTRO,
                 c.CLASS_CONTENT,
                 c.CLASS_CATEGORY_SMALL,
                 p.PRO_ADDRESS,
@@ -47,6 +49,7 @@
                 p.PRO_NAME,
                 c.CLASS_NUMBER,
                 c.CLASS_NAME,
+                c.CLASS_INTRO,
                 c.CLASS_CONTENT,
                 c.CLASS_CATEGORY_SMALL,
                 p.PRO_ADDRESS,
@@ -55,7 +58,7 @@
             WHERE rownum &lt;= #{endRow}
         )
         WHERE rnum &gt; #{startRow}
-        ORDER BY CLASS_REGISTER_DATE
+        ORDER BY CLASS_REGISTER_DATE desc
     </select>
 
     <!-- 검색 기능을 구현하는 select -->
@@ -68,6 +71,7 @@
             PRO_NAME,
             CLASS_NUMBER,
             CLASS_NAME,
+            CLASS_INTRO,
             CLASS_CONTENT,
             CLASS_CATEGORY_SMALL,
             PRO_ADDRESS,
@@ -79,6 +83,7 @@
                 p.PRO_NAME,
                 c.CLASS_NUMBER,
                 c.CLASS_NAME,
+                c.CLASS_INTRO,
                 c.CLASS_CONTENT,
                 c.CLASS_CATEGORY_SMALL,
                 p.PRO_ADDRESS,
@@ -103,7 +108,7 @@
                 WHERE rownum &lt;= #{endRow}
                 )
             WHERE rnum &gt; #{startRow}
-            ORDER BY CLASS_REGISTER_DATE
+            ORDER BY CLASS_REGISTER_DATE desc
     </select>
 
     <!-- 검색결과에 따른 갯수를 가져오는 select -->
