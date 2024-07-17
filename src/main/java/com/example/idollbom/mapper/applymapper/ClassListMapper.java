@@ -1,6 +1,7 @@
 package com.example.idollbom.mapper.applymapper;
 
 import com.example.idollbom.domain.dto.applydto.ClassListDTO;
+import com.example.idollbom.domain.vo.classVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +28,5 @@ public interface ClassListMapper {
     int countClasses(@Param("category") String category,
                      @Param("searchType") String searchType,
                      @Param("searchWord") String searchWord);
+
 }

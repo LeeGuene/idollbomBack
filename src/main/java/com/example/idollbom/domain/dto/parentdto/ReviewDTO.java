@@ -9,6 +9,7 @@ import java.util.Date;
 @Data
 public class ReviewDTO {
 
+    private String parentName;
     private Long reviewNumber;
     private String reviewContent;
     private Long reviewEvaluationPoint;

@@ -3,9 +3,12 @@
 
 <mapper namespace="com.example.idollbom.mapper.applymapper.ClassDetailMapper">
     <!-- 수업 상세보기 조회 -->
-    <select id="selectClassByProNumber">
+    <!-- 이미지가 등록된 특정 전문가의 특정 수업을 조회 -->
+    <select id="selectClassDetail" resultType="ClassDetailDTO">
         SELECT
---             CLASS.PRO_NUMBER,
+            I.IMAGE_FILE_URL,
+            I.IMAGE_NUMBER,
+            CLASS.PRO_NUMBER,
             CLASS.PRO_NAME,
             CLASS.CLASS_NUMBER,
             CLASS.CLASS_NAME,
@@ -16,12 +19,35 @@
             TO_CHAR(CLASS.CLASS_REGISTER_DATE, 'YYYY-MM-DD / HH24') || '시'  AS CLASS_REGISTER_DATE
         FROM
             (
-                SELECT *
+                SELECT
+                    P.*,
+                    C.CLASS_CATEGORY_BIG,
+                    C.CLASS_CATEGORY_SMALL,
+                    C.CLASS_CONTENT,
+                    C.CLASS_NAME,
+                    C.CLASS_NUMBER,
+                    C.CLASS_PAYMENT_ACCOUNT,
+                    C.CLASS_REGISTER_DATE
                 FROM PRO P JOIN CLASS C
                     ON P.PRO_NUMBER = C.PRO_NUMBER
                     AND C.PRO_NUMBER = #{proNumber}
-            ) CLASS
-        WHERE CLASS.CLASS_NUMBER = #{classNumber}
+            ) CLASS JOIN IMG I
+                 ON CLASS.CLASS_NUMBER = I.CLASS_NUMBER
+                 AND CLASS.CLASS_NUMBER = #{classNumber}
     </select>
 
+    <!-- 특정 수업에 대한 특정 예약날짜 정보와 모든 예약시간 정보 조회 -->
+    <select id="selectReservation" resultType="ReservationInfoDTO">
+        SELECT *
+        FROM(
+                SELECT
+                    D.RESERVATION_DATE_NUMBER,
+                    D.CLASS_NUMBER,
+                    D.RESERVATION_DATE,
+                    TO_CHAR(T.RESERVATION_TIME, 'HH24') AS RESERVATION_TIME
+                FROM RESERVATION_DATE D JOIN RESERVATION_TIME T
+                    ON D.RESERVATION_DATE_NUMBER = T.RESERVATION_DATE_NUMBER
+            )
+        WHERE CLASS_NUMBER = #{classNumber}
+    </select>
 </mapper>

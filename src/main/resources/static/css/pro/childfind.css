@@ -45,7 +45,9 @@ button {
 
 /* 아이찾기 화면 */
 #container {
-    padding-top: 100px;
+    padding-top: 130px;
+    padding-bottom: 50px;
+    background-color: rgba(0,0,0,0.01);
 }
 
 .findchild-container {
@@ -54,22 +56,40 @@ button {
 
 .findchild-text {
     font-size: 25px;
-    color: blue;
+    color: #11e072;
     text-align: center;
     font-family: 'GmarketSansBold';
 }
 
 /* 아이찾기 메인 화면 기능 */
 table {
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
     border-collapse: collapse;
+    background-color: #fff;
+    transition: 0.3s;
+}
+
+table:hover {
+    box-shadow: 2px 2px 5px 5px rgba(0,0,0,0.1);
 }
 
 table th, table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
-    /* 텍스트 가운데 정렬 */
+}
+
+table tr{
+    transition: 0.3s;
+}
+
+table tr:nth-child(even){
+    background-color: rgba(0,0,0,0.03);
+}
+
+table tr:hover{
+    box-shadow: 2px 2px 5px 5px rgba(0,0,0,0.1);
 }
 
 table th {
@@ -79,7 +99,7 @@ table th {
 /* 페이지 박스부분 css */
 .pagination {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 50px;
     margin-bottom: 30px;
 }
 
@@ -103,7 +123,22 @@ table th {
 }
 
 /* 메일 이미지 css */
-td > button > img {
-    width: 30px;
-    height: 21px;
+td > button{
+    padding: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+td > button > i {
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    transition: 0.3s;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+td i:hover{
+    color: #0dac58;
 }

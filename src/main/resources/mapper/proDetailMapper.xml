@@ -5,8 +5,25 @@
 
     <!-- 전문가 프로필 상세보기  -->
     <select id="selectProDetail" resultType="ProDetailDTO">
-        select * from PRO
+        select * from pro
         where PRO_NUMBER = #{proNumber}
     </select>
 
+    <!-- 전문가의 모든 리뷰 조회 -->
+    <select id="selectAllReviewList" resultType="ProReviewListDTO">
+        SELECT
+            R.REVIEW_NUMBER,
+            R.REVIEW_CONTENT,
+            R.REVIEW_REGISTER_DATE,
+            R.REVIEW_UPDATE_DATE,
+            R.PARENT_NUMBER,
+            R.CLASS_NUMBER
+        FROM (
+                 SELECT *
+                 FROM PRO P JOIN CLASS C
+                    ON P.PRO_NUMBER = C.PRO_NUMBER
+                    AND P.PRO_NUMBER = #{proNumber}
+             ) DETAIL JOIN REVIEW R
+                ON DETAIL.CLASS_NUMBER = R.CLASS_NUMBER;
+    </select>
 </mapper>
