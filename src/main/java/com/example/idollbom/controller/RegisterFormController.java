@@ -1,6 +1,7 @@
 package com.example.idollbom.controller;
 
 import com.example.idollbom.domain.dto.prodto.ClassDTO;
+import com.example.idollbom.domain.dto.prodto.ClassImgDTO;
 import com.example.idollbom.domain.dto.prodto.ReservationDateDTO;
 import com.example.idollbom.domain.dto.prodto.ReservationTimeDTO;
 import com.example.idollbom.domain.vo.classVO;
@@ -11,6 +12,7 @@ import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -38,6 +40,7 @@ public class RegisterFormController {
                                          @RequestParam("education") String education,
                                          @RequestParam("sport") String sport,
                                          @RequestParam("entertainment") String entertainment,
+                                         @RequestParam("imageFileUrl") MultipartFile imageFileUrl,
                                          ReservationDateDTO reservationDateDTO,
                                          @RequestParam("resDate") String resDate,
                                          ReservationTimeDTO reservationTimeDTO,
@@ -71,7 +74,7 @@ public class RegisterFormController {
         LocalDateTime dateTime = LocalDateTime.of(localDate, localTime);
         reservationTimeDTO.setReservationTime(dateTime);
 
-        registerFormService.registerClass(classDTO, reservationDateDTO, reservationTimeDTO);
+        registerFormService.registerClass(classDTO, reservationDateDTO, reservationTimeDTO, imageFileUrl);
 
         // 이건 어디로 가야 좋을지..
         return "redirect:/pro/register";

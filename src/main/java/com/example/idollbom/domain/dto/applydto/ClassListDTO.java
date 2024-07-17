@@ -11,6 +11,7 @@ public class ClassListDTO {
     private String proAddress;
     private Long classNumber;
     private String className;
+    private String classIntro;
     private String classCategorySmall;
     private String classContent;
     private String classRegisterDate;
