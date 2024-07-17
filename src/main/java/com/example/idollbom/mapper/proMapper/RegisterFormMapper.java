@@ -1,6 +1,7 @@
 package com.example.idollbom.mapper.proMapper;
 
 import com.example.idollbom.domain.dto.prodto.ClassDTO;
+import com.example.idollbom.domain.dto.prodto.ClassImgDTO;
 import com.example.idollbom.domain.dto.prodto.ReservationDateDTO;
 import com.example.idollbom.domain.dto.prodto.ReservationTimeDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,4 +21,5 @@ public interface RegisterFormMapper {
     void classTimeInsert(ReservationTimeDTO resTimeDTO);
 
     // 수업 이미지 insert
+    void imageInsert(ClassImgDTO classImgDTO);
 }
