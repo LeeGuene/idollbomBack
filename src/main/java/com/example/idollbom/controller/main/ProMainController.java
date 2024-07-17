@@ -6,16 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/parentmain")
+@RequestMapping("/proMain")
 @Slf4j
-public class ParentMainController {
+public class ProMainController {
 
-    //   부모 메인페이지로 이동
     @GetMapping
-    public String parentmain(){
-        return "/html/main/index_parents.html";
-
+    public String proMain() {
+        return "/html/main/index_pro.html";
     }
-
 
 }

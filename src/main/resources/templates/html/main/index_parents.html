@@ -6,24 +6,24 @@
     <link rel="stylesheet" th:href="@{/css/main/index_parents.css}">
     <link rel="stylesheet" th:href="@{/css/layout/header.css}">
     <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
-    <title>IDOLL봄</title>
+    <title>부모 메인</title>
 </head>
 
 <!-- 헤더 -->
 <header id="header">
     <div class="header_wrap">
-        <h1><a th:href="@{/main/index_parents.html}"><img th:src="@{/images/logo.png}" alt="IDOLL봄"></a></h1>
+        <h1><a th:href="@{/parentmain}"><img th:src="@{/images/logo.png}" alt="IDOLL봄"></a></h1>
 
         <nav>
             <ul class="gnb">
                 <li>
-                    <a th:href="@{/html/main/index_parents.html}">부모님</a>
+                    <a th:href="@{/parentmain}">부모님</a>
                     <ul>
-                        <li><a th:href="@{/html/matching.html}">매칭</a></li>
+                        <li><a th:href="@{/match}">매칭</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a th:href="@{/html/main/index_pro.html}">전문가</a>
+                    <a th:href="@{/proMain}">전문가</a>
                 </li>
                 <li>
                     <a th:href="@{/html/class_list.html}">신청하기</a>
@@ -37,7 +37,7 @@
                 <li>
                     <a th:href="@{/html/community_parent.html}">커뮤니티</a>
                     <ul>
-                        <li><a th:href="@{/html/community_parent.html}">자유게시판</a></li>
+                        <li><a th:href="@{/parentcommunity/community}">자유게시판</a></li>
                     </ul>
                 </li>
                 <li>
@@ -52,7 +52,7 @@
         <div class="side">
             <p><button onclick="window.location='../mypage/mypage_mail.html'"><img src="../../images/Alarm.png"
                                                                                    alt="알림"></button></p>
-            <p><a th:href="@{/html/mypage/mypage_correction.html}">마이페이지</a></p>
+            <p><a th:href="@{/ParentMyPage/kids}">마이페이지</a></p>
             <p><a th:href="@{/html/login/loginpage.html}">로그인</a></p>
             <p><a th:href="@{/html/login/registerpage.html}">회원가입</a></p>
         </div>
@@ -78,9 +78,8 @@
                     아이에게 필요한 모든것을 추천합니다.</p>
 
 
-                <a th:href="@{/match}" sec:authorize="isAuthenticated()">자세히 보기<span>+</span>
-                    <a class="logincheck" th:href="@{/match}" sec:authorize="!isAuthenticated()">자세히 보기<span>+</span></a>
-
+                <a class="login" th:href="@{/match}" sec:authorize="isAuthenticated()">자세히 보기<span>+</span></a>
+                    <a class="check" th:href="@{/match}" sec:authorize="!isAuthenticated()">자세히 보기<span>+</span></a>
             </div>
         </div>
     </section>
@@ -94,7 +93,7 @@
         <ul>
             <li>
                 <a href="#">
-                    <img src="../../images/index_recommendation.png">
+                    <img th:src="@{/images/index_recommendation.png}">
                     <p>유가람</p>
                     <div>
                         <p>후기</p>
@@ -127,8 +126,8 @@
             </li>
         </ul>
         <div class="pro_control">
-            <button><img th:src="@{/images/pro_button_pre.png}" alt="이전 메뉴 보기"></button>
-            <button><img th:src="@{/images/pro_button_next.png}" alt="다음 메뉴 보기"></button>
+<!--            <button type="button" id="prev"><img th:src="@{/images/pro_button_pre.png}" alt="이전 메뉴 보기"></button>-->
+<!--            <button type="button" id="next"><img th:src="@{/images/pro_button_next.png}" alt="다음 메뉴 보기"></button>-->
         </div>
     </section>
 
@@ -137,7 +136,7 @@
         <h2>키즈존 추천</h2>
         <ul>
             <li>
-                <img src="../../images/kids1.jpg">
+                <img th:src="@{/images/kids1.jpg}">
                 <div>
                     <p>[공덕 프론트원] 자란다 키즈존</p>
                     <p>프론트원은 110개의 스타트업이 모여있는 세계 최대 스타트업 공간입니다.</p>
@@ -148,7 +147,7 @@
                 </div>
             </li>
             <li>
-                <img src="../../images/kids2.jpg">
+                <img th:src="@{/images/kids2.jpg}">
                 <div>
                     <p>[역삼 마루 360] 자란다 키즈존</p>
                     <p>강남 창업가 거리에 위치한 MARU는 기업가 정신을 실천하고 확산하는 사람들을 위한 공간입니다.</p>
@@ -169,11 +168,11 @@
                 <div>
                     <p>돌봄</p>
                     <ul>
-                        <li><a href="../class_list.html">등/하원</a></li>
-                        <li><a href="../class_list.html">실내놀이</a></li>
-                        <li><a href="../class_list.html">책읽기</a></li>
-                        <li><a href="../class_list.html">놀이터</a></li>
-                        <li><a href="../class_list.html">견학/체험</a></li>
+                        <li><a th:href="@{/class/classcare}">등/하원</a></li>
+                        <li><a th:href="@{/class/classcare}">실내놀이</a></li>
+                        <li><a th:href="@{/class/classcare}">책읽기</a></li>
+                        <li><a th:href="@{/class/classcare}">놀이터</a></li>
+                        <li><a th:href="@{/class/classcare}">견학/체험</a></li>
                     </ul>
                 </div>
             </li>
@@ -181,11 +180,11 @@
                 <div>
                     <p>교육</p>
                     <ul>
-                        <li><a href="../class_list.html">초등국어</a></li>
-                        <li><a href="../class_list.html">초등영어</a></li>
-                        <li><a href="../class_list.html">초등수학</a></li>
-                        <li><a href="../class_list.html">코딩</a></li>
-                        <li><a href="../class_list.html">초등과학</a></li>
+                        <li><a th:href="@{/class/classstudy}">초등국어</a></li>
+                        <li><a th:href="@{/class/classstudy}">초등영어</a></li>
+                        <li><a th:href="@{/class/classstudy}">초등수학</a></li>
+                        <li><a th:href="@{/class/classstudy}">코딩</a></li>
+                        <li><a th:href="@{/class/classstudy}">초등과학</a></li>
                     </ul>
                 </div>
             </li>
@@ -193,11 +192,11 @@
                 <div>
                     <p>운동</p>
                     <ul>
-                        <li><a href="../class_list.html">축구</a></li>
-                        <li><a href="../class_list.html">줄넘기</a></li>
-                        <li><a href="../class_list.html">배드민턴</a></li>
-                        <li><a href="../class_list.html">자전거</a></li>
-                        <li><a href="../class_list.html">야구</a></li>
+                        <li><a th:href="@{/class/classsport}">축구</a></li>
+                        <li><a th:href="@{/class/classsport}">줄넘기</a></li>
+                        <li><a th:href="@{/class/classsport}">배드민턴</a></li>
+                        <li><a th:href="@{/class/classsport}">자전거</a></li>
+                        <li><a th:href="@{/class/classsport}">야구</a></li>
                     </ul>
                 </div>
             </li>
@@ -205,11 +204,11 @@
                 <div>
                     <p>예능</p>
                     <ul>
-                        <li><a href="../class_list.html">그리기</a></li>
-                        <li><a href="../class_list.html">리코더</a></li>
-                        <li><a href="../class_list.html">피아노</a></li>
-                        <li><a href="../class_list.html">바이올린</a></li>
-                        <li><a href="../class_list.html">방송댄스</a></li>
+                        <li><a th:href="@{/class/classentertaionment}">그리기</a></li>
+                        <li><a th:href="@{/class/classentertaionment}">리코더</a></li>
+                        <li><a th:href="@{/class/classentertaionment}">피아노</a></li>
+                        <li><a th:href="@{/class/classentertaionment}">바이올린</a></li>
+                        <li><a th:href="@{/class/classentertaionment}">방송댄스</a></li>
                     </ul>
                 </div>
             </li>
@@ -220,7 +219,7 @@
 <!-- 푸터 -->
 <footer id="footer">
     <div class="footer_wrap">
-        <img src="../../images/footer_logo.png" alt="IDOLL봄">
+        <img th:src="@{/images/footer_logo.png}" alt="IDOLL봄">
 
         <div>
             <div>
@@ -244,11 +243,11 @@
             </ul>
             <ul>
                 <li><a href="https://blog.naver.com/jaranblog" target="_blank"><img
-                        src="../../images/footer_social_blog.png" alt="블로그 바로가기"></a></li>
+                        th:src="@{/images/footer_social_blog.png}" alt="블로그 바로가기"></a></li>
                 <li><a href="https://www.instagram.com/jaranda__official" target="_blank"><img
-                        src="../../images/footer_social_insta.png" alt="인스타그램 바로가기"></a></li>
+                        th:src="@{/images/footer_social_insta.png}" alt="인스타그램 바로가기"></a></li>
                 <li><a href="https://www.youtube.com/channel/UCTXkxn1OlVvljxEe-hbd3Vg" target="_blank"><img
-                        src="../../images/footer_social_youtube.png" alt="유튜브 바로가기"></a></li>
+                        th:src="@{/images/footer_social_youtube.png}" alt="유튜브 바로가기"></a></li>
             </ul>
         </div>
     </div>
@@ -256,5 +255,83 @@
 </body>
 <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
 <script th:src="@{/js/motion.js}"></script>
+<script th:src="@{/js/parent_main.js}"></script>
+<script>
+    const pageSize = 3;
+
+    getList();
+
+    function getList(page){
+        $.ajax({
+            method : 'get',
+            url : '/rest/recommend',
+            data : {
+                page : page,
+                size : pageSize
+            },
+            success:function (data){
+                // 리스트 뿌려주는 함수.
+                renderPro(data.content);
+                renderPagination(data);
+            },
+            error:function (){
+                console.error('실패')
+            }
+        })
+    };
+
+    function renderPro(pros){
+        const proContainer = $('.pro_recommendation ul');
+        proContainer.empty();
+
+        pros.forEach(function(pro) {
+            let boardRow =  `<li>
+                <a href="#">
+                    <img src="${pro.proProfileImageUrl}">
+                        <p>${pro.proName}</p>
+                        <div>
+                            <p>후기</p>
+
+                            <img src="../../images/${pro.averageRating > 2 ? 5 : 4.5}rating.png">
+                                <p>(${pro.reviewCount})</p>
+                        </div>
+                </a>
+            </li>`
+            proContainer.append(boardRow);
+        });
+    }
+
+    function renderPagination(pagination) {
+        const paginationContainer = $('.pro_control');
+        paginationContainer.empty();
+
+        // 이전 버튼
+        const prevDisabled = pagination.currentPage === 1 ? 'style = "pointer-events : none"' : '';
+        paginationContainer.append(`
+            <button type="button" ${prevDisabled}>
+                <a class="page-link" data-page="${pagination.currentPage -1}">
+                    <img src="/images/pro_button_pre.png" alt="이전 메뉴 보기">
+                </a>
+            </button>
+        `);
+
+        // 다음 버튼
+        const nextDisabled = pagination.currentPage === pagination.totalPages ? 'style = "pointer-events : none"' : '';
+        paginationContainer.append(`
+            <button type="button" ${nextDisabled}>
+                <a class="page-link" data-page="${pagination.currentPage +1}">
+                    <img src="/images/pro_button_next.png" alt="다음 메뉴 보기">
+                </a>
+            </button>
+        `);
+
+        // 페이지 클릭했을 때 실행할 함수.
+        $('.page-link').click(function(event) {
+            event.preventDefault();
+            const selectedPage = $(this).data('page');
+            getList(selectedPage);
+        });
+    }
+</script>
 
 </html>

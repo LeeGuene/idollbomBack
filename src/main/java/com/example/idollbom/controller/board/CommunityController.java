@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/board/parent/community_parent")
+@RequestMapping("/parentcommunity")
 @RequiredArgsConstructor
 public class CommunityController {
 
     private final CommunityService communityService;
 
-    @GetMapping
+    @GetMapping("/community")
     public String community(@RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
                             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
                             Model model) {
@@ -32,6 +32,7 @@ public class CommunityController {
         int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
         int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
 
+        model.addAttribute("count", totalCommunity);
         model.addAttribute("community", community);
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("pageSize", pageSize);

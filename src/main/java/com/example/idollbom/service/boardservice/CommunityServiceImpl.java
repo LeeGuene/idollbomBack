@@ -24,6 +24,19 @@ public class CommunityServiceImpl implements CommunityService {
 
     @Override
     public int getCommunityListCount() {
+        System.out.println("여기 들어옴.");
         return communityMapper.countCommunity();
     }
-}
+
+//    @Override
+//    @Transactional
+//    public void saveCommunity(CommunityDTO community, List<MultipartFile> files) {
+//        int parentPostNumber = communityMapper.getSeq();
+//        community.setParentPostNumber(parentPostNumber);
+//        communityMapper.saveCommunity(community);
+//
+//        saveCommunity(community, files);
+//     }
+    }
+
+
