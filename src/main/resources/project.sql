@@ -751,34 +751,6 @@ FROM(
 WHERE CLASS_NUMBER = 10;
 
 
--- selectOneAllReview 쿼리문 테스트
-SELECT
-    DETAIL.PRO_NUMBER,
-    R.REVIEW_NUMBER,
-    R.REVIEW_CONTENT,
-    R.REVIEW_EVALUTION_POINT,
-    R.REVIEW_REGISTER_DATE,
-    R.REVIEW_UPDATE_DATE,
-    R.PARENT_NUMBER,
-    R.CLASS_NUMBER
-FROM (
-         SELECT
-             P.PRO_NUMBER,
-             P.PRO_NAME,
-             C.CLASS_NUMBER,
-             C.CLASS_CATEGORY_BIG,
-             C.CLASS_CATEGORY_SMALL,
-             C.CLASS_CONTENT
-         FROM PRO P JOIN CLASS C
-                         ON P.PRO_NUMBER = C.PRO_NUMBER
-                             AND P.PRO_NUMBER = 4
-                     AND C.CLASS_NUMBER = 10
-     ) DETAIL JOIN REVIEW R
-                   ON DETAIL.CLASS_NUMBER = R.CLASS_NUMBER;
-
--- 22, 34, 46
-
-SELECT * FROM REVIEW;
 
 
 
