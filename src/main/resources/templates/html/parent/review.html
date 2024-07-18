@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../../../static/css/parent/review.css" />
+  <link rel="stylesheet" th:href="@{/css/parent/review.css}" />
   <title>전문가 상세보기 페이지</title>
 </head>
 
@@ -15,24 +15,25 @@
       <p>OOO전문가의 프로필 상세보기입니다.</p>
     </div>
 
-    <!-- 전문가 정보 -->
-    <div class="pro-detaillist">
-      <table>
-        <tbody>
-          <tr>
-            <td>조용준</td>
-            <td><img src="#" alt="강사이미지"></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
     <!-- 목록 보기 버튼 -->
     <div class="list-btn-wrap">
       <a href="../html/prolist.html">목록 보기</a>
     </div>
 
+
     <div class="board-form" th:object="${pro_info}">
+      <!-- 전문가 이미지 -->
+      <div class="pro-detaillist">
+        <table>
+          <tbody>
+            <tr>
+              <td>조용준</td>
+              <td><img th:src="*{proProfileImageUrl}" alt="강사이미지"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <!-- 전문가 이름 -->
       <div class="post-title-wrap">
         <h1>전문가 이름</h1>
@@ -59,28 +60,27 @@
       <div class="review-list-wrap">
         <h1>리뷰 리스트</h1>
         <ul class="review-list">
-          <li class="review-item" th:each="review : ${reviews}" th:object="${review}">
+          <li class="review-item" th:each="review : ${reviewList}" th:object="${review}">
+            <h1>수업명 : <span th:text="*{className}"></span></h1>
             <input type="hidden" th:field="*{reviewNumber}" />
             <textarea th:field="*{reviewContent}" name="review-content" class="review-content" readonly>리뷰1</textarea>
             <div>
-<!--              <p>작성자 : <span th:text="*{parentName}"></span></p>-->
+              <p>작성자 : <span th:text="*{parentName}"></span></p>
               <p>등록일 : <span th:text="*{reviewRegisterDate}"></span></p>
               <p>수정일 : <span th:text="*{reviewUpdateDate}"></span></p>
             </div>
-            <a href="#"><button>수정</button></a>
-            <a href="#"><button>삭제</button></a>
           </li>
           <!-- 이 아래코드는 반복되는 코드 -->
-          <li class="review-item">
-            <textarea name="" class="review-content" readonly>리뷰2</textarea>
-            <a href="#"><button>수정</button></a>
-            <a href="#"><button>삭제</button></a>
-          </li>
-          <li class="review-item">
-            <textarea name="" class="review-content" readonly>리뷰3</textarea>
-            <a href="#"><button>수정</button></a>
-            <a href="#"><button>삭제</button></a>
-          </li>
+<!--          <li class="review-item">-->
+<!--            <textarea name="" class="review-content" readonly>리뷰2</textarea>-->
+<!--            <a href="#"><button>수정</button></a>-->
+<!--            <a href="#"><button>삭제</button></a>-->
+<!--          </li>-->
+<!--          <li class="review-item">-->
+<!--            <textarea name="" class="review-content" readonly>리뷰3</textarea>-->
+<!--            <a href="#"><button>수정</button></a>-->
+<!--            <a href="#"><button>삭제</button></a>-->
+<!--          </li>-->
         </ul>
       </div>
 

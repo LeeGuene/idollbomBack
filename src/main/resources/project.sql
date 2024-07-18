@@ -750,6 +750,35 @@ FROM(
     )
 WHERE CLASS_NUMBER = 10;
 
+-- 특정 전문가의 모든 리뷰 조회 ( 모든 수업 )
+SELECT
+       PA.PARENT_NAME,
+       RE.REVIEW_NUMBER,
+       RE.REVIEW_CONTENT,
+       RE.REVIEW_REGISTER_DATE,
+       RE.REVIEW_UPDATE_DATE,
+       RE.PARENT_NUMBER,
+       RE.CLASS_NUMBER,
+       RE.CLASS_NAME
+FROM(
+        SELECT
+            R.REVIEW_NUMBER,
+            R.REVIEW_CONTENT,
+            R.REVIEW_REGISTER_DATE,
+            R.REVIEW_UPDATE_DATE,
+            R.PARENT_NUMBER,
+            R.CLASS_NUMBER,
+            DETAIL.CLASS_NAME
+        FROM (
+                 SELECT *
+                 FROM PRO P JOIN CLASS C
+                    ON P.PRO_NUMBER = C.PRO_NUMBER
+                    AND P.PRO_NUMBER = 4
+             ) DETAIL JOIN REVIEW R
+               ON DETAIL.CLASS_NUMBER = R.CLASS_NUMBER
+) RE JOIN PARENT PA
+    ON RE.PARENT_NUMBER = PA.PARENT_NUMBER;
+
 
 
 

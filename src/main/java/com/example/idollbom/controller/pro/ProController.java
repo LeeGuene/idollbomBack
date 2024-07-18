@@ -4,11 +4,15 @@ import com.example.idollbom.domain.dto.parentdto.ReviewAllListDTO;
 import com.example.idollbom.domain.dto.prodto.ProDetailDTO;
 import com.example.idollbom.domain.dto.prodto.ProReviewListDTO;
 import com.example.idollbom.domain.vo.ParentVO;
+import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.service.applyservice.ClassReviewService;
 import com.example.idollbom.service.proService.ChildFindService;
 import com.example.idollbom.service.proService.ProDetailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +31,7 @@ public class ProController {
     private final ClassReviewService classReviewService;
     private final ProDetailService proDetailService;
     private final ChildFindService childFindService;
+    private final ParentMapper parentMapper;
 
     // 전문가 프로필 상세보기 페이지 ( 이미지, 이름, 프로필 이미지 )
     // 하단에 전문가 수업에 달린 모든 리뷰 목록 표시
@@ -38,10 +43,10 @@ public class ProController {
         ProDetailDTO pro_info = proDetailService.findProDetailByNumber(proNumber);
 
         // 특정 전문가의 전체 리뷰 조회
-        List<ProReviewListDTO> reviews = proDetailService.findAllReviewList(proNumber);
+        List<ProReviewListDTO> reviewList = proDetailService.findAllReviewList(proNumber);
 
         model.addAttribute("pro_info", pro_info);
-        model.addAttribute("reviews", reviews);
+        model.addAttribute("reviewList", reviewList);
 
         return "/html/parent/review";
     }
