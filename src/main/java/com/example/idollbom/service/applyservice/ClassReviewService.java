@@ -12,7 +12,7 @@ import java.util.List;
 public interface ClassReviewService {
 
     // 특정 전문가의 특정 수업의 모든 리뷰를 조회하는 서비스
-    List<ReviewOneListDTO> findOneReviewList(Long proNumber, Long classNumber);
+    List<ReviewOneListDTO> findOneReviewList(Long classNumber);
 
     // 특정 전문가의 모든 수업에 대한 리뷰를 조회하는 서비스
     List<ReviewAllListDTO> findAllReviewList(Long proNumber);

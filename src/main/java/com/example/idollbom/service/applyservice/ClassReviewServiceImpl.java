@@ -18,8 +18,8 @@ public class ClassReviewServiceImpl implements ClassReviewService {
 
     // 특정 전문가의 하나의 수업에 대한 모든 리뷰를 조회하는 서비스
     @Override
-    public List<ReviewOneListDTO> findOneReviewList(Long proNumber, Long classNumber) {
-        return classReviewMapper.selectOneAllReview(proNumber, classNumber);
+    public List<ReviewOneListDTO> findOneReviewList(Long classNumber) {
+        return classReviewMapper.selectOneAllReview(classNumber);
     }
 
     // 특정 전문가에 대한 모든 수업에 대한 리뷰를 조회하는 서비스

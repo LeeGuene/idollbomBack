@@ -4,6 +4,7 @@ import com.example.idollbom.domain.dto.myPagedto.parentdto.classSaveDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.mailDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.paymentDTO;
+import com.example.idollbom.domain.dto.parentdto.ReviewDTO;
 import com.example.idollbom.domain.vo.*;
 import com.example.idollbom.service.myPageservice.parentservice.*;
 import lombok.RequiredArgsConstructor;
@@ -146,6 +147,9 @@ public class ParentMypageController {
     public String selectFavoriteClass(@RequestParam(value= "classNumber") Long classNumber,
                                       @RequestParam(value= "parentNumber") Long parentNumber){
 
+        log.info("수업 찜 클릭 받아온 데이터 : " + classNumber);
+        log.info("수업 찜 클릭 받아온 데이터 : " + parentNumber);
+
         classSaveService.saveClass(classNumber, parentNumber);
 
         return "html/myPage/parent/myFavoriteClass";
@@ -158,11 +162,13 @@ public class ParentMypageController {
         return "redirect:/ParentMyPage/classSave";
     }
 
-//  결제한 수업내역 보기
+    //  결제한 수업내역 보기
     @GetMapping("/myPayment")
     public String selectMyPayment(Model model){
         List<paymentDTO> payment = paymentService.paymentList();
+        model.addAttribute("review", new ReviewDTO());
         model.addAttribute("Mypayment",  payment);
+        log.info("Review object: " + model.getAttribute("Mypayment"));
         return "html/myPage/parent/Payment";
     }
 }
