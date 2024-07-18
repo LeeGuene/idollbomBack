@@ -1,4 +1,4 @@
-package com.example.idollbom.controller;
+package com.example.idollbom.controller.pro;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +38,7 @@ public class UploadController {
             // 파일 저장 경로 설정 (프로젝트의 정적 자원 경로에 저장)
             // 첨부파일도 프로젝트 안에 폴더를 만들어서 저장하기
             // 마지막 /summernote 부분만 변경해서 첨부파일 저장
-            Path directoryPath = Paths.get("src/main/resources/static/uploads/" + datePath + "/summernote/");
+            Path directoryPath = Paths.get("src/main/resources/static/backImage/uploads/" + datePath + "/summernote/");
             if (!Files.exists(directoryPath)) {
                 Files.createDirectories(directoryPath); // 폴더가 없으면 생성
             }

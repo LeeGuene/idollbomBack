@@ -20,5 +20,4 @@ public interface ClassListService {
 
     // 검색한 수업에 대한 갯수를 가져오는 select
     int countClasses(String category, String searchType, String searchWord);
-
 }
