@@ -4,13 +4,13 @@ const btnOpenModal=document.querySelector('.btn-open-modal');
 const btnCloseModal=document.querySelector('.close-btnen');
 const btnCloseModal2=document.querySelector('.close-btnen2');
 const closeInsertModal= document.querySelector('.close-btn')
-const closeInsertModal2= document.querySelector('.cancle')
+// const closeInsertModal2= document.querySelector('.cancle')
 
 
 // 아이수정 모달 삭제버튼
-closeInsertModal2.addEventListener("click", ()=>{
-    modal2.style.display="none";
-});
+// closeInsertModal2.addEventListener("click", ()=>{
+//     modal2.style.display="none";
+// });
 
 
 

@@ -69,97 +69,94 @@ moreBtn.addEventListener('click', ()=>{
 
 // =========================================================
 
-const loginId = $('input[name="loginId"]').val();
+// const loginId = $('input[name="loginId"]').val();
 
 // 날짜 포맷
-function formatDate(dateString) {
-    const now = new Date();
-    const reviewDate = new Date(dateString); // 문자열을 Date 객체로 변환
-
-    const nowYear = now.getFullYear();
-    const nowMonth = now.getMonth();
-    const nowDate = now.getDate();
-
-    const reviewYear = reviewDate.getFullYear();
-    const reviewMonth = reviewDate.getMonth();
-    const reviewDateDate = reviewDate.getDate();
-
-    let displayText = "";
-
-    // 년, 월, 일이 모두 같은 경우 "오늘"로 표시
-    // if (nowYear === commentYear && nowMonth === commentMonth && nowDate === commentDateDate) {
-    //     displayText = "오늘";
-    // } else {
-    // 그 외의 경우, 정해진 포맷으로 표시
-    const yy = reviewYear.toString().slice(-2); // 마지막 두 자리를 가지고 옴.
-    const M = reviewMonth + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
-    const d = reviewDateDate;
-    const HH = reviewDate.getHours().toString().padStart(2, '0');
-    const mm = reviewDate.getMinutes().toString().padStart(2, '0'); // 두자리 수 일 때 앞에 0을 붙임.
-
-    displayText = `${yy}년 ${M}월 ${d}일 ${HH}시 ${mm}분`;
-    // }
-    return displayText;
-}
+// function formatDate(dateString) {
+//     const now = new Date();
+//     const reviewDate = new Date(dateString); // 문자열을 Date 객체로 변환
+//
+//     const nowYear = now.getFullYear();
+//     const nowMonth = now.getMonth();
+//     const nowDate = now.getDate();
+//
+//     const reviewYear = reviewDate.getFullYear();
+//     const reviewMonth = reviewDate.getMonth();
+//     const reviewDateDate = reviewDate.getDate();
+//
+//     let displayText = "";
+//
+//     // 년, 월, 일이 모두 같은 경우 "오늘"로 표시
+//     // if (nowYear === commentYear && nowMonth === commentMonth && nowDate === commentDateDate) {
+//     //     displayText = "오늘";
+//     // } else {
+//     // 그 외의 경우, 정해진 포맷으로 표시
+//     const yy = reviewYear.toString().slice(-2); // 마지막 두 자리를 가지고 옴.
+//     const M = reviewMonth + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
+//     const d = reviewDateDate;
+//     const HH = reviewDate.getHours().toString().padStart(2, '0');
+//     const mm = reviewDate.getMinutes().toString().padStart(2, '0'); // 두자리 수 일 때 앞에 0을 붙임.
+//
+//     displayText = `${yy}년 ${M}월 ${d}일 ${HH}시 ${mm}분`;
+//     // }
+//     return displayText;
+// }
 
 // 페이지가 로드된 이후에 리뷰 목록 조회 함수가 실행되도록 한다.
-$(document).ready(function () {
-    let classNumber = $('input[name="classNumber"]').val();
-    getReviews(classNumber);
-})
+// $(document).ready(function () {
+//     let classNumber = $('input[name="classNumber"]').val();
+//     getReviews(classNumber);
+// })
 
 // 댓글 목록 조회 함수
-function getReviews(classNumber) {
-    $.ajax({
-        method : 'get',
-        url : '/reviews/' + classNumber,
-        success : function(reviews) {
-            let reviewListArea = $('.review-list')
-
-            // 댓글이 작성될 해당 섹션 비우기.
-            reviewListArea.empty();
-
-            // 댓글 없을 때 표시할 html
-            if(reviews.length === 0){
-                reviewListArea.append(
-                    `<div>첫번째 댓글을 남겨주세요!</div>`
-                );
-            }
-
-            // 리뷰 있을 때 목록을 뿌려줄 반복문.
-            reviews.forEach(function(review) {
-                let reviewDate = formatDate(review.reviewRegisterDate);
-                let buttons = '';
-                let editStr = '';
-
-                // 작성일과 수정일을 비교해서 html 에 다른 모양으로 표시.
-                if(review.reviewUpdateDate !== review.reviewRegisterDate){
-                    reviewDate = formatDate(review.reviewUpdateDate);
-                    editStr = ' (수정)';
-                }
-
-                // 종합적으로 뿌려줄 html
-                let reviewElement = `
-                        <li class="review-item" id="review-${review.reviewNumber}">
-                          <input type="hidden" name="reviewNumber" value="${review.reviewNumber}" />
-                          <textarea name="review-content" class="review-content" readonly>${review.reviewContent}</textarea>
-                          <div>
-                            <p>등록일 : <span>${reviewDate}${editStr}</span></p>
-                            <p>수정일 : <span>${reviewDate}${editStr}</span></p>
-                          </div>
-                        </li>
-                    `
-                // 해당 섹션에 추가
-                // 댓글의 갯 수 만큼 차례대로 추가될 것이다.
-                reviewListArea.append(reviewElement);
-            })
-        },
-        error : function(data) {
-            console.error(data, "불러오기 실패");
-        }
-    })
-}
-
+// function getReviews(classNumber) {
+//     $.ajax({
+//         method : 'get',
+//         url : '/reviews/' + classNumber,
+//         success : function(reviews) {
+//             let reviewListArea = $('.review-list')
+//
+//             // 댓글이 작성될 해당 섹션 비우기.
+//             reviewListArea.empty();
+//
+//             // 댓글 없을 때 표시할 html
+//             if(reviews.length === 0){
+//                 reviewListArea.append(
+//                     `<div>첫번째 댓글을 남겨주세요!</div>`
+//                 );
+//             }
+//
+//             // 리뷰 있을 때 목록을 뿌려줄 반복문.
+//             reviews.forEach(function(review) {
+//                 let reviewDate = formatDate(review.reviewRegisterDate);
+//                 let editStr = '';
+//
+//                 // 작성일과 수정일을 비교해서 html 에 다른 모양으로 표시.
+//                 if(review.reviewUpdateDate !== review.reviewRegisterDate){
+//                     reviewDate = formatDate(review.reviewUpdateDate);
+//                     editStr = ' (수정)';
+//                 }
+//
+//                 // 종합적으로 뿌려줄 html
+//                 let reviewElement = `
+//                         <li class="review-item" id="review-${review.reviewNumber}">
+//                           <input type="hidden" name="reviewNumber" value="${review.reviewNumber}" />
+//                           <textarea name="review-content" class="review-content" readonly>${review.reviewContent}</textarea>
+//                           <div>
+//                             <p>작성일 : <span>${reviewDate}${editStr}</span></p>
+//                           </div>
+//                         </li>
+//                     `
+//                 // 해당 섹션에 추가
+//                 // 댓글의 갯 수 만큼 차례대로 추가될 것이다.
+//                 reviewListArea.append(reviewElement);
+//             })
+//         },
+//         error : function(data) {
+//             console.error(data, "불러오기 실패");
+//         }
+//     })
+// }
 
 // paymentcheck.html 로 넘어갈 때, 예약 날짜 pk 넘기기
 window.onload = function(){

@@ -12,7 +12,8 @@
             SAVE.CLASS_NAME,
             SAVE.CLASS_CONTENT,
             SAVE.CLASS_CATEGORY_BIG,
-            SAVE.CLASS_CATEGORY_SMALL
+            SAVE.CLASS_CATEGORY_SMALL,
+            SAVE.CLASS_INTRO
         FROM (
                  SELECT *
                  FROM (
@@ -23,11 +24,12 @@
                               C.CLASS_CATEGORY_BIG,
                               C.CLASS_CATEGORY_SMALL,
                               C.CLASS_CONTENT,
+                              C.CLASS_INTRO,
                               C.CLASS_PAYMENT_ACCOUNT,
                               C.CLASS_REGISTER_DATE
                           FROM PRO P JOIN CLASS C
-                            ON P.PRO_NUMBER = #{proNumber}
-                            AND P.PRO_NUMBER = C.PRO_NUMBER
+                            ON P.PRO_NUMBER = C.PRO_NUMBER
+                            AND P.PRO_NUMBER = #{proNumber}
                       ) CLASS JOIN CLASS_SAVE S
                         ON CLASS.CLASS_NUMBER = S.CLASS_NUMBER
              ) SAVE JOIN PARENT P

@@ -202,7 +202,7 @@ public class ClassListController {
 
     // 수업 상세보기 페이지
     @GetMapping("/detail")
-    public String detail(@RequestParam("classNumber") Long classNumber,
+    public String classDetail(@RequestParam("classNumber") Long classNumber,
                          @RequestParam("proNumber") Long proNumber,
                          Model model) {
 
@@ -214,13 +214,18 @@ public class ClassListController {
         // 특정 수업에 대한 상세정보
         ClassDetailDTO class_info = classDetailService.findClassDetail(proNumber, classNumber);
 
+        // 특정 수업에 대한 전체리뷰 조회
+        List<ReviewOneListDTO> reviews = classReviewService.findOneReviewList(classNumber);
+
         // 특정 수업에 대한 모든 예약날짜 및 시간정보
         List<ReservationInfoDTO> reservation_infos = classDetailService.findReservation(classNumber);
 
+        // 수업 찜 목록 추가할 때, parentNumber 필요!!
         ParentVO parent_info = parentMapper.selectOne(currentUserName); // 수업 상세보기로 넘어갈 때부터 parentNumber 를 넘기기 위한 조치
 
         model.addAttribute("class_info", class_info);
         model.addAttribute("reservation_infos", reservation_infos);
+        model.addAttribute("reviews", reviews);
         model.addAttribute("parent_info", parent_info);
 
         return "/html/parent/studyDetail";

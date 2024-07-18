@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -12,25 +12,22 @@
   <div id="wrapper">
     <div class="page-title-wrap">
       <h1>전문가</h1>
-      <p>OOO전문가의 프로필 상세보기입니다.</p>
+      <p><span th:text="${pro_info.proName}"></span> 전문가의 프로필 상세보기입니다.</p>
     </div>
 
     <!-- 목록 보기 버튼 -->
     <div class="list-btn-wrap">
+      <!-- 강사 리스트 페이지로 이동 -->
       <a href="../html/prolist.html">목록 보기</a>
     </div>
-
 
     <div class="board-form" th:object="${pro_info}">
       <!-- 전문가 이미지 -->
       <div class="pro-detaillist">
         <table>
-          <tbody>
-            <tr>
-              <td>조용준</td>
-              <td><img th:src="*{proProfileImageUrl}" alt="강사이미지"></td>
-            </tr>
-          </tbody>
+          <tr>
+            <td><img th:src="@{'/images/' + *{proProfileImageUrl}}" alt="강사이미지"></td>
+          </tr>
         </table>
       </div>
 
@@ -43,49 +40,34 @@
       <!-- 전문가 소개글 -->
       <div class="post-content-wrap">
         <h1>전문가 소개</h1>
-        <textarea th:field="*{proIntro}" readonly>안녕하세요~~ 저는 아이돌봄에서 OOO 수업을 맡고 있는 조용준이라고 합니다. 여러분의 아이를 저의 아이라는 생각으로 돌보고 있습니다. 믿고 맡겨주세요.
-            
-            경력: OOO대학교 유아교육과 4년제 졸업
-            자란다 10년 근무
-            IDOLL봄 5년째 근무
-            
-            자격증: 유아체육 지도사
-            유아국악 지도사
-            보육교사 2급
-        </textarea>
+        <textarea th:field="*{proIntro}" readonly></textarea>
       </div>
+    </div>
 
       <!-- 추가한 html -->
       <!-- 리뷰 전체 목록 -->
-      <div class="review-list-wrap">
-        <h1>리뷰 리스트</h1>
-        <ul class="review-list">
-          <li class="review-item" th:each="review : ${reviewList}" th:object="${review}">
-            <h1>수업명 : <span th:text="*{className}"></span></h1>
-            <input type="hidden" th:field="*{reviewNumber}" />
-            <textarea th:field="*{reviewContent}" name="review-content" class="review-content" readonly>리뷰1</textarea>
-            <div>
-              <p>작성자 : <span th:text="*{parentName}"></span></p>
-              <p>등록일 : <span th:text="*{reviewRegisterDate}"></span></p>
-              <p>수정일 : <span th:text="*{reviewUpdateDate}"></span></p>
+    <div class="review-list-wrap">
+      <h1>리뷰 리스트</h1>
+      <ul class="review-list">
+        <li class="review-item" th:each="review : ${reviews}" th:object="${review}">
+          <h1>수업명 : <span th:text="*{className}"></span></h1>
+          <input type="hidden" th:value="*{reviewNumber}" />
+          <textarea th:text="*{reviewContent}" name="review-content" class="review-content" readonly></textarea>
+          <div>
+            <p>작성자 : <span th:text="*{parentName}"></span></p>
+            <div th:if="*{reviewRegisterDate == reviewUpdateDate}">
+              <p>작성일 : <span th:text="*{#temporals.format(reviewRegisterDate, 'yy년 M월 d일 HH시 mm분')}"></span></p>
             </div>
-          </li>
-          <!-- 이 아래코드는 반복되는 코드 -->
-<!--          <li class="review-item">-->
-<!--            <textarea name="" class="review-content" readonly>리뷰2</textarea>-->
-<!--            <a href="#"><button>수정</button></a>-->
-<!--            <a href="#"><button>삭제</button></a>-->
-<!--          </li>-->
-<!--          <li class="review-item">-->
-<!--            <textarea name="" class="review-content" readonly>리뷰3</textarea>-->
-<!--            <a href="#"><button>수정</button></a>-->
-<!--            <a href="#"><button>삭제</button></a>-->
-<!--          </li>-->
-        </ul>
-      </div>
-
+            <div th:unless="*{reviewRegisterDate == reviewUpdateDate}">
+              <p>작성일 : <span th:text="*{#temporals.format(reviewUpdateDate, 'yy년 M월 d일 HH시 mm분')} + ' (수정)' "></span></p>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
+
   </div>
+
 </body>
 
 </html>

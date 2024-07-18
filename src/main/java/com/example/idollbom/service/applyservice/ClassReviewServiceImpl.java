@@ -22,10 +22,4 @@ public class ClassReviewServiceImpl implements ClassReviewService {
         return classReviewMapper.selectOneAllReview(classNumber);
     }
 
-    // 특정 전문가에 대한 모든 수업에 대한 리뷰를 조회하는 서비스
-    @Override
-    public List<ReviewAllListDTO> findAllReviewList(Long proNumber) {
-        return classReviewMapper.selectAllReview(proNumber);
-    }
-
 }

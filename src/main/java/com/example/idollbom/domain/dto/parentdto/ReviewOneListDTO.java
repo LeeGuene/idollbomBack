@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Data
 public class ReviewOneListDTO {
 
+    private String parentName;
     private Long reviewNumber;
     private String reviewContent;
     private Long reviewEvaluationPoint;

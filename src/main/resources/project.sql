@@ -368,29 +368,40 @@ VALUES (SEQ_PROJECT.nextval, '강의 내용이 좋았지만, 실습 시간이 �
 -- 테스트 코드
 
 -- 특정 전문가가 진행하는 특정 수업에 대한 모든 리뷰조회
-SELECT R.REVIEW_NUMBER,
+SELECT
+    PA.PARENT_NAME,
+    RE.REVIEW_NUMBER,
+    RE.REVIEW_CONTENT,
+    RE.REVIEW_EVALUTION_POINT,
+    RE.REVIEW_REGISTER_DATE,
+    RE.REVIEW_UPDATE_DATE,
+    PA.PARENT_NUMBER,
+    RE.CLASS_NUMBER
+FROM (
+    SELECT
+       R.REVIEW_NUMBER,
        R.REVIEW_CONTENT,
        R.REVIEW_EVALUTION_POINT,
        R.REVIEW_REGISTER_DATE,
        R.REVIEW_UPDATE_DATE,
        R.PARENT_NUMBER,
        R.CLASS_NUMBER
- FROM (
-        SELECT
-            P.PRO_NAME,
-            C.CLASS_NUMBER,
-            C.CLASS_CATEGORY_BIG,
-            C.CLASS_CATEGORY_SMALL,
-            C.CLASS_CONTENT
-        FROM PRO P
-          JOIN CLASS C
-            ON P.PRO_NUMBER = 4
-            AND C.CLASS_NUMBER = 18
-    ) DETAIL JOIN REVIEW R
-    ON DETAIL.CLASS_NUMBER = R.CLASS_NUMBER;
+     FROM (
+            SELECT
+                P.PRO_NAME,
+                C.CLASS_NUMBER,
+                C.CLASS_CATEGORY_BIG,
+                C.CLASS_CATEGORY_SMALL,
+                C.CLASS_CONTENT
+            FROM PRO P JOIN CLASS C
+                ON P.PRO_NUMBER = C.PRO_NUMBER
+                AND C.CLASS_NUMBER = 18
+        ) CLASS JOIN REVIEW R
+        ON CLASS.CLASS_NUMBER = R.CLASS_NUMBER
+)  RE JOIN PARENT PA
+ON RE.PARENT_NUMBER = PA.PARENT_NUMBER;
 
 SELECT * FROM REVIEW;
-<<<<<<< HEAD
 SELECT * FROM IMG;
 SELECT * FROM RESERVATION;
 SELECT * FROM RESERVATION_DATE;
@@ -779,9 +790,44 @@ FROM(
 ) RE JOIN PARENT PA
     ON RE.PARENT_NUMBER = PA.PARENT_NUMBER;
 
+-- 이미지 주소 변경 쿼리
+UPDATE PRO
+SET PRO_PROFILE_IMAGE_URL = 'content-img2.jpg'
+WHERE PRO_NUMBER = 4;
 
+SELECT * FROM PRO;
+SELECT * FROM CLASS;
 
-
+SELECT
+    P.PARENT_NAME,
+    P.PARENT_NUMBER,
+    P.PARENT_EMAIL,
+    SAVE.CLASS_NAME,
+    SAVE.CLASS_CONTENT,
+    SAVE.CLASS_CATEGORY_BIG,
+    SAVE.CLASS_CATEGORY_SMALL,
+    SAVE.CLASS_INTRO
+FROM (
+         SELECT *
+         FROM (
+                  SELECT
+                      P.*,
+                      C.CLASS_NUMBER,
+                      C.CLASS_NAME,
+                      C.CLASS_CATEGORY_BIG,
+                      C.CLASS_CATEGORY_SMALL,
+                      C.CLASS_CONTENT,
+                      C.CLASS_INTRO,
+                      C.CLASS_PAYMENT_ACCOUNT,
+                      C.CLASS_REGISTER_DATE
+                  FROM PRO P JOIN CLASS C
+                    ON P.PRO_NUMBER = C.PRO_NUMBER
+                    AND P.PRO_NUMBER = 6
+              ) CLASS JOIN CLASS_SAVE S
+                 ON CLASS.CLASS_NUMBER = S.CLASS_NUMBER
+     ) SAVE JOIN PARENT P
+         ON SAVE.PARENT_NUMBER = P.PARENT_NUMBER
+         AND SAVE.PARENT_NUMBER = P.PARENT_NUMBER;
 
 
 

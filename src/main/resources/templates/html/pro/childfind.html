@@ -35,25 +35,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="saveList : ${saveLists}">
+                <tr th:each="save : ${saveList}" th:object="${save}">
                     <!-- 쪽지 보내기할 때, 필요할 것 같아서 추가 -->
-                    <input type="hidden" th:text="${saveList.parentNumber}" />
-
-                    <td th:text="${saveList.className}">놀이터</td>
-                    <td th:text="${saveList.parentName}">이지은</td>
+                    <input type="hidden" th:value="*{parentNumber}" />
+                    <td th:text="*{className}"></td>
+                    <td th:text="*{parentName}"></td>
                     <td><button class="btn-open-modal"><i class="fa-regular fa-envelope"></i></button></td>
                 </tr>
-<!--                <tr>-->
-<!--                    <td>놀이터</td>-->
-<!--                    <td>이지은</td>-->
-<!--                    <td><button class="btn-open-modal"><i class="fa-regular fa-envelope"></i></button></td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td>놀이터</td>-->
-<!--                    <td>이지은</td>-->
-<!--                    <td><button class="btn-open-modal"><i class="fa-regular fa-envelope"></i></button></td>-->
-<!--                </tr>-->
-
             </tbody>
         </table>
 

@@ -187,7 +187,21 @@
         <div class="review-list-wrap" sec:authorize="isAuthenticated()">
           <h1>리뷰 리스트</h1>
           <!-- 자바스크립트로 내부 리뷰 리스트 전체 목록 뿌려줌 -->
-          <ul class="review-list"></ul>
+          <ul class="review-list">
+            <li class="review-item" th:each="review : ${reviews}" th:object="${review}">
+              <input type="hidden" th:value="*{reviewNumber}" />
+              <textarea th:text="*{reviewContent}" name="review-content" class="review-content" readonly></textarea>
+              <div>
+                <p>작성자 : <span th:text="${review.parentName}"></span></p>
+                <div th:if="*{reviewRegisterDate == reviewUpdateDate}">
+                  <p>작성일 : <span th:text="*{#temporals.format(reviewRegisterDate, 'yy년 M월 d일 HH시 mm분')}"></span></p>
+                </div>
+                <div th:unless="*{reviewRegisterDate == reviewUpdateDate}">
+                  <p>작성일 : <span th:text="*{#temporals.format(reviewUpdateDate, 'yy년 M월 d일 HH시 mm분')} + ' (수정)' "></span></p>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
 

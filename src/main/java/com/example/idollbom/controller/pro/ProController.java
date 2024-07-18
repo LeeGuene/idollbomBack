@@ -1,6 +1,7 @@
 package com.example.idollbom.controller.pro;
 
 import com.example.idollbom.domain.dto.parentdto.ReviewAllListDTO;
+import com.example.idollbom.domain.dto.prodto.ChildFindDTO;
 import com.example.idollbom.domain.dto.prodto.ProDetailDTO;
 import com.example.idollbom.domain.dto.prodto.ProReviewListDTO;
 import com.example.idollbom.domain.vo.ParentVO;
@@ -28,25 +29,23 @@ import java.util.List;
 @Slf4j
 public class ProController {
 
-    private final ClassReviewService classReviewService;
     private final ProDetailService proDetailService;
     private final ChildFindService childFindService;
-    private final ParentMapper parentMapper;
 
     // 전문가 프로필 상세보기 페이지 ( 이미지, 이름, 프로필 이미지 )
     // 하단에 전문가 수업에 달린 모든 리뷰 목록 표시
     @GetMapping("/detail")
-    public String detail(@RequestParam("proNumber") Long proNumber,
+    public String proDetail(@RequestParam(value="proNumber") Long proNumber,
                          Model model) {
 
         // 특정 전문가 프로필 상세보기 조회
         ProDetailDTO pro_info = proDetailService.findProDetailByNumber(proNumber);
 
         // 특정 전문가의 전체 리뷰 조회
-        List<ProReviewListDTO> reviewList = proDetailService.findAllReviewList(proNumber);
+        List<ProReviewListDTO> reviews = proDetailService.findAllReviewList(proNumber);
 
         model.addAttribute("pro_info", pro_info);
-        model.addAttribute("reviewList", reviewList);
+        model.addAttribute("reviews", reviews);
 
         return "/html/parent/review";
     }
@@ -55,11 +54,11 @@ public class ProController {
     public String find(@PathVariable("proNumber") Long proNumber,
                        Model model){
 
-//        List<ChildFindDTO> saveLists = childFindService.findAllParent(proNumber);
+        List<ChildFindDTO> saveList = childFindService.findAllParent(proNumber);
 
-//        saveLists.stream().map(ChildFindDTO::toString).forEach(log::info);
+        saveList.stream().map(ChildFindDTO::toString).forEach(log::info);
 
-//        model.addAttribute("saveLists", saveLists);
+        model.addAttribute("saveList", saveList);
 
         return "/html/pro/childfind";
     }
