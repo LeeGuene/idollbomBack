@@ -46,6 +46,8 @@ public class reviewServiceImpl implements reviewService {
 
 //      parent VO 찾아서 아이디 찾기
         ParentVO parent = parentMapper.selectOne(currentUserName);
+
+        log.info("아이디",parent.getParentNumber());
         reviewDTO.setParentNumber(parent.getParentNumber());
         LocalDateTime currentDateTime = LocalDateTime.now();
         LocalDate currentDate = currentDateTime.toLocalDate();

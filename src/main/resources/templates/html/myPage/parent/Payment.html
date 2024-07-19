@@ -107,7 +107,7 @@
                                 <div class="header">
                                     <img class="img" src="/images/logo.png" alt="로고">
                                     <h3 id="title">수업 후기 작성</h3>
-                                    <button id="close-btn"><img class="x-btn" src="/images/closebtn.png" alt="닫기버튼"></button>
+                                    <button id="close-btn" type="button" onclick="closeModal(this)"><img class="x-btn" src="/images/closebtn.png" alt="닫기버튼"></button>
                                 </div>
                                 <div class="mb-3">
                                     <label for="modalClassName" class="form-label">수업명</label>
@@ -137,7 +137,7 @@
                                 </div>
                                 <div class="modal-btn">
                                     <!-- 추가하기를 누르면 새로운 페이지로 이동 -->
-                                    <button class="close-btn btn">취소하기</button>
+                                    <button type="button" class="close-btn btn" onclick="closeModal(this)">취소하기</button>
                                     <button class="add-btn btn" type="submit">작성하기</button>
                                 </div>
                             </div>

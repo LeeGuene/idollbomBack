@@ -5,7 +5,7 @@
 <!--    리뷰작성 완료 표시 -->
     <update id="insertReview">
         update reservation
-        set reservation_completed = 1
+        set review_completed = 1
         where parent_number = #{parentNumber}
         and reservation_date_number = #{reservationDateNumber}
     </update>

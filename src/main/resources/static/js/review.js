@@ -40,8 +40,11 @@ function openModal(element) {
 
     // 모달 열기
     modal.style.display = 'flex';
+}
 
-
+function closeModal(element){
+    const modal = document.querySelector('.modal');
+    modal.style.display = 'none';
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -177,7 +177,6 @@ public class ParentMypageController {
         reviewService.insertReview(reviewDTO);
 
         ReservationDateVO reservationDate = reservationDateService.selectReservationDate(reviewDTO.getClassNumber());
-        log.info(reservationDate.getReservationDateNumber().toString());
         reservationService.reviewUpdate(reservationDate.getReservationDateNumber());
         return "redirect:/ParentMyPage/myPayment";
     }

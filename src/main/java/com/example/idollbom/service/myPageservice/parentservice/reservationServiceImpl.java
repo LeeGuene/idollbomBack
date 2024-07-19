@@ -24,7 +24,7 @@ public class reservationServiceImpl implements reservationService {
 
 //      parent VO 찾아서 아이디 찾기
         ParentVO parent = parentMapper.selectOne(currentUserName);
-
-        reservationMapper.insertReview(parent.getParentNumber(),reservationDateNumber);
+        Long parentNumber = parent.getParentNumber();
+        reservationMapper.insertReview(parentNumber,reservationDateNumber);
     }
 }

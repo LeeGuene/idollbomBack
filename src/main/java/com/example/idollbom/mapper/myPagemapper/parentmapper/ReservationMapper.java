@@ -1,8 +1,9 @@
 package com.example.idollbom.mapper.myPagemapper.parentmapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface ReservationMapper {
-    void insertReview(Long parentNumber ,Long reservationDateNumber);
+    void insertReview(@Param("parentNumber") Long parentNumber, @Param("reservationDateNumber") Long reservationDateNumber);
 }
