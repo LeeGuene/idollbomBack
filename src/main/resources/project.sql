@@ -1,29 +1,3 @@
--- 테이블 삭제
-DROP TABLE PARENT;
-DROP TABLE CHILD;
-DROP TABLE PARENT_POST;
-DROP TABLE PARENT_COMMENT;
-DROP TABLE PARENT_FILE;
-DROP TABLE PARENT_REPORT;
-DROP TABLE PARENT_NOTE;
-DROP TABLE PRO;
-DROP TABLE PRO_POST;
-DROP TABLE PRO_COMMENT;
-DROP TABLE PRO_FILE;
-DROP TABLE PRO_REPORT;
-DROP TABLE CLASS;
-DROP TABLE CLASS_SAVE;
-DROP TABLE REVIEW;
-DROP TABLE IMG;
-DROP TABLE RESERVATION;
-DROP TABLE RESERVATION_DATE;
-DROP TABLE RESERVATION_TIME;
-DROP TABLE QUESTION;
-DROP TABLE ANSWER;
-
--- 시퀀스 삭제
-DROP SEQUENCE SEQ_PROJECT;
-
 -- 부모 테이블
 CREATE TABLE PARENT(
 	PARENT_NUMBER NUMBER PRIMARY KEY, 			-- PK
@@ -270,7 +244,7 @@ CREATE TABLE RESERVATION(
 );
 
 ALTER TABLE RESERVATION
-    ADD REVIEW_COMPLETED NUMBER(1) DEFAULT 0;
+ADD REVIEW_COMPLETED NUMBER(1) DEFAULT 0;
 
 -- 문의하기 테이블
 CREATE TABLE QUESTION(
@@ -366,7 +340,6 @@ INSERT INTO REVIEW (REVIEW_NUMBER, REVIEW_CONTENT, REVIEW_EVALUTION_POINT, REVIE
 VALUES (SEQ_PROJECT.nextval, '강의 내용이 좋았지만, 실습 시간이 부족했습니다. 추가적인 실습 시간이 필요합니다.', 3, SYSDATE, SYSDATE, 3, 17);
 
 -- 테스트 코드
-
 -- 특정 전문가가 진행하는 특정 수업에 대한 모든 리뷰조회
 SELECT
     PA.PARENT_NAME,
@@ -401,146 +374,6 @@ FROM (
 )  RE JOIN PARENT PA
 ON RE.PARENT_NUMBER = PA.PARENT_NUMBER;
 
-SELECT * FROM REVIEW;
-SELECT * FROM IMG;
-SELECT * FROM RESERVATION;
-SELECT * FROM RESERVATION_DATE;
-SELECT * FROM RESERVATION_TIME;
-SELECT * FROM QUESTION;
-SELECT * FROM ANSWER;
-
--- 모든 테이블 INSERT 쿼리문
-INSERT INTO PARENT
-(PARENT_NUMBER, PARENT_EMAIL, PARENT_PASSWORD, PARENT_NAME, PARENT_NICKNAME, PARENT_PHONE_NUMBER, PARENT_ADDRESS, PARENT_PROFILE_IMAGE_URL, PARENT_REPORT_COUNT)
-VALUES(2, 'cdsf577@naver.com', '20198diff', '김시도', '김밥', '01023370987', '김해', 'kim.img', 35);
-
-INSERT INTO CHILD
-(CHILD_NUMBER, CHILD_NAME, CHILD_AGE, CHILD_GENDER, CHILD_SPECIAL_ISSUES, PARENT_NUMBER)
-VALUES(0, '', 0, '', '', 0);
-
-INSERT INTO PARENT_POST
-(PARENT_POST_NUMBER, PARENT_POST_TITLE, PARENT_POST_CONTENT, PARENT_POST_VIEWS, PARENT_POST_REGISTER_DATE, PARENT_POST_UPDATE_DATE, PARENT_NUMBER)
-VALUES(0, '', '', 0, '', '', 0);
-
-INSERT INTO PARENT_COMMENT
-(PARENT_COMMENT_NUMBER, PARENT_COMMENT_CONTENT, PARENT_COMMENT_REGISTER_DATE, PARENT_COMMENT_UPDATE_DATE, PARENT_NUMBER, PARENT_POST_NUMBER)
-VALUES(0, '', '', '', 0, 0);
-
-INSERT INTO PARENT_FILE
-(PARENT_FILE_NUMBER, PARENT_FILE_NAME, PARENT_FILE_SIZE, PARENT_FILE_UPLOAD_TIME, PARENT_POST_NUMBER)
-VALUES(0, '', 0, '', 0);
-
-INSERT INTO PARENT_REPORT
-(PARENT_REPORT_NUMBER, PARENT_REPORT_TYPE, PARENT_REPORT_CONTENT, PARENT_REPORT_REGISTER_DATE, PARENT_POST_NUMBER)
-VALUES(0, '', '', '', 0);
-
-INSERT INTO PARENT_NOTE
-(PARENT_NOTE_NUMBER, PARENT_NOTE_CONTENT, PARENT_NOTE_SEND_TIME, PARENT_NOTE_ALARM_CHECK, PARENT_NUMBER, PRO_NUMBER)
-VALUES(0, '', '', '', 0, 0);
-
-INSERT INTO PRO
-(PRO_NUMBER, PRO_EMAIL, PRO_PASSWORD, PRO_NAME, PRO_NICKNAME, PRO_PHONE_NUMBER, PRO_ADDRESS, PRO_PROFILE_IMAGE_URL, PRO_FILE, PRO_INTRO)
-VALUES(SEQ_PROJECT.nextval, 'ds221@nffdfffdk.com', '123344244', '나는 전문가', '프로이죠', '010-2233-3324', '수원', 'pro.jpg', 'sd', '안녕하세요.');
-
-INSERT INTO PRO_POST
-(PRO_POST_NUMBER, PRO_POST_TITLE, PRO_POST_CONTENT, PRO_POST_VIEWS, PRO_POST_REGISTER_DATE, PRO_POST_UPDATE_DATE, PRO_NUMBER)
-VALUES(0, '', '', 0, '', '', 0);
-
-INSERT INTO PRO_COMMENT
-(PRO_COMMENT_NUMBER, PRO_COMMENT_CONTENT, PRO_COMMENT_REGISTER_DATE, PRO_COMMENT_UPDATE_DATE, PRO_POST_NUMBER, PRO_NUMBER)
-VALUES(0, '', '', '', 0, 0);
-
-INSERT INTO PRO_FILE
-(PRO_FILE_NUMBER, PRO_FILE_NAME, PRO_FILE_URL, PRO_FILE_SIZE, PRO_FILE_UPLOAD_TIME, PRO_POST_NUMBER)
-VALUES(0, '', '', 0, '', 0);
-
-INSERT INTO PRO_REPORT
-(PRO_REPORT_NUMBER, PRO_REPORT_TYPE, PRO_REPORT_CONTENT, PRO_REPORT_REGISTER_DATE, PRO_POST_NUMBER)
-VALUES(0, '', '', '', 0);
-
-INSERT INTO CLASS
-(CLASS_NUMBER, CLASS_NAME, CLASS_CATEGORY_BIG, CLASS_CATEGORY_SMALL, CLASS_CONTENT, CLASS_PAYMENT_ACCOUNT, PRO_NUMBER)
-VALUES(SEQ_PROJECT.nextval, '어린이 등/하원 시켜주기', '돌봄', '견학/체험', '아이들의 오감을 키우기 위해 학교를 견학/체험 한다.', 17000, 4);
-
-select * from class;
-
-INSERT INTO CLASS_SAVE
-(CLASS_NUMBER, PARENT_NUMBER)
-VALUES(0, 0);
-
-INSERT INTO REVIEW
-(REVIEW_NUMBER, REVIEW_CONTENT, REVIEW_EVALUTION_POINT, REVIEW_REGISTER_DATE, REVIEW_UPDATE_DATE, PARENT_NUMBER, CLASS_NUMBER)
-VALUES(0, '', 0, '', '', 0, 0);
-
-INSERT INTO IMG
-(IMAGE_NUMBER, IMAGE_FILE_URL, CLASS_NUMBER)
-VALUES(0, '', 0);
-
-INSERT INTO RESERVATION
-(RESERVATION_DATE_NUMBER, RESERVATION_TIME_NUMBER, PARENT_NUMBER, CHILD_NUMBER)
-VALUES(0, 0, 0, 0);
-
-INSERT INTO RESERVATION_DATE
-(RESERVATION_DATE_NUMBER, RESERVATION_DATE, CLASS_NUMBER)
-VALUES(0, '', 0);
-
-INSERT INTO RESERVATION_TIME
-(RESERVATION_TIME_NUMBER, RESERVATION_TIME, RESERVATION_DATE_NUMBER)
-VALUES(0, '', 0);
-
-INSERT INTO QUESTION
-(QUESTION_NUMBER, QUESTION_TITLE, QUESTION_CONTENT, QUESTION_REGISTER_DATE, QUESTION_READING_CHECK, QUESTION_STATUS, PARENT_NUMBER)
-VALUES(0, '', '', '', '', '', 0);
-
-INSERT INTO ANSWER
-(ANSWER_NUMBER, ANSWER_CONTENT, QUESTION_NUMBER)
-VALUES(0, '', 0);
-
-
--- 테스트
-
-INSERT INTO PRO
-(PRO_NUMBER, PRO_EMAIL, PRO_PASSWORD, PRO_NAME, PRO_NICKNAME, PRO_PHONE_NUMBER, PRO_ADDRESS, PRO_PROFILE_IMAGE_URL, PRO_FILE, PRO_INTRO)
-VALUES(SEQ_PROJECT.nextval, 'dssd@nsdsfdk.com', '1234', '전문가1', '전문', '030-245-3434', '서울시 강북구', 'SSD.MPG', 'SDS', '전문가입니다.');
-
-select * from pro;
-select * from parent;
-
-INSERT INTO CLASS
-(CLASS_NUMBER, CLASS_NAME, CLASS_CATEGORY_BIG, CLASS_CATEGORY_SMALL, CLASS_CONTENT, CLASS_PAYMENT_ACCOUNT, PRO_NUMBER)
-VALUES(SEQ_PROJECT.nextval, '어린이 등/하원 시켜주기', '돌봄', '놀이터', '아이들과 놀이터에서 재밌고 유익한 시간을 보낸다.', 25000, 15);
-
-select * from class;
-
-INSERT INTO REVIEW
-(REVIEW_NUMBER, REVIEW_CONTENT, REVIEW_EVALUTION_POINT, REVIEW_REGISTER_DATE, REVIEW_UPDATE_DATE, PARENT_NUMBER, CLASS_NUMBER)
-VALUES(SEQ_PROJECT.nextval, '이 수업은 ', 4, sysdate, sysdate, 1, 19);
-
-
-
-select * from review;
-
-
-SELECT
-    rd.reservation_date,
-    cv.class_number,
-    cv.class_name,
-    cv.class_payment_account,
-FROM
-    reservation rv
-        JOIN
-    reservation_date rd ON rv.reservation_date_number = rd.reservation_date_number
-        JOIN
-    class cv ON rd.class_number = cv.class_number
-WHERE
-    rv.parentNumber = #{parentNumber}
-
-
-=======
-SELECT * FROM PRO;
-SELECT * FROM CLASS;
->>>>>>> main
-
 -- 수업 등록에서 추가할 때, 등록된 예약 날짜 및 시간을 들고와서, 수업 상세보기 페이지에서 뿌려줘야 한다.
 SELECT
     CLASS.PRO_NUMBER,
@@ -564,59 +397,10 @@ FROM
             C.CLASS_PAYMENT_ACCOUNT,
             C.CLASS_REGISTER_DATE
         FROM PRO P JOIN CLASS C
-<<<<<<< HEAD
         ON P.PRO_NUMBER = C.PRO_NUMBER
         AND C.PRO_NUMBER = 1
     ) CLASS
 WHERE CLASS.CLASS_NUMBER = 20;
-
-
-SELECT
-    p.pro_profile_image_url, -- 전문가 이미지
-    p.pro_name, -- 전문가 이름
-    COALESCE(AVG(r.review_evaluation_point), 0) AS averageRating, -- 평균 평점, NULL 값은 0으로 대체
-    COUNT(r.review_number) AS reviewCount -- 리뷰 개수
-FROM
-    pro p -- 전문가 테이블
-        LEFT JOIN
-    review r ON p.pro_number = r.class_number -- 리뷰 테이블을 전문가 테이블과 LEFT JOIN
-GROUP BY
-    p.pro_name, -- 전문가 이름으로 그룹화
-    p.pro_profile_image_url -- 전문가 이미지 URL로 그룹화
-ORDER BY
-    averageRating DESC, -- 평균 평점이 높은 순으로 정렬
-    reviewCount DESC;
-
-
-
-SELECT
-    p.pro_profile_image_url, -- 전문가 이미지
-    p.pro_name, -- 전문가 이름
-    COALESCE(AVG(r.review_evaluation_point), 0) AS averageRating, -- 평균 평점, NULL 값은 0으로 대체
-    COUNT(r.review_number) AS reviewCount -- 리뷰 개수
-FROM
-    pro p -- 전문가 테이블
-    JOIN
-    class c -- 리뷰테이블
-    ON p.pro_number = c.PRO_NUMBER -- 리뷰 테이블을 전문가 테이블과 JOIN
-    join review r -- 수업테이블
-    on c.class_number = r.class_number -- 전문가 테이블과 수업테이블 join
-GROUP BY
-    p.pro_name,-- 전문가 이름으로 그룹화
-    p.pro_profile_image_url -- 전문가 이미지 URL로 그룹화
--- ORDER BY
---     averageRating DESC;
-
-
-
-
-
-
-=======
-            ON P.PRO_NUMBER = C.PRO_NUMBER
-            AND C.PRO_NUMBER = 4
-    ) CLASS JOIN IMG I
-    ON CLASS.CLASS_NUMBER = I.CLASS_NUMBER;
 
 -- 예약 날짜와 예약 시간 테이블을 조인하는 쿼리문
 SELECT *
@@ -665,7 +449,6 @@ WHERE RESERVATION_TIME_NUMBER = 244;
 SELECT * FROM RESERVATION_TIME
 WHERE RESERVATION_DATE_NUMBER = 68;
 
-
 -- 11번 수업에 대해서만 예약 시간(09 ~ 18시) 추가 ( 2024-07-10 )
 -- 8, 9번 수업에 대한 예약 날짜, 시간 추가 ( 56, 68번 - 2024-05-24 )
 INSERT INTO RESERVATION_TIME (RESERVATION_TIME_NUMBER, RESERVATION_TIME, RESERVATION_DATE_NUMBER)
@@ -674,19 +457,9 @@ VALUES (1, TO_DATE('2024-07-10 14:00:00', 'YY-MM-DD HH24:MI:SS'), 124);
 -- 날짜에서 시간 데이터만 DATE타입으로 저장하는 방법
 -- TO_DATE(TO_CHAR(TO_DATE('2024-07-10 18:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'HH24:MI:SS'), 'HH24:MI:SS')
 
-SELECT * FROM CLASS;
-SELECT * FROM RESERVATION_DATE;
-SELECT * FROM RESERVATION_TIME;
-SELECT * FROM PRO;
-SELECT * FROM IMG;
-SELECT * FROM REVIEW;
-
 -- 이미지 더미 데이터 추가
 insert into IMG (IMAGE_NUMBER, IMAGE_FILE_URL, CLASS_NUMBER)
 values (SEQ_PROJECT.nextval, 'content-img4.jpg', 13);
-
-SELECT * FROM CLASS;
-SELECT * FROM IMG;
 
 -- 이미지가 등록된 전문가의 특정 수업을 조회
 SELECT
@@ -719,8 +492,6 @@ FROM
      ON CLASS.CLASS_NUMBER = I.CLASS_NUMBER;
 --     AND CLASS.CLASS_NUMBER = 8;
 
-SELECT * FROM RESERVATION_DATE;
-
 -- 특정 수업에 대한 특정 예약날짜 정보와 모든 예약시간 정보 조회
 SELECT *
 FROM(
@@ -733,21 +504,6 @@ FROM(
                                      ON D.RESERVATION_DATE_NUMBER = T.RESERVATION_DATE_NUMBER
     )
 WHERE CLASS_NUMBER = 10;
-
-SELECT P.PARENT_NAME,
-       R.*
-FROM REVIEW R JOIN PARENT P
-                   ON R.PARENT_NUMBER = P.PARENT_NUMBER
-WHERE R.CLASS_NUMBER = 10;
-
-SELECT * FROM RESERVATION_DATE;
-
-SELECT
-    TO_CHAR(RESERVATION_TIME, 'HH24') AS HOUR
-FROM
-    RESERVATION_TIME
-WHERE TO_CHAR(RESERVATION_TIME, 'HH24') > 8 AND TO_CHAR(RESERVATION_TIME, 'HH24') < 20
-ORDER BY HOUR;
 
 SELECT *
 FROM(
@@ -795,9 +551,7 @@ UPDATE PRO
 SET PRO_PROFILE_IMAGE_URL = 'content-img2.jpg'
 WHERE PRO_NUMBER = 4;
 
-SELECT * FROM PRO;
-SELECT * FROM CLASS;
-
+-- 특정 전문가의 수업을 듣는 모든 부모 리스트 조회
 SELECT
     P.PARENT_NAME,
     P.PARENT_NUMBER,
@@ -822,12 +576,54 @@ FROM (
                       C.CLASS_REGISTER_DATE
                   FROM PRO P JOIN CLASS C
                     ON P.PRO_NUMBER = C.PRO_NUMBER
-                    AND P.PRO_NUMBER = 6
+                    AND P.PRO_NUMBER = 4
               ) CLASS JOIN CLASS_SAVE S
                  ON CLASS.CLASS_NUMBER = S.CLASS_NUMBER
      ) SAVE JOIN PARENT P
          ON SAVE.PARENT_NUMBER = P.PARENT_NUMBER
          AND SAVE.PARENT_NUMBER = P.PARENT_NUMBER;
+
+-- 특정 수업에 대한 모든 찜 목록 조회하기 ( 페이징 처리 )
+SELECT *
+FROM (
+         SELECT *
+         FROM (
+                  SELECT
+                              ROWNUM AS RN,
+                              P.PARENT_NAME,
+                              P.PARENT_NUMBER,
+                              P.PARENT_EMAIL,
+                              SAVE.CLASS_NAME,
+                              SAVE.CLASS_CONTENT,
+                              SAVE.CLASS_CATEGORY_BIG,
+                              SAVE.CLASS_CATEGORY_SMALL,
+                              SAVE.CLASS_INTRO
+                  FROM (
+                           SELECT *
+                           FROM (
+                                    SELECT
+                                        P.*,
+                                        C.CLASS_NUMBER,
+                                        C.CLASS_NAME,
+                                        C.CLASS_CATEGORY_BIG,
+                                        C.CLASS_CATEGORY_SMALL,
+                                        C.CLASS_CONTENT,
+                                        C.CLASS_INTRO,
+                                        C.CLASS_PAYMENT_ACCOUNT,
+                                        C.CLASS_REGISTER_DATE
+                                    FROM PRO P JOIN CLASS C
+                                                    ON P.PRO_NUMBER = C.PRO_NUMBER
+                                                        AND P.PRO_NUMBER = 4
+                                ) CLASS JOIN CLASS_SAVE S
+                                             ON CLASS.CLASS_NUMBER = S.CLASS_NUMBER
+                       ) SAVE JOIN PARENT P
+                                   ON SAVE.PARENT_NUMBER = P.PARENT_NUMBER
+                                       AND SAVE.PARENT_NUMBER = P.PARENT_NUMBER
+              )
+         WHERE RN <= 5
+     )
+WHERE RN > 0;
+
 
 
 

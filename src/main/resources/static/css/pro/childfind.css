@@ -61,7 +61,7 @@ button {
     font-family: 'GmarketSansBold';
 }
 
-/* 아이찾기 메인 화면 기능 */
+/* 아이찾기 리스트 css */
 table {
     width: 80%;
     margin: 0 auto;
@@ -80,6 +80,21 @@ table th, table td {
     text-align: center;
 }
 
+table th:nth-of-type(1),
+table td:nth-of-type(1){
+    width: 60%;
+}
+
+table th:nth-of-type(2),
+table td:nth-of-type(2){
+    width: 25%;
+}
+
+table th:nth-of-type(3),
+table td:nth-of-type(3){
+    width: 15%;
+}
+
 table tr{
     transition: 0.3s;
 }
@@ -96,30 +111,77 @@ table th {
     background-color: #f2f2f2;
 }
 
+/* class_list 페이지 버튼 */
+.class_save_btn{
+    width: 300px;
+    height: 40px;
+    margin: 50px auto;
+    display: flex;
+}
+
+.class_save_btn img{
+    width: 40px;
+}
+
+.class_save_btn ul{
+    display: flex;
+    margin: 0 20px;
+}
+
+.class_save_btn ul li{
+    line-height: 33px;
+    margin: 0 20px;
+}
+
+.class_save_btn ul button{
+    display: block;
+    font-size: 25px;
+    width: 25px;
+    height: 40px;
+    color: #C6C6C6;
+}
+
+.class_save_btn ul li:nth-child(1) button{
+    color: #048D3B;
+    border-bottom: 3px solid;
+}
+
 /* 페이지 박스부분 css */
 .pagination {
-    text-align: center;
-    margin-top: 50px;
-    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-.pagination a {
-    color: black;
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-item .page-link {
     padding: 8px 16px;
     text-decoration: none;
-    transition: background-color .3s;
+    color: #4CAF50;
     border: 1px solid #ddd;
-    margin: 0 4px;
 }
 
-.pagination a.active {
+.pagination .page-item .page-link > span{
+    cursor: pointer;
+}
+
+.pagination .page-item .page-link:hover {
+    background-color: #ddd;
+}
+
+.pagination .page-item.active .page-link {
     background-color: #4CAF50;
     color: white;
     border: 1px solid #4CAF50;
 }
 
-.pagination a:hover:not(.active) {
-    background-color: #ddd;
+.pagination .page-item.disabled .page-link {
+    color: #ccc;
+    pointer-events: none;
+    border: 1px solid #ddd;
 }
 
 /* 메일 이미지 css */

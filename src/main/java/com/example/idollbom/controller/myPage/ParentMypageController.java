@@ -157,7 +157,7 @@ public class ParentMypageController {
 
         classSaveService.saveClass(classNumber, parentNumber);
 
-        return "redirect:/ParentMyPage/classSave";
+        return "/html/parent/studyDetail"; // 수업 상세보기 페이지
     }
 
     // 수업 찜 목록 추가 ( 신청하기 페이지에서 찜 목록 버튼 클릭 시 넘어오는 컨트롤러 )
@@ -175,7 +175,7 @@ public class ParentMypageController {
         ParentVO parent_info = parentMapper.selectOne(currentUserName);
         classSaveService.saveClass(long_classNumber, parent_info.getParentNumber());
 
-        return "redirect:/ParentMyPage/classSave";
+        return "/html/apply/class_list_care"; // 신청하기 페이지
     }
 
     //  수업 찜 목록 삭제

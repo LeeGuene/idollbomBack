@@ -45,15 +45,25 @@
             </tbody>
         </table>
 
-        <!-- 페이지 메뉴바  -->
-        <div class="pagination">
-            <!-- &laquo는 이전페이지 이동 -->
-            <a href="#">&laquo;</a>
-            <a class="active" href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <!-- &raquo는 다음페이지로 이동 -->
-            <a href="#">&raquo;</a>
+        <!-- 페이지 네비게이션바  -->
+        <div class="class_save_btn">
+            <ul class="pagination">
+                <li th:classappend="${startPage == 1} ? 'disabled' : ''" class="page-item">
+                    <a class="page-link" th:href="@{/pro/childlist(proNumber=${proNumber}, pageNo=${startPage - 1}, pageSize=${pageSize})}" aria-label="Previous">
+                        <span>&laquo;</span>
+                    </a>
+                </li>
+
+                <li th:each="i : ${#numbers.sequence(startPage, endPage)}" th:classappend="${currentPage == i} ? 'active' : ''" class="page-item">
+                    <a th:href="@{/pro/childlist(proNumber=${proNumber}, pageNo=${i}, pageSize=${pageSize})}" class="page-link" th:text="${i}"></a>
+                </li>
+
+                <li th:classappend="${endPage == totalPages} ? 'disabled' : ''" class="page-item">
+                    <a class="page-link" th:href="@{/pro/childlist(proNumber=${proNumber}, pageNo=${endPage + 1}, pageSize=${pageSize})}" aria-label="Next">
+                        <span>&raquo;</span>
+                    </a>
+                </li>
+            </ul>
         </div>
 
         <!-- 쪽지보내기 모달창 -->
@@ -61,13 +71,13 @@
             <div class="modal">
                 <div class="modal-body profile-body">
                     <div class="header">
-                        <img class="img" src="../images/logo.png" alt="로고">
+                        <img class="img" th:src="@{/images/logo.png}" alt="로고">
                         <h3 id="title">쪽지 보내기</h3>
-                        <button id="close-btn"><img class="x-btn" src="../images/closebtn.png" alt="닫기버튼"></button>
+                        <button id="close-btn"><img class="x-btn" th:src="@{/images/closebtn.png}" alt="닫기버튼"></button>
                     </div>
                     <div class="mb-3">
                         <label for="parent" class="form-label">부모님</label>
-                        <input type="parent" class="form-control" readonly>
+                        <input id="parent" type="parent" class="form-control" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="textarea" class="form-label">내용</label>
@@ -85,8 +95,9 @@
         </form>
     </div>
 
-    <!-- footer -->
+    <!-- 푸터 -->
     <div th:replace="~{/layout/footer :: footer}"></div>
+
 </body>
 <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
 <script th:src="@{/js/modal.js}"></script>
