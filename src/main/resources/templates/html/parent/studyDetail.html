@@ -23,20 +23,20 @@
       <div class="carousel-container">
         <ul class="slider-box">
           <li class="slider-item">
-            <img th:src="@{/images/index_pro_find.jpg}" alt="slider-img4" />
+            <img th:src="@{/backImage/class/{imageFileUrl}(imageFileUrl=${class_info.imageFileUrl})}" alt="slider-img4" />
           </li>
-          <li class="slider-item">
-            <img th:src="@{/images/a4c03f0c5f8fc.png}" alt="slider-img1" />
-          </li>
-          <li class="slider-item">
-            <img th:src="@{/images/cb157270a5310.jpeg}" alt="slider-img2" />
-          </li>
-          <li class="slider-item">
-            <img th:src="@{/images/index_matching.jpg}" alt="slider-img3" />
-          </li>
+<!--          <li class="slider-item">-->
+<!--            <img th:src="@{/images/a4c03f0c5f8fc.png}" alt="slider-img1" />-->
+<!--          </li>-->
+<!--          <li class="slider-item">-->
+<!--            <img th:src="@{/images/cb157270a5310.jpeg}" alt="slider-img2" />-->
+<!--          </li>-->
+<!--          <li class="slider-item">-->
+<!--            <img th:src="@{/images/index_matching.jpg}" alt="slider-img3" />-->
+<!--          </li>-->
         </ul>
-        <button class="left slider-btn"><</button>
-        <button class="right slider-btn">></button>
+<!--        <button class="left slider-btn"><</button>-->
+<!--        <button class="right slider-btn">></button>-->
       </div>
 
       <!-- 카테고리 태그 -->
@@ -52,69 +52,11 @@
 
       <!-- 수업 상세정보 영역 ( 이미지, 내용 ) -->
       <section class="study-detail-info">
-        <!-- 이미지 -->
+        <!-- 써머노트 뿌려주는 곳 -->
         <div class="content-img-wrap">
-          <img src="../../../static/image/content-img1.jpg" alt="content-img1" />
+<!--          <img th:src="@{/images/class/{imgFileUrl}(imgFileUrl = ${class_info.imageFileUrl})}" alt="content-img1" />-->
         </div>
 
-        <!-- 내용 -->
-        <p class="study-content">
-          우리 아이에게 1:1 맞춤으로 선생님이 찾아가는 서비스!! <br />
-          아이의 레벨과 속도에 맞춰 집중력을 최대치로!!
-        </p>
-
-        <!-- 이미지 -->
-        <div class="content-img-wrap">
-          <img src="../../../static/image/content-img2.jpg" alt="content-img1" />
-        </div>
-
-        <!-- 내용 -->
-        <p class="study-content">
-          경제적인 부분까지 해결해준다!! <br />
-          합리적인 비용으로 긴 시간을 수업을 들으실 수 있고, 기존 수업비 대비 30% 할인된 가격 제공!!
-        </p>
-
-        <!-- 이미지 -->
-        <div class="content-img-wrap">
-          <img src="../../../static/image/content-img3.jpg" alt="content-img1" />
-        </div>
-
-        <!-- 내용 -->
-        <p class="study-content">
-          돌봄과 배움을 한 번에!!<br />
-          놀이부터 숙제, 공부까지 아이에게 정말로 도움이 되는 시간들!!
-        </p>
-
-        <!-- 버튼 클릭 전까지는 숨김 -->
-        <div class="hidden-content">
-          <!-- 이미지 -->
-          <div class="content-img-wrap">
-            <img src="../../../static/image/content-img3.jpg" alt="content-img1" />
-          </div>
-
-          <!-- 내용 -->
-          <p class="study-content">
-            돌봄과 배움을 한 번에!!<br />
-            놀이부터 숙제, 공부까지 아이에게 정말로 도움이 되는 시간들!!
-          </p>
-
-          <!-- 이미지 -->
-          <div class="content-img-wrap">
-            <img src="../../../static/image/content-img2.jpg" alt="content-img2" />
-          </div>
-          <!-- 내용 -->
-          <p class="study-content">
-            돌봄과 배움을 한 번에!!<br />
-            놀이부터 숙제, 공부까지 아이에게 정말로 도움이 되는 시간들!!
-          </p>
-        </div>
-
-        <!-- js가 적용된 태그 -->
-        <button class="study-more-btn">
-          <span>수업 더 보기</span>
-          <i class="fa-solid fa-angle-down open-btn"></i>
-          <i class="fa-solid fa-angle-up close-btn"></i>
-        </button>
 
       </section>
     </div>
@@ -126,7 +68,6 @@
         <div th:object="${class_info}">
           <!-- 강사명 및 프로필 보기 버튼 -->
           <div class="pro-profile-wrap">
-            <input type="hidden" name="classNumber" th:field="*{classNumber}" readonly/>
             <input type="hidden" name="loginId" th:value="${parent_info.parentNumber}" />
             <h1>강사명</h1>
             <p th:text="*{proName}">이근</p>
@@ -173,7 +114,7 @@
           <div class="payment-button-wrap">
             <div>
               <button type="submit" class="payment-btn">수업 결제하기</button>
-              <a th:href="@{/ParentMyPage/insertSaveClass(classNumber=${class_info.classNumber}, parentNumber=${parent_info.parentNumber})}">
+              <a th:href="@{/ParentMyPage/insertSaveClass(classNumber=*{classNumber}, parentNumber=${parent_info.parentNumber}, proNumber=*{proNumber})}">
                 수업 찜하기
               </a>
             </div>

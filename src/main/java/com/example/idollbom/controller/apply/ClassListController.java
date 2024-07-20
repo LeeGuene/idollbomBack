@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -203,8 +204,11 @@ public class ClassListController {
     // 수업 상세보기 페이지
     @GetMapping("/detail")
     public String classDetail(@RequestParam("classNumber") Long classNumber,
-                         @RequestParam("proNumber") Long proNumber,
-                         Model model) {
+                              @RequestParam("proNumber") Long proNumber,
+                              Model model) {
+
+        log.info("수업 pk : " + classNumber);
+        log.info("전문가 pk : " + proNumber);
 
         // 부모 정보를 받아오는 코드
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -230,6 +234,5 @@ public class ClassListController {
 
         return "/html/parent/studyDetail";
     }
-
 
 }

@@ -23,6 +23,7 @@
             CLASS_INTRO,
             CLASS_CONTENT,
             CLASS_CATEGORY_SMALL,
+            CLASS_CATEGORY_BIG,
             PRO_ADDRESS,
             TO_CHAR(CLASS_REGISTER_DATE, 'YYYY"년 "MM"월 "DD"일') AS CLASS_REGISTER_DATE,
             COALESCE(review_count, 0) AS REVIEW_COUNT
@@ -36,6 +37,7 @@
                 c.CLASS_INTRO,
                 c.CLASS_CONTENT,
                 c.CLASS_CATEGORY_SMALL,
+                C.CLASS_CATEGORY_BIG,
                 p.PRO_ADDRESS,
                 c.CLASS_REGISTER_DATE,
                 COUNT(v.CLASS_NUMBER) AS review_count
@@ -51,6 +53,7 @@
                         c.CLASS_INTRO,
                         c.CLASS_CONTENT,
                         c.CLASS_CATEGORY_SMALL,
+                        C.CLASS_CATEGORY_BIG,
                         p.PRO_ADDRESS,
                         c.CLASS_REGISTER_DATE
                     )

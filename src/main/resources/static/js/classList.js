@@ -46,6 +46,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const saveBtns = document.querySelectorAll('#save-btn');
     let classNumber; // 수업 pk
     let imageSrc;  // 찜 버튼 src속성
+    let bigCategory = document.querySelector('#classCategoryBig');
+    let smallCategory = document.querySelector('input[name="category"]');
+    console.log(bigCategory);
 
     saveBtns.forEach(saveBtn =>{
         // 리스트에 있는 찜 버튼들 중에 클릭 이벤트가 발생한 버튼만
@@ -63,6 +66,21 @@ document.addEventListener("DOMContentLoaded", function() {
                 form.method = 'post';
                 form.action = '/ParentMyPage/insertSaveClass/' + classNumber;
                 document.body.appendChild(form);
+
+                // Create hidden input for category
+                let bigCategoryInput = document.createElement('input');
+                let smallCategoryInput = document.createElement('input');
+                bigCategoryInput.type = 'hidden';
+                smallCategoryInput.type = 'hidden';
+
+                bigCategoryInput.name = 'bigCategory';
+                smallCategoryInput.name = 'smallCategory';
+                bigCategoryInput.value = bigCategory;
+                smallCategoryInput.value = smallCategory;
+
+                form.appendChild(bigCategoryInput);
+                form.appendChild(smallCategoryInput);
+
                 form.submit();
 
             }else{

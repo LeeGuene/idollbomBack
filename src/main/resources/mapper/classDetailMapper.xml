@@ -6,6 +6,7 @@
     <!-- 이미지가 등록된 특정 전문가의 특정 수업을 조회 -->
     <select id="selectClassDetail" resultType="ClassDetailDTO">
         SELECT
+            I.IMAGE_NUMBER,
             I.IMAGE_FILE_URL,
             I.IMAGE_NUMBER,
             CLASS.PRO_NUMBER,
@@ -17,7 +18,7 @@
             CLASS.CLASS_INTRO,
             CLASS.CLASS_CONTENT,
             CLASS.CLASS_PAYMENT_ACCOUNT,
-            TO_CHAR(CLASS.CLASS_REGISTER_DATE, 'YYYY-MM-DD / HH24') || '시'  AS CLASS_REGISTER_DATE
+            TO_CHAR(CLASS.CLASS_REGISTER_DATE, 'YYYY-MM-DD') AS CLASS_REGISTER_DATE
         FROM
             (
                 SELECT

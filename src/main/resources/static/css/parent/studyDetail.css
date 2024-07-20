@@ -79,7 +79,7 @@ html{
 .slider-box{
   transition: 1s;
   display: flex;
-  transform: translateX(-100%);
+  /*transform: translateX(-100%);*/
   height: 100%; /* 500px */
 }
 
