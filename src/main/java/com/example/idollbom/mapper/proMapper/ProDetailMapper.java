@@ -3,6 +3,9 @@ package com.example.idollbom.mapper.proMapper;
 import com.example.idollbom.domain.dto.prodto.ProDetailDTO;
 import com.example.idollbom.domain.dto.prodto.ProReviewListDTO;
 import com.example.idollbom.domain.vo.ProVO;
+import com.example.idollbom.domain.dto.prodto.proReportDTO;
+import com.example.idollbom.domain.vo.ProPostVO;
+import com.example.idollbom.domain.vo.classVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -18,4 +21,13 @@ public interface ProDetailMapper {
 
     // 전문가 로그인 정보를 넘겨서 아이찾기 테스트
     ProVO selectOne(Long proNumber);
+
+    // 전문가 전체 수업 조회하기
+    List<classVO> selectMyClass(Long proNumber);
+
+    // 전문가 신고목록 조회하기
+    List<proReportDTO> selectProReport(Long proNumber);
+
+    // 전문가
+    List<ProPostVO> selectProPost(Long proNumber);
 }

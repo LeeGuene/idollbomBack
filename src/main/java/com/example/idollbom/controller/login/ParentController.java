@@ -1,5 +1,6 @@
 package com.example.idollbom.controller.login;
 import com.example.idollbom.domain.dto.logindto.ParentDTO;
+import com.example.idollbom.domain.vo.ProVO;
 import com.example.idollbom.service.loginservice.ParentService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -40,12 +41,23 @@ public class ParentController {
         return "redirect:/ParentMyPage/kids";
 }
 
-
 //  로그아웃화면 이동
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
         return "redirect:/user/login";
+    }
+
+//  프로 회원가입폼 이동
+    @GetMapping("/proSignup")
+    public String proSignupForm(ProVO proVO) {
+        return "html/login/proRegisterPage"; // 프로 회원가입 페이지
+    }
+
+//  프로 회원가입폼 제출
+    @PostMapping("/proSignup")
+    public String proSignup() {
+        return "redirect:/user/login"; // 회원가입 후 로그인 페이지로 리디렉션
     }
 
 }
