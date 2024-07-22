@@ -26,4 +26,29 @@
              ) DETAIL JOIN REVIEW R
                 ON DETAIL.CLASS_NUMBER = R.CLASS_NUMBER;
     </select>
+
+    <!-- 전문가의 모든 수업 조회 -->
+    <select id="selectMyClass">
+        select * from class
+        where pro_number = #{proNumber}
+    </select>
+
+    <!-- 전문가의 모든 신고 조회  -->
+    <select id="selectProReport">
+        SELECT pr.PRO_REPORT_NUMBER,
+               pr.PRO_REPORT_CONTENT,
+               pr.PRO_REPORT_REGISTER_DATE,
+               pr.PRO_POST_NUMBER,
+               pp.PRO_NUMBER,
+               pp.PRO_POST_TITLE
+        FROM pro_report pr
+                 LEFT JOIN pro_post pp ON pr.PRO_POST_NUMBER = pp.PRO_POST_NUMBER
+        WHERE pp.PRO_NUMBER = #{proNumber}
+    </select>
+
+    <!-- 전문가의 내가쓴 모든 게시글 조회 -->
+    <select id="selectProPost">
+        SELECT * from pro_post
+        where pro_number = #{proNumber}
+    </select>
 </mapper>

@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../../static/css/layout/header.css">
-    <link rel="stylesheet" href="../../../../static/css/layout/footer.css">
-    <link rel="stylesheet" href="../../../../static/css/myPage/pro/propage_hate.css">
+    <link rel="stylesheet" href="/css/layout/header.css">
+    <link rel="stylesheet" href="/css/layout/footer.css">
+    <link rel="stylesheet" href="/css/myPage/pro/propage_hate.css">
     <title>전문가 신고목록 페이지</title>
 </head>
 
@@ -47,21 +47,21 @@
             <div class="incontainer">
                 <div class="menu-bar">
                     <div class="menu-bar-option">
-                        <a href="../../html/propage/propage_fixprofile.html">내정보 수정</a>
+                        <a th:href="@{/proMyPage/profile}">내정보 수정</a>
                     </div>
                     <hr class="custom-hr">
                     <div class="menu-bar-option">
-                        <a href="../../html/propage/propage_class.html">내 수업 목록</a>
+                        <a th:href="@{/proMyPage/proClass}">내 수업 목록</a>
                     </div>
                     <div class="menu-bar-option">
-                        <p>신고 목록</p>
+                        <a th:href="@{/proMyPage/report}">신고 목록</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a href="../../html/propage/propage_proPost.html">내가 쓴 게시글</a>
+                        <a th:href="@{/proMyPage/MyPost}">내가 쓴 게시글</a>
                     </div>
                     <hr class="custom-hr">
                     <div class="menu-bar-option">
-                        <a href="../../html/propage/propage_calender.html">캘린더</a>
+                        <p>캘린더</p>
                     </div>
                     <div class="myprofile">
                         <div class="profileimage">
@@ -82,58 +82,20 @@
                 <!-- 신고 목록을 누르면 나오는 화면 -->
                 <div class="mainbox">
                     <a href="/write/getWritedPage?postId=<%= post.postId %>">
-                        <div class="mypost">
-                            <div>
+                        <div class="mypost" th:each="reports : ${report}" th:if="${not #lists.isEmpty(report)}">
+                            <div th:text="${reports.proPostTitle}">
                                 게시글제목
                             </div>
-                            <p>신고내용</p>
-                            <button>취소</button>
-
+                            <p th:text="${reports.proReportContent}">신고내용</p>
+                            <p th:text="${#dates.format(reports.proReportRegisterDate, 'yyyy-MM-dd HH:mm:ss')}"></p>
                         </div>
 
-                        <p>저장한 게시글이 아직 없습니다.</p>
+                        <p th:if="${#lists.isEmpty(report)}">저장한 게시글이 아직 없습니다.</p>
 
                     </a>
 
                 </div>
             </div>
-        </div>
-
-
-
-        <!-- 팝업 배경 -->
-        <div class="popup-bg" id="popup-bg" onclick="closePopup()"></div>
-
-        <!-- 팝업 내용 -->
-        <div class="popup" id="popup">
-            <h2>프로필 편집</h2>
-            <form class="form-signin" action="/auth/<%= userId %>/update" method="POST" enctype="multipart/form-data">
-                <div class="profileimage2">
-                    <img src="<%= result.imageUrl %>" alt="profileImage" class="img">
-                </div>
-                <div class="input-container">
-                    <label for="inputChangeNickName" class="sr-only">닉네임 변경</label>
-                    <input type="text" name="nickname" id="inputChangeNickName" class="form-control"
-                        placeholder="변경할 닉네임" autofocus required>
-                </div>
-                <div class="input-container-three">
-                    <label for="inputDetailAddress" class="sr-only">주소 변경</label>
-                    <input type="text" name="city" id="inputAddress1" class="form-control2" placeholder="시도" autofocus>
-                    <input type="text" name="district" id="inputAddress2" class="form-control2" placeholder="시군구"
-                        autofocus>
-                    <input type="text" name="town" id="inputAddress3" class="form-control2" placeholder="읍면동" autofocus>
-                </div>
-                <div class="input-container">
-                    <input type="text" name="detail" id="inputDetailAddress" class="form-control" placeholder="상세주소"
-                        autofocus required>
-                </div>
-                <div class="input-container">
-                    <label for="profileImage" class="sr-only">프로필 이미지 변경</label>
-                    <input type="file" name="profileImage" id="profileImage" class="form-control">
-                </div>
-                <button type="button" onclick="closePopup()" id="popupButton">취소</button>
-                <button type="submit" id="popupButton">저장</button>
-            </form>
         </div>
     </div>
 

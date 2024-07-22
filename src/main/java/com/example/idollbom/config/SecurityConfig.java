@@ -61,7 +61,6 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/user/login") // 로그아웃 성공 후 리디렉션 경로
                 )
 
-
                 .build();
     }
 

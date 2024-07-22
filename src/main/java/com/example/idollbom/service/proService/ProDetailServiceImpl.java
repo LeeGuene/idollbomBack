@@ -2,6 +2,7 @@ package com.example.idollbom.service.proService;
 
 import com.example.idollbom.domain.dto.prodto.ProDetailDTO;
 import com.example.idollbom.domain.dto.prodto.ProReviewListDTO;
+import com.example.idollbom.domain.vo.ProPostVO;
 import com.example.idollbom.mapper.proMapper.ProDetailMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,10 @@ public class ProDetailServiceImpl implements ProDetailService {
     @Override
     public List<ProReviewListDTO> findAllReviewList(Long proNumber) {
         return proDetailMapper.selectAllReviewList(proNumber);
+    }
+
+    @Override
+    public List<ProPostVO> selectProPost(Long proNumber) {
+        return proDetailMapper.selectProPost(proNumber);
     }
 }

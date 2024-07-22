@@ -4,10 +4,9 @@ import lombok.Data;
 
 @Data
 public class ProDetailDTO {
-
+    private String proNickname;
     private String proName;
     private String proIntro;
     private Long parentNumber;
     private Long classNumber;
-
 }
