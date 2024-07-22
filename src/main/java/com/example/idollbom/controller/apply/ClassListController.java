@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -202,9 +203,12 @@ public class ClassListController {
 
     // 수업 상세보기 페이지
     @GetMapping("/detail")
-    public String detail(@RequestParam("classNumber") Long classNumber,
-                         @RequestParam("proNumber") Long proNumber,
-                         Model model) {
+    public String classDetail(@RequestParam("classNumber") Long classNumber,
+                              @RequestParam("proNumber") Long proNumber,
+                              Model model) {
+
+        log.info("수업 pk : " + classNumber);
+        log.info("전문가 pk : " + proNumber);
 
         // 부모 정보를 받아오는 코드
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -214,14 +218,13 @@ public class ClassListController {
         // 특정 수업에 대한 상세정보
         ClassDetailDTO class_info = classDetailService.findClassDetail(proNumber, classNumber);
 
-        // 특정 수업에 대한 모든 리뷰 조회
-        List<ReviewOneListDTO> reviews = classReviewService.findOneReviewList(proNumber, classNumber);
-
-        reviews.stream().map(ReviewOneListDTO::toString).forEach(log::info);
+        // 특정 수업에 대한 전체리뷰 조회
+        List<ReviewOneListDTO> reviews = classReviewService.findOneReviewList(classNumber);
 
         // 특정 수업에 대한 모든 예약날짜 및 시간정보
         List<ReservationInfoDTO> reservation_infos = classDetailService.findReservation(classNumber);
 
+        // 수업 찜 목록 추가할 때, parentNumber 필요!!
         ParentVO parent_info = parentMapper.selectOne(currentUserName); // 수업 상세보기로 넘어갈 때부터 parentNumber 를 넘기기 위한 조치
 
         model.addAttribute("class_info", class_info);
@@ -231,6 +234,5 @@ public class ClassListController {
 
         return "/html/parent/studyDetail";
     }
-
 
 }

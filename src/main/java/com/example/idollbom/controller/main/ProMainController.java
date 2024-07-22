@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/promain")
 @Slf4j
 public class ProMainController {
-
+    
+    // 전문가 메인 페이지로 이동하면서 proNumber 넘겨주기
     @GetMapping
     public String proMain() {
+
         return "/html/main/index_pro.html";
     }
 

@@ -1,17 +1,25 @@
 package com.example.idollbom.controller.myPage;
+import com.example.idollbom.domain.dto.applydto.ClassListDTO;
 import com.example.idollbom.domain.dto.logindto.ParentDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.classSaveDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.mailDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.paymentDTO;
+import com.example.idollbom.domain.dto.parentdto.ReviewDTO;
 import com.example.idollbom.domain.vo.*;
+import com.example.idollbom.mapper.loginmapper.ParentMapper;
+import com.example.idollbom.service.applyservice.ClassListService;
 import com.example.idollbom.service.myPageservice.parentservice.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.Console;
 import java.io.IOException;
@@ -34,6 +42,8 @@ public class ParentMypageController {
     private final parentInfoService parentInfoService;
     private final classSaveService classSaveService;
     private final paymentService paymentService;
+    private final ParentMapper parentMapper;
+    private final ClassListService classListService;
 
 //  kid 페이지로 이동
     @GetMapping("/kids")
@@ -141,28 +151,82 @@ public class ParentMypageController {
         return "redirect:/ParentMyPage/myInformation";
     }
 
-    // 수업 찜 목록 추가
+    // 수업 찜 목록 추가 ( 수업 상세보기에서 찜 목록 추가 버튼 클릭 시 넘어오는 컨트롤러 )
     @GetMapping("/insertSaveClass")
     public String selectFavoriteClass(@RequestParam(value= "classNumber") Long classNumber,
-                                      @RequestParam(value= "parentNumber") Long parentNumber){
+                                      @RequestParam(value= "parentNumber") Long parentNumber,
+                                      @RequestParam(value="proNumber") Long proNumber,
+                                      RedirectAttributes redirectAttributes){
+
+        log.info("수업 찜 클릭 받아온 데이터 : " + classNumber);
+        log.info("수업 찜 클릭 받아온 데이터 : " + parentNumber);
+        log.info("수업 찜 클릭 받아온 데이터 : " + proNumber);
 
         classSaveService.saveClass(classNumber, parentNumber);
+        redirectAttributes.addAttribute("proNumber", proNumber);
+        redirectAttributes.addAttribute("classNumber", classNumber);
 
-        return "html/myPage/parent/myFavoriteClass";
+        return "redirect:/class/detail"; // 수업 상세보기 페이지
     }
 
-//  수업 찜 목록 삭제
+    // 수업 찜 목록 추가 ( 신청하기 페이지에서 찜 목록 버튼 클릭 시 넘어오는 컨트롤러 )
+//    @PostMapping("/insertSaveClass/{classNumber}")
+//    public String selectFavoriteClass(@PathVariable(value="classNumber") Long classNumber,
+//                                      @RequestParam(value="bigCategory") String bigCategory,
+//                                      @RequestParam(value="smallCategory") String smallCategory,
+//                                      @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
+//                                      @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
+//                                      RedirectAttributes redirectAttributes){
+//        // 부모 정보를 받아오는 코드
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+//        String currentUserName = userDetails.getUsername();
+//
+//        log.info("classList.js 에서 받아온 데이터 : " + bigCategory);
+//        log.info("classList.js 에서 받아온 데이터 : " + smallCategory);
+//        log.info("classList.js 에서 받아온 데이터 : " + pageNo);
+//        log.info("classList.js 에서 받아온 데이터 : " + pageSize);
+//
+//        // ==================== 수업 찜 목록 추가하는 로직 ==================== //
+//        // String -> Long 변환
+////        Long long_classNumber = Long.parseLong(classNumber);
+//
+//        ParentVO parent_info = parentMapper.selectOne(currentUserName);
+//        classSaveService.saveClass(classNumber, parent_info.getParentNumber());
+//
+//        // ================================================================= //
+//
+//        // 리다이렉트되는 컨트롤러로 매개변수 전달
+//        redirectAttributes.addAttribute("category", smallCategory);
+//        redirectAttributes.addAttribute("pageNo", pageNo);
+//        redirectAttributes.addAttribute("pageSize", pageSize);
+//
+//        // 카테고리에 따라 요청할 리다이렉트 주소가 다르다.
+//        if(bigCategory.equals("돌봄")){
+//            return "redirect:/class/classcare";
+//        }else if(bigCategory.equals("예능")){
+//            return "redirect:/class/classentertainment";
+//        }else if(bigCategory.equals("운동")){
+//            return "redirect:/class/classsport";
+//        }else{
+//            return "redirect:/class/classstudy";
+//        }
+//    }
+
+    //  수업 찜 목록 삭제
     @GetMapping("/deleteFavorite/{classNumber}")
     public String deleteFavorite(@PathVariable(name = "classNumber") Long classNumber){
         classSaveService.deleteClass(classNumber);
         return "redirect:/ParentMyPage/classSave";
     }
 
-//  결제한 수업내역 보기
+    //  결제한 수업내역 보기
     @GetMapping("/myPayment")
     public String selectMyPayment(Model model){
         List<paymentDTO> payment = paymentService.paymentList();
+        model.addAttribute("review", new ReviewDTO());
         model.addAttribute("Mypayment",  payment);
+        log.info("Review object: " + model.getAttribute("Mypayment"));
         return "html/myPage/parent/Payment";
     }
 }

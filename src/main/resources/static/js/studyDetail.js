@@ -49,25 +49,114 @@ btns.forEach(btn=>{
 // ===========================================================
 // 더 보기 버튼 및 내용에 관련된 js.
 
-const hiddenContent = document.querySelector(".hidden-content");
-const moreBtn = document.querySelector(".study-more-btn");
+// const hiddenContent = document.querySelector(".hidden-content");
+// const moreBtn = document.querySelector(".study-more-btn");
 
-moreBtn.addEventListener('click', ()=>{
-
-  // open 클래스 여부에 따라 다른 화살표가 나타나도록 css 설정
-  moreBtn.classList.toggle("open");
-  // hidden 클래스 여부에 따라 height를 다르게 설정 
-  hiddenContent.classList.toggle("hidden");
-
-  // 버튼의 내용을 클릭할 때마다 변경
-  if(moreBtn.children[0].textContent === '수업 더 보기'){
-    moreBtn.children[0].textContent = "접기";
-  }else{
-    moreBtn.children[0].textContent = "수업 더 보기";
-  }
-});
+// moreBtn.addEventListener('click', ()=>{
+//
+//   // open 클래스 여부에 따라 다른 화살표가 나타나도록 css 설정
+//   moreBtn.classList.toggle("open");
+//   // hidden 클래스 여부에 따라 height를 다르게 설정
+//   hiddenContent.classList.toggle("hidden");
+//
+//   // 버튼의 내용을 클릭할 때마다 변경
+//   if(moreBtn.children[0].textContent === '수업 더 보기'){
+//     moreBtn.children[0].textContent = "접기";
+//   }else{
+//     moreBtn.children[0].textContent = "수업 더 보기";
+//   }
+// });
 
 // =========================================================
+
+// const loginId = $('input[name="loginId"]').val();
+
+// 날짜 포맷
+// function formatDate(dateString) {
+//     const now = new Date();
+//     const reviewDate = new Date(dateString); // 문자열을 Date 객체로 변환
+//
+//     const nowYear = now.getFullYear();
+//     const nowMonth = now.getMonth();
+//     const nowDate = now.getDate();
+//
+//     const reviewYear = reviewDate.getFullYear();
+//     const reviewMonth = reviewDate.getMonth();
+//     const reviewDateDate = reviewDate.getDate();
+//
+//     let displayText = "";
+//
+//     // 년, 월, 일이 모두 같은 경우 "오늘"로 표시
+//     // if (nowYear === commentYear && nowMonth === commentMonth && nowDate === commentDateDate) {
+//     //     displayText = "오늘";
+//     // } else {
+//     // 그 외의 경우, 정해진 포맷으로 표시
+//     const yy = reviewYear.toString().slice(-2); // 마지막 두 자리를 가지고 옴.
+//     const M = reviewMonth + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
+//     const d = reviewDateDate;
+//     const HH = reviewDate.getHours().toString().padStart(2, '0');
+//     const mm = reviewDate.getMinutes().toString().padStart(2, '0'); // 두자리 수 일 때 앞에 0을 붙임.
+//
+//     displayText = `${yy}년 ${M}월 ${d}일 ${HH}시 ${mm}분`;
+//     // }
+//     return displayText;
+// }
+
+// 페이지가 로드된 이후에 리뷰 목록 조회 함수가 실행되도록 한다.
+// $(document).ready(function () {
+//     let classNumber = $('input[name="classNumber"]').val();
+//     getReviews(classNumber);
+// })
+
+// 댓글 목록 조회 함수
+// function getReviews(classNumber) {
+//     $.ajax({
+//         method : 'get',
+//         url : '/reviews/' + classNumber,
+//         success : function(reviews) {
+//             let reviewListArea = $('.review-list')
+//
+//             // 댓글이 작성될 해당 섹션 비우기.
+//             reviewListArea.empty();
+//
+//             // 댓글 없을 때 표시할 html
+//             if(reviews.length === 0){
+//                 reviewListArea.append(
+//                     `<div>첫번째 댓글을 남겨주세요!</div>`
+//                 );
+//             }
+//
+//             // 리뷰 있을 때 목록을 뿌려줄 반복문.
+//             reviews.forEach(function(review) {
+//                 let reviewDate = formatDate(review.reviewRegisterDate);
+//                 let editStr = '';
+//
+//                 // 작성일과 수정일을 비교해서 html 에 다른 모양으로 표시.
+//                 if(review.reviewUpdateDate !== review.reviewRegisterDate){
+//                     reviewDate = formatDate(review.reviewUpdateDate);
+//                     editStr = ' (수정)';
+//                 }
+//
+//                 // 종합적으로 뿌려줄 html
+//                 let reviewElement = `
+//                         <li class="review-item" id="review-${review.reviewNumber}">
+//                           <input type="hidden" name="reviewNumber" value="${review.reviewNumber}" />
+//                           <textarea name="review-content" class="review-content" readonly>${review.reviewContent}</textarea>
+//                           <div>
+//                             <p>작성일 : <span>${reviewDate}${editStr}</span></p>
+//                           </div>
+//                         </li>
+//                     `
+//                 // 해당 섹션에 추가
+//                 // 댓글의 갯 수 만큼 차례대로 추가될 것이다.
+//                 reviewListArea.append(reviewElement);
+//             })
+//         },
+//         error : function(data) {
+//             console.error(data, "불러오기 실패");
+//         }
+//     })
+// }
 
 // paymentcheck.html 로 넘어갈 때, 예약 날짜 pk 넘기기
 window.onload = function(){
@@ -88,14 +177,18 @@ window.onload = function(){
       reservationArea.appendChild(reservation);
     });
 
+    console.log(reservationArea);
     // 선택한 예약정보에서 예약날짜 pk만 저장
     reservationArea.addEventListener("change", ()=>{
       selectedReservation = reservationArea.options[reservationArea.selectedIndex];
       reservationDateNumber = selectedReservation.querySelector('#reservationDateNumber').value;
+      console.log(reservationDateNumber);
     });
 
     // 결제하기 버튼 클릭시, 서버로 요청
-    paymentBtn.addEventListener("click", ()=>{
+    paymentBtn.addEventListener("click", (e)=>{
+      e.preventDefault();
+      console.log(classNumber);
       reservationForm.method = 'get';
       reservationForm.action = '/paymentcheck/' + reservationDateNumber + '/' + classNumber;
       reservationForm.submit();

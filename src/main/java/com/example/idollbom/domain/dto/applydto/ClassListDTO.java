@@ -13,6 +13,7 @@ public class ClassListDTO {
     private String className;
     private String classIntro;
     private String classCategorySmall;
+    private String classCategoryBig;
     private String classContent;
     private String classRegisterDate;
     private Long reviewCount;

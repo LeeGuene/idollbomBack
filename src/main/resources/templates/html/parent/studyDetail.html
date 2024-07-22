@@ -23,20 +23,9 @@
       <div class="carousel-container">
         <ul class="slider-box">
           <li class="slider-item">
-            <img th:src="@{/images/index_pro_find.jpg}" alt="slider-img4" />
-          </li>
-          <li class="slider-item">
-            <img th:src="@{/images/a4c03f0c5f8fc.png}" alt="slider-img1" />
-          </li>
-          <li class="slider-item">
-            <img th:src="@{/images/cb157270a5310.jpeg}" alt="slider-img2" />
-          </li>
-          <li class="slider-item">
-            <img th:src="@{/images/index_matching.jpg}" alt="slider-img3" />
+            <img th:src="@{/backImage/class/{imageFileUrl}(imageFileUrl=${class_info.imageFileUrl})}" alt="slider-img4" />
           </li>
         </ul>
-        <button class="left slider-btn"><</button>
-        <button class="right slider-btn">></button>
       </div>
 
       <!-- 카테고리 태그 -->
@@ -52,70 +41,9 @@
 
       <!-- 수업 상세정보 영역 ( 이미지, 내용 ) -->
       <section class="study-detail-info">
-        <!-- 이미지 -->
-        <div class="content-img-wrap">
-          <img src="../../../static/image/content-img1.jpg" alt="content-img1" />
+        <!-- 써머노트 뿌려주는 곳 -->
+        <div class="content-img-wrap" th:utext="${class_info.classContent}">
         </div>
-
-        <!-- 내용 -->
-        <p class="study-content">
-          우리 아이에게 1:1 맞춤으로 선생님이 찾아가는 서비스!! <br />
-          아이의 레벨과 속도에 맞춰 집중력을 최대치로!!
-        </p>
-
-        <!-- 이미지 -->
-        <div class="content-img-wrap">
-          <img src="../../../static/image/content-img2.jpg" alt="content-img1" />
-        </div>
-
-        <!-- 내용 -->
-        <p class="study-content">
-          경제적인 부분까지 해결해준다!! <br />
-          합리적인 비용으로 긴 시간을 수업을 들으실 수 있고, 기존 수업비 대비 30% 할인된 가격 제공!!
-        </p>
-
-        <!-- 이미지 -->
-        <div class="content-img-wrap">
-          <img src="../../../static/image/content-img3.jpg" alt="content-img1" />
-        </div>
-
-        <!-- 내용 -->
-        <p class="study-content">
-          돌봄과 배움을 한 번에!!<br />
-          놀이부터 숙제, 공부까지 아이에게 정말로 도움이 되는 시간들!!
-        </p>
-
-        <!-- 버튼 클릭 전까지는 숨김 -->
-        <div class="hidden-content">
-          <!-- 이미지 -->
-          <div class="content-img-wrap">
-            <img src="../../../static/image/content-img3.jpg" alt="content-img1" />
-          </div>
-
-          <!-- 내용 -->
-          <p class="study-content">
-            돌봄과 배움을 한 번에!!<br />
-            놀이부터 숙제, 공부까지 아이에게 정말로 도움이 되는 시간들!!
-          </p>
-
-          <!-- 이미지 -->
-          <div class="content-img-wrap">
-            <img src="../../../static/image/content-img2.jpg" alt="content-img2" />
-          </div>
-          <!-- 내용 -->
-          <p class="study-content">
-            돌봄과 배움을 한 번에!!<br />
-            놀이부터 숙제, 공부까지 아이에게 정말로 도움이 되는 시간들!!
-          </p>
-        </div>
-
-        <!-- js가 적용된 태그 -->
-        <button class="study-more-btn">
-          <span>수업 더 보기</span>
-          <i class="fa-solid fa-angle-down open-btn"></i>
-          <i class="fa-solid fa-angle-up close-btn"></i>
-        </button>
-
       </section>
     </div>
 
@@ -126,10 +54,8 @@
         <div th:object="${class_info}">
           <!-- 강사명 및 프로필 보기 버튼 -->
           <div class="pro-profile-wrap">
-            <!-- 부모 정보 -->
-<!--            <input type="hidden" name="parent_info" th:value="${parent_info}" />-->
-            <!-- 동적으로 리뷰를 추가하기 위해 필요한 classNumber -->
-            <input type="hidden" name="classNumber" th:field="*{classNumber}" readonly/>
+            <input type="hidden" name="classNumber" th:value="*{classNumber}" />
+            <input type="hidden" name="loginId" th:value="${parent_info.parentNumber}" />
             <h1>강사명</h1>
             <p th:text="*{proName}">이근</p>
             <!-- 해당 강사의 프로필 보기 페이지로 넘어갈 때 주소에 넘겨줄 데이터만 작성함. -->
@@ -145,8 +71,8 @@
 
           <!-- 수업 내용 -->
           <div class="study-content-wrap">
-            <h1>수업 내용</h1>
-            <p th:text="*{classContent}">방학 숙제나 부족했던 교과 진도 따라잡기, 1시간은 수학, 국어 <br />
+            <h1>수업 소개</h1>
+            <p th:text="*{classIntro}">방학 숙제나 부족했던 교과 진도 따라잡기, 1시간은 수학, 국어 <br />
               등 아이에게 필요한 수업을 자란다 쌤과 1:1 맞춤으로 학습해요. <br />
               2시간은 아이가 좋아하는 놀이로 충분히 놀면서 학기 중 스트레스
               날리고 학습 효과까지 UP!!
@@ -174,8 +100,8 @@
           <!-- 수업 결제, 수업 찜하기 버튼 -->
           <div class="payment-button-wrap">
             <div>
-              <button type="button" class="payment-btn">수업 결제하기</button>
-              <a th:href="@{/ParentMyPage/insertSaveClass(classNumber=${class_info.classNumber}, parentNumber=${parent_info.parentNumber})}">
+              <button type="submit" class="payment-btn">수업 결제하기</button>
+              <a th:href="@{/ParentMyPage/insertSaveClass(classNumber=*{classNumber}, parentNumber=${parent_info.parentNumber}, proNumber=*{proNumber})}">
                 수업 찜하기
               </a>
             </div>
@@ -188,14 +114,19 @@
         <!-- 리뷰 전체 목록 -->
         <div class="review-list-wrap" sec:authorize="isAuthenticated()">
           <h1>리뷰 리스트</h1>
+          <!-- 자바스크립트로 내부 리뷰 리스트 전체 목록 뿌려줌 -->
           <ul class="review-list">
             <li class="review-item" th:each="review : ${reviews}" th:object="${review}">
-              <input type="hidden" name="reviewNumber" th:field="*{reviewNumber}" />
-              <textarea th:field="*{reviewContent}" name="review-content" class="review-content" readonly></textarea>
+              <input type="hidden" th:value="*{reviewNumber}" />
+              <textarea th:text="*{reviewContent}" name="review-content" class="review-content" readonly></textarea>
               <div>
-                <p>작성자 : <span th:text="${parent_info.parentName}"></span></p>
-                <p>등록일 : <span th:text="*{reviewRegisterDate}"></span></p>
-                <p>수정일 : <span th:text="*{reviewUpdateDate}"></span></p>
+                <p>작성자 : <span th:text="${review.parentName}"></span></p>
+                <div th:if="*{reviewRegisterDate == reviewUpdateDate}">
+                  <p>작성일 : <span th:text="*{#temporals.format(reviewRegisterDate, 'yy년 M월 d일 HH시 mm분')}"></span></p>
+                </div>
+                <div th:unless="*{reviewRegisterDate == reviewUpdateDate}">
+                  <p>작성일 : <span th:text="*{#temporals.format(reviewUpdateDate, 'yy년 M월 d일 HH시 mm분')} + ' (수정)' "></span></p>
+                </div>
               </div>
             </li>
           </ul>

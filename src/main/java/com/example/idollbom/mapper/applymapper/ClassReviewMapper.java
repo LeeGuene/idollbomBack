@@ -12,7 +12,7 @@ import java.util.List;
 public interface ClassReviewMapper {
 
     // 특정 전문가의 하나의 수업에 대한 리뷰 조회
-    List<ReviewOneListDTO> selectOneAllReview(Long proNumber, Long classNumber);
+    List<ReviewOneListDTO> selectOneAllReview(Long classNumber);
 
     // 특정 전문가의 모든 수업에 대한 리뷰를 조회
     List<ReviewAllListDTO> selectAllReview(Long proNumber);

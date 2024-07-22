@@ -6,13 +6,10 @@ const btnCloseModal2=document.querySelector('.close-btnen2');
 const closeInsertModal= document.querySelector('.close-btn')
 const closeInsertModal2= document.querySelector('.cancle')
 
-
 // 아이수정 모달 삭제버튼
 closeInsertModal2.addEventListener("click", ()=>{
     modal2.style.display="none";
 });
-
-
 
 // 아이추가 모달 삭제버튼
 closeInsertModal.addEventListener("click", ()=>{
@@ -40,3 +37,5 @@ btnCloseModal.addEventListener("click", ()=>{
 btnCloseModal2.addEventListener("click", ()=>{
     modal2.style.display="none";
 });
+
+
