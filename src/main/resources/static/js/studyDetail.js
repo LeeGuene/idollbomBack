@@ -49,23 +49,23 @@ btns.forEach(btn=>{
 // ===========================================================
 // 더 보기 버튼 및 내용에 관련된 js.
 
-const hiddenContent = document.querySelector(".hidden-content");
-const moreBtn = document.querySelector(".study-more-btn");
+// const hiddenContent = document.querySelector(".hidden-content");
+// const moreBtn = document.querySelector(".study-more-btn");
 
-moreBtn.addEventListener('click', ()=>{
-
-  // open 클래스 여부에 따라 다른 화살표가 나타나도록 css 설정
-  moreBtn.classList.toggle("open");
-  // hidden 클래스 여부에 따라 height를 다르게 설정 
-  hiddenContent.classList.toggle("hidden");
-
-  // 버튼의 내용을 클릭할 때마다 변경
-  if(moreBtn.children[0].textContent === '수업 더 보기'){
-    moreBtn.children[0].textContent = "접기";
-  }else{
-    moreBtn.children[0].textContent = "수업 더 보기";
-  }
-});
+// moreBtn.addEventListener('click', ()=>{
+//
+//   // open 클래스 여부에 따라 다른 화살표가 나타나도록 css 설정
+//   moreBtn.classList.toggle("open");
+//   // hidden 클래스 여부에 따라 height를 다르게 설정
+//   hiddenContent.classList.toggle("hidden");
+//
+//   // 버튼의 내용을 클릭할 때마다 변경
+//   if(moreBtn.children[0].textContent === '수업 더 보기'){
+//     moreBtn.children[0].textContent = "접기";
+//   }else{
+//     moreBtn.children[0].textContent = "수업 더 보기";
+//   }
+// });
 
 // =========================================================
 
@@ -177,14 +177,18 @@ window.onload = function(){
       reservationArea.appendChild(reservation);
     });
 
+    console.log(reservationArea);
     // 선택한 예약정보에서 예약날짜 pk만 저장
     reservationArea.addEventListener("change", ()=>{
       selectedReservation = reservationArea.options[reservationArea.selectedIndex];
       reservationDateNumber = selectedReservation.querySelector('#reservationDateNumber').value;
+      console.log(reservationDateNumber);
     });
 
     // 결제하기 버튼 클릭시, 서버로 요청
-    paymentBtn.addEventListener("click", ()=>{
+    paymentBtn.addEventListener("click", (e)=>{
+      e.preventDefault();
+      console.log(classNumber);
       reservationForm.method = 'get';
       reservationForm.action = '/paymentcheck/' + reservationDateNumber + '/' + classNumber;
       reservationForm.submit();

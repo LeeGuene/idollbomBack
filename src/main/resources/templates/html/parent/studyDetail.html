@@ -25,18 +25,7 @@
           <li class="slider-item">
             <img th:src="@{/backImage/class/{imageFileUrl}(imageFileUrl=${class_info.imageFileUrl})}" alt="slider-img4" />
           </li>
-<!--          <li class="slider-item">-->
-<!--            <img th:src="@{/images/a4c03f0c5f8fc.png}" alt="slider-img1" />-->
-<!--          </li>-->
-<!--          <li class="slider-item">-->
-<!--            <img th:src="@{/images/cb157270a5310.jpeg}" alt="slider-img2" />-->
-<!--          </li>-->
-<!--          <li class="slider-item">-->
-<!--            <img th:src="@{/images/index_matching.jpg}" alt="slider-img3" />-->
-<!--          </li>-->
         </ul>
-<!--        <button class="left slider-btn"><</button>-->
-<!--        <button class="right slider-btn">></button>-->
       </div>
 
       <!-- 카테고리 태그 -->
@@ -53,11 +42,8 @@
       <!-- 수업 상세정보 영역 ( 이미지, 내용 ) -->
       <section class="study-detail-info">
         <!-- 써머노트 뿌려주는 곳 -->
-        <div class="content-img-wrap">
-<!--          <img th:src="@{/images/class/{imgFileUrl}(imgFileUrl = ${class_info.imageFileUrl})}" alt="content-img1" />-->
+        <div class="content-img-wrap" th:utext="${class_info.classContent}">
         </div>
-
-
       </section>
     </div>
 
@@ -68,6 +54,7 @@
         <div th:object="${class_info}">
           <!-- 강사명 및 프로필 보기 버튼 -->
           <div class="pro-profile-wrap">
+            <input type="hidden" name="classNumber" th:value="*{classNumber}" />
             <input type="hidden" name="loginId" th:value="${parent_info.parentNumber}" />
             <h1>강사명</h1>
             <p th:text="*{proName}">이근</p>
@@ -84,8 +71,8 @@
 
           <!-- 수업 내용 -->
           <div class="study-content-wrap">
-            <h1>수업 내용</h1>
-            <p th:text="*{classContent}">방학 숙제나 부족했던 교과 진도 따라잡기, 1시간은 수학, 국어 <br />
+            <h1>수업 소개</h1>
+            <p th:text="*{classIntro}">방학 숙제나 부족했던 교과 진도 따라잡기, 1시간은 수학, 국어 <br />
               등 아이에게 필요한 수업을 자란다 쌤과 1:1 맞춤으로 학습해요. <br />
               2시간은 아이가 좋아하는 놀이로 충분히 놀면서 학기 중 스트레스
               날리고 학습 효과까지 UP!!
