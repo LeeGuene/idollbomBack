@@ -4,26 +4,30 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" th:href="@{/css/board/community.css}">
+    <link rel="stylesheet" th:href="@{/css/main/index_parents.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
     <title>IDOLL봄</title>
 </head>
 
 <body>
+<div th:replace="~{/layout/header_parents :: header}"></div>
     <div id="container">
         <div class="community">
             <h2>자유게시판(부모)</h2>
-            <p>우리아이에게 필요한 소식을 자유롭게 공유합니다.</p>
+            <p>우리 아이에게 필요한 소식을 자유롭게 공유합니다.</p>
 
             <div class="community_search">
-                <p><button onclick="window.location='./board/freeBoardForm_parent.html'">작성하기</button></p>
+                <p><a th:href="@{/parentcommunity/write}">작성하기</a></p>
 
                 <div>
-                    <select>
-                        <option>전체</option>
-                        <option>제목</option>
-                        <option>내용</option>
-                    </select>
-
                     <form>
+                        <select>
+                            <option>전체</option>
+                            <option>제목</option>
+                            <option>내용</option>
+                        </select>
+
                         <input type="text" placeholder="검색어를 입력해주세요">
                         <input type="image" th:src="@{/images/comu_search.png}" alt="검색하기">
                     </form>
@@ -31,13 +35,21 @@
             </div>
 
             <table>
+                <thead>
+                <tr>
+                    <th class="number">이미지</th>
+                    <th class="title">제목</th>
+                    <th class="title">게시글 상세</th>
+                    <th class="writer">작성자</th>
+                </tr>
+                </thead>
                 <tbody>
                     <!-- 실제로는 반복 돌릴 리스트 보기 편하게 다 붙여놓음 -->
-                    <tr>
-                        <td><b>[소식]</b></td>
-                        <td>스무디킹 멤버십 정책 변경 안내</td>
-                        <td><a href="./board/freeBoardDetail_parent.html">more</a></td>
-                        <td>2023-07-10</td>
+                    <tr th:each="community : ${communities}">
+                        <td><img th:src="@{/images/{filename}(filename=${community.parentProfileImageUrl})}" alt="프로필"></td>
+                        <td th:text="${community.parentPostTitle}"></td>
+                        <td><a href="./board/freeBoardDetail_parent.html">자세히 보기</a></td>
+                        <td th:text="${community.parentNickname}"></td>
                     </tr>
                 </tbody>
             </table>
@@ -53,12 +65,8 @@
             </div>
         </div>
     </div>
+<div th:replace="~{/layout/footer :: footer}"></div>
 </body>
 <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
 <script th:src="@{/js/motion.js}"></script>
-
-<script>
-
-</script>
-
 </html>

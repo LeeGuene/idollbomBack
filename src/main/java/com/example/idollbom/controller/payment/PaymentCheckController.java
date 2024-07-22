@@ -1,7 +1,9 @@
 package com.example.idollbom.controller.payment;
 
 import com.example.idollbom.domain.dto.applydto.ClassDetailDTO;
+import com.example.idollbom.domain.dto.parentdto.ReservationInfoDTO;
 import com.example.idollbom.domain.vo.kidVO;
+import com.example.idollbom.service.applyservice.ClassDetailService;
 import com.example.idollbom.service.myPageservice.parentservice.kidsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +25,8 @@ public class PaymentCheckController {
     // 아이의 이름을 가져오기 위한 의존성 주입
     private final kidsService kidsService;
 
-    // 수업 상세보길글 가져오기 위한 의존성 주입
+    // 수업 상세보기 가져오기 위한 의존성 주입
+    private final ClassDetailService classDetailService;
 
 
     // 결제확인창 컨틀롤러
@@ -34,6 +37,15 @@ public class PaymentCheckController {
                                Model model) {
         System.out.println("예약날짜 pk : " + reservationDateNumber);
         System.out.println("주소로 받아온 classNumber : " + classNumber);
+
+        // 나중에 전문가 정보를 받아와야하는 코드 추가 지금은 33이 디폴트
+        ClassDetailDTO proInfo = classDetailService.findClassDetail(33L, classNumber);
+        System.out.println("================" + proInfo);
+        model.addAttribute("proInfo", proInfo);
+
+        // 선택한 예약날짜와 시간 가져오기
+        List<ReservationInfoDTO> resDTO = classDetailService.findReservation(classNumber);
+        model.addAttribute("resDTO", resDTO);
 
         // 로그인한 부모에 대한 아이 이름 가져오기
         List<kidVO> kids = kidsService.selectKidsList();
