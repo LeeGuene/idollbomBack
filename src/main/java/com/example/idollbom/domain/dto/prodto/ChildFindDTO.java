@@ -14,5 +14,6 @@ public class ChildFindDTO {
     private String classContent;
     private String classCategoryBig;
     private String classCategorySmall;
+    private String classIntro;
 
 }

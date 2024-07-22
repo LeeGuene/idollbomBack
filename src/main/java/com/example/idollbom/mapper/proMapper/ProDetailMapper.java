@@ -2,6 +2,7 @@ package com.example.idollbom.mapper.proMapper;
 
 import com.example.idollbom.domain.dto.prodto.ProDetailDTO;
 import com.example.idollbom.domain.dto.prodto.ProReviewListDTO;
+import com.example.idollbom.domain.vo.ProVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,4 +15,7 @@ public interface ProDetailMapper {
 
     // 전문가 전체 리뷰 조회하기
     List<ProReviewListDTO> selectAllReviewList(Long proNumber);
+
+    // 전문가 로그인 정보를 넘겨서 아이찾기 테스트
+    ProVO selectOne(Long proNumber);
 }

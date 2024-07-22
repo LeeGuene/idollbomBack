@@ -19,6 +19,7 @@ public class classSaveServiceImpl implements classSaveService {
 
     private final classSaveMapper classSaveMapper;
     private final ParentMapper parentMapper;
+
     @Override
     public List<classSaveDTO> selectClassList() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -34,7 +35,7 @@ public class classSaveServiceImpl implements classSaveService {
     // 수업 찜 목록 추가
     @Override
     public void saveClass(Long classNumber, Long parentNumber) {
-        classSaveMapper.insertClass(classNumber, parentNumber);
+        classSaveMapper.insertClassSave(classNumber, parentNumber);
     }
 
     @Override

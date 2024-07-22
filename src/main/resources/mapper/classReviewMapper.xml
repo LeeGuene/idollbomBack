@@ -2,50 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.idollbom.mapper.applymapper.ClassReviewMapper">
-    <!-- 특정 전문가의 모든 수업에 대한 리뷰를 조회 -->
-    <!-- 전문가 프로필 내 하단에 뿌려질 데이터 -->
-    <select id="selectAllReview" resultType="ReviewAllListDTO">
-        SELECT
-            CLASS.PRO_NUMBER,
-            CLASS.REVIEW_NUMBER,
-            CLASS.REVIEW_CONTENT,
-            CLASS.REVIEW_EVALUTION_POINT,
-            CLASS.REVIEW_REGISTER_DATE,
-            CLASS.REVIEW_UPDATE_DATE,
-            CLASS.CLASS_NUMBER,
-            P.PRO_NUMBER
-        FROM (
-                 SELECT *
-                 FROM CLASS C JOIN REVIEW R
-                       ON C.CLASS_NUMBER = R.CLASS_NUMBER
-             ) CLASS JOIN PRO P
-        ON CLASS.PRO_NUMBER = #{proNumber}
-    </select>
-
     <!-- 특정 전문가의 하나의 수업에 대한 모든 리뷰 조회 -->
-    <!-- 가져올 정보는 수정해야 함. -->
     <select id="selectOneAllReview" resultType="ReviewOneListDTO">
         SELECT
-            R.REVIEW_NUMBER,
-            R.REVIEW_CONTENT,
-            R.REVIEW_EVALUTION_POINT,
-            R.REVIEW_REGISTER_DATE,
-            R.REVIEW_UPDATE_DATE,
-            R.PARENT_NUMBER,
-            R.CLASS_NUMBER
+            PA.PARENT_NAME,
+            RE.REVIEW_NUMBER,
+            RE.REVIEW_CONTENT,
+            RE.REVIEW_EVALUTION_POINT,
+            RE.REVIEW_REGISTER_DATE,
+            RE.REVIEW_UPDATE_DATE,
+            PA.PARENT_NUMBER,
+            RE.CLASS_NUMBER
         FROM (
                  SELECT
-                     P.PRO_NAME,
-                     C.CLASS_NUMBER,
-                     C.CLASS_CATEGORY_BIG,
-                     C.CLASS_CATEGORY_SMALL,
-                     C.CLASS_CONTENT
-                 FROM PRO P JOIN CLASS C
-                     ON P.PRO_NUMBER = C.PRO_NUMBER
-                     AND P.PRO_NUMBER = #{proNumber}
-                     AND C.CLASS_NUMBER = #{classNumber}
-             ) DETAIL JOIN REVIEW R
-               ON DETAIL.CLASS_NUMBER = R.CLASS_NUMBER
+                        R.REVIEW_NUMBER,
+                        R.REVIEW_CONTENT,
+                        R.REVIEW_EVALUTION_POINT,
+                        R.REVIEW_REGISTER_DATE,
+                        R.REVIEW_UPDATE_DATE,
+                        R.PARENT_NUMBER,
+                        R.CLASS_NUMBER
+                 FROM (
+                          SELECT
+                              P.PRO_NAME,
+                              C.CLASS_NUMBER,
+                              C.CLASS_CATEGORY_BIG,
+                              C.CLASS_CATEGORY_SMALL,
+                              C.CLASS_CONTENT
+                          FROM PRO P JOIN CLASS C
+                              ON P.PRO_NUMBER = C.PRO_NUMBER
+                              AND C.CLASS_NUMBER = #{classNumber}
+                  ) CLASS JOIN REVIEW R
+                    ON CLASS.CLASS_NUMBER = R.CLASS_NUMBER
+        )  RE JOIN PARENT PA
+            ON RE.PARENT_NUMBER = PA.PARENT_NUMBER
     </select>
 
 </mapper>

@@ -16,8 +16,9 @@ public class ClassDetailDTO {
     private String className;               // 수업 제목
     private String classCategoryBig;        // 수업 카테고리(대)
     private String classCategorySmall;      // 수업 카테고리(소)
+    private String classIntro;              // 수업 소개(요약)
     private String classContent;            // 수업 내용
     private String classPaymentAccount;     // 수업 결제금액
-    private String classRegisterDate;        // 수업 등록일
+    private String classRegisterDate;       // 수업 등록일
 
 }
