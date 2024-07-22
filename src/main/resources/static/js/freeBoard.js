@@ -11,8 +11,8 @@ fileBtn.addEventListener("change", ()=>{
   uploadName.style.border = '2px solid #00B455'; // 테투리 css
 });
 
-const titleInput = document.querySelector("#title-input");
-const contentInput = document.querySelector("#content-input");
+const titleInput = document.querySelector("#parentPostTitle");
+const contentInput = document.querySelector("#parentPostContent");
 
 // 게시글 제목, 내용 클릭 시 적용되는 css
 titleInput.onclick = ()=>{

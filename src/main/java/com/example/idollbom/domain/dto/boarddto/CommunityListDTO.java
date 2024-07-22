@@ -11,10 +11,7 @@ public class CommunityListDTO {
 
     private int parentPostNumber;
     private String parentPostTitle;
-    private String parentPostContent;
-    private int parentPostViews;
-    private LocalDateTime parentPostRegisterDate;
-    private LocalDateTime parentPostUpdateDate;
     private int parentNumber;
-    private int fileCount;
+    private String parentNickname;
+    private String parentProfileImageUrl;
 }

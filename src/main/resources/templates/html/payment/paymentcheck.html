@@ -25,22 +25,22 @@
         <form action="#">
             <div class="container">
                 <!-- 수업 이미지 띄어주는 div -->
-                <div class="class-container">
+                <div class="class-container" th:object="${proInfo}">
                     <div class="class-image-section">
                         <label class="image-label">수업이미지</label>
-                        <img class="image" src="../images/kids1.jpg" alt="수업이미지">
+                        <img class="image" th:src="@{/backImage/class/{filename}(filename=${proInfo.imageFileUrl})}" alt="수업이미지">
                     </div>
 
                     <!-- 실제 선택한 수업 가져오는 div -->
                     <div class="class-details">
                         <div class="detail-item">
                             <label for="name">강사명</label>
-                            <input type="text" class="form-control" id="name" value="모은서" readonly>
+                            <input type="text" class="form-control" id="name" th:value="*{proName}" readonly>
                         </div>
 
                         <div class="detail-item">
                             <label for="classname">수업제목</label>
-                            <input type="text" class="form-control" id="classname" value="동화책 읽기" readonly>
+                            <input type="text" class="form-control" id="classname" th:value="*{className}" readonly>
                         </div>
 
                         <div class="detail-item">
@@ -55,7 +55,7 @@
 
                         <div class="detail-item">
                             <label for="money">결제 금액</label>
-                            <input type="text" class="form-control" id="money" value="₩50,000" readonly>
+                            <input type="text" class="form-control" id="money" th:value="*{classPaymentAccount}" readonly>
                         </div>
                     </div>
                 </div>
