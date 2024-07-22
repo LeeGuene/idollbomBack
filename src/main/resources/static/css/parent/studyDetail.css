@@ -79,7 +79,7 @@ html{
 .slider-box{
   transition: 1s;
   display: flex;
-  transform: translateX(-100%);
+  /*transform: translateX(-100%);*/
   height: 100%; /* 500px */
 }
 
@@ -539,42 +539,42 @@ html{
 }
 
 /* 리뷰 목록 내 button css */
-.review-list button{
-  padding: 10px 20px;
-  color: #fff;
-  border-radius: 10px;
-  margin-top: 5px;
-  font-size: 16px;
-  transition: 0.3s;
-}
+/*.review-list button{*/
+/*  padding: 10px 20px;*/
+/*  color: #fff;*/
+/*  border-radius: 10px;*/
+/*  margin-top: 5px;*/
+/*  font-size: 16px;*/
+/*  transition: 0.3s;*/
+/*}*/
 
-.review-list > li > div > button:nth-child(1){
-  background-color: #029a49b5;
-}
+/*.review-list > li > div > button:nth-child(1){*/
+/*  background-color: #029a49b5;*/
+/*}*/
 
-.review-list > li > div >  button:nth-child(2){
-  background-color: #f93271a6;
-}
+/*.review-list > li > div >  button:nth-child(2){*/
+/*  background-color: #f93271a6;*/
+/*}*/
 
-.review-list > li > div > button:nth-child(1):hover{
-  background-color: #029a49;
-}
+/*.review-list > li > div > button:nth-child(1):hover{*/
+/*  background-color: #029a49;*/
+/*}*/
 
-.review-list > li > div > button:nth-child(2):hover{
-  background-color: #f93271;
-}
+/*.review-list > li > div > button:nth-child(2):hover{*/
+/*  background-color: #f93271;*/
+/*}*/
 
 /* 리뷰 목록 버튼 position css */
-.review-list > li > div > button{
-  position: absolute;
-  bottom: 10px;
-}
+/*.review-list > li > div > button{*/
+/*  position: absolute;*/
+/*  bottom: 10px;*/
+/*}*/
 
-.review-list > li > div > button:nth-child(1){
-  right: 90px;
-}
+/*.review-list > li > div > button:nth-child(1){*/
+/*  right: 90px;*/
+/*}*/
 
-.review-list > li > div > button:nth-child(2){
-  right: 10px;
-}
+/*.review-list > li > div > button:nth-child(2){*/
+/*  right: 10px;*/
+/*}*/
 

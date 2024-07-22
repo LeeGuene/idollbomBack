@@ -23,6 +23,7 @@
             CLASS_INTRO,
             CLASS_CONTENT,
             CLASS_CATEGORY_SMALL,
+            CLASS_CATEGORY_BIG,
             PRO_ADDRESS,
             TO_CHAR(CLASS_REGISTER_DATE, 'YYYY"년 "MM"월 "DD"일') AS CLASS_REGISTER_DATE,
             COALESCE(review_count, 0) AS REVIEW_COUNT
@@ -36,25 +37,26 @@
                 c.CLASS_INTRO,
                 c.CLASS_CONTENT,
                 c.CLASS_CATEGORY_SMALL,
+                C.CLASS_CATEGORY_BIG,
                 p.PRO_ADDRESS,
                 c.CLASS_REGISTER_DATE,
                 COUNT(v.CLASS_NUMBER) AS review_count
                 FROM
-                PRO p
-                JOIN CLASS c ON p.PRO_NUMBER = c.PRO_NUMBER AND c.CLASS_CATEGORY_SMALL = #{category}
-                LEFT JOIN REVIEW v ON v.CLASS_NUMBER = c.CLASS_NUMBER
-                GROUP BY
-                p.PRO_NUMBER,
-                p.PRO_PROFILE_IMAGE_URL,
-                p.PRO_NAME,
-                c.CLASS_NUMBER,
-                c.CLASS_NAME,
-                c.CLASS_INTRO,
-                c.CLASS_CONTENT,
-                c.CLASS_CATEGORY_SMALL,
-                p.PRO_ADDRESS,
-                c.CLASS_REGISTER_DATE
-                )
+                    PRO p JOIN CLASS c ON p.PRO_NUMBER = c.PRO_NUMBER AND c.CLASS_CATEGORY_SMALL = #{category}
+                    LEFT JOIN REVIEW v ON v.CLASS_NUMBER = c.CLASS_NUMBER
+                    GROUP BY
+                        p.PRO_NUMBER,
+                        p.PRO_PROFILE_IMAGE_URL,
+                        p.PRO_NAME,
+                        c.CLASS_NUMBER,
+                        c.CLASS_NAME,
+                        c.CLASS_INTRO,
+                        c.CLASS_CONTENT,
+                        c.CLASS_CATEGORY_SMALL,
+                        C.CLASS_CATEGORY_BIG,
+                        p.PRO_ADDRESS,
+                        c.CLASS_REGISTER_DATE
+                    )
             WHERE rownum &lt;= #{endRow}
         )
         WHERE rnum &gt; #{startRow}
@@ -133,5 +135,5 @@
                 </choose>
             </if>
         </where>
-</select>
+    </select>
 </mapper>

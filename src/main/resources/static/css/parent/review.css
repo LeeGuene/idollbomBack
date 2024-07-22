@@ -93,7 +93,7 @@ button {
 }
 
 .board-form > div > h1{
-  width: 100px;
+  width: 200px;
   vertical-align: middle;
 }
 
@@ -134,99 +134,87 @@ button {
 }
 
 /* 전문가의 정보 */
-.pro-detaillist{
-  margin-left: 5%; 
-}
-
-.pro-detaillist table tr td{
-  font-size: 30px;
-}
 .pro-detaillist table tr td img {
-  width: 100px;
-  height: 100px;
-  padding-left: 50%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
 }
 
 /* 추가한 css */
 /* 전문가 리뷰 전체 목록 css */
-#review-write-area{
-  display: flex;
-  flex-direction: column;
-  row-gap: 30px;
-}
+/*#review-write-area{*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  row-gap: 30px;*/
+/*}*/
 
-#review-write-area > div{
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-}
+/*#review-write-area > div{*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  row-gap: 10px;*/
+/*}*/
 
-#review-write-area > div > label{
-  padding-bottom: 20px;
-  border-bottom: 2px solid #ccc;
-  font-size: 24px;
-}
+/*#review-write-area > div > label{*/
+/*  padding-bottom: 20px;*/
+/*  border-bottom: 2px solid #ccc;*/
+/*  font-size: 24px;*/
+/*}*/
 
-#review-write-area > div > textarea{
-  width: 90%;
-  height: 100px;
-  margin: 0 auto;
-  resize: none;
-  margin-top: 20px;
-  padding: 20px;
-}
+/*#review-write-area > div > textarea{*/
+/*  width: 90%;*/
+/*  height: 100px;*/
+/*  margin: 0 auto;*/
+/*  resize: none;*/
+/*  margin-top: 20px;*/
+/*  padding: 20px;*/
+/*}*/
 
-/* 별점 css */
-#review-write-area > .evaluation-wrap{
-  display: grid;
-  grid-template-columns: 100px 200px;
-  width: 20%;
-}
+/*!* 별점 css *!*/
+/*#review-write-area > .evaluation-wrap{*/
+/*  display: grid;*/
+/*  grid-template-columns: 100px 200px;*/
+/*  width: 20%;*/
+/*}*/
 
-#review-write-area > .evaluation-wrap > label {
-  font-size: 18px;
-  height: 100%;
-  border: none;
-  margin-top: 22px;
-}
+/*#review-write-area > .evaluation-wrap > label {*/
+/*  font-size: 18px;*/
+/*  height: 100%;*/
+/*  border: none;*/
+/*  margin-top: 22px;*/
+/*}*/
 
-#review-write-area > .evaluation-wrap > select{
-  width: 100%;
-  outline: none;
-  border: none;
-  flex-grow: 1;
-}
+/*#review-write-area > .evaluation-wrap > select{*/
+/*  width: 100%;*/
+/*  outline: none;*/
+/*  border: none;*/
+/*  flex-grow: 1;*/
+/*}*/
 
 /* 리뷰 작성 button css */
-#review-write-area > button{
-  align-self: flex-end;
-  background-color: #00b45488;
-  color: #fff;
-  border-radius: 10px;
-  padding: 10px 20px;
-  margin-right: 60px;
-  transition: 0.3s;
-}
+/*#review-write-area > button{*/
+/*  align-self: flex-end;*/
+/*  background-color: #00b45488;*/
+/*  color: #fff;*/
+/*  border-radius: 10px;*/
+/*  padding: 10px 20px;*/
+/*  margin-right: 60px;*/
+/*  transition: 0.3s;*/
+/*}*/
 
-#review-write-area > button:hover{
-  background-color: #00b454;
-}
-
+/*#review-write-area > button:hover{*/
+/*  background-color: #00b454;*/
+/*}*/
 
 /* 리뷰 리스트 영역 css */
 .review-list-wrap{
   width: 90%;
-  margin-top: 50px;
-}
-
-/* 리뷰 리스트 layout css */
-.board-form > .review-list-wrap{
+  margin-top: 150px;
   flex-direction: column;
   width: 100%;
 }
 
 /* 리뷰 리스트 제목 css */
-.board-form > .review-list-wrap > h1{
+.review-list-wrap > h1{
   font-size: 24px;
   width: 100%;
   border-bottom: 2px solid #ccc;
@@ -243,7 +231,7 @@ button {
 }
 
 .review-list > li{
-  height: 220px;
+  height: 250px;
   border: 2px solid #ccc;
   border-radius: 5px;
   position: relative;
@@ -264,44 +252,44 @@ button {
 }
 
 /* 리뷰 목록 내 button css */
-.review-list button{
-  padding: 10px 20px;
-  color: #fff;
-  border-radius: 10px;
-  margin-top: 5px;
-  font-size: 16px;
-  transition: 0.3s;
-}
+/*.review-list button{*/
+/*  padding: 10px 20px;*/
+/*  color: #fff;*/
+/*  border-radius: 10px;*/
+/*  margin-top: 5px;*/
+/*  font-size: 16px;*/
+/*  transition: 0.3s;*/
+/*}*/
 
-.review-list > li > a:nth-last-of-type(1) > button{
-  background-color: #029a49b5;
-}
+/*.review-list > li > a:nth-last-of-type(1) > button{*/
+/*  background-color: #029a49b5;*/
+/*}*/
 
-.review-list > li > a:nth-last-of-type(2) > button{
-  background-color: #f93271a6;
-}
+/*.review-list > li > a:nth-last-of-type(2) > button{*/
+/*  background-color: #f93271a6;*/
+/*}*/
 
-.review-list > li > a:nth-last-of-type(1) > button:hover{
-  background-color: #029a49;
-}
+/*.review-list > li > a:nth-last-of-type(1) > button:hover{*/
+/*  background-color: #029a49;*/
+/*}*/
 
-.review-list > li > a:nth-last-of-type(2) > button:hover{
-  background-color: #f93271;
-}
+/*.review-list > li > a:nth-last-of-type(2) > button:hover{*/
+/*  background-color: #f93271;*/
+/*}*/
 
-/* 댓글 목록 버튼 position css */
-.review-list > li > a{
-  position: absolute;
-  bottom: 10px;
-}
+/* 리뷰 목록 버튼 position css */
+/*.review-list > li > a{*/
+/*  position: absolute;*/
+/*  bottom: 10px;*/
+/*}*/
 
-.review-list > li > a:nth-last-of-type(1){
-  right: 20px;
-}
+/*.review-list > li > a:nth-last-of-type(1){*/
+/*  right: 20px;*/
+/*}*/
 
-.review-list > li > a:nth-last-of-type(2){
-  right: 100px;
-}
+/*.review-list > li > a:nth-last-of-type(2){*/
+/*  right: 100px;*/
+/*}*/
 
 
 

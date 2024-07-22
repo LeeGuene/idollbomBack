@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Component
@@ -15,11 +16,11 @@ import java.time.LocalDateTime;
 public class ReservationDateVO {
 
     private Long reservationDateNumber;
-    private LocalDateTime reservationDate;
+    private LocalDate reservationDate;
     private Long classNumber;
 
     @Builder
-    public ReservationDateVO(Long reservationDateNumber, LocalDateTime reservationDate, Long classNumber) {
+    public ReservationDateVO(Long reservationDateNumber, LocalDate reservationDate, Long classNumber) {
         this.reservationDateNumber = reservationDateNumber;
         this.reservationDate = reservationDate;
         this.classNumber = classNumber;

@@ -2,37 +2,67 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.idollbom.mapper.proMapper.ChildFindMapper">
-
-    <!-- 특정 전문가의 수업을 찜한 모든 부모 조회 -->
+    <!-- 수업을 찜한 모든 부모 리스트에 대한 페이징 처리 쿼리 -->
     <select id="selectAllParent" resultType="ChildFindDTO">
         SELECT
-            P.PARENT_NAME,
-            P.PARENT_NUMBER,
-            P.PARENT_EMAIL,
-            SAVE.CLASS_NAME,
-            SAVE.CLASS_CONTENT,
-            SAVE.CLASS_CATEGORY_BIG,
-            SAVE.CLASS_CATEGORY_SMALL
+            PAGE.PARENT_NAME,
+            PAGE.PARENT_NUMBER,
+            PAGE.PARENT_EMAIL,
+            PAGE.CLASS_NAME,
+            PAGE.CLASS_CONTENT,
+            PAGE.CLASS_CATEGORY_BIG,
+            PAGE.CLASS_CATEGORY_SMALL,
+            PAGE.CLASS_INTRO
+        FROM (
+                SELECT *
+                FROM (
+                    SELECT
+                        ROWNUM AS RN,
+                        P.PARENT_NAME,
+                        P.PARENT_NUMBER,
+                        P.PARENT_EMAIL,
+                        SAVE.CLASS_NAME,
+                        SAVE.CLASS_CONTENT,
+                        SAVE.CLASS_CATEGORY_BIG,
+                        SAVE.CLASS_CATEGORY_SMALL,
+                        SAVE.CLASS_INTRO
+                    FROM (
+                        SELECT *
+                        FROM (
+                            SELECT
+                            P.*,
+                            C.CLASS_NUMBER,
+                            C.CLASS_NAME,
+                            C.CLASS_CATEGORY_BIG,
+                            C.CLASS_CATEGORY_SMALL,
+                            C.CLASS_CONTENT,
+                            C.CLASS_INTRO,
+                            C.CLASS_PAYMENT_ACCOUNT,
+                            C.CLASS_REGISTER_DATE
+                            FROM PRO P JOIN CLASS C
+                                ON P.PRO_NUMBER = C.PRO_NUMBER
+                                AND P.PRO_NUMBER = #{proNumber}
+                        ) CLASS JOIN CLASS_SAVE S
+                            ON CLASS.CLASS_NUMBER = S.CLASS_NUMBER
+                    ) SAVE JOIN PARENT P
+                    ON SAVE.PARENT_NUMBER = P.PARENT_NUMBER
+                    AND SAVE.PARENT_NUMBER = P.PARENT_NUMBER
+                )
+            WHERE RN &lt;= #{endRow}
+        ) PAGE
+        WHERE RN &gt; #{startRow}
+    </select>
+
+    <!-- 전문가의 모든 수업에 대해 찜한 부모 목록 개수 조회 -->
+    <select id="classSaveCount" resultType="_int">
+        SELECT COUNT(*)
         FROM (
                  SELECT *
-                 FROM (
-                          SELECT
-                              P.*,
-                              C.CLASS_NUMBER,
-                              C.CLASS_NAME,
-                              C.CLASS_CATEGORY_BIG,
-                              C.CLASS_CATEGORY_SMALL,
-                              C.CLASS_CONTENT,
-                              C.CLASS_PAYMENT_ACCOUNT,
-                              C.CLASS_REGISTER_DATE
-                          FROM PRO P JOIN CLASS C
-                            ON P.PRO_NUMBER = #{proNumber}
-                            AND P.PRO_NUMBER = C.PRO_NUMBER
-                      ) CLASS JOIN CLASS_SAVE S
-                        ON CLASS.CLASS_NUMBER = S.CLASS_NUMBER
-             ) SAVE JOIN PARENT P
-        ON SAVE.PARENT_NUMBER = P.PARENT_NUMBER
-        AND SAVE.PARENT_NUMBER = P.PARENT_NUMBER
+                 FROM PRO P JOIN CLASS C
+                    ON P.PRO_NUMBER = C.PRO_NUMBER
+                    AND P.PRO_NUMBER = #{proNumber}
+             ) INFO JOIN CLASS_SAVE CS
+         ON INFO.CLASS_NUMBER = CS.CLASS_NUMBER
     </select>
 
 </mapper>

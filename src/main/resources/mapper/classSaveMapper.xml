@@ -15,7 +15,6 @@
     <insert id="insertClassSave">
         INSERT INTO CLASS_SAVE (CLASS_NUMBER, PARENT_NUMBER)
         VALUES(#{classNumber}, #{parentNumber})
-        where parent_number = #{parentNumber}
     </insert>
 
     <delete id="deleteClass">
