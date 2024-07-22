@@ -10,4 +10,5 @@ import java.util.List;
 public interface ReviewMapper {
    List<reviewVO> selectAll(Long parentNumber);
 
+   void insertReview(reviewVO reviewVO);
 }

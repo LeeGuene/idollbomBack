@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../../static/css/layout/header.css">
-    <link rel="stylesheet" href="../../../../static/css/layout/footer.css">
-    <link rel="stylesheet" href="../../../../static/css/myPage/pro/propage_fixprofile.css">
+    <link rel="stylesheet" href="/css/layout/header.css">
+    <link rel="stylesheet" href="/css/layout/footer.css">
+    <link rel="stylesheet" href="/css/myPage/pro/propage_fixprofile.css">
 
     <!-- 공통모달 css -->
-    <link rel="stylesheet" href="../../../../static/css/modal/modalstyle.css" />
+    <link rel="stylesheet" href="/css/modal/modalstyle.css" />
     <!-- 비밀번호 변경 css -->
-    <link rel="stylesheet" href="../../../../static/css/modal/password-modify.css" />
+    <link rel="stylesheet" href="/css/modal/password-modify.css" />
     <!-- 프로필 변경 css -->
-    <link rel="stylesheet" href="../../../../static/css/modal/profile-modify.css" />
+    <link rel="stylesheet" href="/css/modal/profile-modify.css" />
     <title>전문가 회원정보 수정 페이지</title>
 </head>
 
@@ -54,21 +54,21 @@
             <div class="incontainer">
                 <div class="menu-bar">
                     <div class="menu-bar-option">
-                        <p>내정보 수정</p>
+                        <a th:href="@{/proMyPage/profile}">내정보 수정</a>
                     </div>
                     <hr class="custom-hr">
                     <div class="menu-bar-option">
-                        <a href="../../html/propage/propage_class.html">내 수업 목록</a>
+                        <a th:href="@{/proMyPage/proClass}">내 수업 목록</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a href="../../html/propage/propage_hateUser.html">신고목록</a>
+                        <a th:href="@{/proMyPage/report}">신고 목록</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a href="../../html/propage/propage_proPost.html">내가 쓴 게시글</a>
+                        <a th:href="@{/proMyPage/MyPost}">내가 쓴 게시글</a>
                     </div>
                     <hr class="custom-hr">
                     <div class="menu-bar-option">
-                        <a href="../../html/propage/propage_calender.html">캘린더</a>
+                        <p>캘린더</p>
                     </div>
                     <div class="myprofile">
                         <div class="profileimage">

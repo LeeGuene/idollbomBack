@@ -1,5 +1,4 @@
 package com.example.idollbom.controller.myPage;
-import com.example.idollbom.domain.dto.applydto.ClassListDTO;
 import com.example.idollbom.domain.dto.logindto.ParentDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.classSaveDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
@@ -12,9 +11,6 @@ import com.example.idollbom.service.applyservice.ClassListService;
 import com.example.idollbom.service.myPageservice.parentservice.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +38,8 @@ public class ParentMypageController {
     private final parentInfoService parentInfoService;
     private final classSaveService classSaveService;
     private final paymentService paymentService;
+    private final reservationService reservationService;
+    private final reservationDateService reservationDateService;
     private final ParentMapper parentMapper;
     private final ClassListService classListService;
 
@@ -229,4 +227,16 @@ public class ParentMypageController {
         log.info("Review object: " + model.getAttribute("Mypayment"));
         return "html/myPage/parent/Payment";
     }
+
+//  리뷰쓰기
+    @PostMapping("/writeReview")
+    public String insertReview(@ModelAttribute ReviewDTO reviewDTO){
+        System.out.println("Received ReviewDTO: " + reviewDTO);
+        reviewService.insertReview(reviewDTO);
+
+        ReservationDateVO reservationDate = reservationDateService.selectReservationDate(reviewDTO.getClassNumber());
+        reservationService.reviewUpdate(reservationDate.getReservationDateNumber());
+        return "redirect:/ParentMyPage/myPayment";
+    }
+
 }

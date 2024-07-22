@@ -3,8 +3,7 @@ $(document).ready(function() {
 });
 
 function openModal(element) {
-    //  const mailId = element.getAttribute('th:value');
-    // const noteContent = element.getAttribute('data-content');
+
     let mailId= $(element).attr('data-mail-number');
     console.log(mailId);
     // 모달 요소 가져오기

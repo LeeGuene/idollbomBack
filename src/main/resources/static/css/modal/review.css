@@ -24,13 +24,9 @@
     font-size: 20px;
 }
 
-.evaluation-wrap > div > span:first-child{
-    color:  #00568b;
-}
 
 .profile-body{
     width: 500px;
-    height: 700px;
 }
 
 /* 모달 위치 한번 더 잡아줌 */

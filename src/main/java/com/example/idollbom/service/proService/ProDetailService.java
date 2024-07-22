@@ -3,6 +3,7 @@ package com.example.idollbom.service.proService;
 import com.example.idollbom.domain.dto.prodto.ProDetailDTO;
 import com.example.idollbom.domain.dto.prodto.ProReviewListDTO;
 import com.example.idollbom.domain.vo.ProVO;
+import com.example.idollbom.domain.vo.ProPostVO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,5 +19,7 @@ public interface ProDetailService {
 
     // 전문가 로그인 정보를 넘겨서 아이찾기 테스트
     ProVO findProInfo(Long proNumber);
+
+    List<ProPostVO> selectProPost(Long proNumber);
 
 }

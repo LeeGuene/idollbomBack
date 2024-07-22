@@ -7,5 +7,9 @@
         where parent_number = #{parentNumber}
     </select>
 
+    <insert id="insertReview">
+        insert into review
+        values(seq_project.NEXTVAL,#{reviewContent},#{reviewEvaluationPoint},#{reviewRegisterDate},#{reviewUpdateDate},#{parentNumber},#{classNumber})
+    </insert>
 
 </mapper>
