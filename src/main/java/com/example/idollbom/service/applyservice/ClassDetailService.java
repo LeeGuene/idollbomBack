@@ -13,4 +13,8 @@ public interface ClassDetailService {
     
     // 특정 수업에 대한 모든 예약정보(날짜, 시간) 조회
     List<ReservationInfoDTO> findReservation(Long classNumber);
+
+    // 특정 예약 정보 및 시간 정보 조회
+    ReservationInfoDTO findReservationInfo(Long reservationDateNumber, Long reservationTimeNumber);
+
 }
