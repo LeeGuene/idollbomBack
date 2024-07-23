@@ -65,7 +65,7 @@
       </div>
 
       <!-- 게시글 첨부파일(다운로드 가능) -->
-      <div class="post-files-wrap">
+      <div class="post-files-wrap" th:if="${not #lists.isEmpty(files)}">
         <h1>첨부파일</h1>
         <!-- 첨부파일 영역 -->
         <ul class="file-area">

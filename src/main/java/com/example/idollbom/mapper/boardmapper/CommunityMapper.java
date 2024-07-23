@@ -30,6 +30,9 @@ public interface CommunityMapper {
 
     // 게시글 수정하기
     void updateCommunity(CommunityDTO community);
+
+    // 조회수 SELECT
+    void plusView(int parentPostNumber);
 }
 
 

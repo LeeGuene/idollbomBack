@@ -91,7 +91,7 @@ public class CommunityServiceImpl implements CommunityService {
         }
     }
 
-    // 게시글 상세보기
+    // 게시글 상세보기 및 조회수
     @Override
     public CommunityDetailDTO selectCommunityDetail(Long parentPostNumber) {
         return communityMapper.selectCommunityDetail(parentPostNumber);
@@ -106,6 +106,7 @@ public class CommunityServiceImpl implements CommunityService {
         communityMapper.deleteCommunity(parentPostNumber);
     }
 
+    // 게시글 수정하기
     @Override
     public void updateCommunity(CommunityDTO community) {
         communityMapper.updateCommunity(community);

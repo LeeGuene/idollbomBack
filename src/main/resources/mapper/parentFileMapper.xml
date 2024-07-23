@@ -13,4 +13,6 @@
         DELETE FROM PARENT_FILE
         WHERE PARENT_POST_NUMBER = #{parentPostNumber}
     </delete>
+
+    <!-- 게시글 조회 -->
 </mapper>
