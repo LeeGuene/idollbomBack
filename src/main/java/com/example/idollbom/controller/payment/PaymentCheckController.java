@@ -31,21 +31,26 @@ public class PaymentCheckController {
 
     // 결제확인창 컨틀롤러
     // 이때 로그인한 부모의 pk와 수업pk를 가져와서 데이터를 뿌려줘야한다.
-    @GetMapping("/{reservationDateNumber}/{classNumber}")
-    public String paymentCheck(@PathVariable("reservationDateNumber") Long reservationDateNumber,
+    @GetMapping("/{classNumber}")
+    public String paymentCheck(@RequestParam("reservationDateNumber") Long reservationDateNumber,
+                               @RequestParam("reservationTimeNumber") Long reservationTimeNumber,
+                               @RequestParam("proNumber") Long proNumber,
                                @PathVariable("classNumber") Long classNumber,
                                Model model) {
+
         System.out.println("예약날짜 pk : " + reservationDateNumber);
         System.out.println("주소로 받아온 classNumber : " + classNumber);
+        System.out.println("전문가 pk : " + proNumber);
 
         // 나중에 전문가 정보를 받아와야하는 코드 추가 지금은 33이 디폴트
-        ClassDetailDTO proInfo = classDetailService.findClassDetail(33L, classNumber);
+        ClassDetailDTO proInfo = classDetailService.findClassDetail(proNumber, classNumber);
         System.out.println("================" + proInfo);
         model.addAttribute("proInfo", proInfo);
 
         // 선택한 예약날짜와 시간 가져오기
-        List<ReservationInfoDTO> resDTO = classDetailService.findReservation(classNumber);
-        model.addAttribute("resDTO", resDTO);
+        ReservationInfoDTO reservationInfo = classDetailService.findReservationInfo(reservationDateNumber, reservationTimeNumber);
+        System.out.println("================" + reservationInfo);
+        model.addAttribute("reservationInfo", reservationInfo);
 
         // 로그인한 부모에 대한 아이 이름 가져오기
         List<kidVO> kids = kidsService.selectKidsList();
