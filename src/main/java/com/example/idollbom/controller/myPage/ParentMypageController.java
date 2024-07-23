@@ -153,8 +153,8 @@ public class ParentMypageController {
     }
 
     // 수업 찜 목록 추가 ( 수업 상세보기에서 찜 목록 추가 버튼 클릭 시 넘어오는 컨트롤러 )
-    @GetMapping("/insertSaveClass/{classNumber}")
-    public String selectFavoriteClass(@PathVariable(value= "classNumber") Long classNumber,
+    @GetMapping("/insertSaveClass")
+    public String selectFavoriteClass(@RequestParam(value= "classNumber") Long classNumber,
                                       @RequestParam(value= "parentNumber") Long parentNumber,
                                       @RequestParam(value="proNumber") Long proNumber,
                                       RedirectAttributes redirectAttributes){

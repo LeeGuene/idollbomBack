@@ -76,8 +76,8 @@ function autoSubmit() {
     const selectedDate = date.value;
     const selectedTime = time.options[time.selectedIndex].value;
 
-    console.log(category)
-    console.log(categoryData)
+    // console.log(category)
+    // console.log(categoryData)
     console.log(selectedDate)
     console.log(selectedTime)
 
@@ -103,8 +103,7 @@ function autoSubmit() {
             // 랜덤 돌려서 딱 한개만 나오게 하기
             const randomIndex = Math.floor(Math.random() * data.length);
             const randomMatch = data[randomIndex];
-
-
+            console.log(randomMatch);
             
             // 만약, 데이터가 없다면
             if (data.length === 0) {
@@ -135,4 +134,5 @@ function autoSubmit() {
             alert('제대로 수행되지 않았습니다. 다시 시도해주세요.');
         }
     });
+
 }
