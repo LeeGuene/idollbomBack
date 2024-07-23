@@ -8,4 +8,9 @@
         VALUES (seq_project.nextval, #{parentFileName}, #{parentFileSize}, sysdate, #{parentPostNumber})
     </insert>
 
+    <!-- 게시글 삭제 시, 첨부파일 삭제 -->
+    <delete id="deleteFile">
+        DELETE FROM PARENT_FILE
+        WHERE PARENT_POST_NUMBER = #{parentPostNumber}
+    </delete>
 </mapper>

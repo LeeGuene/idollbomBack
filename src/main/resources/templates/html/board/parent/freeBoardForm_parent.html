@@ -21,7 +21,7 @@
   </div>
 
   <form class="board-form" th:action="@{/parentcommunity/write}" method="post" enctype="multipart/form-data" th:object="${community}">
-    <!-- 사용자 정보 가져오고 싶음 pk로   -->
+    <input type="hidden" th:field="*{parentPostNumber}">
     <!-- 게시글 제목 -->
     <div class="post-title-wrap form-group">
       <label for="parentPostTitle">제목</label>

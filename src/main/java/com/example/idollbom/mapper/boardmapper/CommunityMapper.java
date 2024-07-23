@@ -1,6 +1,7 @@
 package com.example.idollbom.mapper.boardmapper;
 
 import com.example.idollbom.domain.dto.boarddto.CommunityDTO;
+import com.example.idollbom.domain.dto.boarddto.CommunityDetailDTO;
 import com.example.idollbom.domain.dto.boarddto.CommunityListDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +21,15 @@ public interface CommunityMapper {
     int getSeq();
 //    게시글 작성
     void saveCommunity(CommunityDTO community);
+
+    // 게시글 상세보기
+    CommunityDetailDTO selectCommunityDetail(Long parentPostNumber);
+
+    // 게시글 삭제하기
+    void deleteCommunity(Long parentPostNumber);
+
+    // 게시글 수정하기
+    void updateCommunity(CommunityDTO community);
 }
 
 
