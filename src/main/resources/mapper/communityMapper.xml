@@ -4,15 +4,25 @@
 <mapper namespace="com.example.idollbom.mapper.boardmapper.CommunityMapper">
     <!--  게시글 목록 가져오기  -->
     <select id="selectAll" resultType="CommunityListDTO">
-        SELECT
-            p.PARENT_POST_TITLE,
-            p.PARENT_NUMBER,
-            p1.PARENT_NICKNAME,
-            p1.PARENT_PROFILE_IMAGE_URL
-        FROM parent_post p
-             JOIN PARENT P1
-             ON p.PARENT_NUMBER = p1.PARENT_NUMBER
-        WHERE p1.PARENT_NUMBER = 2
+    SELECT *
+    FROM (
+         SELECT ROWNUM AS RN, BOARD.*
+         FROM (
+              SELECT
+                  p.PARENT_POST_NUMBER,
+                  p.PARENT_POST_TITLE,
+                  p.PARENT_NUMBER,
+                  p.PARENT_POST_REGISTER_DATE,
+                  p1.PARENT_NICKNAME,
+                  p1.PARENT_PROFILE_IMAGE_URL
+                  FROM parent_post p
+                    JOIN PARENT P1
+                    ON p.PARENT_NUMBER = p1.PARENT_NUMBER
+                    ORDER BY p.PARENT_POST_REGISTER_DATE DESC
+                ) BOARD
+            WHERE ROWNUM &lt;= #{endRow}
+            )
+        WHERE rn &gt; #{startRow}
     </select>
 
     <!--  총 게시글의 갯수  -->
@@ -30,8 +40,10 @@
     <!-- 게시글 작성 쿼리문 -->
     <insert id="saveCommunity">
         insert into parent_post
-        values(#{parentPostNumber}, #{parentPostTitle}, #{parentPostContent}, 0, sysdate, sysdate, 2)
+        values(#{parentPostNumber}, #{parentPostTitle}, #{parentPostContent}, 0, sysdate, sysdate, #{parentNumber})
     </insert>
+
+    <!-- 신고하기 눌렀을 때 -->
 
     <!--  게시글 상세보기  -->
     <select id="selectCommunityDetail" resultType="CommunityDetailDTO">
@@ -39,13 +51,14 @@
             P.PARENT_POST_NUMBER,
             P.PARENT_POST_TITLE,
             P.PARENT_POST_CONTENT,
-            U.PARENT_NAME,
+            U.PARENT_NICKNAME,
+            U.PARENT_NUMBER,
             P.PARENT_POST_VIEWS,
             P.PARENT_POST_REGISTER_DATE,
             (SELECT COUNT(*) FROM PARENT_FILE PF WHERE PF.PARENT_POST_NUMBER = P.PARENT_POST_NUMBER) AS FILE_COUNT
         FROM
-            PARENT_POST P JOIN PARENT U ON U.PARENT_NAME = P.PARENT_NAME
-        where p.PARENT_NAME = #{parentName}
+            PARENT_POST P JOIN PARENT U ON U.PARENT_NUMBER = P.PARENT_NUMBER
+        where p.PARENT_POST_NUMBER = #{parentPostNumber}
     </select>
 
     <!--  조회 수 +1  -->
@@ -53,5 +66,18 @@
         update parent_post
         set parent_post_views = parent_post_views + 1
         where parent_post_number = #{parentpostNumber}
+    </update>
+
+    <!-- 게시글 삭제하기 -->
+    <delete id="deleteCommunity">
+        delete from parent_post
+        where parent_post_number = #{parentPostNumber}
+    </delete>
+
+    <!-- 게시글 수정하기 -->
+    <update id="updateCommunity">
+        update parent_post
+        set parent_post_title = #{parentPostTitle}, parent_post_content = #{parentPostContent}, parent_post_update_date = sysdate
+        where parent_post_number = #{parentPostNumber}
     </update>
 </mapper>

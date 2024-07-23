@@ -105,18 +105,21 @@
               <!-- 시간 선택 -->
               <!-- 시간 출력공간 -->
               <div class="hour-select"></div>
-              <select class="time" name="resTime">
-                <option value="9">9시</option>
-                <option value="10">10시</option>
-                <option value="11">11시</option>
-                <option value="12">12시</option>
-                <option value="13">13시</option>
-                <option value="14">14시</option>
-                <option value="15">15시</option>
-                <option value="16">16시</option>
-                <option value="17">17시</option>
-                <option value="18">18시</option>
+              <select id="timeSelect" class="time" onchange="addToSelectedList()">
+                <option value="none">====시간 선택====</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
               </select>
+              <!-- 여러 선택된 시간  -->
+              <p>선택된 시간: <span id="selectedTime"></span></p>
             </nav>
           </div>
         </div>
@@ -146,15 +149,12 @@
       <div class="register-button-wrap">
           <button class="submit-btn" type="submit">수업 등록</button>
       </div>
-
-      <!-- 현재 로그인된 전문가를 가져와서 name 속성으로 넘긴다 -->
-      <input type="hidden">
     </form>
   </div>
 
 <div th:replace="~{/layout/footer :: footer}"></div>
 <script src="https://kit.fontawesome.com/96adc9c597.js" crossorigin="anonymous"></script>
-<!--<script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>-->
+<script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
 <script th:src="@{/js/registerForm.js}"></script>

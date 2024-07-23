@@ -6,6 +6,8 @@ import com.example.idollbom.domain.dto.prodto.ReservationDateDTO;
 import com.example.idollbom.domain.dto.prodto.ReservationTimeDTO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface RegisterFormMapper {
     // 현재 시퀀스 값을 불러오는 select

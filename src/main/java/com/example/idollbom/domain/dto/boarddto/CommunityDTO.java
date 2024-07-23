@@ -15,6 +15,6 @@ public class CommunityDTO {
     private int parentPostViews;
     private LocalDateTime parentPostRegisterDate;
     private LocalDateTime parentPostUpdateDate;
-    private int parentNumber;
+    private Long parentNumber;
 
 }

@@ -18,6 +18,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.List;
 
 @Controller
 @RequestMapping("/pro")
@@ -43,8 +47,8 @@ public class RegisterFormController {
                                          @RequestParam("imageFileUrl") MultipartFile imageFileUrl,
                                          ReservationDateDTO reservationDateDTO,
                                          @RequestParam("resDate") String resDate,
-                                         ReservationTimeDTO reservationTimeDTO,
-                                         @RequestParam("resTime") String resTime) {
+//                                         ReservationTimeDTO reservationTimeDTO,
+                                         @RequestParam("selectedTimes") String selectedTimes) {
 
         // 대카에 대한 소카 저장
         switch (classDTO.getClassCategoryBig()) {
@@ -68,13 +72,24 @@ public class RegisterFormController {
         LocalDate localDate = LocalDate.parse(resDate);
         reservationDateDTO.setReservationDate(localDate);
 
-        // 입력 받은 시간을 LocalTime으로 변환
-        LocalTime localTime = LocalTime.of(Integer.parseInt(resTime), 0); // 분은 0으로 고정
-        // 입력한 날짜와 LocalDateTime으로 조합
-        LocalDateTime dateTime = LocalDateTime.of(localDate, localTime);
-        reservationTimeDTO.setReservationTime(dateTime);
+        // 쉼표로 구분된 문자열을 리스트로 변환
+        List<String> timesList = Arrays.asList(selectedTimes.split("\\s*,\\s*"));
+        // 중복 제거를 위해 Set으로 변환 후 다시 리스트로 변환
+        List<String> uniqueTimesList = new ArrayList<>(new LinkedHashSet<>(timesList));
+        System.out.println("Selected times list without duplicates: " + uniqueTimesList);
 
-        registerFormService.registerClass(classDTO, reservationDateDTO, reservationTimeDTO, imageFileUrl);
+
+        // 현재 reservationNumber를 받아옴
+        List<LocalDateTime> localDateTimes = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH");
+
+        for (String time : uniqueTimesList) {
+            LocalTime localTime = LocalTime.of(Integer.parseInt(time), 0); // 시간을 LocalTime으로 변환 (분은 0으로 고정)
+            LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
+            localDateTimes.add(localDateTime);
+        }
+
+        registerFormService.registerClass(classDTO, reservationDateDTO, imageFileUrl, localDateTimes);
 
         // 이건 어디로 가야 좋을지..
         return "redirect:/pro/register";

@@ -118,7 +118,7 @@ function autoSubmit() {
                     <div>
                         <p>${randomMatch.proName} (${randomMatch.reviewCount})</p>
                         <p>${randomMatch.className} (${randomMatch.classCategoryBig})</p>
-                        <p>${randomMatch.classContent}</p>
+                        <p>${randomMatch.classIntro}</p>
                         <p>${randomMatch.proAddress}</p>
                         <p>${randomMatch.classRegisterDate}</p>
                     </div>

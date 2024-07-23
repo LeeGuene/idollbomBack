@@ -20,6 +20,7 @@
             <div class="community_search">
                 <p><a th:href="@{/parentcommunity/write}">작성하기</a></p>
 
+                <!-- 검색 말고 조회순, 최시순으로 해보자 -->
                 <div>
                     <form>
                         <select>
@@ -48,20 +49,31 @@
                     <tr th:each="community : ${communities}">
                         <td><img th:src="@{/images/{filename}(filename=${community.parentProfileImageUrl})}" alt="프로필"></td>
                         <td th:text="${community.parentPostTitle}"></td>
-                        <td><a href="./board/freeBoardDetail_parent.html">자세히 보기</a></td>
+                        <td><a th:href="@{/parentcommunity/detail/{parentPostNumber}(parentPostNumber=*{community.parentPostNumber})}">자세히 보기</a></td>
                         <td th:text="${community.parentNickname}"></td>
                     </tr>
                 </tbody>
             </table>
 
+            <!-- 페이징 처리 부분  -->
             <div class="community_btn">
-                <button><img src="../images/pro_button_pre.png"></button>
-                <ul>
-                    <li><button>1</button></li>
-                    <li><button>2</button></li>
-                    <li><button>3</button></li>
+                <ul class="pagination">
+                    <li th:classappend="${startPage == 1} ? 'disabled' : ''" class="page-item">
+                        <a class="page-link" th:href="@{/parentcommunity(pageNo=${startPage - 1}, pageSize=${pageSize})}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <li th:each="i : ${#numbers.sequence(startPage, endPage)}" th:classappend="${currentPage == i} ? 'active' : ''" class="page-item">
+                        <a th:href="@{/parentcommunity(pageNo=${i}, pageSize=${pageSize})}" class="page-link" th:text="${i}"></a>
+                    </li>
+
+                    <li th:classappend="${endPage == totalPages} ? 'disabled' : ''" class="page-item">
+                        <a class="page-link" th:href="@{/parentcommunity(pageNo=${endPage + 1}, pageSize=${pageSize})}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
                 </ul>
-                <button><img src="../images/pro_button_next.png"></button>
             </div>
         </div>
     </div>

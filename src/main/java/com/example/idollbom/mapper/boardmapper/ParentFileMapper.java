@@ -9,4 +9,6 @@ public interface ParentFileMapper {
     // 첨부파일 insert
     void insertFile(ParentFileDTO dto);
 
+    // 첨부파일 삭제
+    void deleteFile(Long parentPostNumber);
 }

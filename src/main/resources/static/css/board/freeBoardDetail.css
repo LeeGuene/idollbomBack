@@ -174,12 +174,8 @@ button {
   column-gap: 40px;
 }
 
-.post-btn-wrap > a{
-  text-align: center;
-  width: 50%;
-}
-
 .post-btn-wrap button{
+  text-align: center;
   padding: 10px 20px;
   color: #fff;
   border-radius: 10px;
@@ -188,19 +184,19 @@ button {
   transition: 0.3s;
 }
 
-.post-btn-wrap > a:first-child > button{
+.update{
   background-color: #00b45499;
 }
 
-.post-btn-wrap > a:last-child > button{
+.delete{
   background-color: #f932718f;
 }
 
-.post-btn-wrap > a:first-child > button:hover{
+.update:hover{
   background-color: #00b454;
 }
 
-.post-btn-wrap > a:last-child > button:hover{
+.delete:hover{
   background-color: #f93271;
 }
 

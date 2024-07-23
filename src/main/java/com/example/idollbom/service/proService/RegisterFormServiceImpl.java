@@ -14,6 +14,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -24,9 +29,13 @@ public class RegisterFormServiceImpl implements RegisterFormService {
 
     @Override
     @Transactional
-    public void registerClass(ClassDTO classDTO, ReservationDateDTO reservationDateDTO, ReservationTimeDTO resTimeDTO, MultipartFile imageFileUrl) {
+    public void registerClass(ClassDTO classDTO,
+                              ReservationDateDTO reservationDateDTO,
+                              MultipartFile imageFileUrl,
+                              List<LocalDateTime> times) {
         System.out.println(classDTO);
         registerFormMapper.classInsert(classDTO);
+
         // 이미지 테이블에 들어가야하는 코드 필요
         // 날짜 테이블 삽입
         // 현재 class pk를 받아옴
@@ -36,11 +45,13 @@ public class RegisterFormServiceImpl implements RegisterFormService {
         System.out.println(reservationDateDTO);
         registerFormMapper.classDateInsert(reservationDateDTO);
 
-        // 현재 reservationNumber를 받아옴
         Long reservationNumber = registerFormMapper.currentSeq();
-        resTimeDTO.setReservationDateNumber(reservationNumber);
-        System.out.println(resTimeDTO);
-        registerFormMapper.classTimeInsert(resTimeDTO);
+        for(LocalDateTime time : times){
+            ReservationTimeDTO timeDTO = new ReservationTimeDTO();
+            timeDTO.setReservationDateNumber(reservationNumber);
+            timeDTO.setReservationTime(time);
+            registerFormMapper.classTimeInsert(timeDTO);
+        }
     }
 
     @Override
