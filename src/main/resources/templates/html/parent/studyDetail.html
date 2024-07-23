@@ -54,6 +54,7 @@
         <div th:object="${class_info}">
           <!-- 강사명 및 프로필 보기 버튼 -->
           <div class="pro-profile-wrap">
+            <input type="hidden" name="proNumber" th:value="*{proNumber}" />
             <input type="hidden" name="classNumber" th:value="*{classNumber}" />
             <input type="hidden" name="loginId" th:value="${parent_info.parentNumber}" />
             <h1>강사명</h1>
@@ -83,12 +84,13 @@
           <div class="study-date-wrap">
             <h1>수업 날짜 및 시간</h1>
             <select id="reservation-select" name="reservation-select">
-              <option class="reservation-value" th:each="reservation_info : ${reservation_infos}" th:object="${reservation_info}">
-                <span th:text="*{reservationDate}"></span>
-                <span th:text="*{reservationTime} + '시'"></span>
-                <input type="hidden" id="reservationDateNumber" th:value="*{reservationDateNumber}" />
-              </option>
             </select>
+            <option class="reservation-value" th:each="reservation_info : ${reservation_infos}" th:object="${reservation_info}">
+              <span th:text="*{reservationDate}"></span>
+              <span th:text="*{reservationTime} + '시'"></span>
+              <input type="hidden" name="reservationTimeNumber" id="reservationTimeNumber" th:value="*{reservationTimeNumber}" />
+              <input type="hidden" name="reservationDateNumber" id="reservationDateNumber" th:value="*{reservationDateNumber}" />
+            </option>
           </div>
 
           <!-- 결제 금액 -->

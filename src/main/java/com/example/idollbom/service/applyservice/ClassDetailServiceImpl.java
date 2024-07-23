@@ -25,4 +25,9 @@ public class ClassDetailServiceImpl implements ClassDetailService {
     public List<ReservationInfoDTO> findReservation(Long classNumber) {
         return classDetailMapper.selectReservation(classNumber);
     }
+
+    @Override
+    public ReservationInfoDTO findReservationInfo(Long reservationDateNumber, Long reservationTimeNumber) {
+        return classDetailMapper.selectReservationInfo(reservationDateNumber, reservationTimeNumber);
+    }
 }

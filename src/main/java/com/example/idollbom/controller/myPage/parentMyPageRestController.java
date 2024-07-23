@@ -62,24 +62,6 @@ public class parentMyPageRestController {
         return noteService.selectOneMail(mailId);
     }
 
-    // 신청하기 페이지의 수업 찜 목록 버튼 클릭시 이동되는 컨트롤러
-    @PostMapping("/insertSaveClass/{classNumber}")
-    public ResponseEntity<?> insertSaveClass(@PathVariable(value="classNumber") String classNumber){
-
-        log.info("View에서 받아온 수업 pk : " + classNumber);
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String currentUserName = userDetails.getUsername();
-
-        Long long_classNumber = Long.parseLong(classNumber);
-
-        ParentVO parent_info = parentMapper.selectOne(currentUserName);
-        classSaveService.saveClass(long_classNumber, parent_info.getParentNumber());
-
-        return ResponseEntity.ok("Data processed successfully");
-    }
-
 }
 
 
