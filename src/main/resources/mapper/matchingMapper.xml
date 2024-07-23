@@ -9,7 +9,7 @@
               p.PRO_NAME,
               c.CLASS_NUMBER,
               C.CLASS_NAME,
-              C.CLASS_CONTENT,
+              C.CLASS_INTRO,
               C.CLASS_CATEGORY_BIG,
               P.PRO_ADDRESS,
               TO_CHAR(C.CLASS_REGISTER_DATE, 'YYYY"년 "MM"월 "DD"일') as CLASS_REGISTER_DATE,
@@ -27,7 +27,7 @@
                 p.PRO_NAME,
                 C.CLASS_NUMBER,
                 C.CLASS_NAME,
-                C.CLASS_CONTENT,
+                C.CLASS_INTRO,
                 C.CLASS_CATEGORY_BIG,
                 P.PRO_ADDRESS,
                 C.CLASS_REGISTER_DATE

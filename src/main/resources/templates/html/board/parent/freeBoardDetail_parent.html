@@ -1,60 +1,61 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자유 게시판 상세보기(부모)</title>
 
   <!-- 자유게시판 상세보기 css -->
-  <link rel="stylesheet" href="../../../../static/css/board/freeBoardDetail.css" />
+  <link rel="stylesheet" th:href="@{/css/board/freeBoardDetail.css}" />
   <!-- 신고하기 css -->
-  <link rel="stylesheet" href="../../../../static/css/modal/report.css" />
-  <link rel="stylesheet" href="../../../../static/css/modal/modalstyle.css" />
-  <title>자유 게시판 상세보기(부모)</title>
+  <link rel="stylesheet" th:href="@{/css/modal/report.css}" />
+  <link rel="stylesheet" th:href="@{/css/modal/modalstyle.css}" />
 </head>
 
 <body>
   <div id="wrapper">
     <div class="page-title-wrap">
       <h1>게시판 상세보기</h1>
-      <p>부모가 작성한 게시글에 대한 자세한 정보를 볼 수 있는 페이지입니다.</p>
     </div>
 
     <!-- 목록 보기 버튼 -->
     <div class="list-btn-wrap">
-      <a href="../../html/community_parent.html">목록 보기</a>
+      <a href="/parentcommunity">목록 보기</a>
       <a class="report-btn btn-open-modal">신고하기</a>
     </div>
 
-    <div class="board-form" action="#">
+    <div class="board-form" th:object="${community}">
+      <!-- 현재 작성자가 누구인지 -->
+      <input type="hidden" name="parentNumber" th:value="*{parentNumber}" readonly>
       <!-- 게시글 번호 -->
       <div class="post-number-wrap">
         <h1>번호</h1>
-        <input type="text" value="10" readonly />
+        <input type="text" name="parentPostNumber" th:value="*{parentPostNumber}" readonly>
       </div>
 
       <!-- 게시글 제목 -->
       <div class="post-title-wrap">
         <h1>제목</h1>
-        <input type="text" value="OOO강사님이 진행한 OO수업이 너무 아이한테 유익한 수업이었습니다." readonly />
+        <input type="text" th:value="*{parentPostTitle}" readonly>
       </div>
 
       <!-- 게시글 내용 -->
       <div class="post-content-wrap">
         <h1>내용</h1>
-        <textarea readonly>OOO강사님이 진행한 OO수업이 너무 아이한테 유익한 수업이었습니다.</textarea>
+        <textarea th:text="*{parentPostContent}" readonly></textarea>
       </div>
 
       <!-- 게시글 작성자 -->
       <div class="post-writer-wrap">
         <h1>작성자</h1>
-        <input type="text" value="이근" readonly />
+        <input type="text" th:value="*{parentNickName}" readonly />
       </div>
 
       <!-- 게시글 작성일 -->
       <div class="post-RegisterDate-wrap">
         <h1>작성일</h1>
-        <input type="text" value="2024년 5월 15일" readonly />
+        <input type="text" th:value="*{#temporals.format(parentPostRegisterDate, 'yy년 M월 HH시 mm분')}" readonly />
       </div>
 
       <!-- 게시글 조회수 -->
@@ -64,26 +65,18 @@
       </div>
 
       <!-- 게시글 첨부파일(다운로드 가능) -->
-      <div class="post-files-wrap">
+      <div class="post-files-wrap" th:if="${not #lists.isEmpty(files)}">
         <h1>첨부파일</h1>
         <!-- 첨부파일 영역 -->
         <ul class="file-area">
-          <li>1_basic.txt</li`>
-          <li>2_MVC.txt</li>
-          <li>4_myBatis.txt</li>
-          <li>6_Spring-Security.txt</li>
-          <li>6_Spring-Security.txt</li>
-          <li>6_Spring-Security.txt</li>
-          <li>6_Spring-Security.txt</li>
-          <li>6_Spring-Security.txt</li>
-          <li>6_Spring-Security.txt</li>
+
         </ul>
       </div>
 
       <!-- 게시글 수정 및 삭제 버튼 -->
-      <div class="post-btn-wrap">
-        <a href="#"><button>수정</button></a>
-        <a href="#"><button>삭제</button></a>
+      <div class="post-btn-wrap" sec:authorize="isAuthenticated()">
+        <button class="update" onclick="goUpdate()">수정</button>
+        <button class="delete" onclick="goDelete()">삭제</button>
       </div>
 
       <!-- 게시글 댓글 영역 -->
@@ -102,21 +95,6 @@
         <ul class="comment-list">
           <li>
             <textarea name="" id="" readonly>댓글1</textarea>
-            <a href="#"><button>수정</button></a>
-            <a href="#"><button>삭제</button></a>
-          </li>
-          <li>
-            <textarea name="" id="" readonly>댓글2</textarea>
-            <a href="#"><button>수정</button></a>
-            <a href="#"><button>삭제</button></a>
-          </li>
-          <li>
-            <textarea name="" id="" readonly>댓글3</textarea>
-            <a href="#"><button>수정</button></a>
-            <a href="#"><button>삭제</button></a>
-          </li>
-          <li>
-            <textarea name="" id="" readonly>댓글4</textarea>
             <a href="#"><button>수정</button></a>
             <a href="#"><button>삭제</button></a>
           </li>
@@ -158,7 +136,7 @@
       </div>
     </form>
   </div>
-  <script src="../../../../static/js/modal.js"></script>
+  <script th:src="@{/js/report.js}"></script>
+  <script th:src="@{/js/detail.js}"></script>
 </body>
-
 </html>

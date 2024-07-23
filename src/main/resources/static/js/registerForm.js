@@ -58,6 +58,7 @@ function initializeSummernote() {
     }
   });
 }
+
 function uploadImage(file) {
   let data = new FormData();
   data.append("file", file);
@@ -84,4 +85,36 @@ function insertImageToSummernote(url) {
   img.src = url;
   img.style.width = '100%';
   $('#classContent').summernote('insertNode', img);
+}
+
+// 선택한 시간을 보여줌
+function addToSelectedList() {
+  var selectBox = document.getElementById("timeSelect");
+  var selectedOption = selectBox.options[selectBox.selectedIndex];
+
+  // "====시간 선택====" 옵션이 선택된 경우, 선택을 초기화
+  if (selectedOption.value === "none") {
+    alert('시간을 선택해주세요.')
+    return;
+  }
+
+  var selectedText = selectedOption.text;
+  var selectedValue = selectedOption.value;
+
+  var selectedTimesSpan = document.getElementById("selectedTime");
+  var currentTimes = selectedTimesSpan.textContent.trim();
+  if (currentTimes !== "") {
+    currentTimes += ", ";
+  }
+  currentTimes += selectedText
+  selectedTimesSpan.textContent = currentTimes;
+
+  // 선택된 시간을 숨은 입력 필드에 추가하여 폼 데이터로 전송
+  var hiddenInput = document.createElement("input");
+  hiddenInput.type = "hidden";
+  hiddenInput.name = "selectedTimes"; // 폼 데이터의 이름
+  hiddenInput.value = selectedTimesSpan.textContent;
+
+  // 폼에 숨은 입력 필드 추가
+  document.getElementById("register-form").append(hiddenInput);
 }

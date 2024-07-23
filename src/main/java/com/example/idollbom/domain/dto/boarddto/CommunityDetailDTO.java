@@ -12,10 +12,11 @@ public class CommunityDetailDTO {
     private int parentPostNumber;
     private String parentPostTitle;
     private String parentPostContent;
+    private String parentNickName;
     private int parentPostViews;
     private LocalDateTime parentPostRegisterDate;
     private LocalDateTime parentPostUpdateDate;
-    private int parentNumber;
+    private Long parentNumber;
     private int fileCount;
 
 }

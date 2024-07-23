@@ -11,7 +11,7 @@ public class MatchingDTO {
     private Long classNumber;
     private String className;
     private String classCategoryBig;
-    private String classContent;
+    private String classIntro;
     private String classRegisterDate;
     private Long reviewCount;
 }

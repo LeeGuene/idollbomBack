@@ -1,6 +1,7 @@
 package com.example.idollbom.service.boardservice;
 
 import com.example.idollbom.domain.dto.boarddto.CommunityDTO;
+import com.example.idollbom.domain.dto.boarddto.CommunityDetailDTO;
 import com.example.idollbom.domain.dto.boarddto.CommunityListDTO;
 import com.example.idollbom.domain.dto.boarddto.ParentFileDTO;
 import com.example.idollbom.mapper.boardmapper.CommunityMapper;
@@ -32,7 +33,6 @@ public class CommunityServiceImpl implements CommunityService {
     // 페이징 처리
     @Override
     public List<CommunityListDTO> getCommunityList(int page, int pageSize) {
-
         int startRow = (page - 1) * pageSize;
         int endRow = page * pageSize;
 
@@ -48,12 +48,12 @@ public class CommunityServiceImpl implements CommunityService {
     // 자유게시판 등록 구현
     @Override
     @Transactional
-    public void saveCommunity(CommunityDTO community, List<MultipartFile> files) {
+    public void saveCommunity(CommunityDTO community, List<MultipartFile> files, Long parentNumber) {
         int parentPostNumber = communityMapper.getSeq();
         community.setParentPostNumber(parentPostNumber);
-        communityMapper.saveCommunity(community);
+        community.setParentNumber(parentNumber);
 
-        System.out.println(community.getParentPostNumber());
+        communityMapper.saveCommunity(community);
         saveFile(community.getParentPostNumber(), files);
     }
 
@@ -89,6 +89,27 @@ public class CommunityServiceImpl implements CommunityService {
                 e.printStackTrace();
             }
         }
+    }
+
+    // 게시글 상세보기 및 조회수
+    @Override
+    public CommunityDetailDTO selectCommunityDetail(Long parentPostNumber) {
+        return communityMapper.selectCommunityDetail(parentPostNumber);
+    }
+
+    // 게시글 삭제하기
+    @Override
+    @Transactional
+    public void deleteCommunity(Long parentPostNumber) {
+        // 첨부파일도 같이 삭제해주자.
+        parentFileMapper.deleteFile(parentPostNumber);
+        communityMapper.deleteCommunity(parentPostNumber);
+    }
+
+    // 게시글 수정하기
+    @Override
+    public void updateCommunity(CommunityDTO community) {
+        communityMapper.updateCommunity(community);
     }
 }
 
