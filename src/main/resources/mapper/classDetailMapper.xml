@@ -47,10 +47,24 @@
                     D.RESERVATION_DATE_NUMBER,
                     D.CLASS_NUMBER,
                     D.RESERVATION_DATE,
+                    T.RESERVATION_TIME_NUMBER,
                     TO_CHAR(T.RESERVATION_TIME, 'HH24') AS RESERVATION_TIME
                 FROM RESERVATION_DATE D JOIN RESERVATION_TIME T
                     ON D.RESERVATION_DATE_NUMBER = T.RESERVATION_DATE_NUMBER
             )
         WHERE CLASS_NUMBER = #{classNumber}
+    </select>
+
+    <!-- 예약 날짜 및 시간 정보 하나만 가져오는 쿼리문 -->
+    <select id="selectReservationInfo">
+        SELECT
+            D.RESERVATION_DATE_NUMBER,
+            D.CLASS_NUMBER,
+            D.RESERVATION_DATE,
+            TO_CHAR(T.RESERVATION_TIME, 'HH24') AS RESERVATION_TIME
+        FROM RESERVATION_DATE D JOIN RESERVATION_TIME T
+        ON D.RESERVATION_DATE_NUMBER = T.RESERVATION_DATE_NUMBER
+        AND T.RESERVATION_DATE_NUMBER = #{reservationDateNumber}
+        AND T.RESERVATION_TIME_NUMBER = #{reservationTimeNumber}
     </select>
 </mapper>

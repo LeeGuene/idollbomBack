@@ -20,5 +20,4 @@
             rv.parent_number = #{parentNumber}
     </select>
 
-
 </mapper>

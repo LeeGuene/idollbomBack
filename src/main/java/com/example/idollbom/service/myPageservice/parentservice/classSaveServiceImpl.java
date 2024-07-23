@@ -34,8 +34,8 @@ public class classSaveServiceImpl implements classSaveService {
 
     // 수업 찜 목록 추가
     @Override
-    public void saveClass(Long classNumber, Long parentNumber) {
-        classSaveMapper.insertClassSave(classNumber, parentNumber);
+    public int saveClass(Long classNumber, Long parentNumber) {
+        return classSaveMapper.insertClassSave(classNumber, parentNumber);
     }
 
     @Override

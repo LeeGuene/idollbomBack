@@ -45,12 +45,12 @@
 
                         <div class="detail-item">
                             <label for="classdate">수업 날짜</label>
-                            <input type="text" class="form-control" id="classdate" value="2023-12-15" readonly>
+                            <input type="text" class="form-control" id="classdate" th:value="${reservationInfo.reservationDate}" readonly>
                         </div>
 
                         <div class="detail-item">
                             <label for="classtime">수업 시간</label>
-                            <input type="text" class="form-control" id="classtime" value="오후 2시" readonly>
+                            <input type="text" class="form-control" id="classtime" th:value="${reservationInfo.reservationTime}" readonly>
                         </div>
 
                         <div class="detail-item">
