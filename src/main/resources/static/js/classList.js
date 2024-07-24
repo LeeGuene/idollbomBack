@@ -46,43 +46,58 @@ document.addEventListener("DOMContentLoaded", function() {
     let saveBtns = document.querySelectorAll('.fail-btn');
     const classNumber =  $('input[name="classNumber"]').val(); // 수업 pk
     let imageSrc;  // 찜 버튼 src속성
-    let categoryBig = $('input[name="categoryBig"]').val();
-    let categorySmall = $('input[name="category"]').val();
-    let buttonIndex = 0;
+    let categoryBig;
+    let categorySmall = document.querySelector('input[name="category"]');
+    let pageNo;
+    let pageSize;
 
     for(let index = 0; index < saveBtns.length; index++){
         saveBtns[index].addEventListener("click", e=>{
             e.preventDefault();
+            categoryBig = document.querySelector('input[name="categoryBig"]');
+
+            // 수업 찜 버튼을 클릭했을 때, 현재 선택된 pageNo, pageSize를 불러온다.
+            pageNo = document.querySelector('.pagination > .page-item.active > a').textContent;
+
+            const pageLink = document.querySelector('.pagination > .page-item.active > a');
+            const pageHref = pageLink.getAttribute("href");
+            const params = new URLSearchParams(pageHref);
+            pageSize = params.get("pageSize");
+
+            console.log(typeof pageNo);
+            console.log(typeof pageSize);
 
             // 클릭된 버튼요소의 부모의 부모의 자식요소로 접근하여 수업 pk를 가져온다.
             imageSrc = e.currentTarget.children[0].src;
 
+
             // 즐겨찾기 되지 않은 수업이라면
             if(imageSrc.indexOf('pick_n') !== -1){
 
-                let form = document.createElement('form');
-                let categoryBigInput = document.createElement('input');
-                let categorySmallInput = document.createElement('input');
-                let indexInput = document.createElement('input');
-                categoryBigInput.name = 'categoryBig';
-                categorySmallInput.name = 'category';
-                categoryBigInput.type = 'hidden';
-                categorySmallInput.type = 'hidden';
-                categoryBigInput.value = categoryBig;
-                categorySmallInput.value = categorySmall;
+                const form = document.createElement('form');
+                const indexInput = document.createElement('input');
+                const pageNoInput = document.createElement('input');
+                const pageSizeInput = document.createElement('input');
+
+                pageNoInput.name = 'pageNo';
+                pageNoInput.type = 'hidden';
+                pageNoInput.value = pageNo;
+
+                pageSizeInput.name = 'pageSize';
+                pageSizeInput.type = 'hidden';
+                pageSizeInput.value = pageSize;
+
                 indexInput.name = 'buttonIndex';
                 indexInput.type = 'hidden';
                 indexInput.value = index;
 
-                form.append(categoryBigInput);
-                form.append(categorySmallInput);
+                form.append(categoryBig);
+                form.append(categorySmall);
+                form.append(pageNoInput);
+                form.append(pageSizeInput);
                 form.append(indexInput);
 
-                // 기존 버튼 삭제
-                // saveBtns[index].style.display = 'none';
-
-                console.log(form);
-
+                // console.log(form);
                 form.method = 'post';
                 form.action = '/ParentMyPage/insertSaveClass/' + classNumber;
                 document.body.appendChild(form);
@@ -91,6 +106,36 @@ document.addEventListener("DOMContentLoaded", function() {
             } else{
                 // 기존 이미지로 변경
                 saveBtns[i].children[0].src = '../images/class_list_pick_n.png';
+
+                const form = document.createElement('form');
+                const indexInput = document.createElement('input');
+                const pageNoInput = document.createElement('input');
+                const pageSizeInput = document.createElement('input');
+
+                pageNoInput.name = 'pageNo';
+                pageNoInput.type = 'hidden';
+                pageNoInput.value = pageNo;
+
+                pageSizeInput.name = 'pageSize';
+                pageSizeInput.type = 'hidden';
+                pageSizeInput.value = pageSize;
+
+                indexInput.name = 'buttonIndex';
+                indexInput.type = 'hidden';
+                indexInput.value = index;
+
+                form.append(categoryBig);
+                form.append(categorySmall);
+                form.append(pageNoInput);
+                form.append(pageSizeInput);
+                form.append(indexInput);
+
+                // console.log(form);
+                form.method = 'get';
+                form.action = '/ParentMyPage/deleteSaveClass/' + classNumber;
+                document.body.appendChild(form);
+                form.submit();
+
             }
 
         });

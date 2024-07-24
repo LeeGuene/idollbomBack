@@ -14,5 +14,5 @@ public interface classSaveMapper {
     int insertClassSave(Long classNumber, Long parentNumber);
 
     // 수업 찜 목록 삭제
-    void deleteClass(Long classNumber);
+    int deleteClass(Long classNumber);
 }
