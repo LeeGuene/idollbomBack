@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 수업 찜 추가버튼
     let saveBtns = document.querySelectorAll('.fail-btn');
+    let deleteBtns = document.querySelectorAll('.success-btn');
     const classNumber =  $('input[name="classNumber"]').val(); // 수업 pk
     let imageSrc;  // 찜 버튼 src속성
     let categoryBig;
@@ -52,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let pageSize;
 
     for(let index = 0; index < saveBtns.length; index++){
-        saveBtns[index].addEventListener("click", e=>{
+        saveBtns[index].addEventListener("click", e=> {
             e.preventDefault();
             categoryBig = document.querySelector('input[name="categoryBig"]');
 
@@ -72,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
             // 즐겨찾기 되지 않은 수업이라면
-            if(imageSrc.indexOf('pick_n') !== -1){
+            if (imageSrc.indexOf('pick_n') !== -1) {
 
                 const form = document.createElement('form');
                 const indexInput = document.createElement('input');
@@ -103,10 +104,32 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.body.appendChild(form);
                 form.submit();
 
-            } else{
-                // 기존 이미지로 변경
-                saveBtns[i].children[0].src = '../images/class_list_pick_n.png';
+            }
+        });
+    }
+    
+    // 이미 추가된 찜 목록 버튼들 중 하나를 클릭하면
+    for(let index = 0; index < deleteBtns.length; index++){
+        deleteBtns[index].addEventListener("click", e =>{
+            e.preventDefault();
 
+            categoryBig = document.querySelector('input[name="categoryBig"]');
+
+            // 수업 찜 버튼을 클릭했을 때, 현재 선택된 pageNo, pageSize를 불러온다.
+            pageNo = document.querySelector('.pagination > .page-item.active > a').textContent;
+
+            const pageLink = document.querySelector('.pagination > .page-item.active > a');
+            const pageHref = pageLink.getAttribute("href");
+            const params = new URLSearchParams(pageHref);
+            pageSize = params.get("pageSize");
+
+            console.log(typeof pageNo);
+            console.log(typeof pageSize);
+
+            // 클릭된 버튼요소의 부모의 부모의 자식요소로 접근하여 수업 pk를 가져온다.
+            imageSrc = e.currentTarget.children[0].src;
+
+            if (imageSrc.indexOf('pick_y') !== -1) {
                 const form = document.createElement('form');
                 const indexInput = document.createElement('input');
                 const pageNoInput = document.createElement('input');
@@ -140,7 +163,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         });
     }
-
     // =============================== 이근 추가 부분 =============================== //
 
 });
