@@ -19,15 +19,16 @@ public interface CommunityService {
 
     // 여러 개의 첨부부파일을 올리기 위한 메소드
     void saveFile(int parentNumber, List<MultipartFile> files);
+
 //    게시글 작성
     void saveCommunity(CommunityDTO community, List<MultipartFile> files, Long parentNumber);
 
     // 게시글 상세보기
-    CommunityDetailDTO selectCommunityDetail(Long parentPostNumber);
+    CommunityDetailDTO selectCommunityDetail(Long parentPostNumber, Long parentId);
 
     // 게시글 삭제하기
     void deleteCommunity(Long parentPostNumber);
 
     // 게시글 수정하기
-    void updateCommunity(CommunityDTO community);
+    void updateCommunity(CommunityDTO community, List<MultipartFile> files);
 }

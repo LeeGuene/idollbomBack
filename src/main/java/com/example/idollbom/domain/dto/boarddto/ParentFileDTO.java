@@ -8,9 +8,8 @@ import java.time.LocalDateTime;
 public class ParentFileDTO {
     private Long parentFileNumber;
     private String parentFileName;
+    private String parentFileOriginName;
     private Long parentFileSize;
-    private String parentFileUrl;
     private LocalDateTime parentFileUploadTime;
     private Long parentPostNumber;
-
 }
