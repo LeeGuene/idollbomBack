@@ -21,6 +21,7 @@
   </div>
 
   <form class="board-form" th:action="@{/parentcommunity/write}" method="post" enctype="multipart/form-data" th:object="${community}">
+    <input type="hidden" th:field="*{parentNumber}">
     <input type="hidden" th:field="*{parentPostNumber}">
     <!-- 게시글 제목 -->
     <div class="post-title-wrap form-group">
@@ -42,7 +43,7 @@
 
     <!-- 게시글 등록 버튼 -->
     <div class="post-submitBtn-wrap form-group">
-      <button type="submit" class="btn btn-success">등록하기</button>
+      <button type="submit" class="btn btn-success" th:text="${community.parentNumber != null} ? '수정하기' : '등록하기'">등록하기</button>
     </div>
   </form>
 </div>

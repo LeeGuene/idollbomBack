@@ -20,17 +20,13 @@
             <div class="community_search">
                 <p><a th:href="@{/parentcommunity/write}">작성하기</a></p>
 
-                <!-- 검색 말고 조회순, 최시순으로 해보자 -->
                 <div>
                     <form>
                         <select>
-                            <option>전체</option>
-                            <option>제목</option>
-                            <option>내용</option>
+                            <option>최신순</option>
+                            <option>조회순</option>
+                            <option>오래된순</option>
                         </select>
-
-                        <input type="text" placeholder="검색어를 입력해주세요">
-                        <input type="image" th:src="@{/images/comu_search.png}" alt="검색하기">
                     </form>
                 </div>
             </div>
