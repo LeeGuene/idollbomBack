@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.idollbom.mapper.boardmapper.ParentCommentMapper">
+    <!-- 특정 게시글의 모든 댓글 조회 -->
+    <select id="selectCommentById">
+        SELECT p.PARENT_NICKNAME, pc.*
+        FROM parent p JOIN PARENT_COMMENT pc
+           ON p.PARENT_NUMBER = pc.PARENT_NUMBER
+           AND PARENT_POST_NUMBER = #{parentPostNumber}
+        ORDER BY PARENT_COMMENT_UPDATE_DATE DESC
+    </select>
+
+    <!-- 댓글추가 -->
+    <insert id="insertComment">
+        INSERT INTO PARENT_COMMENT
+        VALUES (SEQ_PROJECT.nextval, #{parentCommentContent}, sysdate, sysdate, #{parentNumber}, #{parentPostNumber})
+    </insert>
+</mapper>
