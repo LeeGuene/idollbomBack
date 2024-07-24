@@ -79,6 +79,7 @@ public class CommunityServiceImpl implements CommunityService {
                 Files.copy(file.getInputStream(), filePath);
 
                 ParentFileDTO fileDTO = new ParentFileDTO();
+                fileDTO.setParentFileOriginName(originalFileName);
                 fileDTO.setParentFileName(directoryPath + "/" + storedFileName);
                 fileDTO.setParentFileSize(fileSize);
                 fileDTO.setParentPostNumber((long) parentPostNumber);
@@ -93,8 +94,14 @@ public class CommunityServiceImpl implements CommunityService {
 
     // 게시글 상세보기 및 조회수
     @Override
-    public CommunityDetailDTO selectCommunityDetail(Long parentPostNumber) {
-        return communityMapper.selectCommunityDetail(parentPostNumber);
+    public CommunityDetailDTO selectCommunityDetail(Long parentPostNumber, Long parentId) {
+        CommunityDetailDTO communityDetailDTO = communityMapper.selectCommunityDetail(parentPostNumber);
+
+        // 현재 로그인한 아이디와 게시글에 pk가 같지 않다면 조회수 +1
+        if(!parentId.equals(communityDetailDTO.getParentNumber())){
+            communityMapper.plusView(parentPostNumber);
+        }
+        return communityDetailDTO;
     }
 
     // 게시글 삭제하기
@@ -108,8 +115,12 @@ public class CommunityServiceImpl implements CommunityService {
 
     // 게시글 수정하기
     @Override
-    public void updateCommunity(CommunityDTO community) {
+    public void updateCommunity(CommunityDTO community, List<MultipartFile> files) {
         communityMapper.updateCommunity(community);
+
+        // 원래있던 파일 삭제
+        parentFileMapper.deleteFile((long) community.getParentPostNumber());
+        saveFile(community.getParentPostNumber(), files);
     }
 }
 

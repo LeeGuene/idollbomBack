@@ -32,7 +32,10 @@ public interface CommunityMapper {
     void updateCommunity(CommunityDTO community);
 
     // 조회수 SELECT
-    void plusView(int parentPostNumber);
+    void plusView(Long parentPostNumber);
+
+    // 게시글 오래된순
+    List<CommunityListDTO> selectAllByDateASC(int startRow, int endRow);
 }
 
 

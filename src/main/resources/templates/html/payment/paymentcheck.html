@@ -22,7 +22,7 @@
 
         <!-- 나중에 value값들은 다 바꿔주기 -->
         <!-- method 뭔지도 나중에 적기 -->
-        <form action="#">
+        <form>
             <div class="container">
                 <!-- 수업 이미지 띄어주는 div -->
                 <div class="class-container" th:object="${proInfo}">
@@ -50,7 +50,7 @@
 
                         <div class="detail-item">
                             <label for="classtime">수업 시간</label>
-                            <input type="text" class="form-control" id="classtime" th:value="${reservationInfo.reservationTime}" readonly>
+                            <input type="text" class="form-control" id="classtime" th:value="${reservationInfo.reservationTime} + '시'" readonly>
                         </div>
 
                         <div class="detail-item">
@@ -81,13 +81,16 @@
                     <!-- 이 부분을 누르면 이전페이지로 -->
                     <button class="btn btn-back">뒤로가기</button>
                     <!-- 얘를 누르면 카카오페이로 넘어감 -->
-                    <button class="btn" type="submit">결제하기</button>
+                    <button class="btn kakaoPay" type="button">결제하기</button>
                 </div>
             </div>
         </form>
     </div>
 <div th:replace="~{/layout/footer :: footer}"></div>
 </body>
+<!--부트페이 쓰기위한 js 추가-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://js.bootpay.co.kr/bootpay-5.0.0.min.js" type="application/javascript"></script>
 <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
 <script th:src="@{/js/motion.js}"></script>
 </html>
