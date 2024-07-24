@@ -10,18 +10,18 @@
 <body>
     <header id="header" th:fragment="header_pro">
         <div class="header_wrap">
-            <h1><a href="../html/main/index_pro.html"><img th:src="@{/images/logo.png}" alt="IDOLL봄"></a></h1>
+            <h1><a th:href="@{/parentmain}"><img th:src="@{/images/logo.png}" alt="IDOLL봄"></a></h1>
 
             <nav>
                 <ul class="gnb">
                     <li>
-                        <a href="#">수업등록</a>
+                        <a th:href="@{/pro/register}">수업등록</a>
                     </li>
                     <li>
                         <a th:href="@{/pro/childlist/{proNumber}(proNumber=${4})}">아이찾기</a>
                     </li>
                     <li>
-                        <a href="#">신청하기</a>
+                        <a href="#">자유게시판</a>
                     </li>
                     <li>
                         <a href="#">공지사항</a>
