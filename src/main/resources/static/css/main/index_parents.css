@@ -124,6 +124,7 @@ h2{
 
 .pro_recommendation ul {
     display: flex;
+
 }
 
 .pro_recommendation li {
@@ -134,6 +135,12 @@ h2{
     width: 400px;
     display: block;
     margin-bottom: 35px;
+}
+
+/* css 추가 부분 */
+.pro_recommendation li > a > .proImg-box{
+    width: 400px;
+    height: 400px;
 }
 
 .pro_recommendation li > a > p {

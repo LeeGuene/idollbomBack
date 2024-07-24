@@ -4,51 +4,43 @@
 <mapper namespace="com.example.idollbom.mapper.mainmapper.RecommendMapper">
     <!--  전문가 추천  -->
     <select id="recommend">
-        select *
-        from (select rownum as rn, recom.*
-            from (SELECT
-                        p.pro_profile_image_url, -- 전문가 이미지
-                        p.pro_name, -- 전문가 이름
-                        COALESCE(AVG(r.review_evaluation_point), 0) AS averageRating, -- 평균 평점, NULL 값은 0으로 대체
-                        COUNT(r.review_number) AS reviewCount -- 리뷰 개수
-                    FROM
-                        pro p -- 전문가 테이블
-                        JOIN
-                        class c -- 클래스 테이블
-                        ON p.pro_number = c.pro_number -- 리뷰 테이블을 전문가 테이블과 JOIN
-                        join review r -- 리뷰 테이블
-                        on c.class_number = r.class_number -- 전문가 테이블과 수업테이블 join
-                    GROUP BY
-                        p.pro_name, -- 전문가 이름으로 그룹화
-                        p.pro_profile_image_url -- 전문가 이미지 URL로 그룹화
-                    ORDER BY
-                        averageRating DESC) recom -- 평균 평점이 높은 순으로 정렬
-            --             reviewCount DESC; -- 리뷰 개수가 많은 순으로 정렬
-            WHERE ROWNUM &lt;= #{endRow}
+        SELECT *
+        FROM (
+                SELECT ROWNUM AS RN, RECOM.*
+                FROM (
+                        SELECT
+                          P.PRO_PROFILE_IMAGE_URL,
+                          P.PRO_NAME,
+                          COALESCE(AVG(R.REVIEW_EVALUTION_POINT), 0) AS averageRating,  -- 평균 평점이 NULL이면 0으로 대체
+                          COUNT(R.REVIEW_NUMBER) AS reviewCount                         -- 리뷰 개수
+                        FROM PRO P JOIN CLASS C ON P.PRO_NUMBER = C.PRO_NUMBER
+                                   JOIN REVIEW R on C.CLASS_NUMBER = R.CLASS_NUMBER
+                        GROUP BY
+                          P.PRO_NAME,
+                          P.PRO_PROFILE_IMAGE_URL
+                        ORDER BY averageRating DESC
+                    ) RECOM
+                WHERE ROWNUM &lt;= #{endRow}
             )
-        WHERE rn &gt; #{startRow}
+        WHERE RN &gt; #{startRow}
     </select>
 
-<!--  전문가 총 수  -->
+    <!--  전문가 총 수 ( 단, 진행하는 수업이 있고, 수업에 대한 리뷰가 있어야 한다. )  -->
     <select id="getCount">
-        select count(*)
-        from (SELECT
-                  p.pro_profile_image_url, -- 전문가 이미지
-                  p.pro_name, -- 전문가 이름
-                  COALESCE(AVG(r.review_evaluation_point), 0) AS averageRating, -- 평균 평점, NULL 값은 0으로 대체
-                  COUNT(r.review_number) AS reviewCount -- 리뷰 개수
-              FROM
-                  pro p -- 전문가 테이블
-                      JOIN
-                  class c -- 클래스 테이블
-                  ON p.pro_number = c.pro_number -- 리뷰 테이블을 전문가 테이블과 JOIN
-                      join review r -- 리뷰 테이블
-                           on c.class_number = r.class_number -- 전문가 테이블과 수업테이블 join
-              GROUP BY
-                  p.pro_name, -- 전문가 이름으로 그룹화
-                  p.pro_profile_image_url -- 전문가 이미지 URL로 그룹화
-              ORDER BY
-                  averageRating DESC)
+        select COUNT(*)
+        from (
+                  SELECT
+                      P.PRO_PROFILE_IMAGE_URL,
+                      P.PRO_NAME,
+                      COALESCE(AVG(R.REVIEW_EVALUTION_POINT), 0) AS averageRating,  -- 평균 평점이 NULL이면 0으로 대체
+                      COUNT(R.REVIEW_NUMBER) AS reviewCount                         -- 리뷰 개수
+                  FROM PRO P JOIN CLASS C ON P.PRO_NUMBER = C.PRO_NUMBER
+                             JOIN REVIEW R on C.CLASS_NUMBER = R.CLASS_NUMBER
+                  GROUP BY
+                      P.PRO_NAME,
+                      P.PRO_PROFILE_IMAGE_URL
+                  ORDER BY averageRating DESC
+        )
     </select>
 
 </mapper>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../../../static/css/parent/prolist.css">
+    <link rel="stylesheet" th:href="@{/css/parent/prolist.css}">
     <title>전문가 리스트</title>
 </head>
 
@@ -15,11 +15,14 @@
 
             <table>
                 <tbody>
-                    <!-- 실제로는 반복 돌릴 리스트 보기 편하게 다 붙여놓음 -->
                     <tr>
+                        <!-- 전문가 이름 -->
                         <td><b>조용준</b></td>
+                        <!-- 수업 소개 -->
                         <td>저랑 함께 재밌는 수업을 해봐요.</td>
+                        <!-- 전문가 이미지 -->
                         <td><img src="../../../static/image/class_list_pro.png" alt="강사이미지"></td>
+                        <!-- 전문가 프로필 상세보기로 이동 -->
                         <td><a href="./review.html">더 보기</a></td>
                     </tr>
                     <tr>
@@ -104,6 +107,6 @@
     </div>
 </body>
 <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
-<script src="../../../static/js/motion.js"></script>
+<script th:src="@{/js/motion.js}"></script>
 
 </html>

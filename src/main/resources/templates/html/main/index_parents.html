@@ -44,47 +44,13 @@
         <section class="pro_recommendation">
             <div>
                 <h2>전문가 추천</h2>
-                <a href="#">더보기<span>+</span></a>
+                <a th:href="@{/parentmain/prolist}">더보기<span>+</span></a>
             </div>
-            <ul>
-                <li>
-                    <a href="#">
-                        <img th:src="@{/images/index_recommendation.png}">
-                        <p>유가람</p>
-                        <div>
-                            <p>후기</p>
-                            <img src="../../images/4.5rating.png">
-                            <p>(97)</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="../../images/index_recommendation.png">
-                        <p>유가람</p>
-                        <div>
-                            <p>후기</p>
-                            <img src="../../images/4.5rating.png">
-                            <p>(97)</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="../../images/index_recommendation.png">
-                        <p>유가람</p>
-                        <div>
-                            <p>후기</p>
-                            <img src="../../images/4.5rating.png">
-                            <p>(97)</p>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <div class="pro_control">
-    <!--            <button type="button" id="prev"><img th:src="@{/images/pro_button_pre.png}" alt="이전 메뉴 보기"></button>-->
-    <!--            <button type="button" id="next"><img th:src="@{/images/pro_button_next.png}" alt="다음 메뉴 보기"></button>-->
-            </div>
+            <!-- 추천 전문가 리스트 뿌려줄 공간 -->
+            <ul></ul>
+
+            <!-- 추천 전문가 리스트 페이징 처리하는 버튼(이전, 다음) -->
+            <div class="pro_control"></div>
         </section>
 
         <!-- 키즈존 추천 예약하기 클릭 시 네이버 지도로 이동 -->
@@ -179,82 +145,5 @@
 <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
 <script th:src="@{/js/motion.js}"></script>
 <script th:src="@{/js/parent_main.js}"></script>
-<script>
-    const pageSize = 3;
-
-    getList();
-
-    function getList(page){
-        $.ajax({
-            method : 'get',
-            url : '/rest/recommend',
-            data : {
-                page : page,
-                size : pageSize
-            },
-            success:function (data){
-                // 리스트 뿌려주는 함수.
-                renderPro(data.content);
-                renderPagination(data);
-            },
-            error:function (){
-                console.error('실패')
-            }
-        })
-    };
-
-    function renderPro(pros){
-        const proContainer = $('.pro_recommendation ul');
-        proContainer.empty();
-
-        pros.forEach(function(pro) {
-            let boardRow =  `<li>
-                <a href="#">
-                    <img src="${pro.proProfileImageUrl}">
-                        <p>${pro.proName}</p>
-                        <div>
-                            <p>후기</p>
-
-                            <img src="../../images/${pro.averageRating > 2 ? 5 : 4.5}rating.png">
-                                <p>(${pro.reviewCount})</p>
-                        </div>
-                </a>
-            </li>`
-            proContainer.append(boardRow);
-        });
-    }
-
-    function renderPagination(pagination) {
-        const paginationContainer = $('.pro_control');
-        paginationContainer.empty();
-
-        // 이전 버튼
-        const prevDisabled = pagination.currentPage === 1 ? 'style = "pointer-events : none"' : '';
-        paginationContainer.append(`
-            <button type="button" ${prevDisabled}>
-                <a class="page-link" data-page="${pagination.currentPage -1}">
-                    <img src="/images/pro_button_pre.png" alt="이전 메뉴 보기">
-                </a>
-            </button>
-        `);
-
-        // 다음 버튼
-        const nextDisabled = pagination.currentPage === pagination.totalPages ? 'style = "pointer-events : none"' : '';
-        paginationContainer.append(`
-            <button type="button" ${nextDisabled}>
-                <a class="page-link" data-page="${pagination.currentPage +1}">
-                    <img src="/images/pro_button_next.png" alt="다음 메뉴 보기">
-                </a>
-            </button>
-        `);
-
-        // 페이지 클릭했을 때 실행할 함수.
-        $('.page-link').click(function(event) {
-            event.preventDefault();
-            const selectedPage = $(this).data('page');
-            getList(selectedPage);
-        });
-    }
-</script>
 
 </html>
