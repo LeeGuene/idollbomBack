@@ -89,20 +89,21 @@
 
                 <!-- 정보 수정을 누르면 나오는 페이지 -->
                 <div class="mainbox">
-                    <form class="reset-form">
+                    <form class="reset-form" th:object="${pro}">
+                        <input type="hidden" id="hiddenPassword">
                         <div class="reset">
                             <div> 이름</div>
-                            <input type="textarea">
+                            <input th:field="*{proName}">
                         </div>
 
                         <div class="reset">
                             <div>휴대폰번호</div>
-                            <input type="textarea">
+                            <input th:field="*{proPhoneNumber}">
                         </div>
 
                         <div class="reset">
                             <div> 별명</div>
-                            <input type="textarea">
+                            <input  th:field="*{proNickName}">
                         </div>
 
                         <div class="reset">
@@ -123,7 +124,7 @@
                         <div class="reset-wrap">
                             <div class="reset">
                                 <div>자기 소개</div>
-                                <textarea name="info" id="info"></textarea>
+                                <textarea name="info" id="info" th:field="*{proIntro}"></textarea>
                             </div>
                             <div class="attachment-wrap">
                                 <div>이력서</div>
@@ -154,22 +155,22 @@
                                     alt="닫기버튼"></button>
                         </div>
                         <div class="mb-3">
-                            <label for="childName" class="form-label">현재 비밀번호</label>
-                            <input type="text" class="form-control">
+                            <label  class="form-label">현재 비밀번호</label>
+                            <input id="childName" type="password" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label for="childName" class="form-label">비밀번호</label>
-                            <input type="text" class="form-control">
+                            <label class="form-label">비밀번호</label>
+                            <input id="presentNew" type="password" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label for="childInstruct" class="form-label">비밀번호 확인</label>
-                            <input type="text" class="form-control">
+                            <label  class="form-label" >비밀번호 확인</label>
+                            <input type="password" class="form-control" id="childInstruct">
                         </div>
 
                         <div class="modal-btn">
                             <!-- 추가하기를 누르면 새로운 페이지로 이동 -->
                             <button type="button" class="close-btn btn">취소하기</button>
-                            <button class="regist-btn btn" type="submit">수정하기</button>
+                            <button class="regist-btn btn " type="submit" onclick="test(this)">수정하기</button>
                         </div>
                     </div>
                 </div>
@@ -253,9 +254,33 @@
                 document.getElementById('preview').src = "";
             }
         }
+
+        //유효성검사
+        function test() {
+            let p1 = document.getElementById('childName').value;
+            let p2 = document.getElementById('childInstruct').value;
+            let p3 = document.getElementById('presentNew').value;
+
+            if (p3 != p2) {
+                alert("비밀번호가 일치 하지 않습니다");
+                return false;
+            } else if (p1 == p3) {
+                alert("현재 비밀번호와 같습니다");
+                return false;
+            } else {
+                var newPassword = document.getElementById('hiddenPassword');
+                newPassword.value = p2;
+                console.log(p2);
+                alert("성공적으로 수정되었습니다.");
+                modal.style.display="none";
+            }
+            document.getElementById('childName').value = '';
+            document.getElementById('presentNew').value = '';
+            document.getElementById('childInstruct').value = '';
+        }
     </script>
-    <script src="../../../../static/js/password-modal.js"></script>
-    <script src="../../../../static/js/profile-modal.js"></script>
+    <script src="/js/password-modal.js"></script>
+    <script src="/js/profile-modal.js"></script>
 </body>
 
 </html>

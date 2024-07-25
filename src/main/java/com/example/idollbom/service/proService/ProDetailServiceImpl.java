@@ -38,4 +38,9 @@ public class ProDetailServiceImpl implements ProDetailService {
         return proDetailMapper.selectProPost(proNumber);
 
     }
+
+    @Override
+    public ProVO selectProPrivate(Long proNumber) {
+        return proDetailMapper.selectProPrivate(proNumber);
+    }
 }

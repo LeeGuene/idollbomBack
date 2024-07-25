@@ -38,7 +38,7 @@ public class ProController {
     // 하단에 전문가 수업에 달린 모든 리뷰 목록 표시
     @GetMapping("/detail")
     public String proDetail(@RequestParam(value="proNumber") Long proNumber,
-                         Model model) {
+                            Model model) {
 
         // 특정 전문가 프로필 상세보기 조회
         ProDetailDTO pro_info = proDetailService.findProDetailByNumber(proNumber);
@@ -51,7 +51,7 @@ public class ProController {
 
         return "/html/parent/review";
     }
-    
+
     // 아이찾기 내 모든 나의 수업을 찜한 부모 목록 보여주기
     // 테스트를 위해서 임의로 대메뉴 "아이찾기" 버튼에 직접 proNumber를 전달함. ( index_pro.html, header_pro.html에 모두 추가 )
     @GetMapping("/childlist/{proNumber}")
