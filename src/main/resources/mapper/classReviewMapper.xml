@@ -5,37 +5,50 @@
     <!-- 특정 전문가의 하나의 수업에 대한 모든 리뷰 조회 -->
     <select id="selectOneAllReview" resultType="ReviewOneListDTO">
         SELECT
-            PA.PARENT_NAME,
-            RE.REVIEW_NUMBER,
-            RE.REVIEW_CONTENT,
-            RE.REVIEW_EVALUTION_POINT,
-            RE.REVIEW_REGISTER_DATE,
-            RE.REVIEW_UPDATE_DATE,
-            PA.PARENT_NUMBER,
-            RE.CLASS_NUMBER
-        FROM (
-                 SELECT
-                        R.REVIEW_NUMBER,
-                        R.REVIEW_CONTENT,
-                        R.REVIEW_EVALUTION_POINT,
-                        R.REVIEW_REGISTER_DATE,
-                        R.REVIEW_UPDATE_DATE,
-                        R.PARENT_NUMBER,
-                        R.CLASS_NUMBER
-                 FROM (
-                          SELECT
-                              P.PRO_NAME,
-                              C.CLASS_NUMBER,
-                              C.CLASS_CATEGORY_BIG,
-                              C.CLASS_CATEGORY_SMALL,
-                              C.CLASS_CONTENT
-                          FROM PRO P JOIN CLASS C
-                              ON P.PRO_NUMBER = C.PRO_NUMBER
-                              AND C.CLASS_NUMBER = #{classNumber}
-                  ) CLASS JOIN REVIEW R
-                    ON CLASS.CLASS_NUMBER = R.CLASS_NUMBER
-        )  RE JOIN PARENT PA
-            ON RE.PARENT_NUMBER = PA.PARENT_NUMBER
+            RESULT.PARENT_NAME,
+            RESULT.REVIEW_NUMBER,
+            RESULT.REVIEW_CONTENT,
+            RESULT.REVIEW_EVALUTION_POINT,
+            RESULT.REVIEW_REGISTER_DATE,
+            RESULT.REVIEW_UPDATE_DATE,
+            RESULT.PARENT_NUMBER,
+            RESULT.CLASS_NUMBER
+        FROM(
+                SELECT
+                    PA.PARENT_NAME,
+                    RE.REVIEW_NUMBER,
+                    RE.REVIEW_CONTENT,
+                    RE.REVIEW_EVALUTION_POINT,
+                    RE.REVIEW_REGISTER_DATE,
+                    RE.REVIEW_UPDATE_DATE,
+                    PA.PARENT_NUMBER,
+                    RE.CLASS_NUMBER,
+                    ROW_NUMBER() OVER (ORDER BY RE.REVIEW_REGISTER_DATE) AS RN
+                FROM (
+                         SELECT
+                                R.REVIEW_NUMBER,
+                                R.REVIEW_CONTENT,
+                                R.REVIEW_EVALUTION_POINT,
+                                R.REVIEW_REGISTER_DATE,
+                                R.REVIEW_UPDATE_DATE,
+                                R.PARENT_NUMBER,
+                                R.CLASS_NUMBER
+                         FROM (
+                                  SELECT
+                                      P.PRO_NAME,
+                                      C.CLASS_NUMBER,
+                                      C.CLASS_CATEGORY_BIG,
+                                      C.CLASS_CATEGORY_SMALL,
+                                      C.CLASS_CONTENT
+                                  FROM PRO P JOIN CLASS C
+                                      ON P.PRO_NUMBER = C.PRO_NUMBER
+                                      AND C.CLASS_NUMBER = #{classNumber}
+                          ) CLASS JOIN REVIEW R
+                            ON CLASS.CLASS_NUMBER = R.CLASS_NUMBER
+                )  RE JOIN PARENT PA
+                   ON RE.PARENT_NUMBER = PA.PARENT_NUMBER
+            ) RESULT
+        WHERE RESULT.RN &lt;= 3
     </select>
 
 </mapper>

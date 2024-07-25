@@ -204,6 +204,13 @@ public class ClassListController {
                               @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                               Model model) {
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String currentUserName = userDetails.getUsername();
+
+        ParentVO parent_info = parentMapper.selectOne(currentUserName);
+        model.addAttribute("parent_info", parent_info);
+
         List<ClassListDTO> classListDTO = classListService.searchClassList(searchWord, searchType, category, pageNo, pageSize);
         int count = classListService.countClasses(category,searchType, searchWord);
 
