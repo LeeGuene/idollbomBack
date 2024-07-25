@@ -8,7 +8,6 @@ const entertainment = document.querySelector('.category-entertainment')
 const date = document.querySelector('.date')
 const time = document.querySelector('.time')
 const today = new Date()
-date.value = new Date().toISOString().substring(0,10)
 
 selectbox.addEventListener('change', () => {
     const category = selectbox.options[selectbox.selectedIndex].value
@@ -128,11 +127,50 @@ function autoSubmit() {
             `
                     randomProContainer.append(html);
             }
+
+            // ====================== 이근 추가한 부분 ====================== //
+            const ramdomPro = document.querySelector('.random_pro');
+            const toStudyDetailPage = document.querySelector('.random_pro a');
+
+            toStudyDetailPage.addEventListener("click", e=>{
+                e.preventDefault(); // a태그 기본동작(페이지 이동) 중지
+                let proNumber = ramdomPro.children[0].value;
+                let classNumber = ramdomPro.children[1].value;
+                const url = '/class/detail' + '?classNumber=' + classNumber + '&proNumber=' + proNumber;
+                console.log(url);
+                window.location.href = url;
+
+            });
+            // ====================== 이근 추가한 부분 ====================== //
+
             },
         error: function (xhr, status, error) {
             console.error(xhr.responseText); // 오류 메시지 출력
             alert('제대로 수행되지 않았습니다. 다시 시도해주세요.');
         }
     });
-
 }
+
+// // Assume randomProContainer is already defined
+// randomProContainer.innerHTML = html;
+//
+// // Find the anchor tag within the inserted HTML
+// const anchorTag = randomProContainer.querySelector('.random_pro a');
+//
+// // Add a click event listener to the anchor tag
+// anchorTag.addEventListener('click', function(event) {
+//     event.preventDefault(); // Prevent default link behavior (e.g., page reload)
+//
+//     // Get proNumber and classNumber from the hidden inputs in the parent div
+//     const proNumber = this.closest('.random_pro').querySelector('input[type="hidden"][value="${randomMatch.proNumber}"]').value;
+//     const classNumber = this.closest('.random_pro').querySelector('input[type="hidden"][value="${randomMatch.classNumber}"]').value;
+//
+//     // Construct the URL with parameters
+//     const url = '/match/submit/detail' + '?proNumber=' + proNumber + '&classNumber=' + classNumber;
+//
+//     // Navigate to the new page
+//     window.location.href = url;
+// });
+
+
+

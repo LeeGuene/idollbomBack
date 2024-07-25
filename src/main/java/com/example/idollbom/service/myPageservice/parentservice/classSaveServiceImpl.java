@@ -39,7 +39,7 @@ public class classSaveServiceImpl implements classSaveService {
     }
 
     @Override
-    public void deleteClass(Long classNumber) {
-        classSaveMapper.deleteClass(classNumber);
+    public int deleteClass(Long classNumber) {
+        return classSaveMapper.deleteClass(classNumber);
     }
 }

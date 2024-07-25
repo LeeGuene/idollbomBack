@@ -1,4 +1,5 @@
 package com.example.idollbom.controller.login;
+
 import com.example.idollbom.domain.dto.logindto.ParentDTO;
 import com.example.idollbom.domain.vo.ProVO;
 import com.example.idollbom.service.loginservice.ParentService;
@@ -9,8 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/user")
@@ -38,7 +40,7 @@ public class ParentController {
         log.info("HTML에서 넘어온 데이터: " + dto.toString());
 
         parentService.save(dto);
-        return "redirect:/ParentMyPage/kids";
+        return "redirect:/user/login";
 }
 
 //  로그아웃화면 이동
@@ -51,12 +53,14 @@ public class ParentController {
 //  프로 회원가입폼 이동
     @GetMapping("/proSignup")
     public String proSignupForm(ProVO proVO) {
+
         return "html/login/proRegisterPage"; // 프로 회원가입 페이지
     }
 
 //  프로 회원가입폼 제출
     @PostMapping("/proSignup")
     public String proSignup() {
+
         return "redirect:/user/login"; // 회원가입 후 로그인 페이지로 리디렉션
     }
 

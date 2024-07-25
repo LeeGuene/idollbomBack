@@ -1,27 +1,18 @@
 package com.example.idollbom.controller.pro;
 
-import com.example.idollbom.domain.dto.parentdto.ReviewAllListDTO;
 import com.example.idollbom.domain.dto.prodto.ChildFindDTO;
 import com.example.idollbom.domain.dto.prodto.ProDetailDTO;
 import com.example.idollbom.domain.dto.prodto.ProReviewListDTO;
-import com.example.idollbom.domain.vo.ParentVO;
-import com.example.idollbom.domain.vo.ProVO;
-import com.example.idollbom.mapper.loginmapper.ParentMapper;
-import com.example.idollbom.service.applyservice.ClassReviewService;
 import com.example.idollbom.service.proService.ChildFindService;
 import com.example.idollbom.service.proService.ProDetailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -129,6 +120,5 @@ public class ProController {
 
         return "/html/pro/childfind";
     }
-
 
 }
