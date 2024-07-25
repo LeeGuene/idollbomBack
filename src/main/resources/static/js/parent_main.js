@@ -49,10 +49,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     <p>${pro.proName}</p>
                     <div>
                         <p>후기</p>
-
                         <!-- 별점 이미지 사진이 4.5rating밖에 없어서 일단 평균 별점 2점 초과하면 무조건 나오도록 설정함. -->
-                        <img src="/images/${pro.averageRating > 2 ? 4.5 : 5}rating.png">
-                            <p>(${pro.reviewCount})</p>
+                        <img src="/images/${pro.averageRating > 2 ? 4.5 : 5}rating.png" />
+                        <p>(${pro.reviewCount})</p>
                     </div>
                 </a>
             </li>`;

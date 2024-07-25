@@ -132,7 +132,7 @@ h2{
 }
 
 .pro_recommendation li img {
-    width: 400px;
+    width: 70%;
     display: block;
     margin-bottom: 35px;
 }
@@ -141,10 +141,19 @@ h2{
 .pro_recommendation li > a > .proImg-box{
     width: 400px;
     height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pro_recommendation li > a > .proImg-box > img{
+    width: 70%;
+    height: 70%;
+    border-radius: 10px;
 }
 
 .pro_recommendation li > a > p {
-    font-size: 25px;
+    font-size: 22px;
     text-align: center;
     margin-bottom: 10px;
 }
@@ -158,10 +167,6 @@ h2{
 
 .pro_recommendation li div p {
     font-size: 20px;
-}
-
-.pro_recommendation li div img {
-    width: 185px;
 }
 
 .pro_control button {
