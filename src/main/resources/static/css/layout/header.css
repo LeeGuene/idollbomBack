@@ -93,7 +93,7 @@ button {
 .side {
     display: flex;
     width: 350px;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .side * {
@@ -114,6 +114,9 @@ button {
     line-height: 100px;
 }
 
-.side p:last-child {
-    margin-left: -3px;
+/* 헤더 구조 변경으로 추가하는 css */
+/* 마이페이지, 로그아웃에 적용되는 css */
+.logout-status,
+.login-status{
+    display: flex;
 }

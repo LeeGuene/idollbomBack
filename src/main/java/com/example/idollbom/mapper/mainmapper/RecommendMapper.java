@@ -11,7 +11,7 @@ public interface RecommendMapper {
     // 전문가 추천
     List<RecommendListDTO> recommend(int startRow, int endRow);
 
-    // 갯수
+    // 전문가의 총 인원수
     int getCount();
 
 }

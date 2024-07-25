@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -10,18 +10,18 @@
 <body>
     <header id="header" th:fragment="header_pro">
         <div class="header_wrap">
-            <h1><a href="../html/main/index_pro.html"><img th:src="@{/images/logo.png}" alt="IDOLL봄"></a></h1>
+            <h1><a th:href="@{/parentmain}"><img th:src="@{/images/logo.png}" alt="IDOLL봄"></a></h1>
 
             <nav>
                 <ul class="gnb">
                     <li>
-                        <a href="#">수업등록</a>
+                        <a th:href="@{/pro/register}">수업등록</a>
                     </li>
                     <li>
                         <a th:href="@{/pro/childlist/{proNumber}(proNumber=${4})}">아이찾기</a>
                     </li>
                     <li>
-                        <a href="#">신청하기</a>
+                        <a href="#">자유게시판</a>
                     </li>
                     <li>
                         <a href="#">공지사항</a>
@@ -30,9 +30,16 @@
             </nav>
             <div class="side">
                 <p><button><img th:src="@{/images/Alarm.png}" alt="알림"></button></p>
-                <p><a href="#">마이페이지</a></p>
-                <p><a href="#">로그인 /</a></p>
-                <p><a href="#">회원가입</a></p>
+                <div sec:authorize="!isAuthenticated()" class="logout-status">
+                    <p><a th:href="@{/user/login}">로그인</a></p>
+                    <p><a th:href="@{/user/proSignup}">회원가입</a></p>
+                </div>
+
+                <div sec:authorize="isAuthenticated()" class="login-status">
+                    <!-- 전문가 마이페이지의 기본 페이지는 나의 프로필 보기로 설정 -->
+                    <p><a th:href="@{/proMyPage/profile}">마이페이지</a></p>
+                    <p><a th:href="@{/user/logout}">로그아웃</a></p>
+                </div>
             </div>
         </div>
     </header>

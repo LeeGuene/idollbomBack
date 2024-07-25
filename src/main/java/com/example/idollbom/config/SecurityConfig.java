@@ -79,7 +79,7 @@ public class SecurityConfig {
 
 //            request.getSession().setAttribute("user", auth.getPrincipal());
 
-            response.sendRedirect("/ParentMyPage/kids");
+            response.sendRedirect("/parentmain");
         };
     }
 

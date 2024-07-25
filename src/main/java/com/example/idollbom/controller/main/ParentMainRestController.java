@@ -20,9 +20,9 @@ public class ParentMainRestController {
     // 전문가 추천은 리뷰가 달려있는 사람만 추천.
     @GetMapping
     public ResponseEntity<PagedResponse<RecommendListDTO>> getBoardList(@RequestParam(defaultValue = "1") int page,
-                                                                        @RequestParam(defaultValue = "3") int size
+                                                                        @RequestParam(defaultValue = "3") int pageSize
                                                                         ) {
-        return ResponseEntity.ok(recommendService.getRecommendList(page, size));
+        return ResponseEntity.ok(recommendService.getRecommendList(page, pageSize));
     }
 
 }

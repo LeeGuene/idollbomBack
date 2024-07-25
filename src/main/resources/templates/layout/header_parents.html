@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -10,32 +10,33 @@
 <body>
     <header id="header" th:fragment="header_parents">
         <div class="header_wrap">
-            <h1><a href="#"><img th:src="@{/images/logo.png}" alt="IDOLL봄"></a></h1>
+            <h1><a th:href="@{/parentmain}"><img th:src="@{/images/logo.png}" alt="IDOLL봄"></a></h1>
 
             <nav>
                 <ul class="gnb">
                     <li>
-                        <a herf="#">부모님</a>
+                        <a th:href="@{/parentmain}">부모님</a>
                         <ul>
-                            <li><a href="#">매칭</a></li>
+                            <li><a th:href="@{/match}">매칭</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">전문가</a>
+                        <a th:href="@{/promain}">전문가</a>
                     </li>
                     <li>
-                        <a href="#">신청하기</a>
+                        <!-- 신청하기 기본 페이지 : 돌봄 -->
+                        <a th:href="@{/class/classcare}">신청하기</a>
                         <ul>
-                            <li><a href="#">돌봄</a></li>
-                            <li><a href="#">운동</a></li>
-                            <li><a href="#">교육</a></li>
-                            <li><a href="#">예능</a></li>
+                            <li><a th:href="@{/class/classcare}">돌봄</a></li>
+                            <li><a th:href="@{/class/classstudy}">교육</a></li>
+                            <li><a th:href="@{/class/classsport}">운동</a></li>
+                            <li><a th:href="@{/class/classentertainment}">예능</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">커뮤니티</a>
+                        <a th:href="@{/parentcommunity}">커뮤니티</a>
                         <ul>
-                            <li><a href="#">자유게시판</a></li>
+                            <li><a th:href="@{/parentcommunity}">자유게시판</a></li>
                         </ul>
                     </li>
                     <li>
@@ -48,10 +49,23 @@
                 </ul>
             </nav>
             <div class="side">
-                <p><button><img th:src="@{/images/Alarm.png}" alt="알림"></button></p>
-                <p><a href="#">마이페이지</a></p>
-                <p><a href="#">로그인 /</a></p>
-                <p><a href="#">회원가입</a></p>
+                <p>
+                    <button onclick="goAlarm()">
+                        <img th:src="@{/images/Alarm.png}" alt="알림">
+                    </button>
+                </p>
+
+                <div sec:authorize="!isAuthenticated()" class="logout-status">
+                    <p><a th:href="@{/user/login}">로그인</a></p>
+                    <p><a th:href="@{/user/signup}">회원가입</a></p>
+                </div>
+
+                <div sec:authorize="isAuthenticated()" class="login-status">
+                    <!-- 로그인 기본페이지와 동일하게 마이페이지도 아이등록 페이지로 이동 -->
+                    <p><a th:href="@{/ParentMyPage/kids}">마이페이지</a></p>
+                    <p><a th:href="@{/user/logout}">로그아웃</a></p>
+                </div>
+
             </div>
         </div>
     </header>

@@ -12,5 +12,5 @@ public interface classSaveService {
     // 수업 찜 목록 추가 ( 수업 상세 -> 찜 목록 이동 )
     int saveClass(Long classNumber, Long parentNumber);
 
-    void deleteClass(Long classNumber);
+    int deleteClass(Long classNumber);
 }

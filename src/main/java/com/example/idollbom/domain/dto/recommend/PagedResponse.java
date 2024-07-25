@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 public class PagedResponse<T> {
-    private List<T> content;
+    private List<T> content;     // 전문가를 추천하기 위한 전문가에 대한 정보 목록
     private int currentPage;
     private int totalPages;
     private int pageSize;
