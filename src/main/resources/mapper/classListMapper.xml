@@ -110,7 +110,7 @@
                 WHERE rownum &lt;= #{endRow}
                 )
             WHERE rnum &gt; #{startRow}
-            ORDER BY CLASS_REGISTER_DATE desc
+            ORDER BY CLASS_REGISTER_DATE DESC
     </select>
 
     <!-- 검색결과에 따른 갯수를 가져오는 select -->

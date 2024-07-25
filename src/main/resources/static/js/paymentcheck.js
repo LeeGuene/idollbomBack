@@ -37,7 +37,7 @@ async function kakaoPay() {
         ],
         "extra": {
             "open_type": "iframe", /*결제창 진행방식*/
-            "seller_name": "류호근", /*판매자 이름*/
+            "seller_name": "관리자", /*판매자 이름*/
         }
     })
     switch (response.event) {
@@ -54,3 +54,10 @@ async function kakaoPay() {
 $(".kakaoPay").on("click", function () {
     kakaoPay();
 })
+
+// 뒤로가기 버튼을 눌렀을 때
+function goBack() {
+    // js에서 제공해주는 이전 페이지로 가는 메소드
+    // button은 꼭 type="button" 선언 필수!
+    window.history.back();
+}

@@ -4,6 +4,7 @@ import com.example.idollbom.domain.dto.boarddto.CommunityDTO;
 import com.example.idollbom.domain.dto.boarddto.CommunityDetailDTO;
 import com.example.idollbom.domain.dto.boarddto.CommunityListDTO;
 import com.example.idollbom.domain.dto.boarddto.ParentFileDTO;
+import com.example.idollbom.domain.dto.recommend.PagedResponse;
 import com.example.idollbom.mapper.boardmapper.CommunityMapper;
 import com.example.idollbom.mapper.boardmapper.ParentFileMapper;
 import lombok.RequiredArgsConstructor;
@@ -121,6 +122,25 @@ public class CommunityServiceImpl implements CommunityService {
         // 원래있던 파일 삭제
         parentFileMapper.deleteFile((long) community.getParentPostNumber());
         saveFile(community.getParentPostNumber(), files);
+    }
+
+    @Override
+    public PagedResponse<CommunityListDTO> searchCommunityList(String searchType, String searchWord, int page, int pageSize) {
+        int startRow = (page - 1) * pageSize;
+        int endRow = page * pageSize;
+
+        int totalBoards = communityMapper.countSearchCommunity(searchType, searchWord);
+        int totalPages = (int) Math.ceil((double) totalBoards / pageSize);
+
+
+        List<CommunityListDTO> communityListDTO = communityMapper.searchCommunityList(searchType, searchWord, startRow, endRow);
+
+        return new PagedResponse<>(communityListDTO, page, totalPages, pageSize, totalBoards);
+    }
+
+    @Override
+    public int countSearchCommunity(String searchType, String searchWord) {
+        return communityMapper.countSearchCommunity(searchType, searchWord);
     }
 }
 

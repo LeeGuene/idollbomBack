@@ -59,9 +59,4 @@ public class PaymentCheckController {
 
         return "/html/payment/paymentcheck";
     }
-
-    // 결제하기 버튼을 눌렀을 때
-
-    // 뒤로가기 버튼을 눌렀을 때
-
 }

@@ -15,4 +15,10 @@ public interface ParentCommentMapper {
     // 댓글 추가
     void insertComment(ParentCommentDTO parentCommentDTO);
 
+    // 댓글 삭제
+    void deleteComment(Long parentCommentNumber);
+
+    // 댓글 수정
+    void updateComment(ParentCommentDTO parentCommentDTO);
+
 }
