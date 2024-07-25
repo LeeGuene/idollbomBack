@@ -179,6 +179,13 @@ public class ClassListController {
         int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
         int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
 
+//        if (authentication != null){
+//            for (ClassListDTO classDTO : classListDTO){
+//                if(매퍼.메소드(classDTO.getClassNumber(), parent_info.getParentNumber())){
+//                    classDTO.setLike("있음");
+//                }
+//            }
+//        }
 
         model.addAttribute("count", count);
         model.addAttribute("category", category);
