@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -29,8 +29,9 @@
                 <div>
                     <p>학습부터 놀이, 돌봄까지<br>
                         내게 딱 맞는 수업 찾기</p>
-
-                    <a href="../childfind.html">자세히 보기<span>+</span></a>
+                    <!-- proNumber가 아닌 임의의 4번 전문가를 넣어줌 -->
+                    <a class="login" th:href="@{/pro/childlist/{proNumber}(proNumber=${4})}" sec:authorize="isAuthenticated()">자세히 보기<span>+</span></a>
+                    <a class="check" sec:authorize="!isAuthenticated()">자세히 보기<span>+</span></a>
                 </div>
             </div>
         </section>
@@ -44,12 +45,14 @@
                     <p>아이들을 좋아하는 누구나<br>
                         자란다 선생님이 될 수 있어요!</p>
 
-                    <a th:href="@{/pro/register}">바로가기<span>+</span></a>
+                    <a class="check-in"  sec:authorize="isAuthenticated()" th:href="@{/pro/register}">바로가기<span>+</span></a>
+                    <a class="check-out" sec:authorize="!isAuthenticated()">바로가기<span>+</span></a>
                 </div>
             </div>
         </section>
 
         <!-- 활동 가이드 더 알아보기 클릭 시 가이드 페이지로 이동 -->
+        <!-- 활동 가이드 페이지 없음 -->
         <section class="pro_guide">
             <h2>활동 가이드</h2>
             <div class="pro_guide_wrap">
@@ -110,5 +113,6 @@
 
 </body>
 <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
+<script th:src="@{/js/pro_main.js}"></script>
 
 </html>

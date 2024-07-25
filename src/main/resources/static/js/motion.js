@@ -27,6 +27,6 @@ $(function(){
 
 // 헤더의 쪽지 모양 버튼 클릭하면
 // 부모 마이페이지의 쪽지 목록 페이지로 이동
-function goAlarm(){
+function goMynote(){
     window.location.href = '/ParentMyPage/myNote';
 }

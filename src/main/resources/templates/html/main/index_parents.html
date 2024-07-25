@@ -9,8 +9,6 @@
     <title>부모 메인</title>
 </head>
 
-
-
 <body>
 
     <!-- 헤더 -->
@@ -44,11 +42,11 @@
         <section class="pro_recommendation">
             <div>
                 <h2>전문가 추천</h2>
-                <a th:href="@{/parentmain/prolist}">더보기<span>+</span></a>
+                <a th:href="@{/parentmain/prolist}">더 보기<span>+</span></a>
             </div>
+
             <!-- 추천 전문가 리스트 뿌려줄 공간 -->
             <ul></ul>
-
             <!-- 추천 전문가 리스트 페이징 처리하는 버튼(이전, 다음) -->
             <div class="pro_control"></div>
         </section>
@@ -65,7 +63,7 @@
                         <p><b>위치</b>서울특별시 마포구 마포대로 122 1층</p>
                         <p><b>이용 연령</b>4세 ~ 13세(일반인 이용가능)</p>
                         <p><b>이용 시간</b>평일 9:00 ~ 19:00</p>
-                        <p><a href="#">키즈존 예약하기</a></p>
+                        <p><a href="https://map.naver.com/v5/entry/place/1783319321?placePath=%2Fticket&c=15,0,0,0,dh">키즈존 예약하기</a></p>
                     </div>
                 </li>
                 <li>
@@ -76,7 +74,7 @@
                         <p><b>위치</b>서울특별시 강남구 역삼로 172 2층</p>
                         <p><b>이용 연령</b>4세 ~ 13세(일반인 이용가능)</p>
                         <p><b>이용 시간</b>평일 9:00 ~ 19:00</p>
-                        <p><a href="#">키즈존 예약하기</a></p>
+                        <p><a href="https://map.naver.com/v5/entry/place/1035617695?placePath=%2Fhome">키즈존 예약하기</a></p>
                     </div>
                 </li>
             </ul>
@@ -90,11 +88,11 @@
                     <div>
                         <p>돌봄</p>
                         <ul>
-                            <li><a th:href="@{/class/classcare}">등/하원</a></li>
-                            <li><a th:href="@{/class/classcare}">실내놀이</a></li>
-                            <li><a th:href="@{/class/classcare}">책읽기</a></li>
-                            <li><a th:href="@{/class/classcare}">놀이터</a></li>
-                            <li><a th:href="@{/class/classcare}">견학/체험</a></li>
+                            <li><a th:href="@{/class/classcare(category='등/하원')}">등/하원</a></li>
+                            <li><a th:href="@{/class/classcare(category='실내놀이')}">실내놀이</a></li>
+                            <li><a th:href="@{/class/classcare(category='책읽기')}">책읽기</a></li>
+                            <li><a th:href="@{/class/classcare(category='놀이터')}">놀이터</a></li>
+                            <li><a th:href="@{/class/classcare(category='견학/체험')}">견학/체험</a></li>
                         </ul>
                     </div>
                 </li>
@@ -102,11 +100,11 @@
                     <div>
                         <p>교육</p>
                         <ul>
-                            <li><a th:href="@{/class/classstudy}">초등국어</a></li>
-                            <li><a th:href="@{/class/classstudy}">초등영어</a></li>
-                            <li><a th:href="@{/class/classstudy}">초등수학</a></li>
-                            <li><a th:href="@{/class/classstudy}">코딩</a></li>
-                            <li><a th:href="@{/class/classstudy}">초등과학</a></li>
+                            <li><a th:href="@{/class/classstudy(category='초등국어')}">초등국어</a></li>
+                            <li><a th:href="@{/class/classstudy(category='초등영어')}">초등영어</a></li>
+                            <li><a th:href="@{/class/classstudy(category='초등수학')}">초등수학</a></li>
+                            <li><a th:href="@{/class/classstudy(category='코딩')}">코딩</a></li>
+                            <li><a th:href="@{/class/classstudy(category='초등과학')}">초등과학</a></li>
                         </ul>
                     </div>
                 </li>
@@ -114,11 +112,11 @@
                     <div>
                         <p>운동</p>
                         <ul>
-                            <li><a th:href="@{/class/classsport}">축구</a></li>
-                            <li><a th:href="@{/class/classsport}">줄넘기</a></li>
-                            <li><a th:href="@{/class/classsport}">배드민턴</a></li>
-                            <li><a th:href="@{/class/classsport}">자전거</a></li>
-                            <li><a th:href="@{/class/classsport}">야구</a></li>
+                            <li><a th:href="@{/class/classsport(category='축구')}">축구</a></li>
+                            <li><a th:href="@{/class/classsport(category='줄넘기')}">줄넘기</a></li>
+                            <li><a th:href="@{/class/classsport(category='배드민턴')}">배드민턴</a></li>
+                            <li><a th:href="@{/class/classsport(category='자전거')}">자전거</a></li>
+                            <li><a th:href="@{/class/classsport(category='야구')}">야구</a></li>
                         </ul>
                     </div>
                 </li>
@@ -126,11 +124,11 @@
                     <div>
                         <p>예능</p>
                         <ul>
-                            <li><a th:href="@{/class/classentertaionment}">그리기</a></li>
-                            <li><a th:href="@{/class/classentertaionment}">리코더</a></li>
-                            <li><a th:href="@{/class/classentertaionment}">피아노</a></li>
-                            <li><a th:href="@{/class/classentertaionment}">바이올린</a></li>
-                            <li><a th:href="@{/class/classentertaionment}">방송댄스</a></li>
+                            <li><a th:href="@{/class/classentertaionment(category='그리기')}">그리기</a></li>
+                            <li><a th:href="@{/class/classentertaionment(category='리코더')}">리코더</a></li>
+                            <li><a th:href="@{/class/classentertaionment(category='피아노')}">피아노</a></li>
+                            <li><a th:href="@{/class/classentertaionment(category='바이올린')}">바이올린</a></li>
+                            <li><a th:href="@{/class/classentertaionment(category='방송댄스')}">방송댄스</a></li>
                         </ul>
                     </div>
                 </li>

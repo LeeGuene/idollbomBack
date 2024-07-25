@@ -18,7 +18,7 @@
     <!-- 목록 보기 버튼 -->
     <div class="list-btn-wrap">
       <!-- 강사 리스트 페이지로 이동 -->
-      <a href="../html/prolist.html">목록 보기</a>
+      <a th:href="@{/parentmain/prolist}">목록 보기</a>
     </div>
 
     <div class="board-form" th:object="${pro_info}">
@@ -34,7 +34,7 @@
       <!-- 전문가 이름 -->
       <div class="post-title-wrap">
         <h1>전문가 이름</h1>
-        <input th:field="*{proName}" type="textarea" value="조용준" readonly />
+        <input th:field="*{proName}" type="text" readonly />
       </div>
 
       <!-- 전문가 소개글 -->

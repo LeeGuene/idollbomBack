@@ -12,16 +12,16 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class ProVO {
 
-    private Long proNumber;
+    private Long proNumber;                 // 전문가 pk
     private String proEmail;
     private String proPassword;
-    private String proName;
+    private String proName;                 // 전문가 이름
     private String proNickName;
     private String proPhoneNumber;
     private String proAddress;
-    private String proProfileImageUrl;
-    private String proFile;
-    private String proIntro;
+    private String proProfileImageUrl;      // 전문가 이미지
+    private String proFile;                 // 첨부파일
+    private String proIntro;                // 전문가 소개
 
     @Builder
     public ProVO (Long proNumber, String proEmail, String proPassword, String proName, String proNickName, String proPhoneNumber, String proAddress, String proProfileImageUrl, String proFile, String proIntro) {

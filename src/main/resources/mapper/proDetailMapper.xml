@@ -71,4 +71,33 @@
         SELECT * from pro_post
         where pro_number = #{proNumber}
     </select>
+
+    <!-- 모든 전문가 리스트 조회 -->
+    <select id="selectAllProList" resultType="ProListDTO">
+        SELECT *
+        FROM (
+                SELECT ROWNUM AS RN, PRO_INFO.*
+                FROM (
+                    SELECT
+                        P.PRO_NUMBER,
+                        P.PRO_EMAIL,
+                        P.PRO_NAME,
+                        P.PRO_PROFILE_IMAGE_URL,
+                        P.PRO_FILE,
+                        P.PRO_INTRO
+                    FROM PRO P
+                ) PRO_INFO
+            WHERE ROWNUM &lt;= #{endRow}
+        )
+        WHERE RN &gt; #{startRow}
+    </select>
+
+    <!-- 전문가 총인원 수 -->
+    <select id="getProCount">
+        SELECT COUNT(DISTINCT P.PRO_NUMBER)
+        FROM PRO P JOIN CLASS C ON P.PRO_NUMBER = C.PRO_NUMBER
+                 JOIN REVIEW R ON C.CLASS_NUMBER = R.CLASS_NUMBER
+        WHERE R.CLASS_NUMBER IS NOT NULL
+    </select>
+
 </mapper>
