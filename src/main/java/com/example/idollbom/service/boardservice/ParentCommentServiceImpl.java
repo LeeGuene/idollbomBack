@@ -23,4 +23,14 @@ public class ParentCommentServiceImpl implements ParentCommentService {
     public void saveComment(ParentCommentDTO parentCommentDTO) {
         parentCommentMapper.insertComment(parentCommentDTO);
     }
+
+    @Override
+    public void deleteComment(Long parentCommentNumber) {
+        parentCommentMapper.deleteComment(parentCommentNumber);
+    }
+
+    @Override
+    public void updateComment(ParentCommentDTO parentCommentDTO) {
+        parentCommentMapper.updateComment(parentCommentDTO);
+    }
 }

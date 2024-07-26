@@ -27,4 +27,19 @@ public class ParentCommentRestController {
         return ResponseEntity.ok().build();
     }
 
+    // 댓글 삭제
+    @DeleteMapping("/{parentCommentNumber}")
+    public ResponseEntity<?> deleteComment(@PathVariable Long parentCommentNumber) {
+        parentCommentService.deleteComment(parentCommentNumber);
+        return ResponseEntity.ok().build();
+    }
+
+    // 댓글 수정
+    @PutMapping("/{parentCommentNumber}")
+    public ResponseEntity<?> updateComment(@PathVariable Long parentCommentNumber, @RequestBody ParentCommentDTO commentDTO) {
+        commentDTO.setParentCommentNumber(parentCommentNumber);
+        parentCommentService.updateComment(commentDTO);
+        System.out.println(commentDTO);
+        return ResponseEntity.ok().build();
+    }
 }

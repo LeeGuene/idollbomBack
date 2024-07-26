@@ -79,7 +79,7 @@
                 <!-- 버튼 부분 -->
                 <div class="button-container">
                     <!-- 이 부분을 누르면 이전페이지로 -->
-                    <button class="btn btn-back">뒤로가기</button>
+                    <button type="button" class="btn btn-back" onclick="goBack()">뒤로가기</button>
                     <!-- 얘를 누르면 카카오페이로 넘어감 -->
                     <button class="btn kakaoPay" type="button">결제하기</button>
                 </div>
@@ -93,4 +93,5 @@
 <script src="https://js.bootpay.co.kr/bootpay-5.0.0.min.js" type="application/javascript"></script>
 <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
 <script th:src="@{/js/motion.js}"></script>
+<script th:src="@{/js/paymentcheck.js}"></script>
 </html>
