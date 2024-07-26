@@ -5,23 +5,18 @@ import com.example.idollbom.domain.dto.boarddto.CommunityDetailDTO;
 import com.example.idollbom.domain.dto.boarddto.CommunityListDTO;
 import com.example.idollbom.domain.dto.boarddto.ParentFileDTO;
 import com.example.idollbom.domain.vo.ParentVO;
-import com.example.idollbom.mapper.boardmapper.ParentReportMapper;
+import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.service.boardservice.CommunityService;
 import com.example.idollbom.service.boardservice.ParentFileService;
 import com.example.idollbom.service.boardservice.ParentReportService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.jdbc.datasource.init.ScriptUtils;
-import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.SecureRandom;
 import java.util.List;
@@ -34,12 +29,20 @@ public class ParentcommunityController {
     private final CommunityService communityService;
     private final ParentFileService parentFileService;
     private final ParentReportService parentReportService;
+    private final ParentMapper parentMapper;
 
     // 게시글 목록 띄어주는 컨트롤러
     @GetMapping()
     public String community(@RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
                             @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                             Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String currentUserName = userDetails.getUsername();
+
+        ParentVO parent_info = parentMapper.selectOne(currentUserName);
+        model.addAttribute("parent_info", parent_info);
 
         int totalCommunity = communityService.getCommunityListCount();
         int totalPages = (int) Math.ceil((double)totalCommunity/pageSize);

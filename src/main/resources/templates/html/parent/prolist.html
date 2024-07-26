@@ -15,94 +15,42 @@
 
             <table>
                 <tbody>
-                    <tr>
+                    <tr th:each="pro_info : ${pro_infos}" th:object="${pro_info}">
+
                         <!-- 전문가 이름 -->
-                        <td><b>조용준</b></td>
-                        <!-- 수업 소개 -->
-                        <td>저랑 함께 재밌는 수업을 해봐요.</td>
+                        <td><b th:text="*{proName}"></b></td>
+
+                        <!-- 전문가 소개 -->
+                        <td th:text="*{proIntro}">저랑 함께 재밌는 수업을 해봐요.</td>
+
                         <!-- 전문가 이미지 -->
-                        <td><img src="../../../static/image/class_list_pro.png" alt="강사이미지"></td>
+                        <td><img th:src="@{/images/{proProfileImageUrl}(proProfileImageUrl=*{proProfileImageUrl})}" alt="강사이미지"></td>
+
                         <!-- 전문가 프로필 상세보기로 이동 -->
-                        <td><a href="./review.html">더 보기</a></td>
-                    </tr>
-                    <tr>
-                        <td><b>조용준</b></td>
-                        <td>저랑 함께 재밌는 수업을 해봐요.</td>
-                        <td><img src="../../../static/image/class_list_pro.png" alt="강사이미지"></td>
-                        <td><a href="./review.html">더 보기</a></td>
-                    </tr>
-                    <tr>
-                        <td><b>조용준</b></td>
-                        <td>저랑 함께 재밌는 수업을 해봐요.</td>
-                        <td><img src="../../../static/image/class_list_pro.png" alt="강사이미지"></td>
-                        <td><a href="./review.html">더 보기</a></td>
-                    </tr>
-                    <tr>
-                        <td><b>조용준</b></td>
-                        <td>저랑 함께 재밌는 수업을 해봐요.</td>
-                        <td><img src="../../../static/image/class_list_pro.png" alt="강사이미지"></td>
-                        <td><a href="./review.html">더 보기</a></td>
-                    </tr>
-                    <tr>
-                        <td><b>조용준</b></td>
-                        <td>저랑 함께 재밌는 수업을 해봐요.</td>
-                        <td><img src="../../../static/image/class_list_pro.png" alt="강사이미지"></td>
-                        <td><a href="./review.html">더 보기</a></td>
-                    </tr>
-                    <tr>
-                        <td><b>조용준</b></td>
-                        <td>저랑 함께 재밌는 수업을 해봐요.</td>
-                        <td><img src="../../../static/image/class_list_pro.png" alt="강사이미지"></td>
-                        <td><a href="./review.html">더 보기</a></td>
-                    </tr>
-                    <tr>
-                        <td><b>조용준</b></td>
-                        <td>저랑 함께 재밌는 수업을 해봐요.</td>
-                        <td><img src="../../../static/image/class_list_pro.png" alt="강사이미지"></td>
-                        <td><a href="./review.html">더 보기</a></td>
-                    </tr>
-                    <tr>
-                        <td><b>조용준</b></td>
-                        <td>저랑 함께 재밌는 수업을 해봐요.</td>
-                        <td><img src="../../../static/image/class_list_pro.png" alt="강사이미지"></td>
-                        <td><a href="./review.html">더 보기</a></td>
-                    </tr>
-                    <tr>
-                        <td><b>조용준</b></td>
-                        <td>저랑 함께 재밌는 수업을 해봐요.</td>
-                        <td><img src="../../../static/image/class_list_pro.png" alt="강사이미지"></td>
-                        <td><a href="./review.html">더 보기</a></td>
-                    </tr>
-                    <tr>
-                        <td><b>조용준</b></td>
-                        <td>저랑 함께 재밌는 수업을 해봐요.</td>
-                        <td><img src="../../../static/image/class_list_pro.png" alt="강사이미지"></td>
-                        <td><a href="./review.html">더 보기</a></td>
-                    </tr>
-                    <tr>
-                        <td><b>조용준</b></td>
-                        <td>저랑 함께 재밌는 수업을 해봐요.</td>
-                        <td><img src="../../../static/image/class_list_pro.png" alt="강사이미지"></td>
-                        <td><a href="./review.html">더 보기</a></td>
-                    </tr>
-                    <tr>
-                        <td><b>조용준</b></td>
-                        <td>저랑 함께 재밌는 수업을 해봐요.</td>
-                        <td><img src="../../../static/image/class_list_pro.png" alt="강사이미지"></td>
-                        <td><a href="./review.html">더 보기</a></td>
+                        <td><a th:href="@{/pro/detail(proNumber=*{proNumber})}">더 보기</a></td>
                     </tr>
                 </tbody>
             </table>
 
-            <div class="notice_btn">
-                <button><img src="../../../static/image/pro_button_pre.png"></button>
-                <ul>
-                    <li><button>1</button></li>
-                    <li><button>2</button></li>
-                    <li><button>3</button></li>
-                </ul>
-                <button><img src="../../../static/image/pro_button_next.png"></button>
-            </div>
+            <!-- 페이징 처리 -->
+            <ul class="pagination">
+                <li th:classappend="${startPage == 1} ? 'disabled' : ''" class="page-item">
+                    <a class="page-link" th:href="@{/parentmain/prolist(pageNo=${startPage - 1}, pageSize=${pageSize})}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <li th:each="i : ${#numbers.sequence(startPage, endPage)}" th:classappend="${currentPage == i} ? 'active' : ''" class="page-item">
+                    <a th:href="@{/parentmain/prolist(pageNo=${i}, pageSize=${pageSize})}" class="page-link" th:text="${i}"></a>
+                </li>
+
+                <li th:classappend="${endPage == totalPages} ? 'disabled' : ''" class="page-item">
+                    <a class="page-link" th:href="@{/parentmain/prolist(pageNo=${endPage + 1}, pageSize=${pageSize})}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+
         </div>
     </div>
 </body>

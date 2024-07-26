@@ -2,9 +2,7 @@ package com.example.idollbom.controller.apply;
 
 import com.example.idollbom.domain.dto.applydto.ClassDetailDTO;
 import com.example.idollbom.domain.dto.applydto.ClassListDTO;
-import com.example.idollbom.domain.dto.myPagedto.parentdto.classSaveDTO;
 import com.example.idollbom.domain.dto.parentdto.ReservationInfoDTO;
-import com.example.idollbom.domain.dto.parentdto.ReviewDTO;
 import com.example.idollbom.domain.dto.parentdto.ReviewOneListDTO;
 import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
@@ -19,11 +17,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.Console;
 import java.util.List;
 
 @Controller
@@ -44,6 +40,13 @@ public class ClassListController {
                             @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
                             @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                             Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String currentUserName = userDetails.getUsername();
+
+        ParentVO parent_info = parentMapper.selectOne(currentUserName);
+        model.addAttribute("parent_info", parent_info);
 
         // 페이징 처리를 위한 코드
         int count = classListService.classCount(category);
@@ -80,6 +83,14 @@ public class ClassListController {
                              @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
                              @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                              Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String currentUserName = userDetails.getUsername();
+
+        ParentVO parent_info = parentMapper.selectOne(currentUserName);
+        model.addAttribute("parent_info", parent_info);
+
         // 페이징 처리를 위한 코드
         int count = classListService.classCount(category);
         int totalPages = (int) Math.ceil((double) count / pageSize);
@@ -111,6 +122,14 @@ public class ClassListController {
                                      @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
                                      @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                                      Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String currentUserName = userDetails.getUsername();
+
+        ParentVO parent_info = parentMapper.selectOne(currentUserName);
+        model.addAttribute("parent_info", parent_info);
+
         // 페이징 처리를 위한 코드
         int count = classListService.classCount(category);
         int totalPages = (int) Math.ceil((double) count / pageSize);
@@ -142,6 +161,14 @@ public class ClassListController {
                              @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
                              @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                              Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String currentUserName = userDetails.getUsername();
+
+        ParentVO parent_info = parentMapper.selectOne(currentUserName);
+        model.addAttribute("parent_info", parent_info);
+
         // 페이징 처리를 위한 코드
         int count = classListService.classCount(category);
         int totalPages = (int) Math.ceil((double) count / pageSize);
@@ -152,6 +179,13 @@ public class ClassListController {
         int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
         int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
 
+//        if (authentication != null){
+//            for (ClassListDTO classDTO : classListDTO){
+//                if(매퍼.메소드(classDTO.getClassNumber(), parent_info.getParentNumber())){
+//                    classDTO.setLike("있음");
+//                }
+//            }
+//        }
 
         model.addAttribute("count", count);
         model.addAttribute("category", category);
@@ -176,6 +210,13 @@ public class ClassListController {
                               @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
                               @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                               Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String currentUserName = userDetails.getUsername();
+
+        ParentVO parent_info = parentMapper.selectOne(currentUserName);
+        model.addAttribute("parent_info", parent_info);
 
         List<ClassListDTO> classListDTO = classListService.searchClassList(searchWord, searchType, category, pageNo, pageSize);
         int count = classListService.countClasses(category,searchType, searchWord);

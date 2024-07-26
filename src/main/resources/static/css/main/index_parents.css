@@ -124,7 +124,7 @@ h2{
 
 .pro_recommendation ul {
     display: flex;
-
+    column-gap: 50px;
 }
 
 .pro_recommendation li {
@@ -165,10 +165,18 @@ h2{
     justify-content: space-between;
 }
 
+/* 총 리뷰 개수 css */
 .pro_recommendation li div p {
     font-size: 20px;
 }
 
+/* 별점 css */
+.pro_recommendation li div > span{
+    font-size: 24px;
+    letter-spacing: 5px;
+}
+
+/* 페이지 이동 버튼 css */
 .pro_control button {
     position: absolute;
     margin: -350px 0 0 -100px;

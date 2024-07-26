@@ -9,6 +9,7 @@
                 SELECT ROWNUM AS RN, RECOM.*
                 FROM (
                         SELECT
+                          P.PRO_NUMBER,
                           P.PRO_PROFILE_IMAGE_URL,
                           P.PRO_NAME,
                           COALESCE(AVG(R.REVIEW_EVALUTION_POINT), 0) AS averageRating,  -- 평균 평점이 NULL이면 0으로 대체
@@ -17,7 +18,8 @@
                                    JOIN REVIEW R on C.CLASS_NUMBER = R.CLASS_NUMBER
                         GROUP BY
                           P.PRO_NAME,
-                          P.PRO_PROFILE_IMAGE_URL
+                          P.PRO_PROFILE_IMAGE_URL,
+                          P.PRO_NUMBER
                         ORDER BY averageRating DESC
                     ) RECOM
                 WHERE ROWNUM &lt;= #{endRow}

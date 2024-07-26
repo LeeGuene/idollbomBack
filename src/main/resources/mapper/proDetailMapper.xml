@@ -13,32 +13,45 @@
     <!-- 리뷰 작성자 정보와 수업명이 있어야 한다. -->
     <select id="selectAllReviewList">
         SELECT
-            PA.PARENT_NAME,
-            RE.REVIEW_NUMBER,
-            RE.REVIEW_CONTENT,
-            RE.REVIEW_REGISTER_DATE,
-            RE.REVIEW_UPDATE_DATE,
-            RE.PARENT_NUMBER,
-            RE.CLASS_NUMBER,
-            RE.CLASS_NAME
-        FROM(
+            RESULT.PARENT_NAME,
+            RESULT.REVIEW_NUMBER,
+            RESULT.REVIEW_CONTENT,
+            RESULT.REVIEW_REGISTER_DATE,
+            RESULT.REVIEW_UPDATE_DATE,
+            RESULT.PARENT_NUMBER,
+            RESULT.CLASS_NUMBER,
+            RESULT.CLASS_NAME
+        FROM (
                 SELECT
-                    R.REVIEW_NUMBER,
-                    R.REVIEW_CONTENT,
-                    R.REVIEW_REGISTER_DATE,
-                    R.REVIEW_UPDATE_DATE,
-                    R.PARENT_NUMBER,
-                    R.CLASS_NUMBER,
-                    DETAIL.CLASS_NAME
-                FROM (
-                         SELECT *
-                         FROM PRO P JOIN CLASS C
-                            ON P.PRO_NUMBER = C.PRO_NUMBER
-                            AND P.PRO_NUMBER = #{proNumber}
-                     ) DETAIL JOIN REVIEW R
+                    PA.PARENT_NAME,
+                    RE.REVIEW_NUMBER,
+                    RE.REVIEW_CONTENT,
+                    RE.REVIEW_REGISTER_DATE,
+                    RE.REVIEW_UPDATE_DATE,
+                    RE.PARENT_NUMBER,
+                    RE.CLASS_NUMBER,
+                    RE.CLASS_NAME,
+                    ROW_NUMBER() OVER (ORDER BY RE.REVIEW_REGISTER_DATE) AS RN
+                FROM(
+                        SELECT
+                            R.REVIEW_NUMBER,
+                            R.REVIEW_CONTENT,
+                            R.REVIEW_REGISTER_DATE,
+                            R.REVIEW_UPDATE_DATE,
+                            R.PARENT_NUMBER,
+                            R.CLASS_NUMBER,
+                            DETAIL.CLASS_NAME
+                        FROM (
+                                 SELECT *
+                                 FROM PRO P JOIN CLASS C
+                                    ON P.PRO_NUMBER = C.PRO_NUMBER
+                                    AND P.PRO_NUMBER = #{proNumber}
+                        ) DETAIL JOIN REVIEW R
                         ON DETAIL.CLASS_NUMBER = R.CLASS_NUMBER
-        ) RE JOIN PARENT PA
-            ON RE.PARENT_NUMBER = PA.PARENT_NUMBER
+                ) RE JOIN PARENT PA
+                ON RE.PARENT_NUMBER = PA.PARENT_NUMBER
+            ) RESULT
+        WHERE RESULT.RN &lt;= 3
     </select>
 
     <!-- 전문가 로그인 처리하여 아이찾기 페이지로 proNumber 넘기기 -->
@@ -70,6 +83,34 @@
     <select id="selectProPost">
         SELECT * from pro_post
         where pro_number = #{proNumber}
+    </select>
+
+    <!-- 모든 전문가 리스트 조회 -->
+    <select id="selectAllProList" resultType="ProListDTO">
+        SELECT *
+        FROM (
+                SELECT ROWNUM AS RN, PRO_INFO.*
+                FROM (
+                    SELECT
+                        P.PRO_NUMBER,
+                        P.PRO_EMAIL,
+                        P.PRO_NAME,
+                        P.PRO_PROFILE_IMAGE_URL,
+                        P.PRO_FILE,
+                        P.PRO_INTRO
+                    FROM PRO P
+                ) PRO_INFO
+            WHERE ROWNUM &lt;= #{endRow}
+        )
+        WHERE RN &gt; #{startRow}
+    </select>
+
+    <!-- 전문가 총인원 수 -->
+    <select id="getProCount">
+        SELECT COUNT(DISTINCT P.PRO_NUMBER)
+        FROM PRO P JOIN CLASS C ON P.PRO_NUMBER = C.PRO_NUMBER
+                 JOIN REVIEW R ON C.CLASS_NUMBER = R.CLASS_NUMBER
+        WHERE R.CLASS_NUMBER IS NOT NULL
     </select>
 
     <!--    전문가의 내 정보 조회-->

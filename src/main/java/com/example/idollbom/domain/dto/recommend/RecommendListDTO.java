@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class RecommendListDTO {
 
+    Long proNumber;             // 전문가 pk
     String proProfileImageUrl;  // 전문가 프로필 이미지
     String proName;             // 전문가 이름
     double averageRating;       // 전문가에 대한 평균 별점

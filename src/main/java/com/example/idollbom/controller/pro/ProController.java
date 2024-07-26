@@ -25,6 +25,8 @@ public class ProController {
     private final ProDetailService proDetailService;
     private final ChildFindService childFindService;
 
+    // 1. 메인 페이지에서 전문가 프로필 클릭해서 넘어오는 흐름
+    // 2. 수업 상세보기에서 프로필 보기를 통해 넘어오는 흐름
     // 전문가 프로필 상세보기 페이지 ( 이미지, 이름, 프로필 이미지 )
     // 하단에 전문가 수업에 달린 모든 리뷰 목록 표시
     @GetMapping("/detail")
@@ -68,7 +70,7 @@ public class ProController {
         Long proNubmer = proDetailService.findProInfo(proNumber).getProNumber();
         log.info("전문가 pk : " + proNumber);
 
-        model.addAttribute("count", count);
+//        model.addAttribute("count", count);
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("pageSize", pageSize);
         model.addAttribute("totalPages", totalPages);
@@ -107,7 +109,7 @@ public class ProController {
         // 전문가 정보 넘기는 테스트 코드
         Long proNubmer = proDetailService.findProInfo(proNumber).getProNumber();
 
-        model.addAttribute("count", count);
+//        model.addAttribute("count", count);
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("pageSize", pageSize);
         model.addAttribute("totalPages", totalPages);

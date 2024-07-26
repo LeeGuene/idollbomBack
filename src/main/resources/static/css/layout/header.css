@@ -72,9 +72,10 @@ button {
 .gnb a {
     display: block;
     color: black;
+    cursor: pointer;
 }
 
-.gnb>li>a {
+.gnb > li > a {
     width: 160px;
     height: 100px;
     line-height: 100px;
@@ -92,7 +93,7 @@ button {
 
 .side {
     display: flex;
-    width: 350px;
+    /*width: 350px;*/
     justify-content: center;
 }
 

@@ -49,6 +49,14 @@ public class ParentMypageController {
 //  kid 페이지로 이동
     @GetMapping("/kids")
     public String getKids(Model model){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String currentUserName = userDetails.getUsername();
+
+        ParentVO parent_info = parentMapper.selectOne(currentUserName);
+        model.addAttribute("parent_info", parent_info);
+
         List<kidVO> kids = kidsService.selectKidsList();
         model.addAttribute("kid", new kidDTO());
         model.addAttribute("kids", kids);
@@ -132,6 +140,14 @@ public class ParentMypageController {
 //    쪽지 목록으로 이동
     @GetMapping("/myNote")
     public String selectMyNoteList(Model model){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String currentUserName = userDetails.getUsername();
+
+        ParentVO parent_info = parentMapper.selectOne(currentUserName);
+        model.addAttribute("parent_info", parent_info);
+
         List<mailDTO> noteList = noteService.selectAllMyNote();
         model.addAttribute("myNotes", noteList);
         return "html/myPage/parent/mail";
