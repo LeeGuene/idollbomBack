@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/pay/rest")
 public class PayRestController {
 
+    // 결제하기 버틑을 눌렀을 때
     @PostMapping("/chargingOk")
     public String chargingOk(@RequestBody String result) {
         System.out.println(result);

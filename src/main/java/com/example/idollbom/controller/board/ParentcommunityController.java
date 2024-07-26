@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.SecureRandom;
 import java.util.List;
 
 @Controller
@@ -160,5 +161,39 @@ public class ParentcommunityController {
         parentReportService.saveParentReport(parentPostNumber,reportType,reportForm);
         return "redirect:/parentcommunity";
     }
+
+//    // 검색기능 구현
+//    @GetMapping("/search")
+//    public String search(@RequestParam("searchType") String searchType,
+//                         @RequestParam("searchWord") String searchWord,
+//                         @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
+//                         @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
+//                         Model model){
+//        List<CommunityListDTO> communityListDTO = communityService.searchCommunityList(searchType, searchWord, pageNo, pageSize);
+//        int count = communityService.countSearchCommunity(searchType, searchWord);
+//
+//        System.out.println("==============="+count);
+//        System.out.println("==============="+searchType);
+//        System.out.println("==============="+searchWord);
+//
+//        int totalPages = (int) Math.ceil((double) count / pageSize);
+//
+//        int pageGroupSize = 3;
+//        int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
+//        int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
+//
+//        model.addAttribute("searchWord", searchWord);
+//        model.addAttribute("count", count);
+//        model.addAttribute("communities", communityListDTO);
+//        model.addAttribute("currentPage", pageNo);
+//        model.addAttribute("pageSize", pageSize);
+//        model.addAttribute("totalPages", totalPages);
+//
+//        model.addAttribute("startPage", startPage);
+//        model.addAttribute("endPage", endPage);
+//
+//
+//        return "html/board/parent/community_parent";
+//    }
 }
 

@@ -16,4 +16,17 @@
         INSERT INTO PARENT_COMMENT
         VALUES (SEQ_PROJECT.nextval, #{parentCommentContent}, sysdate, sysdate, #{parentNumber}, #{parentPostNumber})
     </insert>
+
+    <!-- 댓글 삭제 -->
+    <delete id="deleteComment">
+        delete from parent_comment
+        where parent_comment_number = #{parentCommentNumber}
+    </delete>
+
+    <!-- 댓글 수정 -->
+    <update id="updateComment">
+        update parent_comment
+        set parent_comment_content = #{parentCommentContent}, parent_comment_update_date = sysdate
+        where parent_comment_number = #{parentCommentNumber}
+    </update>
 </mapper>

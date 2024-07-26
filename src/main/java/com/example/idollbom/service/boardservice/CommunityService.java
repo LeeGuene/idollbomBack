@@ -3,6 +3,7 @@ package com.example.idollbom.service.boardservice;
 import com.example.idollbom.domain.dto.boarddto.CommunityDTO;
 import com.example.idollbom.domain.dto.boarddto.CommunityDetailDTO;
 import com.example.idollbom.domain.dto.boarddto.CommunityListDTO;
+import com.example.idollbom.domain.dto.recommend.PagedResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,4 +32,10 @@ public interface CommunityService {
 
     // 게시글 수정하기
     void updateCommunity(CommunityDTO community, List<MultipartFile> files);
+
+    // 게시글 검색 기능 구현
+    PagedResponse<CommunityListDTO> searchCommunityList(String searchType, String searchWord, int startRow, int endRow);
+
+    // 게시글 검색 시 갯수
+    int countSearchCommunity(String searchType, String searchWord);
 }

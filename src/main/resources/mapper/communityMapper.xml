@@ -82,25 +82,85 @@
 
     <!-- 검색과 정렬 페이지 이동없이 하는 쿼리문 -->
     <!-- 게시글 오래된순 -->
-    <select id="selectAllByDateASC" resultType="CommunityListDTO">
+<!--    <select id="selectAllByDateASC" resultType="CommunityListDTO">-->
+<!--        SELECT *-->
+<!--        FROM (-->
+<!--                 SELECT ROWNUM AS RN, BOARD.*-->
+<!--                 FROM (-->
+<!--                          SELECT-->
+<!--                              p.PARENT_POST_NUMBER,-->
+<!--                              p.PARENT_POST_TITLE,-->
+<!--                              p.PARENT_NUMBER,-->
+<!--                              p.PARENT_POST_REGISTER_DATE,-->
+<!--                              p1.PARENT_NICKNAME,-->
+<!--                              p1.PARENT_PROFILE_IMAGE_URL-->
+<!--                          FROM parent_post p-->
+<!--                                   JOIN PARENT P1-->
+<!--                                        ON p.PARENT_NUMBER = p1.PARENT_NUMBER-->
+<!--                          ORDER BY p.PARENT_POST_REGISTER_DATE DESC-->
+<!--                      ) BOARD-->
+<!--                 WHERE ROWNUM &lt;= #{endRow}-->
+<!--             )-->
+<!--        WHERE rn &gt; #{startRow}-->
+<!--    </select>-->
+
+    <!-- 검색 기능 구현  -->
+    <select id="searchCommunityList" resultType="CommunityListDTO">
         SELECT *
         FROM (
-                 SELECT ROWNUM AS RN, BOARD.*
-                 FROM (
-                          SELECT
-                              p.PARENT_POST_NUMBER,
-                              p.PARENT_POST_TITLE,
-                              p.PARENT_NUMBER,
-                              p.PARENT_POST_REGISTER_DATE,
-                              p1.PARENT_NICKNAME,
-                              p1.PARENT_PROFILE_IMAGE_URL
-                          FROM parent_post p
-                                   JOIN PARENT P1
-                                        ON p.PARENT_NUMBER = p1.PARENT_NUMBER
-                          ORDER BY p.PARENT_POST_REGISTER_DATE DESC
-                      ) BOARD
-                 WHERE ROWNUM &lt;= #{endRow}
+             SELECT ROWNUM AS RN, BOARD.*
+             FROM (
+                  SELECT
+                      p.PARENT_POST_NUMBER,
+                      p.PARENT_POST_TITLE,
+                      p.PARENT_NUMBER,
+                      p.PARENT_POST_REGISTER_DATE,
+                      p1.PARENT_NICKNAME,
+                      p1.PARENT_PROFILE_IMAGE_URL
+                  FROM parent_post p
+                       JOIN PARENT P1
+                       ON p.PARENT_NUMBER = p1.PARENT_NUMBER
+                  <where>
+                      <if test="searchWord !=null">
+                        <choose>
+                            <when test="searchType == 'all'">
+                                p.PARENT_POST_TITLE LIKE '%' || #{searchWord} || '%' OR p1.PARENT_NICKNAME LIKE '%' || #{searchWord} || '%'
+                            </when>
+                            <when test="searchType == 'title'">
+                                p.PARENT_POST_TITLE LIKE '%' || #{searchWord} || '%'
+                            </when>
+                            <otherwise>
+                                p1.PARENT_NICKNAME LIKE '%' || #{searchWord} || '%'
+                            </otherwise>
+                        </choose>
+                      </if>
+                  </where>
+                  ORDER BY p.PARENT_POST_REGISTER_DATE DESC
+              ) BOARD
+             WHERE ROWNUM &lt;= #{endRow}
              )
         WHERE rn &gt; #{startRow}
+    </select>
+
+    <!-- 검색 시 갯수를 가져오는 select (검색 페이징 처리를 위해) -->
+    <select id="countSearchCommunity">
+        SELECT COUNT(*)
+        FROM PARENT_POST p1 join parent p
+        on p1.parent_number = p.parent_number
+        <where>
+            <if test="searchWord != null">
+                <choose>
+                    <when test="searchType == 'all'">
+                        PARENT_POST_TITLE LIKE '%' || #{searchWord} || '%' OR p.PARENT_NICKNAME LIKE '%' || #{searchWord} || '%'
+                    </when>
+                    <when test="searchType == 'title'">
+                        PARENT_POST_TITLE LIKE '%' || #{searchWord} || '%'
+                    </when>
+                    <otherwise>
+                        p.PARENT_NICKNAME LIKE '%' || #{searchWord} || '%'
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
     </select>
 </mapper>
