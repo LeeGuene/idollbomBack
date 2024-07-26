@@ -303,7 +303,7 @@ button {
   padding: 8px 15px;
   margin-right: 10px;
   font-size: 0.9em;
-  background-color: #007bff;
+  background-color: #00b45488;
   color: #fff;
   border: none;
   border-radius: 3px;
@@ -312,7 +312,7 @@ button {
 }
 
 .comment-actions button:hover {
-  background-color: #0056b3;
+  background-color: #00b454;
 }
 
 
