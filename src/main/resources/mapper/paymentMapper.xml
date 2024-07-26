@@ -20,4 +20,10 @@
             rv.parent_number = #{parentNumber}
     </select>
 
+    <!-- 결제하기 부분 -->
+    <insert id="payInsert">
+        insert into reservation
+        values (#{reservationDateNumber}, #{reservationTimeNumber}, #{parentNumber}, #{childNumber}, 0)
+    </insert>
+
 </mapper>

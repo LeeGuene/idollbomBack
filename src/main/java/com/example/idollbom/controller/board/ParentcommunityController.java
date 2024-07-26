@@ -4,6 +4,7 @@ import com.example.idollbom.domain.dto.boarddto.CommunityDTO;
 import com.example.idollbom.domain.dto.boarddto.CommunityDetailDTO;
 import com.example.idollbom.domain.dto.boarddto.CommunityListDTO;
 import com.example.idollbom.domain.dto.boarddto.ParentFileDTO;
+import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
 import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.service.boardservice.CommunityService;
@@ -33,9 +34,7 @@ public class ParentcommunityController {
 
     // 게시글 목록 띄어주는 컨트롤러
     @GetMapping()
-    public String community(@RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
-                            @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
-                            Model model) {
+    public String community(Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -43,24 +42,6 @@ public class ParentcommunityController {
 
         ParentVO parent_info = parentMapper.selectOne(currentUserName);
         model.addAttribute("parent_info", parent_info);
-
-        int totalCommunity = communityService.getCommunityListCount();
-        int totalPages = (int) Math.ceil((double)totalCommunity/pageSize);
-
-        List<CommunityListDTO> community = communityService.getCommunityList(pageNo, pageSize);
-
-        int pageGroupSize = 5;
-        int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
-        int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
-
-        model.addAttribute("count", totalCommunity);
-        model.addAttribute("communities", community);
-        model.addAttribute("currentPage", pageNo);
-        model.addAttribute("pageSize", pageSize);
-        model.addAttribute("totalPages", totalPages);
-
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
 
         return "html/board/parent/community_parent";
     }
@@ -75,8 +56,12 @@ public class ParentcommunityController {
     // 현재 pk를 가지고 오는 메소드
     public Long findParentPK(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        ParentVO p = ((ParentVO) authentication.getPrincipal());
-        return p.getParentNumber();
+        CustomUserDTO p = ((CustomUserDTO) authentication.getPrincipal());
+        String parentName = p.getUsername();
+
+        ParentVO parent_info = parentMapper.selectOne(parentName);
+
+        return parent_info.getParentNumber();
     }
 
     // 게시글 작성 및 수정 (같은 폼에서 할 거기 때문에)
@@ -164,39 +149,5 @@ public class ParentcommunityController {
         parentReportService.saveParentReport(parentPostNumber,reportType,reportForm);
         return "redirect:/parentcommunity";
     }
-
-//    // 검색기능 구현
-//    @GetMapping("/search")
-//    public String search(@RequestParam("searchType") String searchType,
-//                         @RequestParam("searchWord") String searchWord,
-//                         @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
-//                         @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
-//                         Model model){
-//        List<CommunityListDTO> communityListDTO = communityService.searchCommunityList(searchType, searchWord, pageNo, pageSize);
-//        int count = communityService.countSearchCommunity(searchType, searchWord);
-//
-//        System.out.println("==============="+count);
-//        System.out.println("==============="+searchType);
-//        System.out.println("==============="+searchWord);
-//
-//        int totalPages = (int) Math.ceil((double) count / pageSize);
-//
-//        int pageGroupSize = 3;
-//        int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
-//        int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
-//
-//        model.addAttribute("searchWord", searchWord);
-//        model.addAttribute("count", count);
-//        model.addAttribute("communities", communityListDTO);
-//        model.addAttribute("currentPage", pageNo);
-//        model.addAttribute("pageSize", pageSize);
-//        model.addAttribute("totalPages", totalPages);
-//
-//        model.addAttribute("startPage", startPage);
-//        model.addAttribute("endPage", endPage);
-//
-//
-//        return "html/board/parent/community_parent";
-//    }
 }
 

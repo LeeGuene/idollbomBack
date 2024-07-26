@@ -1,6 +1,7 @@
 package com.example.idollbom.service.myPageservice.parentservice;
 
 import com.example.idollbom.domain.dto.myPagedto.parentdto.paymentDTO;
+import com.example.idollbom.domain.dto.paymentdto.PayDTO;
 import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.mapper.myPagemapper.parentmapper.paymentMapper;
@@ -35,5 +36,10 @@ public class paymentServiceImpl implements paymentService {
             payment.get(i).setProName(proDetailMapper.selectProDetail(payment.get(i).getProNumber()).getProName());
         }
         return payment;
+    }
+
+    @Override
+    public void payInsert(PayDTO payDTO) {
+        paymentMapper.payInsert(payDTO);
     }
 }

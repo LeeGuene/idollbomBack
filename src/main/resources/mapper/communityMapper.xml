@@ -80,30 +80,6 @@
         where parent_post_number = #{parentPostNumber}
     </update>
 
-    <!-- 검색과 정렬 페이지 이동없이 하는 쿼리문 -->
-    <!-- 게시글 오래된순 -->
-<!--    <select id="selectAllByDateASC" resultType="CommunityListDTO">-->
-<!--        SELECT *-->
-<!--        FROM (-->
-<!--                 SELECT ROWNUM AS RN, BOARD.*-->
-<!--                 FROM (-->
-<!--                          SELECT-->
-<!--                              p.PARENT_POST_NUMBER,-->
-<!--                              p.PARENT_POST_TITLE,-->
-<!--                              p.PARENT_NUMBER,-->
-<!--                              p.PARENT_POST_REGISTER_DATE,-->
-<!--                              p1.PARENT_NICKNAME,-->
-<!--                              p1.PARENT_PROFILE_IMAGE_URL-->
-<!--                          FROM parent_post p-->
-<!--                                   JOIN PARENT P1-->
-<!--                                        ON p.PARENT_NUMBER = p1.PARENT_NUMBER-->
-<!--                          ORDER BY p.PARENT_POST_REGISTER_DATE DESC-->
-<!--                      ) BOARD-->
-<!--                 WHERE ROWNUM &lt;= #{endRow}-->
-<!--             )-->
-<!--        WHERE rn &gt; #{startRow}-->
-<!--    </select>-->
-
     <!-- 검색 기능 구현  -->
     <select id="searchCommunityList" resultType="CommunityListDTO">
         SELECT *

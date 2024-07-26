@@ -26,9 +26,12 @@
             <div class="container">
                 <!-- 수업 이미지 띄어주는 div -->
                 <div class="class-container" th:object="${proInfo}">
+                    <!-- 부모의 pk를 넘기기 위해 -->
+                    <input type="hidden" name="parentNumber" id="parentId" th:value="${parentId}">
                     <div class="class-image-section">
                         <label class="image-label">수업이미지</label>
-                        <img class="image" th:src="@{/backImage/class/{filename}(filename=${proInfo.imageFileUrl})}" alt="수업이미지">
+<!--                        <img class="image" th:src="@{/backImage/class/{filename}(filename=${proInfo.imageFileUrl})}" alt="수업이미지">-->
+                        <img class="image" src="/backImage/class/${proInfo.imageFileUrl}" alt="수업이미지">
                     </div>
 
                     <!-- 실제 선택한 수업 가져오는 div -->
@@ -44,13 +47,15 @@
                         </div>
 
                         <div class="detail-item">
-                            <label for="classdate">수업 날짜</label>
-                            <input type="text" class="form-control" id="classdate" th:value="${reservationInfo.reservationDate}" readonly>
+                            <label for="classDate">수업 날짜</label>
+                            <input type="text" class="form-control" th:value="${reservationInfo.reservationDate}" readonly>
+                            <input type="hidden" name="reservationDateNumber" id="classDate" th:value="${reservationInfo.reservationDateNumber}">
                         </div>
 
                         <div class="detail-item">
-                            <label for="classtime">수업 시간</label>
-                            <input type="text" class="form-control" id="classtime" th:value="${reservationInfo.reservationTime} + '시'" readonly>
+                            <label for="classTime">수업 시간</label>
+                            <input type="text" class="form-control" th:value="${reservationInfo.reservationTime} + '시'" readonly>
+                            <input type="hidden" name="reservationTimeNumber" id="classTime" th:value="${reservationInfo.reservationTimeNumber}">
                         </div>
 
                         <div class="detail-item">
@@ -68,10 +73,10 @@
                     </div>
 
                     <div class="child-select">
-                        <label for="childlists" class="form-label">아이 선택</label>
-                        <select name="childlists" id="childlists" class="selectBox">
+                        <label for="childLists" class="form-label">아이 선택</label>
+                        <select name="childNumber" id="childLists" class="selectBox">
                             <option value="none">===아이 선택===</option>
-                            <option th:each="kid : ${kids}" th:text="${kid.childName}"></option>
+                            <option th:each="kid : ${kids}" th:value="${kid.childNumber}" th:text="${kid.childName}"></option>
                         </select>
                     </div>
                 </div>

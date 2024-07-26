@@ -124,6 +124,7 @@ public class CommunityServiceImpl implements CommunityService {
         saveFile(community.getParentPostNumber(), files);
     }
 
+    // 게시글 검색 시 
     @Override
     public PagedResponse<CommunityListDTO> searchCommunityList(String searchType, String searchWord, int page, int pageSize) {
         int startRow = (page - 1) * pageSize;
@@ -143,5 +144,3 @@ public class CommunityServiceImpl implements CommunityService {
         return communityMapper.countSearchCommunity(searchType, searchWord);
     }
 }
-
-

@@ -33,6 +33,9 @@ public class ClassListController {
     private final ClassReviewService classReviewService;
     private final ParentMapper parentMapper;
 
+    // 부모의 정보를 가지고 오는 메소드
+
+
     // 페이지 전부 페이징 처리 구현하기
     // 돌봄 페이지, default는 등하원으로
     @GetMapping("/classcare")
@@ -178,14 +181,6 @@ public class ClassListController {
         int pageGroupSize = 3;
         int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
         int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
-
-//        if (authentication != null){
-//            for (ClassListDTO classDTO : classListDTO){
-//                if(매퍼.메소드(classDTO.getClassNumber(), parent_info.getParentNumber())){
-//                    classDTO.setLike("있음");
-//                }
-//            }
-//        }
 
         model.addAttribute("count", count);
         model.addAttribute("category", category);
