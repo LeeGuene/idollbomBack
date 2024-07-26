@@ -22,12 +22,6 @@ function prevImage(input) {
     }
 }
 
-function handleFileChange(input) {
-    // 여기서 두 번째 파일 입력 요소에서 선택한 파일에 대한 처리를 진행
-    console.log(input.files);
-    // 예시로 콘솔에 출력
-}
-
 //유효성검사
 function test() {
     let p1 = document.getElementById('childName').value;

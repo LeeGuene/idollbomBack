@@ -1,6 +1,7 @@
 package com.example.idollbom.controller.myPage;
 import com.example.idollbom.domain.dto.prodto.proReportDTO;
 import com.example.idollbom.domain.vo.ProPostVO;
+import com.example.idollbom.domain.vo.ProVO;
 import com.example.idollbom.domain.vo.classVO;
 import com.example.idollbom.service.myPageservice.proservice.classService;
 import com.example.idollbom.service.proService.ProDetailService;
@@ -46,7 +47,9 @@ public class proMypageController {
 
 // 내 프로필 보기
     @GetMapping("/profile")
-    public String selectProfile(){
+    public String selectProfile(Model model){
+        ProVO proPrivate = proDetailService.selectProPrivate(6L);
+        model.addAttribute("pro", proPrivate);
         return "html/myPage/pro/profile";
     }
 

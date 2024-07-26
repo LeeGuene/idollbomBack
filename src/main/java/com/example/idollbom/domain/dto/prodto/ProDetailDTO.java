@@ -16,4 +16,5 @@ public class ProDetailDTO {
     private String proIntro;
     private Long parentNumber;
     private Long classNumber;
+    private String role;
 }

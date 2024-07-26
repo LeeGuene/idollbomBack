@@ -27,6 +27,9 @@ public interface ProDetailService {
     // 전문가 총인원 수 조회
     int getProCount();
 
+    // 전문가 post 찾기
     List<ProPostVO> selectProPost(Long proNumber);
 
+    // 전문가 개인정보 불러오기
+    ProVO selectProPrivate(Long proNumber);
 }

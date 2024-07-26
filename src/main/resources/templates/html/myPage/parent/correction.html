@@ -81,7 +81,6 @@
                 <!-- 내정보수정 -->
                 <div class="mainbox">
                     <form  method="post" th:action="@{/ParentMyPage/updateMyInfo}" class="reset-form" enctype="multipart/form-data" th:object="${parentInfo}">
-                        <input type="file" id="myfile" onchange="handleFileChange(this)" style="display: none;" multiple="multiple" name="file"/>
 
                         <input type="hidden" id="hiddenPassword" th:field="*{password}">
                         <div class="reset">
@@ -172,15 +171,15 @@
                         </div>
                         <!-- 이미지 미리보기 -->
                         <div class="profile-img-wrap">
-                            <img id="preview" alt="미리보기" class="img-profile">
+                            <img id="preview" alt="미리보기" class="img-profile" >
                             <label class="input-file-button" for="input-file">upload</label>
-                            <input type="file" id="input-file" onchange="prevImage(this)"  style="display: none;"/>
+                            <input type="file" id="input-file" onchange="prevImage(this)"  style="display: none;" multiple="multiple" name="file"/>
                         </div>
         
                         <div class="modal-btn">
                             <!-- 추가하기를 누르면 새로운 페이지로 이동 -->
                             <button id="imgnon" class="close-profile-btn btn">취소하기</button>
-                            <button id="submit" class="add-btn btn" onclick="">등록하기</button>
+                            <button id="submit" class="add-btn btn" onclick="updateImg(this)">등록하기</button>
                         </div>
                     </div>
                 </div>

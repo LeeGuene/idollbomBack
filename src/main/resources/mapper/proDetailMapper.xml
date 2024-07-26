@@ -113,4 +113,14 @@
         WHERE R.CLASS_NUMBER IS NOT NULL
     </select>
 
+    <!--    전문가의 내 정보 조회-->
+    <select id="selectProPrivate">
+        select * from pro
+        where pro_number = #{proNumber}
+    </select>
+
+    <select id="selectOneDTO">
+        select * from pro
+        where pro_email = #{proEmail}
+    </select>
 </mapper>
