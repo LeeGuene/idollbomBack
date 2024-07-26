@@ -28,6 +28,11 @@ public interface ProDetailMapper {
     // 전문가 신고목록 조회하기
     List<proReportDTO> selectProReport(Long proNumber);
 
-    // 전문가
+    // 전문가 게시글 조회
     List<ProPostVO> selectProPost(Long proNumber);
+
+    // 전문가 개인정보 조회
+    ProVO selectProPrivate(Long proNumber);
+
+    ProDetailDTO selectOneDTO(String proEmail);
 }

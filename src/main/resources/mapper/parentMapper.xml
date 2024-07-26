@@ -12,13 +12,19 @@
         PARENT_NAME,
         PARENT_NICKNAME,
         PARENT_PHONE_NUMBER,
-        PARENT_ADDRESS)
-        values (seq_project.NEXTVAL, #{parentEmail}, #{parentPassword}, #{parentName}, #{parentNickname}, #{parentPhoneNumber}, #{parentAddress})
+        PARENT_ADDRESS,
+        ROLE)
+        values (seq_project.NEXTVAL, #{parentEmail}, #{parentPassword}, #{parentName}, #{parentNickname}, #{parentPhoneNumber}, #{parentAddress}, 'parent')
     </insert>
 
 
     <!--    로그인    -->
     <select id="selectOne" parameterType="string">
+        select * from parent
+        where parent_email = #{parentEmail}
+    </select>
+
+    <select id="selectOneDTO" parameterType="string">
         select * from parent
         where parent_email = #{parentEmail}
     </select>

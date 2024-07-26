@@ -38,7 +38,7 @@ public class parentInfoServiceImpl implements parentInfoService {
     }
 
     @Override
-    public void update(ParentDTO parentDTO, MultipartFile file) throws IOException {
+    public void update(ParentDTO parentDTO) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String currentUserName = userDetails.getUsername();
@@ -46,12 +46,8 @@ public class parentInfoServiceImpl implements parentInfoService {
 //      parent VO 찾아서 아이디 찾기
         ParentVO parent = parentMapper.selectOne(currentUserName);
 
-        System.out.println(file.isEmpty());
-        log.info("파일"+file.getOriginalFilename());
-
         parentDTO.setParentEmail(parent.getParentEmail());
         parentDTO.setParentReportCount(parent.getParentReportCount());
-        parentDTO.setParentProfileImageUrl(saveImage(file));
         parentMapper.updateInfo(ParentVO.toEntity(parentDTO));
 
 
