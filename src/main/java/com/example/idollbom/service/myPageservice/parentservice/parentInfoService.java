@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @Service
 public interface parentInfoService {
-    ParentVO selectParentInfo();
+    public ParentVO selectParentInfo();
 
-    public void update(ParentDTO parentDTO, MultipartFile file) throws IOException;
+    public void update(ParentDTO parentDTO);
 }

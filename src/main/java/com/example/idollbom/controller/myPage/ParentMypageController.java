@@ -147,8 +147,8 @@ public class ParentMypageController {
 
     // 내정보 update
     @PostMapping("/updateMyInfo")
-    public String updateParentInfo(@ModelAttribute ParentDTO parentDTO, @RequestParam("file") MultipartFile file) throws IOException {
-        parentInfoService.update(parentDTO,file);
+    public String updateParentInfo(@ModelAttribute ParentDTO parentDTO) {
+        parentInfoService.update(parentDTO);
         return "redirect:/ParentMyPage/myInformation";
     }
 

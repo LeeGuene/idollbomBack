@@ -77,4 +77,9 @@
         select * from pro
         where pro_number = #{proNumber}
     </select>
+
+    <select id="selectOneDTO">
+        select * from pro
+        where pro_email = #{proEmail}
+    </select>
 </mapper>
