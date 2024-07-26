@@ -3,6 +3,7 @@ package com.example.idollbom.controller.payment;
 import com.example.idollbom.domain.dto.applydto.ClassDetailDTO;
 import com.example.idollbom.domain.dto.parentdto.ReservationInfoDTO;
 import com.example.idollbom.domain.vo.kidVO;
+import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.service.applyservice.ClassDetailService;
 import com.example.idollbom.service.myPageservice.parentservice.kidsService;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class PaymentCheckController {
 
     // 수업 상세보기 가져오기 위한 의존성 주입
     private final ClassDetailService classDetailService;
+    private final ParentMapper parentMapper;
 
 
     // 결제확인창 컨틀롤러
