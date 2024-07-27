@@ -31,4 +31,9 @@ public class ParentReportServiceImpl implements ParentReportService {
         parentReportMapper.plusReport(parentId.getParentNumber());
 
     }
+
+    @Override
+    public int reportCount(Long parentNumber) {
+        return parentReportMapper.reportCount(parentNumber);
+    }
 }

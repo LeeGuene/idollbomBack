@@ -12,7 +12,7 @@
     <insert id="classInsert">
         insert into class (CLASS_NUMBER, CLASS_NAME, CLASS_CATEGORY_BIG, CLASS_CATEGORY_SMALL, CLASS_CONTENT,
                            CLASS_PAYMENT_ACCOUNT, PRO_NUMBER, CLASS_REGISTER_DATE, CLASS_INTRO)
-        values (seq_project.NEXTVAL, #{className}, #{classCategoryBig}, #{classCategorySmall}, #{classContent}, #{classPaymentAccount}, 4, sysdate, #{classIntro})
+        values (seq_project.NEXTVAL, #{className}, #{classCategoryBig}, #{classCategorySmall}, #{classContent}, #{classPaymentAccount}, #{proNumber}, sysdate, #{classIntro})
     </insert>
 
     <!-- 수업 날짜 insert -->

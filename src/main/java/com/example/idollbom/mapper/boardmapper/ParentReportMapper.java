@@ -13,4 +13,7 @@ public interface ParentReportMapper {
 
     // 신고된 작성자 update
     void plusReport(Long parentNumber);
+
+    // 작성자 신고횟수 count
+    int reportCount(Long parentNumber);
 }

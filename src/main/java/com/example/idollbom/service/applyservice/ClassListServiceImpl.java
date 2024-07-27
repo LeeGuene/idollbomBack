@@ -1,6 +1,7 @@
 package com.example.idollbom.service.applyservice;
 
 import com.example.idollbom.domain.dto.applydto.ClassListDTO;
+import com.example.idollbom.domain.dto.recommend.PagedResponse;
 import com.example.idollbom.mapper.applymapper.ClassListMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,11 +27,16 @@ public class ClassListServiceImpl implements ClassListService {
     }
 
     @Override
-    public List<ClassListDTO> searchClassList(String searchWord, String searchType, String category, int page, int pageSize) {
+    public PagedResponse<ClassListDTO> searchClassList(String searchType, String searchWord, String category, int page, int pageSize) {
         int startRow = (page - 1) * pageSize;
         int endRow = page * pageSize;
 
-        return classListMapper.searchClassList(searchWord, searchType, category, startRow, endRow);
+        int totalBoards = classListMapper.countClasses(category, searchType, searchWord);
+        int totalPages = (int) Math.ceil((double) totalBoards / pageSize);
+
+        List<ClassListDTO> classLisDTO = classListMapper.searchClassList(searchType, searchWord, category, startRow, endRow);
+
+        return new PagedResponse<>(classLisDTO, page, totalPages, pageSize, totalBoards);
     }
 
     @Override

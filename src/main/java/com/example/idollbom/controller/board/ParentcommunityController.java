@@ -31,6 +31,7 @@ public class ParentcommunityController {
     private final ParentFileService parentFileService;
     private final ParentReportService parentReportService;
     private final ParentMapper parentMapper;
+    private final com.example.idollbom.service.myPageservice.parentservice.reportService reportService;
 
     // 게시글 목록 띄어주는 컨트롤러
     @GetMapping()
@@ -97,10 +98,14 @@ public class ParentcommunityController {
 
         System.out.println(community.getParentPostUpdateDate());
 
+        // 신고횟수 가져옴
+        int reportCount = parentReportService.reportCount(parentId);
+
         model.addAttribute("community", community);
         model.addAttribute("files", files);
         // 현재 로그인한 정보와 게시글 작성자와의 확인 유무를 위함
         model.addAttribute("parentId", parentId);
+        model.addAttribute("reportCount", reportCount);
 
         return "/html/board/parent/freeBoardDetail_parent";
     }

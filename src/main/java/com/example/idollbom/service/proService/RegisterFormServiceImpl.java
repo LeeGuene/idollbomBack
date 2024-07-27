@@ -1,11 +1,16 @@
 package com.example.idollbom.service.proService;
 
+import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
 import com.example.idollbom.domain.dto.prodto.ClassDTO;
 import com.example.idollbom.domain.dto.prodto.ClassImgDTO;
 import com.example.idollbom.domain.dto.prodto.ReservationDateDTO;
 import com.example.idollbom.domain.dto.prodto.ReservationTimeDTO;
+import com.example.idollbom.domain.vo.ProVO;
+import com.example.idollbom.mapper.loginmapper.ProMapper;
 import com.example.idollbom.mapper.proMapper.RegisterFormMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +31,7 @@ import java.util.UUID;
 public class RegisterFormServiceImpl implements RegisterFormService {
 
     private final RegisterFormMapper registerFormMapper;
+    private final ProMapper proMapper;
 
     @Override
     @Transactional
@@ -33,7 +39,17 @@ public class RegisterFormServiceImpl implements RegisterFormService {
                               ReservationDateDTO reservationDateDTO,
                               MultipartFile imageFileUrl,
                               List<LocalDateTime> times) {
+
+        // 현재 로그인한 전문가 pk 가져오기
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDTO p = ((CustomUserDTO) authentication.getPrincipal());
+        String proId = p.getEmail();
+
+        ProVO pro = proMapper.selectPro(proId);
+        System.out.println(pro.getProNumber());
+
         System.out.println(classDTO);
+        classDTO.setProNumber(pro.getProNumber());
         registerFormMapper.classInsert(classDTO);
 
         // 이미지 테이블에 들어가야하는 코드 필요
@@ -71,9 +87,13 @@ public class RegisterFormServiceImpl implements RegisterFormService {
             Path filePath = directoryPath.resolve(imgUrl);
             Files.copy(file.getInputStream(), filePath);
 
+            // 이미지 URL은 상대 경로로 설정
+            String imageUrl = "/backImage/class/" + imgUrl;
+
+
             ClassImgDTO fileDTO = new ClassImgDTO();
             fileDTO.setClassNumber(classNumber);
-            fileDTO.setImageFileUrl(directoryPath + "/" + imgUrl);
+            fileDTO.setImageFileUrl(imageUrl);
 
             registerFormMapper.imageInsert(fileDTO); // 파일 정보 저장
 

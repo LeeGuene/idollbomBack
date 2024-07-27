@@ -242,3 +242,25 @@ function editComment(parentCommentNumber){
 function cancelEdit(){
     getComments($('input[name="parentPostNumber"]').val());
 }
+
+// 신고횟수에 따른 게시글 스타일 수정
+// 게시글에 대한 횟수로 하자 > 컬럼 필요
+// 부모는 나중에 강제탈퇴를 시키기 위함
+document.addEventListener("DOMContentLoaded", function() {
+    // 게시글 컨테이너를 선택
+    let postContainer = document.getElementById("postContainer");
+
+    // 게시글 횟수를 가져옴
+    let reportCount = document.querySelector('#reportCount').val()
+
+    // 신고 횟수 기준 설정
+    let reportLimit = 1; // 예: 10회 이상 신고된 게시글 차단
+
+    // 신고 횟수가 기준을 초과하면 게시글을 숨김
+    if (reportCount >= reportLimit) {
+        postContainer.innerHTML = "<p>이 게시글은 신고 횟수가 많아 더 이상 열람할 수 없습니다.</p>";
+        postContainer.style.display = "none"; // 게시글 숨기기
+        // 또는 다른 스타일을 적용할 수도 있습니다.
+    }
+});
+

@@ -1,14 +1,20 @@
 package com.example.idollbom.controller.pro;
 
+import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
 import com.example.idollbom.domain.dto.prodto.ClassDTO;
 import com.example.idollbom.domain.dto.prodto.ClassImgDTO;
 import com.example.idollbom.domain.dto.prodto.ReservationDateDTO;
 import com.example.idollbom.domain.dto.prodto.ReservationTimeDTO;
+import com.example.idollbom.domain.vo.ParentVO;
+import com.example.idollbom.domain.vo.ProVO;
 import com.example.idollbom.domain.vo.classVO;
+import com.example.idollbom.service.loginservice.ProService;
 import com.example.idollbom.service.proService.RegisterFormService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cglib.core.Local;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -68,7 +74,7 @@ public class RegisterFormController {
                 break;
         }
 
-        // html에서 받아온 날짜를 localDate 형식으로 반환
+//        // html에서 받아온 날짜를 localDate 형식으로 반환
         LocalDate localDate = LocalDate.parse(resDate);
         reservationDateDTO.setReservationDate(localDate);
 
@@ -92,6 +98,7 @@ public class RegisterFormController {
         registerFormService.registerClass(classDTO, reservationDateDTO, imageFileUrl, localDateTimes);
 
         // 이건 어디로 가야 좋을지..
+        // 전문가 마이페이지 수업 목록으로 옮기기
         return "redirect:/pro/register";
     }
 }

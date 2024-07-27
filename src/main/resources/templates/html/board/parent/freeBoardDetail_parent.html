@@ -25,7 +25,10 @@
     <!-- 신고하기 버튼은 작성자와 다를때만 표시 -->
       <a class="report-btn btn-open-modal" style="display: flex" th:if="${parentId!=community.parentNumber}">신고하기</a>
     </div>
-    <div class="board-form" th:object="${community}">
+    <div class="board-form" id="postContainer" th:object="${community}">
+      <!-- 현재 작성자의 신고횟수 -->
+      <input type="hidden" id="reportCount" name="reportCount" th:value="${reportCount}">
+
       <!-- 현재 작성자가 누구인지 -->
       <input type="hidden" name="parentNumber" th:value="${community.parentNumber}" readonly>
       <!-- 게시글 번호 -->

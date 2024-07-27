@@ -15,16 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/restList")
 public class ClassListRestController {
 
-//    private final ClassListService classListService;
-//
-//    @GetMapping
-//    public ResponseEntity<PagedResponse<ClassListDTO>> getBoardList(@RequestParam(defaultValue = "1") int pageNo,
-//                                                                    @RequestParam(defaultValue = "5") int pageSize,
-//                                                                    @RequestParam String category,
-//                                                                    @RequestParam String searchType,
-//                                                                    @RequestParam String searchWord) {
-//
-//        return ResponseEntity.ok(classListService.searchClassList(searchType, searchWord, category, pageNo, pageSize));
-//    }
+    private final ClassListService classListService;
+
+    @GetMapping
+    public ResponseEntity<PagedResponse<ClassListDTO>> getBoardList(@RequestParam(defaultValue = "1") int pageNo,
+                                                                    @RequestParam(defaultValue = "5") int pageSize,
+                                                                    @RequestParam(value = "category", defaultValue = "등/하원") String category,
+                                                                    @RequestParam String searchType,
+                                                                    @RequestParam String searchWord) {
+        System.out.println(category);
+
+        return ResponseEntity.ok(classListService.searchClassList(searchType, searchWord, category, pageNo, pageSize));
+    }
 
 }
