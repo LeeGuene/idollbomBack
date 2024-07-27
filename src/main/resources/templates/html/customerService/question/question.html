@@ -24,9 +24,10 @@
                 <!-- 문의하기 전체 목록 -->
                 <dl th:each="question : ${questionList}" th:object="${question}">
                     <!-- 문의하기 제목 -->
-                    <dt>
+                    <dt th:if="${public}">
                         <span>Q.</span>
                         <span th:text="*{questionContent}"></span>
+                        <button th:text="*{questionStatus == '미완'} ? '답변 중' : '답변 완료'"></button>
                     </dt>
 
                     <!-- 문의 답변 내용 -->
