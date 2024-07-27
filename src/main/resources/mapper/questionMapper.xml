@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.idollbom.mapper.customservicemapper.question.QuestionMapper">
+
+    <!-- 전체 문의하기 목록 조회하기 -->
+    <!-- 페이징 처리 -->
+    <select id="selectQuestionAll">
+        SELECT
+            INFO.PARENT_NAME,
+            INFO.QUESTION_NUMBER,
+            INFO.QUESTION_TITLE,
+            INFO.QUESTION_CONTENT,
+            INFO.QUESTION_REGISTER_DATE,
+            INFO.QUESTION_READING_CHECK,
+            INFO.QUESTION_STATUS,
+            INFO.ANSWER_NUMBER,
+            INFO.ANSWER_CONTENT
+        FROM (
+                SELECT *
+                FROM (
+                        SELECT
+                            ROWNUM AS RN,
+                            QUES.PARENT_NUMBER,
+                            QUES.QUESTION_NUMBER,
+                            QUES.QUESTION_TITLE,
+                            QUES.QUESTION_CONTENT,
+                            QUES.QUESTION_REGISTER_DATE,
+                            QUES.QUESTION_READING_CHECK,
+                            QUES.QUESTION_STATUS,
+                            QUES.ANSWER_NUMBER,
+                            QUES.ANSWER_CONTENT,
+                            P.PARENT_NAME
+                        FROM (
+                                SELECT
+                                    Q.QUESTION_NUMBER,
+                                    Q.PARENT_NUMBER,
+                                    Q.QUESTION_TITLE,
+                                    Q.QUESTION_CONTENT,
+                                    Q.QUESTION_REGISTER_DATE,
+                                    Q.QUESTION_READING_CHECK,
+                                    Q.QUESTION_STATUS,
+                                    A.ANSWER_NUMBER,
+                                    A.ANSWER_CONTENT
+                                FROM QUESTION Q JOIN ANSWER A
+                                ON Q.QUESTION_NUMBER = A.QUESTION_NUMBER
+                        ) QUES JOIN PARENT P
+                        ON QUES.PARENT_NUMBER = P.PARENT_NUMBER
+                )
+                WHERE ROWNUM &lt;= #{endRow}
+        ) INFO
+        WHERE RN &gt; #{startRow}
+    </select>
+
+    <!-- 전체 문의목록 개수 조회하기 -->
+    <select id="countQuestion" resultType="_int">
+        SELECT COUNT(*) FROM QUESTION
+    </select>
+
+    <!-- 문의하기 추가 -->
+    <insert id="insertQuestion">
+        insert into QUESTION (QUESTION_NUMBER, QUESTION_TITLE, QUESTION_CONTENT, QUESTION_READING_CHECK, PARENT_NUMBER)
+        values (SEQ_PROJECT.NEXTVAL, #{questionTitle}, #{questionContent}, #{questionReadingCheck}, #{parentNumber})
+    </insert>
+
+</mapper>
