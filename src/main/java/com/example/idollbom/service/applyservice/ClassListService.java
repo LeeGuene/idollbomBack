@@ -1,6 +1,7 @@
 package com.example.idollbom.service.applyservice;
 
 import com.example.idollbom.domain.dto.applydto.ClassListDTO;
+import com.example.idollbom.domain.dto.recommend.PagedResponse;
 import jdk.jfr.Category;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public interface ClassListService {
     int classCount(String category);
 
     // 검색 구현 select
-    List<ClassListDTO> searchClassList(String searchWord, String searchType, String category, int PageNo, int pageSize);
+    PagedResponse<ClassListDTO> searchClassList(String searchWord, String searchType, String category, int PageNo, int pageSize);
 
     // 검색한 수업에 대한 갯수를 가져오는 select
     int countClasses(String category, String searchType, String searchWord);

@@ -33,6 +33,9 @@ public class ClassListController {
     private final ClassReviewService classReviewService;
     private final ParentMapper parentMapper;
 
+    // 부모의 정보를 가지고 오는 메소드
+
+
     // 페이지 전부 페이징 처리 구현하기
     // 돌봄 페이지, default는 등하원으로
     @GetMapping("/classcare")
@@ -47,6 +50,7 @@ public class ClassListController {
 
         ParentVO parent_info = parentMapper.selectOne(currentUserName);
         model.addAttribute("parent_info", parent_info);
+        model.addAttribute("category", category);
 
         // 페이징 처리를 위한 코드
         int count = classListService.classCount(category);
@@ -63,7 +67,6 @@ public class ClassListController {
         System.out.println("Category: " + category);  // 로그 출력
 
         model.addAttribute("count", count);
-        model.addAttribute("category", category);
         model.addAttribute("classLists", classListDTO);
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("pageSize", pageSize);
@@ -179,7 +182,6 @@ public class ClassListController {
         int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
         int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
 
-        // 강사님이 짜 주신 로직
 //        if (authentication != null){
 //            for (ClassListDTO classDTO : classListDTO){
 //                if(매퍼.메소드(classDTO.getClassNumber(), parent_info.getParentNumber())){
@@ -204,44 +206,44 @@ public class ClassListController {
 
     // 검색 기능 구현
     // 검색한 결과도 많을 수도 있기에, 페이징 처리해야한다.
-    @GetMapping("/search")
-    public String classSearch(@RequestParam(name = "searchWord") String searchWord,
-                              @RequestParam(name = "searchType") String searchType,
-                              @RequestParam(value = "category", required = false, defaultValue = "등/하원") String category,
-                              @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
-                              @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
-                              Model model) {
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String currentUserName = userDetails.getUsername();
-
-        ParentVO parent_info = parentMapper.selectOne(currentUserName);
-        model.addAttribute("parent_info", parent_info);
-
-        List<ClassListDTO> classListDTO = classListService.searchClassList(searchWord, searchType, category, pageNo, pageSize);
-        int count = classListService.countClasses(category,searchType, searchWord);
-
-        int totalPages = (int) Math.ceil((double) count / pageSize);
-
-        System.out.println("Category: " + category);
-
-        int pageGroupSize = 3;
-        int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
-        int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
-
-        model.addAttribute("count", count);
-        model.addAttribute("category", category);
-        model.addAttribute("classLists", classListDTO);
-        model.addAttribute("currentPage", pageNo);
-        model.addAttribute("pageSize", pageSize);
-        model.addAttribute("totalPages", totalPages);
-
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
-
-        return "/html/apply/class_list_care";
-    }
+//    @GetMapping("/search")
+//    public String classSearch(@RequestParam(name = "searchWord") String searchWord,
+//                              @RequestParam(name = "searchType") String searchType,
+//                              @RequestParam(value = "category", required = false, defaultValue = "등/하원") String category,
+//                              @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
+//                              @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
+//                              Model model) {
+//
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+//        String currentUserName = userDetails.getUsername();
+//
+//        ParentVO parent_info = parentMapper.selectOne(currentUserName);
+//        model.addAttribute("parent_info", parent_info);
+//
+//        List<ClassListDTO> classListDTO = classListService.searchClassList(searchWord, searchType, category, pageNo, pageSize);
+//        int count = classListService.countClasses(category,searchType, searchWord);
+//
+//        int totalPages = (int) Math.ceil((double) count / pageSize);
+//
+//        System.out.println("Category: " + category);
+//
+//        int pageGroupSize = 3;
+//        int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
+//        int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
+//
+//        model.addAttribute("count", count);
+//        model.addAttribute("category", category);
+//        model.addAttribute("classLists", classListDTO);
+//        model.addAttribute("currentPage", pageNo);
+//        model.addAttribute("pageSize", pageSize);
+//        model.addAttribute("totalPages", totalPages);
+//
+//        model.addAttribute("startPage", startPage);
+//        model.addAttribute("endPage", endPage);
+//
+//        return "/html/apply/class_list_care";
+//    }
 
     // 수업 상세보기 페이지
     @GetMapping("/detail")

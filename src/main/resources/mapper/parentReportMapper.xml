@@ -22,4 +22,11 @@
         WHERE PARENT_NUMBER = #{parentNumber}
     </update>
 
+    <!-- 해당 게시글 작성자가 신고 횟수 select -->
+    <select id="reportCount">
+        SELECT DISTINCT p.PARENT_REPORT_COUNT
+        FROM PARENT p
+        JOIN PARENT_POST p2 ON p.PARENT_NUMBER = p2.PARENT_NUMBER
+        WHERE p2.PARENT_NUMBER = #{parentNumber}
+    </select>
 </mapper>

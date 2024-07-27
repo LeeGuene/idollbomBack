@@ -1,3 +1,4 @@
+// 여기서 데이터 넘기기
 function pointSave(pay) {
     $.ajax({
         url: "/pay/rest/chargingOk",
@@ -5,10 +6,13 @@ function pointSave(pay) {
         data: JSON.stringify(pay),
         contentType: "application/json; charset=utf-8",
         success: function(result) {
-            console.log(result)
+            // 결제 성공하면 마이페이지 결제 내역으로 이동
+            window.location.href = '/ParentMyPage/myPayment'
         },
 
         error: function () {
+            console.error("AJAX 호출 실패");
+            alert('결제 처리 중 오류가 발생했습니다.')
         }
     });
 }
@@ -44,7 +48,10 @@ async function kakaoPay() {
         case 'done':
             // 결제 완료 처리
             pointSave({
-                result: response.data.price,
+                parentNumber: $("#parentId").val(),
+                reservationDateNumber: $("#classDate").val(),
+                reservationTimeNumber: $("#classTime").val(),
+                childNumber: $("#childLists").val()
             });
             break;
     }

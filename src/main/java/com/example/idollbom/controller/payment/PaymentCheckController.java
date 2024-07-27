@@ -1,13 +1,18 @@
 package com.example.idollbom.controller.payment;
 
 import com.example.idollbom.domain.dto.applydto.ClassDetailDTO;
+import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
 import com.example.idollbom.domain.dto.parentdto.ReservationInfoDTO;
+import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.domain.vo.kidVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.service.applyservice.ClassDetailService;
+import com.example.idollbom.service.loginservice.ParentService;
 import com.example.idollbom.service.myPageservice.parentservice.kidsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +44,16 @@ public class PaymentCheckController {
                                @RequestParam("proNumber") Long proNumber,
                                @PathVariable("classNumber") Long classNumber,
                                Model model) {
+
+        // 현재 로그인한 부모 pk 전달
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDTO p = ((CustomUserDTO) authentication.getPrincipal());
+        String parentName = p.getUsername();
+
+        ParentVO parent_info = parentMapper.selectOne(parentName);
+        Long parentId = parent_info.getParentNumber();
+        model.addAttribute("parent_info", parent_info);
+        model.addAttribute("parentId", parentId);
 
         System.out.println("예약날짜 pk : " + reservationDateNumber);
         System.out.println("주소로 받아온 classNumber : " + classNumber);

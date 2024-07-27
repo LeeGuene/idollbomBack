@@ -167,12 +167,95 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-// 검색하기를 눌렀을 때 일어나는 이벤트
-function submitForm() {
-    document.getElementById("searchForm").submit();
+// 비동기로 리스트와 검색 기능 구현
+const pageSize = 5
+let searchWord = null
+let searchType = null
+let category = null
+
+window.onload = function(){
+    searchType = $('select[name="searchType"]').val()
+    searchWord = $('input[name="searchWord"]').val()
+    category = $('input[name="category"]').val()
+
+    // 첫 페이지 지정
+    getList(1);
 }
 
+function getList(page){
+    $.ajax({
+        method: 'get',
+        url: '/restList',
+        data: {
+            pageNo: page,
+            pageSize: pageSize,
+            searchType: searchType,
+            searchWord: searchWord,
+            category : category
+        },
+        success: function (data){
+            // 리스트 뿌려주는 함수
+            Pagination(data)
 
+        },
+        error: function (data){
+            alert('불러오기 실패')
+            console.log(category)
+            console.log(data)
+        }
+    })
+}
+
+// 페이징 처리 영역
+// data- 는 속성이라고 생각 뒤에 있는 거는 데이터를 저장하기 위한 식별하기 위한 변수라고 생각
+function Pagination(pagination) {
+    const Container = $('.pagination');
+    Container.empty();
+
+    // 이전 버튼
+    const prevDisabled = pagination.currentPage === 1 ? 'disabled' : '';
+    Container.append(`
+            <li class="page-item ${prevDisabled}">
+                <a class="page-link" href="#" aria-label="Previous" data-page="${pagination.currentPage - 1}">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        `);
+
+    for (let i = pagination.startPage; i <= pagination.endPage; i++) {
+        const activeClass = pagination.currentPage === i ? 'active' : '';
+        Container.append(`
+            <li class="page-item ${activeClass}">
+                <a class="page-link" href="#" data-page="${i}">${i}</a>
+            </li>
+        `);
+    }
+
+    const nextDisabled = pagination.currentPage === pagination.totalPages ? 'disabled' : '';
+    Container.append(`
+            <li class="page-item ${nextDisabled}">
+                <a class="page-link" href="#" aria-label="Next" data-page="${pagination.currentPage + 1}">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        `);
+
+    // 페이지 클릭했을 때 실행할 함수.
+    $('.page-link').click(function(event) {
+        event.preventDefault();
+        const selectedPage = $(this).data('page');
+        getList(selectedPage);
+    });
+}
+
+// 검색 기능 함수
+function saveKeyword(){
+    searchType = $('select[name="searchType"]').val()
+    searchWord = $('input[name="searchWord"]').val()
+    category = $('input[name="category"]').val()
+
+    getList(1)
+}
 
 
 
