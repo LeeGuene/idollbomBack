@@ -311,5 +311,4 @@ public class ParentMypageController {
         reservationService.reviewUpdate(reservationDate.getReservationDateNumber());
         return "redirect:/ParentMyPage/myPayment";
     }
-
 }

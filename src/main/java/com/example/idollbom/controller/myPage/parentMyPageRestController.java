@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -30,6 +31,7 @@ public class parentMyPageRestController {
     private final noteService noteService;
     private final classSaveService classSaveService;
     private final ParentMapper parentMapper;
+    private final parentInfoService parentInfoService;
 
 //  아이정보 넘기기
     @GetMapping("/kidById")
@@ -62,6 +64,10 @@ public class parentMyPageRestController {
         return noteService.selectOneMail(mailId);
     }
 
+    @PutMapping("/updateImg")
+    public void updateImg(@RequestBody MultipartFile files){
+        parentInfoService.updateImg(files);
+    }
 }
 
 

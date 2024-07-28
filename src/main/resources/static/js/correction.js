@@ -1,8 +1,8 @@
-$(document).ready(function() {
-    prevImage();
-    test();
-    document.querySelector("#searchAddress").addEventListener("click", execDaumPostcode);
-});
+// $(document).ready(function() {
+//     prevImage();
+//     test();
+//     document.querySelector("#searchAddress").addEventListener("click", execDaumPostcode);
+// });
 
 // 이미지를 미리 불러오는 js
 function prevImage(input) {
@@ -10,9 +10,6 @@ function prevImage(input) {
         let reader = new FileReader();
         reader.onload = function (e) {
             document.getElementById('preview').src = e.target.result;
-            document.getElementById('myfie').src=e.target.result;
-            let myFileInput = document.getElementById('myfile');
-            myFileInput.files = input.files;
 
         };
         reader.readAsDataURL(input.files[0]);
@@ -49,4 +46,32 @@ function test() {
     document.getElementById('childInstruct').value = '';
 }
 
+
+function updateImg() {
+    const fileInput = document.getElementById('input-file');
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert("파일을 선택해주세요.");
+        return;
+    }
+
+    const files = new FormData();
+    files.append("file", file);
+
+    $.ajax({
+        url: '/ParentMyPageRest/updateImg',
+        type: 'PUT',
+        data: files,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            alert("파일이 성공적으로 업로드되었습니다.");
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(textStatus, errorThrown);
+            alert("파일 업로드에 실패했습니다.");
+        }
+    });
+}
 
