@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -40,18 +41,18 @@ public class AskController {
 
         int totalQuestions = questionService.countQuestion();
         int totalPages = (int) Math.ceil((double) totalQuestions / pageSize);
-
         List<QuestionListDTO> questionList = questionService.findQuestionAll(pageNo, pageSize);
+        
+        // 공개 / 비공개 글임을 구분하는 문의하기 pk를 저장할 리스트 변수
+        List<Long> visibleList = new ArrayList<>();
 
-
-        for(QuestionListDTO question : questionList){
-            log.info("공개/비공개 여부 : " + question.getQuestionReadingCheck().equals("비공개"));
-            if(question.getQuestionReadingCheck().equals("비공개")){
-                model.addAttribute("private", question.getQuestionReadingCheck());
-            }else{
-                model.addAttribute("public", question.getQuestionReadingCheck());
+        for(QuestionListDTO question : questionList) {
+            if(question.getQuestionReadingCheck().equals("공개")){
+                visibleList.add(question.getQuestionNumber()); // 공개인 것만 추가
             }
         }
+
+        model.addAttribute("visibleList", visibleList);
 
         int pageGroupSize = 5;
         int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
