@@ -8,11 +8,12 @@
         where parent_number = #{parentNumber}
     </select>
 
-<!--    내정보 (이미지) 업데이트-->
-    <update id="updateImg">
+<!--    내정보 비밀번호 업데이트-->
+    <update id="updatePassword">
         update parent
-        SET parent_profile_image_url = #{parentProfileImageUrl}
-        WHERE id = #{id}
+        SET parent_password = #{parentPassword}
+        WHERE parent_number = #{parentNumber}
     </update>
+
 
 </mapper>
