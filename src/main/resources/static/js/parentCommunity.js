@@ -31,22 +31,41 @@ function getList(page){
         }
     })
 }
+// 현재 누가 로그인했는지
+const userRole = $('input[name="userRole"]').val()
 
 // 리스트 데이터를 받아서 렌더링 하는 함수
 // 전체 게시글을 보여주는 함수
 function renderBoard(communities){
     const boardContainer = $('.table tbody')
     boardContainer.empty()
+    let linkHtml;
 
     communities.forEach(function (community){
+        // 현재 로그인한 사람이 누구인지
+        linkHtml = `<a href="/parentcommunity/detail/${community.parentPostNumber}">자세히보기</a>`
+
+
+        // 해당 게시글 신고횟수가 3회 이상이면 게시글 막기
+        if(community.parentPostReportCount >= 3){
+            linkHtml = `<a style="cursor: not-allowed"<span class="disabled-link" data-message="해당 게시글은 볼 수 없습니다.">자세히 보기</span></a>`
+        }
+
         let communityRow = `<tr>
             <td><img src="/images/${community.parentProfileImageUrl}" alt="프로필"></td>
             <td>${community.parentPostTitle}</td>
-            <td><a href="/parentcommunity/detail/${community.parentPostNumber}">자세히 보기</a></td>
-            <td>${community.parentNickname}</td></tr>
+            <td>${linkHtml}</td>
+            <td>${community.parentNickname}</td>
+            <td><input type="hidden" value="${community.parentPostReportCount}"></td></tr>
             `
 
         boardContainer.append(communityRow)
+    })
+
+    // 클릭 이벤트 핸들러 추가
+    $('.disabled-link').click(function(event) {
+        const message = $(this).data('message');
+        alert(message); // 메시지를 띄우는 코드
     })
 }
 

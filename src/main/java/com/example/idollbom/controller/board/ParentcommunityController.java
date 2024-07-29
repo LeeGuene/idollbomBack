@@ -31,7 +31,6 @@ public class ParentcommunityController {
     private final ParentFileService parentFileService;
     private final ParentReportService parentReportService;
     private final ParentMapper parentMapper;
-    private final com.example.idollbom.service.myPageservice.parentservice.reportService reportService;
 
     // 게시글 목록 띄어주는 컨트롤러
     @GetMapping()
@@ -40,6 +39,15 @@ public class ParentcommunityController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String currentUserName = userDetails.getUsername();
+
+        // 현재 로그인이 되어있는지
+        // 만약, 전문가로 로그인이 되어있다면 게시판 보는 것을 막을 수 있음
+        CustomUserDTO p = ((CustomUserDTO) authentication.getPrincipal());
+        String userRole = p.getRole();
+
+        System.out.println(userRole);
+        model.addAttribute("userRole", userRole);
+
 
         ParentVO parent_info = parentMapper.selectOne(currentUserName);
         model.addAttribute("parent_info", parent_info);
@@ -98,14 +106,10 @@ public class ParentcommunityController {
 
         System.out.println(community.getParentPostUpdateDate());
 
-        // 신고횟수 가져옴
-        int reportCount = parentReportService.reportCount(parentId);
-
         model.addAttribute("community", community);
         model.addAttribute("files", files);
         // 현재 로그인한 정보와 게시글 작성자와의 확인 유무를 위함
         model.addAttribute("parentId", parentId);
-        model.addAttribute("reportCount", reportCount);
 
         return "/html/board/parent/freeBoardDetail_parent";
     }

@@ -15,18 +15,18 @@
         FROM PARENT_POST
         WHERE PARENT_POST_NUMBER = #{parentPostNumber}
     </select>
+
+    <!-- 해당 게시글 신고횟수 +1 -->
+    <update id="plusPost">
+        UPDATE PARENT_POST
+        SET PARENT_POST_REPORTCOUNT = PARENT_POST_REPORTCOUNT + 1
+        WHERE PARENT_POST_NUMBER = #{parentPostNumber}
+    </update>
+
     <!-- 해당 게시글을 작성한 작성자 신고횟수 +1 -->
     <update id="plusReport">
         UPDATE PARENT
         SET PARENT_REPORT_COUNT = PARENT_REPORT_COUNT + 1
         WHERE PARENT_NUMBER = #{parentNumber}
     </update>
-
-    <!-- 해당 게시글 작성자가 신고 횟수 select -->
-    <select id="reportCount">
-        SELECT DISTINCT p.PARENT_REPORT_COUNT
-        FROM PARENT p
-        JOIN PARENT_POST p2 ON p.PARENT_NUMBER = p2.PARENT_NUMBER
-        WHERE p2.PARENT_NUMBER = #{parentNumber}
-    </select>
 </mapper>
