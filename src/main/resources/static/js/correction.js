@@ -35,6 +35,8 @@ function test() {
         var newPassword = document.getElementById('hiddenPassword');
         newPassword.value = p2;
         console.log(p2);
+
+
         const btnSubmitModal=document.querySelector('.regist-btn');
         btnSubmitModal.addEventListener("click", ()=>{
             modal.style.display="none";
@@ -67,6 +69,9 @@ function updateImg() {
         contentType: false,
         success: function(response) {
             alert("파일이 성공적으로 업로드되었습니다.");
+            console.log(response.data);
+            console.log(response);
+            document.getElementById('profile').src = response;
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.error(textStatus, errorThrown);

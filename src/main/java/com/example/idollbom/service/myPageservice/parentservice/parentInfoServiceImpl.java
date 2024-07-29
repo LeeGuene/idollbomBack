@@ -13,12 +13,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
 @Service
@@ -57,41 +55,41 @@ public class parentInfoServiceImpl implements parentInfoService {
     }
 
     @Override
-    public void updateImg(MultipartFile file) {
+    public String updateImg(MultipartFile file) {
         if (file.isEmpty()) {
             throw new IllegalArgumentException("Uploaded file is empty");
         }
-        String originalFileName = file.getOriginalFilename();
-        String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + "_" + originalFileName;
 
-        try {
-            // 파일 저장 경로 설정
-            String uploadDir = "/upload";
-            Path directoryPath = Paths.get(uploadDir);
-            if (!Files.exists(directoryPath)) {
-                Files.createDirectories(directoryPath); // 폴더가 없으면 생성
+            String originalFileName = file.getOriginalFilename();
+            String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + "_" + originalFileName;
+            Long fileSize = file.getSize();
+
+            try {
+                // 파일 저장 경로 설정
+                Path directoryPath = Paths.get("src/main/resources/static/backImage/parent/prifile");
+                if (!Files.exists(directoryPath)) {
+                    Files.createDirectories(directoryPath); // 폴더가 없으면 생성
+                }
+                Path filePath = directoryPath.resolve(storedFileName);
+                // 파일 저장
+                Files.copy(file.getInputStream(), filePath);
+
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+                String currentUserName = userDetails.getUsername();
+
+                //      parent VO 찾아서 아이디 찾기
+                ParentVO parent = parentMapper.selectOne(currentUserName);
+                String parentPrifileImageUrl= directoryPath + "/" + storedFileName;
+
+                parentFileMapper.updatePic(parentPrifileImageUrl,parent.getParentNumber());
+
+                return "/backImage/parent/prifile/" + storedFileName;
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            Path filePath = directoryPath.resolve(storedFileName);
-
-            // 파일 저장
-            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-            // 데이터베이스에 파일 경로 저장
-            String fileUrl = uploadDir + "/" + storedFileName;
-
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            String currentUserName = userDetails.getUsername();
-
-            // parent VO 찾아서 아이디 찾기
-            ParentVO parent = parentMapper.selectOne(currentUserName);
-
-
-            parentFileMapper.updatePic(fileUrl,parent.getParentNumber());
-
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to save file", e);
-        }
+        return null;
     }
-
-}
+    }

@@ -42,8 +42,8 @@
 
     <!-- 부모정보 사진update   -->
     <update id="updatePic">
-        update parent
-        set parent_profile_image_url = #{parentPrifileImageUrl}
-        WHERE parent_number=#{parentNumber}
+        UPDATE parent
+        SET parent_profile_image_url = #{parentProfileImageUrl}
+        WHERE parent_number = #{parentNumber}
     </update>
 </mapper>
