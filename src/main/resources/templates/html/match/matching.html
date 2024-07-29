@@ -66,7 +66,7 @@
                     <div>
                         <strong>날짜/시간</strong>
                         <!-- 오늘 날짜 이후론 선택하지 못하게 막기 -->
-                        <input type="date" class="date" name="dateTime">
+                        <input type="date" class="date" name="dateTime" id="dateSelect">
                         <select class="time">
                             <option value="09">9시</option>
                             <option value="10">10시</option>
@@ -77,7 +77,6 @@
                             <option value="15">15시</option>
                             <option value="16">16시</option>
                             <option value="17">17시</option>
-                            <option value="18">18시</option>
                         </select>
                     </div>
                 </div>
@@ -91,6 +90,7 @@
         <div id="random_pro_container">
             <!-- 이 부분은 js에서 받아오는 데이터를 뿌려주는 공간 -->
         </div>
+    </div>
 <div th:replace="~{/layout/footer :: footer}"></div>
 <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
 <!-- 매칭정보 js -->

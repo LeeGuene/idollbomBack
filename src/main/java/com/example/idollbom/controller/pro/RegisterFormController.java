@@ -97,8 +97,7 @@ public class RegisterFormController {
 
         registerFormService.registerClass(classDTO, reservationDateDTO, imageFileUrl, localDateTimes);
 
-        // 이건 어디로 가야 좋을지..
         // 전문가 마이페이지 수업 목록으로 옮기기
-        return "redirect:/pro/register";
+        return "redirect:/proMyPage/proClass";
     }
 }

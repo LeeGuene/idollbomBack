@@ -13,6 +13,7 @@
                   p.PARENT_POST_TITLE,
                   p.PARENT_NUMBER,
                   p.PARENT_POST_REGISTER_DATE,
+                  p.PARENT_POST_REPORTCOUNT,
                   p1.PARENT_NICKNAME,
                   p1.PARENT_PROFILE_IMAGE_URL
                   FROM parent_post p
@@ -91,6 +92,7 @@
                       p.PARENT_POST_TITLE,
                       p.PARENT_NUMBER,
                       p.PARENT_POST_REGISTER_DATE,
+                      p.PARENT_POST_REPORTCOUNT,
                       p1.PARENT_NICKNAME,
                       p1.PARENT_PROFILE_IMAGE_URL
                   FROM parent_post p
