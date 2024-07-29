@@ -30,10 +30,8 @@ public class ParentReportServiceImpl implements ParentReportService {
         // 해당 부모 신고횟수 +1
         parentReportMapper.plusReport(parentId.getParentNumber());
 
-    }
+        // 해당 게시글 신고횟수 +1
+        parentReportMapper.plusPost(parentPostNumber);
 
-    @Override
-    public int reportCount(Long parentNumber) {
-        return parentReportMapper.reportCount(parentNumber);
     }
 }

@@ -25,23 +25,31 @@
 }
 
 /* 수업 제목 css */
-.study-title{
+.study-title {
   display: flex;
   align-items: center;
+  margin-bottom: 20px; /* 입력 필드와 그 아래 요소 사이의 간격을 조정 */
 }
 
-.study-title > label{
+.study-title > label {
   display: inline-block;
   width: 150px;
   text-align: left;
 }
 
-.study-title > input{
+.study-title > input {
   width: 50%;
   padding: 10px 15px;
   outline: none;
   border: none;
   border-bottom: 1px solid #ccc;
+}
+
+.extra-info {
+  display: none;
+  margin-top: 10px; /* <p> 태그와 이전 요소 사이의 간격을 조정 */
+  margin-left: 150px;
+  color: red;
 }
 
 .study-title{}

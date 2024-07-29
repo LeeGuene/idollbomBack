@@ -83,6 +83,7 @@ public class RegisterFormServiceImpl implements RegisterFormService {
             if (!Files.exists(directoryPath)) {
                 Files.createDirectories(directoryPath); // 폴더가 없으면 생성
             }
+
             // 파일 저장
             Path filePath = directoryPath.resolve(imgUrl);
             Files.copy(file.getInputStream(), filePath);

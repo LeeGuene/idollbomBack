@@ -42,22 +42,13 @@ selectbox.addEventListener('change', () => {
 });
 
 // 전문가 추천해주는 div
-const pro_search = document.querySelector('.pro-search');
-const random_pro_container = document.getElementById('random_pro_container');
-const pro_reset = document.querySelector('.reset')
-
-pro_search.addEventListener("click", () => {
-    // 당일 날짜라면 막기
-    // || date.value < today.toISOString().substring(0, 10) 전날은 이거 추가하기
-    if (today.toISOString().substring(0, 10) === date.value) {
-        // alert창 말고 밑에 트렌드에 맞게 바꿔보기
-        alert('해당 날짜는 안됩니다.');
-    }
-})
-
 // 검색버튼을 눌렀을 때 비동기로 sql문 실행하기
 // 현재 로그인된 아이디도 가져와야함
 function autoSubmit() {
+    if (today.toISOString().substring(0, 10) === date.value) {
+        alert('해당 날짜는 안됩니다.');
+        return
+    }
 
     const category = selectbox.options[selectbox.selectedIndex].value;
 
@@ -75,8 +66,6 @@ function autoSubmit() {
     const selectedDate = date.value;
     const selectedTime = time.options[time.selectedIndex].value;
 
-    // console.log(category)
-    // console.log(categoryData)
     console.log(selectedDate)
     console.log(selectedTime)
 
@@ -151,26 +140,23 @@ function autoSubmit() {
     });
 }
 
-// // Assume randomProContainer is already defined
-// randomProContainer.innerHTML = html;
-//
-// // Find the anchor tag within the inserted HTML
-// const anchorTag = randomProContainer.querySelector('.random_pro a');
-//
-// // Add a click event listener to the anchor tag
-// anchorTag.addEventListener('click', function(event) {
-//     event.preventDefault(); // Prevent default link behavior (e.g., page reload)
-//
-//     // Get proNumber and classNumber from the hidden inputs in the parent div
-//     const proNumber = this.closest('.random_pro').querySelector('input[type="hidden"][value="${randomMatch.proNumber}"]').value;
-//     const classNumber = this.closest('.random_pro').querySelector('input[type="hidden"][value="${randomMatch.classNumber}"]').value;
-//
-//     // Construct the URL with parameters
-//     const url = '/match/submit/detail' + '?proNumber=' + proNumber + '&classNumber=' + classNumber;
-//
-//     // Navigate to the new page
-//     window.location.href = url;
-// });
+// 날짜 관련 js
+// 당일 날짜로만 등록 및 이전 날짜는 막기
+document.addEventListener('DOMContentLoaded', function() {
+    // 현재 날짜를 YYYY-MM-DD 형식으로 가져옵니다.
+    const today = new Date()
+    const year = today.getFullYear()
+    const month = ('0' + (today.getMonth() + 1)).slice(-2) // 월을 두 자리로 포맷
+    const day = ('0' + today.getDate()).slice(-2) // 일을 두 자리로 포맷
+    const todayString = `${year}-${month}-${day}`
+
+    // 날짜 선택 입력 필드 가져오기
+    const dateInput = document.getElementById('dateSelect')
+
+    // min 속성 및 기본값 설정
+    dateInput.setAttribute('min', todayString)
+    dateInput.value = todayString; // 기본값 설정
+})
 
 
 
