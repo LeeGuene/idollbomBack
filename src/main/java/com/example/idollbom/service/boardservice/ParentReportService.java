@@ -7,7 +7,4 @@ import org.springframework.stereotype.Service;
 public interface ParentReportService {
 
     void saveParentReport(Long parentPostNumber, String reportType, String reportForm);
-
-    // 작성자 신고횟수 count
-    int reportCount(Long parentNumber);
 }

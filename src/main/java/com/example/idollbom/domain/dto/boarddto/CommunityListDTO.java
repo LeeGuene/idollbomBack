@@ -14,4 +14,5 @@ public class CommunityListDTO {
     private int parentNumber;
     private String parentNickname;
     private String parentProfileImageUrl;
+    private int parentPostReportCount;
 }

@@ -81,7 +81,7 @@ function uploadImage(file) {
 }
 
 function insertImageToSummernote(url) {
-  const img = document.createElement('img');
+  const img = document.createElement("img");
   img.src = url;
   img.style.width = '100%';
   $('#classContent').summernote('insertNode', img);
@@ -91,21 +91,22 @@ function insertImageToSummernote(url) {
 function addToSelectedList() {
   var selectBox = document.getElementById("timeSelect");
   var selectedOption = selectBox.options[selectBox.selectedIndex];
-
-  // "====시간 선택====" 옵션이 선택된 경우, 선택을 초기화
-  if (selectedOption.value === "none") {
-    alert('시간을 선택해주세요.')
-    return;
-  }
-
   var selectedText = selectedOption.text;
-  var selectedValue = selectedOption.value;
+
 
   var selectedTimesSpan = document.getElementById("selectedTime");
   var currentTimes = selectedTimesSpan.textContent.trim();
+  // "====시간 선택====" 옵션이 선택된 경우, 선택을 초기화
+  if (selectedOption.value === "none") {
+    alert('시간을 선택해주세요.')
+    currentTimes = ""
+    return;
+  }
+
   if (currentTimes !== "") {
     currentTimes += ", ";
   }
+
   currentTimes += selectedText
   selectedTimesSpan.textContent = currentTimes;
 
@@ -118,3 +119,70 @@ function addToSelectedList() {
   // 폼에 숨은 입력 필드 추가
   document.getElementById("register-form").append(hiddenInput);
 }
+
+// 유효성 체크
+function validateForm() {
+  let isValid = true;
+  let message = "";
+
+  console.log('실행되니?')
+
+  // 수업 제목
+  const title = document.getElementById('title').value
+  const classTitle = document.getElementById('classTitle')
+  if (!title) {
+    classTitle.style.display="block"
+    isValid = false;
+  }
+
+  // 수업 소개
+  const intro = document.getElementById('intro').value;
+  const classIntro = document.getElementById('classIntro')
+  if (!intro) {
+    classIntro.style.display="block"
+    isValid = false;
+  }
+
+  // // 날짜 선택
+  // // 당일로 한다면, 등록하지 못하게 막기
+  // const dateSelect = document.getElementById('dateSelect').value;
+  // if (!dateSelect) {
+  //   message += "날짜를 선택해 주세요.\n";
+  //   isValid = false;
+  // }
+  //
+  // // 시간 선택
+  // const timeSelect = document.getElementById('timeSelect').value;
+  // if (timeSelect === "none") {
+  //   message += "시간을 선택해 주세요.\n";
+  //   isValid = false;
+  // }
+  //
+  // // 수업 사진
+  // const upload = document.getElementById('upload').files.length;
+  // if (upload === 0) {
+  //   message += "수업 사진을 업로드해 주세요.\n";
+  //   isValid = false;
+  // }
+
+  // 값이 true여야만 실행
+  return isValid
+}
+
+// 날짜 관련 js
+// 당일 날짜로만 등록 및 이전 날짜는 막기
+document.addEventListener('DOMContentLoaded', function() {
+  // 현재 날짜를 YYYY-MM-DD 형식으로 가져옵니다.
+  const today = new Date()
+  const year = today.getFullYear()
+  const month = ('0' + (today.getMonth() + 1)).slice(-2) // 월을 두 자리로 포맷
+  const day = ('0' + today.getDate()).slice(-2) // 일을 두 자리로 포맷
+  const todayString = `${year}-${month}-${day}`
+
+  // 날짜 선택 입력 필드 가져오기
+  const dateInput = document.getElementById('dateSelect')
+
+  // min 속성 및 기본값 설정
+  dateInput.setAttribute('min', todayString)
+  dateInput.value = todayString; // 기본값 설정
+})
