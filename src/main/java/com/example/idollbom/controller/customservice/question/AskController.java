@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +84,7 @@ public class AskController {
     }
 
     @PostMapping("/write")
-    public String write(@ModelAttribute QuestionDTO question, RedirectAttributes redirectAttributes) {
+    public String write(@ModelAttribute QuestionDTO question) {
 
         log.info("View에서 넘어온 데이터들 : ");
         log.info("questionReadingCheck(열람가능 여부) : " + question.getQuestionReadingCheck());
@@ -93,12 +92,6 @@ public class AskController {
         log.info("parentNumber(부모 pk) : " + question.getParentNumber());
         log.info("questionTitle(문의 제목) : " + question.getQuestionTitle());
         log.info("questionContent(문의 내용) : " + question.getQuestionContent());
-
-        if(question.getQuestionReadingCheck().equals("비공개")){
-            redirectAttributes.addFlashAttribute("private", "비공개");
-        }else{
-            redirectAttributes.addFlashAttribute("public", "공개");
-        }
 
         // 문의하기 추가 쿼리문 실행
         questionService.saveQuestion(question);

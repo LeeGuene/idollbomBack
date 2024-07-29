@@ -27,6 +27,7 @@ public class ParentVO implements UserDetails {
     private String parentAddress;
     private String parentProfileImageUrl;
     private Long parentReportCount;
+    private String role;
 
     public static ParentVO toEntity(ParentDTO parentDTO){
         return ParentVO.builder()
@@ -38,6 +39,7 @@ public class ParentVO implements UserDetails {
                 .parentAddress(parentDTO.getParentAddress())
                 .parentProfileImageUrl(parentDTO.getParentProfileImageUrl())
                 .parentReportCount(parentDTO.getParentReportCount())
+                .role(parentDTO.getRole())
                 .build();
 
     }

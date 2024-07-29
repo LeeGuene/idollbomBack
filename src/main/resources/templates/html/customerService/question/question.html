@@ -43,7 +43,7 @@
 
                     <!-- 문의 답변 내용 -->
                     <!-- 공개 글이더라도 작성자와 로그인 한 회원이 일치하는 경우에만 문의답변을 조회할 수 있도록 설정 -->
-                    <dd th:if="${parent_info.parentNumber == question.parentNumber}">
+                    <dd th:if="${parent_info.parentNumber == question.parentNumber} and *{answerContent != null}">
                         <span>A.</span>
                         <span class="answer_content" th:text="*{answerContent}"></span>
                     </dd>

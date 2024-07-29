@@ -53,6 +53,14 @@ public class proMypageController {
         return "html/myPage/pro/profile";
     }
 
+    // 나의 쪽지 목록 보기
+    @GetMapping("/myNote")
+    public String selectNoteList(Model model){
+
+        return "html/myPage/pro/mail";
+    }
+
+    // 캘린더
     @GetMapping("/calender")
     public String selectCalender(){
         return "html/myPage/pro/calender";
