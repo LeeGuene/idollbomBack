@@ -38,6 +38,12 @@ public class classSaveServiceImpl implements classSaveService {
         return classSaveMapper.insertClassSave(classNumber, parentNumber);
     }
 
+    // 수업 찜 목록 삭제 ( 찜 목록 버튼으로 삭제 )
+    @Override
+    public int deleteSaveClass(Long classNumber, Long parentNumber) {
+        return classSaveMapper.deleteClassSave(classNumber, parentNumber);
+    }
+
     @Override
     public int deleteClass(Long classNumber) {
         return classSaveMapper.deleteClass(classNumber);

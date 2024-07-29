@@ -2,6 +2,7 @@ package com.example.idollbom.service.customserviceservice.question;
 
 import com.example.idollbom.domain.dto.customservice.question.QuestionDTO;
 import com.example.idollbom.domain.dto.customservice.question.QuestionListDTO;
+import com.example.idollbom.domain.vo.QuestionVO;
 import com.example.idollbom.mapper.customservicemapper.question.QuestionMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,6 @@ public class QuestionServiceImpl implements QuestionService {
     // 문의하기 추가
     @Override
     public void saveQuestion(QuestionDTO question) {
-        questionMapper.insertQuestion(question);
+        questionMapper.insertQuestion(QuestionVO.toEntity(question));
     }
 }

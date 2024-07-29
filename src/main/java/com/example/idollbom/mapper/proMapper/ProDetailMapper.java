@@ -3,7 +3,6 @@ package com.example.idollbom.mapper.proMapper;
 import com.example.idollbom.domain.dto.parentdto.ProListDTO;
 import com.example.idollbom.domain.dto.prodto.ProDetailDTO;
 import com.example.idollbom.domain.dto.prodto.ProReviewListDTO;
-import com.example.idollbom.domain.vo.ProVO;
 import com.example.idollbom.domain.dto.prodto.proReportDTO;
 import com.example.idollbom.domain.vo.ProPostVO;
 import com.example.idollbom.domain.vo.ProVO;
@@ -30,7 +29,7 @@ public interface ProDetailMapper {
     // 전문가 신고목록 조회하기
     List<proReportDTO> selectProReport(Long proNumber);
 
-    // 전문가
+    // 전문가 게시글 조회
     List<ProPostVO> selectProPost(Long proNumber);
 
     // 전문가 개인정보 조회

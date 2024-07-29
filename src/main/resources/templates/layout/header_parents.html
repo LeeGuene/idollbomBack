@@ -40,9 +40,9 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">고객센터</a>
+                        <a th:href="@{/ask/list}">고객센터</a>
                         <ul>
-                            <li><a href="#">문의하기</a></li>
+                            <li><a th:href="@{/ask/list}">문의하기</a></li>
                             <li><a href="#">공지사항</a></li>
                         </ul>
                     </li>
@@ -60,7 +60,7 @@
                     <p><a th:href="@{/user/signup}">회원가입</a></p>
                 </div>
 
-                <div sec:authorize="isAuthenticated()" class="login-status">
+                <div th:if="${parent_info.role == 'parent'}" sec:authorize="isAuthenticated()" class="login-status">
 <!--                    <span th:text="${parent_info.parentName}"></span>-->
 <!--                    <span style="font-size: 16px;">님</span>-->
                     <!-- 로그인 기본페이지와 동일하게 마이페이지도 아이등록 페이지로 이동 -->

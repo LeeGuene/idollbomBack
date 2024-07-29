@@ -13,6 +13,5 @@ public class ParentDTO {
     private String parentAddress;
     private String parentProfileImageUrl;
     private Long parentReportCount;
-
     private String role;
 }

@@ -3,12 +3,8 @@ package com.example.idollbom.config;
 import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
 import com.example.idollbom.domain.dto.logindto.ParentDTO;
 import com.example.idollbom.domain.dto.prodto.ProDetailDTO;
-import com.example.idollbom.domain.vo.ProVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.mapper.proMapper.ProDetailMapper;
-import com.example.idollbom.service.customserviceservice.login.CustomLoginService;
-import com.example.idollbom.service.loginservice.ParentDetailService;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,11 +14,8 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -44,6 +37,7 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/user/login"),
                                 new AntPathRequestMatcher("/user/signup"),
                                 new AntPathRequestMatcher("/user/myPage"),
+                                new AntPathRequestMatcher("/user/proSignup"),
                                 new AntPathRequestMatcher("/css/**"),
                                 new AntPathRequestMatcher("/images/**"),
                                 new AntPathRequestMatcher("/js/**"),
@@ -103,13 +97,13 @@ public class SecurityConfig {
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
         return (request, response, authentication) -> {
             System.out.println("들어옴");
-            CustomUserDTO userDTO = (CustomUserDTO)authentication.getPrincipal();
+            CustomUserDTO userDTO = (CustomUserDTO) authentication.getPrincipal();
 
             if(userDTO.getRole().equals("parent")){
                 response.sendRedirect("/parentmain");
             }
             else {
-                response.sendRedirect("/match");
+                response.sendRedirect("/promain");
             }
 
         };

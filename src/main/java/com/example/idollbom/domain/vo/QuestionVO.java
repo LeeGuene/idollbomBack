@@ -1,5 +1,6 @@
 package com.example.idollbom.domain.vo;
 
+import com.example.idollbom.domain.dto.customservice.question.QuestionDTO;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,15 @@ public class QuestionVO {
         this.questionReadingCheck = questionReadingCheck;
         this.questionStatus = questionStatus;
         this.parentNumber = parentNumber;
+    }
+
+    public static QuestionVO toEntity(QuestionDTO dto){
+        return QuestionVO.builder()
+                .questionTitle(dto.getQuestionTitle())
+                .questionContent(dto.getQuestionContent())
+                .questionReadingCheck(dto.getQuestionReadingCheck())
+                .parentNumber(dto.getParentNumber())
+                .build();
     }
 
 }

@@ -32,7 +32,7 @@
                         돌봄과 배움을 함께, 우리아이 단짝쌤 찾기 <br>
                         아이에게 필요한 모든것을 추천합니다.
                     </p>
-                    <a class="login" th:href="@{/match}" sec:authorize="isAuthenticated()">자세히 보기<span>+</span></a>
+                    <a class="login" th:href="@{/match}" th:if="${parent_info.role == 'parent'}" sec:authorize="isAuthenticated()">자세히 보기<span>+</span></a>
                     <a class="check" sec:authorize="!isAuthenticated()">자세히 보기<span>+</span></a>
                 </div>
             </div>
