@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up Form</title>
-    <link rel="stylesheet" href="/css/login/proRegisterPage.css">
+    <link rel="stylesheet" th:href="@{/css/login/proRegisterPage.css}">
 </head>
 <body>
 
@@ -38,7 +38,7 @@
     <!-- 폼로그인 -->
     <form id="signupForm" onsubmit="return validateForm()">
 
-        <input type="text" id="username" placeholder="이름" required >
+        <input type="text" id="username" placeholder="이름" required>
 
         <input type="text" id="nickname" placeholder="별명" required>
 
@@ -49,7 +49,7 @@
 
         <input type="text" id="phoneNumber" placeholder="전화번호" required>
 
-        <input type="text" id="" placeholder="주소" required>
+        <input type="text" id="" name="proAddress" placeholder="주소" required>
 
         <div class="form">
             <input type="email" id="email" placeholder="Email" required>
@@ -64,20 +64,14 @@
 
         <input type="password" id="confirmPassword" placeholder="비밀번호 확인" required>
 
-
         <div class="error-message" style="display: none;" id="confirmPasswordError">
             <img src="../../images/warning.png" alt="Warning" class="error-icon"> 비밀번호가 일치하지 않습니다
         </div>
 
-
-
-        <input type="file" class="file">
-
+        <input type="file" class="file" name="proFile" />
 
         <div class="form">
-      <textarea class="myprofile" type="email" id="email" placeholder="Email" required>
-      </textarea>
-
+            <textarea class="myprofile" type="email" id="proIntro" name="proIntro" placeholder="Email" required></textarea>
         </div>
 
         <!-- 서비스 이용약관 -->
@@ -99,13 +93,13 @@
                 <span class="checkbox-label">[필수] 14세 이상입니다</span>
             </label>
         </div>
-        <!— 등록 —>
+        <!-- 등록 -->
         <button type="submit" class="signup-button">SIGN UP</button>
-        <!— sign in 으로 이동 —>
+        <!-- sign in 으로 이동 -->
     </form>
     <p class="signinAsk">이미 계정이 있나요 <a href="../../html/login/loginpage.html">Sign In</a></p>
 </div>
 
-<script src="../js/registerpage.js"></script>
+<script th:src="@{/js/registerpage.js}"></script>
 </body>
 </html>

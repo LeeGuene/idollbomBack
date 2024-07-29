@@ -18,10 +18,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -187,102 +185,101 @@ public class ParentMypageController {
     }
 
     // 수업 찜 목록 추가 ( 신청하기 페이지에서 찜 목록 버튼 클릭 시 넘어오는 컨트롤러 )
-    @PostMapping("/insertSaveClass/{classNumber}")
-    public String selectFavoriteClass(@PathVariable("classNumber") Long classNumber,
-                                      @RequestParam("categoryBig") String categoryBig,
-                                      @RequestParam("category") String categorySmall,
-                                      @RequestParam("buttonIndex") String buttonIndex,
-                                      @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
-                                      @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
-                                      RedirectAttributes redirectAttributes){
+//    @PostMapping("/insertSaveClass/{classNumber}")
+//    public String selectFavoriteClass(@PathVariable("classNumber") Long classNumber,
+//                                      @RequestParam("categoryBig") String categoryBig,
+//                                      @RequestParam("category") String categorySmall,
+//                                      @RequestParam("buttonIndex") String buttonIndex,
+//                                      @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
+//                                      @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
+//                                      RedirectAttributes redirectAttributes){
 
-        log.info("신청하기 페이지에서 넘겨받은 데이터 : ");
-        log.info("buttonIndex : " + buttonIndex);
-        log.info("classNumber : " + classNumber);
-        log.info("bigCategory : " + categoryBig);
-        log.info("smallCategory : " + categorySmall);
-        log.info("classList.js 에서 받아온 데이터 : " + pageNo);
-        log.info("classList.js 에서 받아온 데이터 : " + pageSize);
+//        log.info("신청하기 페이지에서 넘겨받은 데이터 : ");
+//        log.info("buttonIndex : " + buttonIndex);
+//        log.info("classNumber : " + classNumber);
+//        log.info("bigCategory : " + categoryBig);
+//        log.info("smallCategory : " + categorySmall);
+//        log.info("classList.js 에서 받아온 데이터 : " + pageNo);
+//        log.info("classList.js 에서 받아온 데이터 : " + pageSize);
 
         // 부모 정보를 받아오는 코드
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String currentUserName = userDetails.getUsername();
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+//        String currentUserName = userDetails.getUsername();
 
         // ==================== 수업 찜 목록 추가하는 로직 ==================== //
 
-        ParentVO parent_info = parentMapper.selectOne(currentUserName);
-        int isSaved = classSaveService.saveClass(classNumber, parent_info.getParentNumber());
+//        ParentVO parent_info = parentMapper.selectOne(currentUserName);
+//        int isSaved = classSaveService.saveClass(classNumber, parent_info.getParentNumber());
 
-        log.info("수업 찜 목록 추가 성공(1) / 실패(0) : " + isSaved);
+//        log.info("수업 찜 목록 추가 성공(1) / 실패(0) : " + isSaved);
 
-        if(isSaved == 1){ // 수업 찜 목록에 추가 되었다면
-            redirectAttributes.addFlashAttribute("addIndex", buttonIndex);
-        }
+//        if(isSaved == 1){ // 수업 찜 목록에 추가 되었다면
+//            redirectAttributes.addFlashAttribute("addIndex", buttonIndex);
+//        }
          // ================================================================= //
 
         // 리다이렉트되는 컨트롤러로 매개변수 전달
-        redirectAttributes.addAttribute("category", categorySmall);
-        redirectAttributes.addAttribute("pageNo", pageNo);
-        redirectAttributes.addAttribute("pageSize", pageSize);
+//        redirectAttributes.addAttribute("category", categorySmall);
+//        redirectAttributes.addAttribute("pageNo", pageNo);
+//        redirectAttributes.addAttribute("pageSize", pageSize);
 
         // 카테고리에 따라 요청할 리다이렉트 주소가 다르다.
-        if(categoryBig.equals("돌봄")){
-            return "redirect:/class/classcare";
-        }else if(categoryBig.equals("예능")){
-            return "redirect:/class/classentertainment";
-        }else if(categoryBig.equals("운동")){
-            return "redirect:/class/classsport";
-        }else{
-            return "redirect:/class/classstudy";
-          }
-    }
+//        if(categoryBig.equals("돌봄")){
+//            return "redirect:/class/classcare";
+//        }else if(categoryBig.equals("예능")){
+//            return "redirect:/class/classentertainment";
+//        }else if(categoryBig.equals("운동")){
+//            return "redirect:/class/classsport";
+//        }else{
+//            return "redirect:/class/classstudy";
+//          }
+//    }
 
     // 수업 찜 목록 삭제 ( 신청하기 페이지에서 찜 목록 버튼 클릭 시 넘어오는 컨트롤러 )
-    @GetMapping("deleteSaveClass/{classNumber}")
-    public String deleteSaveClass(@PathVariable("classNumber") Long classNumber,
-                                  @RequestParam("categoryBig") String categoryBig,
-                                  @RequestParam("category") String categorySmall,
-                                  @RequestParam("buttonIndex") String buttonIndex,
-                                  @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
-                                  @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
-                                  RedirectAttributes redirectAttributes){
+//    @GetMapping("deleteSaveClass/{classNumber}")
+//    public String deleteSaveClass(@PathVariable("classNumber") Long classNumber,
+//                                  @RequestParam("categoryBig") String categoryBig,
+//                                  @RequestParam("category") String categorySmall,
+//                                  @RequestParam("buttonIndex") String buttonIndex,
+//                                  @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
+//                                  @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
+//                                  RedirectAttributes redirectAttributes){
 
-        log.info("신청하기 페이지에서 넘겨받은 데이터 : ");
-        log.info("buttonIndex : " + buttonIndex);
-        log.info("classNumber : " + classNumber);
-        log.info("bigCategory : " + categoryBig);
-        log.info("smallCategory : " + categorySmall);
-        log.info("classList.js 에서 받아온 데이터 : " + pageNo);
-        log.info("classList.js 에서 받아온 데이터 : " + pageSize);
+//        log.info("신청하기 페이지에서 넘겨받은 데이터 : ");
+//        log.info("buttonIndex : " + buttonIndex);
+//        log.info("classNumber : " + classNumber);
+//        log.info("bigCategory : " + categoryBig);
+//        log.info("smallCategory : " + categorySmall);
+//        log.info("classList.js 에서 받아온 데이터 : " + pageNo);
+//        log.info("classList.js 에서 받아온 데이터 : " + pageSize);
 
         // ==================== 수업 찜 목록 삭제하는 로직 ==================== //
-        int isDeleted = classSaveService.deleteClass(classNumber);
+//        int isDeleted = classSaveService.deleteClass(classNumber);
 
-        log.info("수업 찜 목록 추가 성공(1) / 실패(0) : " + isDeleted);
+//        log.info("수업 찜 목록 추가 성공(1) / 실패(0) : " + isDeleted);
 
-        if(isDeleted == 1){ // 수업 찜 목록에 추가 되었다면
-            redirectAttributes.addFlashAttribute("deleteIndex", buttonIndex);
-        }
+//        if(isDeleted == 1){ // 수업 찜 목록에 추가 되었다면
+//            redirectAttributes.addFlashAttribute("deleteIndex", buttonIndex);
+//        }
         // ================================================================= //
 
         // 리다이렉트되는 컨트롤러로 매개변수 전달
-        redirectAttributes.addAttribute("category", categorySmall);
-        redirectAttributes.addAttribute("pageNo", pageNo);
-        redirectAttributes.addAttribute("pageSize", pageSize);
+//        redirectAttributes.addAttribute("category", categorySmall);
+//        redirectAttributes.addAttribute("pageNo", pageNo);
+//        redirectAttributes.addAttribute("pageSize", pageSize);
 
         // 카테고리에 따라 요청할 리다이렉트 주소가 다르다.
-        if(categoryBig.equals("돌봄")){
-            return "redirect:/class/classcare";
-        }else if(categoryBig.equals("예능")){
-            return "redirect:/class/classentertainment";
-        }else if(categoryBig.equals("운동")){
-            return "redirect:/class/classsport";
-        }else{
-            return "redirect:/class/classstudy";
-        }
-
-    }
+//        if(categoryBig.equals("돌봄")){
+//            return "redirect:/class/classcare";
+//        }else if(categoryBig.equals("예능")){
+//            return "redirect:/class/classentertainment";
+//        }else if(categoryBig.equals("운동")){
+//            return "redirect:/class/classsport";
+//        }else{
+//            return "redirect:/class/classstudy";
+//        }
+//    }
 
     //  수업 찜 목록 삭제
     @GetMapping("/deleteFavorite/{classNumber}")

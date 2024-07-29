@@ -1,8 +1,10 @@
 package com.example.idollbom.controller.login;
 
 import com.example.idollbom.domain.dto.logindto.ParentDTO;
+import com.example.idollbom.domain.dto.logindto.ProDTO;
 import com.example.idollbom.domain.vo.ProVO;
 import com.example.idollbom.service.loginservice.ParentService;
+import com.example.idollbom.service.loginservice.ProService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +23,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ParentController {
 
     private final ParentService parentService;
+    private final ProService proService;
+
 //  부모 로그인화면이동
     @GetMapping("/login")
     public String login() {
         return "html/login/loginpage";
 
     }
-//  부모 회원가입화면이동
+//  부모 회원가입 화면이동
     @GetMapping("/signup")
     public String signup() {
         log.info("로그인으로 이동");
@@ -50,6 +54,7 @@ public class ParentController {
         return "redirect:/user/login";
     }
 
+//  ============================= 전문가 관련 컨트롤러 ============================= //
 //  프로 회원가입폼 이동
     @GetMapping("/proSignup")
     public String proSignupForm(ProVO proVO) {
@@ -59,8 +64,11 @@ public class ParentController {
 
 //  프로 회원가입폼 제출
     @PostMapping("/proSignup")
-    public String proSignup() {
+    public String proSignup(ProDTO pro) {
 
+        // DB에 전문가 회원정보 등록
+        proService.savePro(pro);
+        
         return "redirect:/user/login"; // 회원가입 후 로그인 페이지로 리디렉션
     }
 

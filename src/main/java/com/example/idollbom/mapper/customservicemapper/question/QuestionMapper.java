@@ -1,7 +1,7 @@
 package com.example.idollbom.mapper.customservicemapper.question;
 
-import com.example.idollbom.domain.dto.customservice.question.QuestionDTO;
 import com.example.idollbom.domain.dto.customservice.question.QuestionListDTO;
+import com.example.idollbom.domain.vo.QuestionVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -16,6 +16,6 @@ public interface QuestionMapper {
     int countQuestion();
 
     // 문의하기 추가
-    void insertQuestion(QuestionDTO question);
+    void insertQuestion(QuestionVO question);
 }
 

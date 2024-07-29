@@ -86,7 +86,7 @@ h2 {
 }
 
 .question dl dt span {
-    color: #D0272E;
+    color: #000;
     font-family: 'GmarketSansBold';
     margin-right: 20px;
 }
@@ -170,4 +170,26 @@ h2 {
     border: 1px solid #ddd;
 }
 
+/* 문의하기 목록 중 비공개 글에 적용되는 css */
+.question_item > dt.disabled{
+    color: #ccc;
+    pointer-events: none;
+    border: 1px solid #ddd;
+}
 
+/* 문의하기 상태 (답변 중, 답변 완료) 버튼 css */
+.question_item > dt > button{
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.question_item > dt > button:last-of-type{
+    padding: 9px 15px 5px 15px;
+}
+
+/* 문의하기 작성자 css */
+.question_item > dt > span:last-of-type{
+    margin-left: 20px;
+}

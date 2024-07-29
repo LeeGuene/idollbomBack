@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ParentMapper {
      void insert(ParentVO vo);
+
      ParentVO selectOne(String userId);
 
      ParentDTO selectOneDTO(String userId);

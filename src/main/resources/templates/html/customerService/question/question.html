@@ -22,18 +22,30 @@
                 <p><a th:href="@{/ask/write}">문의하기</a></p>
 
                 <!-- 문의하기 전체 목록 -->
-                <dl th:each="question : ${questionList}" th:object="${question}">
+                <dl class="question_item" th:each="question : ${questionList}" th:object="${question}">
                     <!-- 문의하기 제목 -->
-                    <dt th:if="${public}">
+                    <!-- 비공개 글이면 답변을 조회할 수 있도록 css 적용 -->
+                    <dt th:classappend="${!visibleList.contains(question.questionNumber)} ? 'disabled' : ''">
                         <span>Q.</span>
-                        <span th:text="*{questionContent}"></span>
+                        <span
+                                th:text="${!visibleList.contains(question.questionNumber)} ? '비공개 글입니다.' : *{questionContent}"
+                                th:style="${!visibleList.contains(question.questionNumber)} ? 'color: red;' : 'color: black;'"
+                        >
+                        </span>
+                        <!-- 문의하기 상태에 따라 출력되는 글자를 다르게 적용 -->
                         <button th:text="*{questionStatus == '미완'} ? '답변 중' : '답변 완료'"></button>
+                        <button th:text="${!visibleList.contains(question.questionNumber)} ? '비공개' : '공개'"
+                                th:style="${!visibleList.contains(question.questionNumber)} ? 'background-color: red;' : 'background-color: blue;'"
+                        >
+                        </button>
+                        <span th:text="'[ 작성자 : ' + *{parentName} + ' ]'"></span>
                     </dt>
 
                     <!-- 문의 답변 내용 -->
-                    <dd>
+                    <!-- 공개 글이더라도 작성자와 로그인 한 회원이 일치하는 경우에만 문의답변을 조회할 수 있도록 설정 -->
+                    <dd th:if="${parent_info.parentNumber == question.parentNumber} and *{answerContent != null}">
                         <span>A.</span>
-                        <span th:text="*{answerContent}"></span>
+                        <span class="answer_content" th:text="*{answerContent}"></span>
                     </dd>
                 </dl>
 

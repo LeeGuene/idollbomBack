@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Component
 public class QuestionListDTO {
 
+    private Long parentNumber;                  // 작성자 pk
     private String parentName;                  // 작성자 이름
     private Long questionNumber;                // 문의하기 pk
     private String questionTitle;               // 문의하기 제목

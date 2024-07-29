@@ -11,14 +11,22 @@
         WHERE cv.parent_number = #{parentNumber}
     </select>
 
-    <!-- 수업 찜목록 추가  -->
+    <!-- 수업 신청하기 페이지에서 찜 목록 버튼으로 수업 찜 목록 추가 -->
     <insert id="insertClassSave">
         INSERT INTO CLASS_SAVE (CLASS_NUMBER, PARENT_NUMBER)
         VALUES(#{classNumber}, #{parentNumber})
     </insert>
 
+    <!-- 수업 찜목록 삭제 -->
     <delete id="deleteClass">
         delete class_save
         where class_number =#{classNumber}
+    </delete>
+
+    <!-- 수업 신청하기 페이지에서 찜 목록 버튼으로 수업 찜 목록 삭제 -->
+    <delete id="deleteClassSave">
+        delete class_save
+        where class_number = #{classNumber}
+        and parent_number = #{parentNumber}
     </delete>
 </mapper>

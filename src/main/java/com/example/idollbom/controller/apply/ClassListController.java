@@ -181,7 +181,8 @@ public class ClassListController {
         int pageGroupSize = 3;
         int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
         int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
-
+        
+        // 강사님이 작성해주신 코드
 //        if (authentication != null){
 //            for (ClassListDTO classDTO : classListDTO){
 //                if(매퍼.메소드(classDTO.getClassNumber(), parent_info.getParentNumber())){

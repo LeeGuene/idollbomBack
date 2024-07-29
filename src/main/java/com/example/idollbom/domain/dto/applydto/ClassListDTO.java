@@ -1,7 +1,6 @@
 package com.example.idollbom.domain.dto.applydto;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 @Data
 public class ClassListDTO {
@@ -17,4 +16,5 @@ public class ClassListDTO {
     private String classContent;
     private String classRegisterDate;
     private Long reviewCount;
+    private String classLike;
 }

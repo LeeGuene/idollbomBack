@@ -34,10 +34,12 @@ public class ParentMainController {
         String currentUserName = userDetails.getUsername();
 
         ParentVO parent_info = parentMapper.selectOne(currentUserName);
+        log.info("parent_info : " + parent_info);
+        log.info("parent_role : " + parent_info.getRole());
         // 로그인 한 회원(부모)의 정보를 메인 페이지 이동할 때 전달
         model.addAttribute("parent_info", parent_info);
 
-        return "/html/main/index_parents.html";
+        return "/html/main/index_parents";
     }
 
     // 전문가 정보 리스트 페이지로 이동
