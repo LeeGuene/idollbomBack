@@ -7,10 +7,12 @@ import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.service.myPageservice.parentservice.classSaveService;
 import com.example.idollbom.service.myPageservice.parentservice.kidsService;
 import com.example.idollbom.service.myPageservice.parentservice.noteService;
+import com.example.idollbom.service.myPageservice.parentservice.parentInfoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -25,6 +27,7 @@ public class parentMyPageRestController {
     private final noteService noteService;
     private final classSaveService classSaveService;
     private final ParentMapper parentMapper;
+    private final parentInfoService parentInfoService;
 
 //  아이정보 넘기기
     @GetMapping("/kidById")
@@ -57,6 +60,11 @@ public class parentMyPageRestController {
         return noteService.selectOneMail(mailId);
     }
 
+    @PutMapping("/updateImg")
+    public String updateImg(@RequestParam("file") MultipartFile files){
+        log.info(String.valueOf(files));
+        return parentInfoService.updateImg(files);
+    }
 }
 
 

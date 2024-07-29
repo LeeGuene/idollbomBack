@@ -5,11 +5,11 @@ import com.example.idollbom.domain.vo.ParentVO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-
 @Service
 public interface parentInfoService {
     public ParentVO selectParentInfo();
 
     public void update(ParentDTO parentDTO);
+
+    public String updateImg(MultipartFile file);
 }

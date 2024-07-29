@@ -39,4 +39,11 @@
         FROM PARENT_FILE
         WHERE PARENT_FILE_NUMBER = #{parentFileNumber}
     </select>
+
+    <!-- 부모정보 사진update   -->
+    <update id="updatePic">
+        UPDATE parent
+        SET parent_profile_image_url = #{parentProfileImageUrl}
+        WHERE parent_number = #{parentNumber}
+    </update>
 </mapper>
