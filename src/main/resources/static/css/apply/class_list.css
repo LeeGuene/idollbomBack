@@ -1,103 +1,331 @@
 @charset "utf-8";
-body,h1,h2,h3,h4,h5,h6,p,ul,ol,li,dl,dt,dd,button,form,input,textarea,hr,address,b,strong,a,th
-{margin: 0; padding: 0; list-style: none; text-decoration: none; font-style: normal; font-weight: normal; color: #000; box-sizing: border-box;}
-button{cursor: pointer; background: none; border: 0;}
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, button, form, input, textarea, hr, address, b, strong, a, th {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-style: normal;
+    font-weight: normal;
+    color: #000;
+    box-sizing: border-box;
+}
 
-*{font-size: 18px; font-family: 'GmarketSansMedium'; }
+button {
+    cursor: pointer;
+    background: none;
+    border: 0;
+}
+
+* {
+    font-size: 18px;
+    font-family: 'GmarketSansMedium';
+}
 
 @font-face {
     font-family: 'GmarketSansMedium';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
     font-weight: normal;
-    font-style: normal;}
+    font-style: normal;
+}
 
 @font-face {
     font-family: 'GmarketSansBold';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
     font-weight: normal;
-    font-style: normal;}
+    font-style: normal;
+}
 
-#container{padding-top: 100px;}
+#container {
+    padding-top: 100px;
+}
 
 /* class_list */
-h2{font-size: 35px; text-align: center; margin: 100px 0 50px 0;}
-.class_list>p:nth-of-type(1){font-size: 20px; text-align: center; line-height: 150%; color: rgba(0, 0, 0, 0.7); margin-bottom: 100px;}
+h2 {
+    font-size: 35px;
+    text-align: center;
+    margin: 100px 0 50px 0;
+}
 
-.class_list>div:nth-of-type(1){width: 100%; height: 350px;background: url(../../images/class_list_banner.jpg) no-repeat center top; margin-bottom: 200px;}
-.class_list>div:nth-of-type(1) p{ width: 700px; padding: 130px 0px 0 300px; font-size: 40px; text-align: center; color: rgba(0, 0, 0, 0.7);}
+.class_list > p:nth-of-type(1) {
+    font-size: 20px;
+    text-align: center;
+    line-height: 150%;
+    color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 100px;
+}
+
+.class_list > div:nth-of-type(1) {
+    width: 100%;
+    height: 350px;
+    background: url(../../images/class_list_banner.jpg) no-repeat center top;
+    margin-bottom: 200px;
+}
+
+.class_list > div:nth-of-type(1) p {
+    width: 700px;
+    padding: 130px 0px 0 300px;
+    font-size: 40px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.7);
+}
 
 /* 소카테고리 선택 버튼 */
-.class_list>ul{display: flex; width: 1400px; height: 100px; position: absolute; left: 50%; margin: -225px 0 0 -700px;}
-.class_list>ul li{flex: 1; text-align: center; line-height: 100px; background: #fff; border: 1px solid; border-color: rgba(0, 0, 0, 0.2);} 
-.class_list>ul li a{font-size: 25px; color: rgba(0, 0, 0, 0.4); width: 100%; height: 100px;}
-.class_list>ul li:nth-of-type(1) button{color: #048D3B; }
+.class_list > ul {
+    display: flex;
+    width: 1400px;
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    margin: -225px 0 0 -700px;
+}
+
+.class_list > ul li {
+    flex: 1;
+    text-align: center;
+    line-height: 100px;
+    background: #fff;
+    border: 1px solid;
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.class_list > ul li a {
+    font-size: 25px;
+    color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100px;
+}
+
+.class_list > ul li:nth-of-type(1) button {
+    color: #048D3B;
+}
 
 /* 검색 */
-.class_list_search{width: 1400px; margin: 0 auto 100px auto; display: flex; justify-content: space-between;}
-.class_list_search>p{font-size: 25px; color: #626262;}
-.class_list_search>p span{font-size: 25px; font-family: 'GmarketSansBold'; color: #E41F26;}
+.class_list_search {
+    width: 1400px;
+    margin: 0 auto 100px auto;
+    display: flex;
+    justify-content: space-between;
+}
 
-.class_list_search>div{display: flex;}
-.class_list_search>div select{width: 100px; height: 35PX; text-align: left; padding-left: 5px; border: 0; border-bottom: 2px solid #000000; color: #626262; font-size: 20PX; font-family: 'GmarketSansBold'; outline: none;}
-.class_list_search>div form{width: 430px; height: 35px; border-bottom: 2px solid; margin-left: 30px;}
-.class_list_search>div form input:nth-child(1){width: 90%; border: 0; outline: none;}
+.class_list_search > p {
+    font-size: 25px;
+    color: #626262;
+}
+
+.class_list_search > p span {
+    font-size: 25px;
+    font-family: 'GmarketSansBold';
+    color: #E41F26;
+}
+
+.class_list_search > div {
+    display: flex;
+}
+
+.class_list_search > div select {
+    width: 100px;
+    height: 35PX;
+    text-align: left;
+    padding-left: 5px;
+    border: 0;
+    border-bottom: 2px solid #000000;
+    color: #626262;
+    font-size: 20PX;
+    font-family: 'GmarketSansBold';
+    outline: none;
+}
+
+.class_list_search > div form {
+    width: 430px;
+    height: 35px;
+    border-bottom: 2px solid;
+    margin-left: 30px;
+}
+
+.class_list_search > div form input:nth-child(1) {
+    width: 90%;
+    border: 0;
+    outline: none;
+}
 
 /* 테이블 위 바 */
-.class_list>div:nth-of-type(3){width: 1400px; margin: 0 auto; height: 45px; display: flex; background: #048D3B; border-radius: 22px;}
-.class_list>div:nth-of-type(3) p{color: #fff; font-size: 25px; text-align: center;}
-.class_list>div:nth-of-type(3) p:nth-child(1){width: 27%; height: 30px; margin: auto; border-right: 2px solid #fff;}
-.class_list>div:nth-of-type(3) p:nth-child(2){width: 73%; line-height: 45px;}
+.class_list > div:nth-of-type(3) {
+    width: 1400px;
+    margin: 0 auto;
+    height: 45px;
+    display: flex;
+    background: #048D3B;
+    border-radius: 22px;
+}
+
+.class_list > div:nth-of-type(3) p {
+    color: #fff;
+    font-size: 25px;
+    text-align: center;
+}
+
+.class_list > div:nth-of-type(3) p:nth-child(1) {
+    width: 27%;
+    height: 30px;
+    margin: auto;
+    border-right: 2px solid #fff;
+}
+
+.class_list > div:nth-of-type(3) p:nth-child(2) {
+    width: 73%;
+    line-height: 45px;
+}
 
 /* class_list 수업 목록 table */
-.class_list table{width: 1400px; margin: 0 auto; margin-bottom: 100px; border-collapse: collapse;}
-.class_list table tr{border-bottom: 2px solid #D6D6D6; height: 300px;}
+.class_list table {
+    width: 1400px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+    border-collapse: collapse;
+}
+
+.class_list table tr {
+    border-bottom: 2px solid #D6D6D6;
+    height: 300px;
+}
+
 /* table 1,2,3번째 td 넓이 */
-.class_list table td:nth-of-type(1){width: 30%; text-align: center;}
-.class_list table td:nth-of-type(2){width: 55%;}
-.class_list table td:nth-of-type(3){width: 15%; text-align: center;}
+.class_list table td:nth-of-type(1) {
+    width: 30%;
+    text-align: center;
+}
+
+.class_list table td:nth-of-type(2) {
+    width: 55%;
+}
+
+.class_list table td:nth-of-type(3) {
+    width: 15%;
+    text-align: center;
+}
+
 /* 1번째 td부터 스타일 */
-.class_list table td:nth-of-type(1) img{height: 250px; }
-.class_list table td:nth-of-type(2) div:nth-of-type(1){display: flex;}
-.class_list table td:nth-of-type(2) div:nth-of-type(1) img{height: 20px; margin: 0 10px 0 15px;}
-.class_list table td:nth-of-type(2) div:nth-of-type(1) p:nth-of-type(1){font-size: 20px; margin-bottom: 10px;}
-.class_list table td:nth-of-type(2) div:nth-of-type(1) p:nth-of-type(2){font-size: 14px; color: rgba(0, 0, 0, 0.7); margin-top: 3px;}
-.class_list table td:nth-of-type(2)>p:nth-of-type(1){font-size: 25px; margin-bottom: 10px;}
-.class_list table td:nth-of-type(2)>p:nth-of-type(2){color: rgba(0, 0, 0, 0.7); margin-bottom: 20px;}
-.class_list table td:nth-of-type(2)>p:nth-of-type(3){color: rgba(0, 0, 0, 0.7); margin-bottom: 10px;}
-.class_list table td:nth-of-type(2)>p:nth-of-type(4){color: #048D3B;}
-.class_list table td:nth-of-type(3) img{margin:0 0 30px 170px;}
-.class_list table td:nth-of-type(3) a{display: block; width: 200px; height: 70px; line-height: 70px; background-color: #00568B; color: #fff;}
+.class_list table td:nth-of-type(1) img {
+    height: 250px;
+}
+
+.class_list table td:nth-of-type(2) div:nth-of-type(1) {
+    display: flex;
+}
+
+.class_list table td:nth-of-type(2) div:nth-of-type(1) img {
+    height: 20px;
+    margin: 0 10px 0 15px;
+}
+
+.class_list table td:nth-of-type(2) div:nth-of-type(1) p:nth-of-type(1) {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.class_list table td:nth-of-type(2) div:nth-of-type(1) p:nth-of-type(2) {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.7);
+    margin-top: 3px;
+}
+
+.class_list table td:nth-of-type(2) > p:nth-of-type(1) {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.class_list table td:nth-of-type(2) > p:nth-of-type(2) {
+    color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+}
+
+.class_list table td:nth-of-type(2) > p:nth-of-type(3) {
+    color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 10px;
+}
+
+.class_list table td:nth-of-type(2) > p:nth-of-type(4) {
+    color: #048D3B;
+}
+
+.class_list table td:nth-of-type(3) img {
+    margin: 0 0 30px 170px;
+}
+
+/* 자세히 보기(수업 상세보기) 버튼 css */
+.class_list table td:nth-of-type(3) > p > button {
+    display: block;
+    width: 200px;
+    height: 70px;
+    line-height: 70px;
+    background-color: #00568B;
+    color: #fff;
+}
+
+
 
 /* class_list 페이지 버튼 */
-.class_list_btn{width: 300px; height: 40px; margin: 0 auto 200px auto; display: flex;}
-.class_list_btn img{width: 40px;}
-.class_list_btn ul{display: flex; margin: 0 20px;}
-.class_list_btn ul li{ line-height: 33px; margin: 0 20px;}
-.class_list_btn ul button{display: block;  font-size: 25px; width: 25px; height: 40px; color: #C6C6C6;}
-.class_list_btn ul li:nth-child(1) button{color: #048D3B; border-bottom: 3px solid;}
+.class_list_btn {
+    width: 300px;
+    height: 40px;
+    margin: 0 auto 200px auto;
+    display: flex;
+}
+
+.class_list_btn img {
+    width: 40px;
+}
+
+.class_list_btn ul {
+    display: flex;
+    margin: 0 20px;
+}
+
+.class_list_btn ul li {
+    line-height: 33px;
+    margin: 0 20px;
+}
+
+.class_list_btn ul button {
+    display: block;
+    font-size: 25px;
+    width: 25px;
+    height: 40px;
+    color: #C6C6C6;
+}
+
+.class_list_btn ul li:nth-child(1) button {
+    color: #048D3B;
+    border-bottom: 3px solid;
+}
 
 .pagination {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
+
 .pagination .page-item {
     margin: 0 5px;
 }
+
 .pagination .page-item .page-link {
     padding: 8px 16px;
     text-decoration: none;
     color: #4CAF50;
     border: 1px solid #ddd;
 }
+
 .pagination .page-item .page-link:hover {
     background-color: #ddd;
 }
+
 .pagination .page-item.active .page-link {
     background-color: #4CAF50;
     color: white;
     border: 1px solid #4CAF50;
 }
+
 .pagination .page-item.disabled .page-link {
     color: #ccc;
     pointer-events: none;

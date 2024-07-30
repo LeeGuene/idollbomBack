@@ -5,15 +5,16 @@ import com.example.idollbom.domain.dto.recommend.PagedResponse;
 import com.example.idollbom.service.applyservice.ClassListService;
 import com.example.idollbom.service.myPageservice.parentservice.classSaveService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/restList")
+@Slf4j
 public class ClassListRestController {
 
     private final ClassListService classListService;
@@ -33,6 +34,10 @@ public class ClassListRestController {
     @PostMapping
     public ResponseEntity<?> insertClassSave(@RequestParam("classNumber") Long classNumber,
                                              @RequestParam("parentNumber") Long parentNumber){
+
+        log.info("비동기로 뿌려진 데이터에서 넘어온 데이터들 : ");
+        log.info("classNumber : " + classNumber);
+        log.info("parentNumber : " + parentNumber);
 
         // 비회원/ 회원에 따라 화면에 버튼의 유무를 결정
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

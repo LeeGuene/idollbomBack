@@ -38,133 +38,6 @@ document.addEventListener("DOMContentLoaded", function() {
             link.style.color = ""; // 기본 값으로 설정
         });
     }
-    // 찜하기 버튼을 눌렀을 경우 색상이 바뀌면서, 수업 찜 목록 리스트에 추가되도록 실행
-
-    // =============================== 이근 추가 부분 =============================== //
-    // 비동기 아님
-
-    // 수업 찜 추가버튼
-    // let saveBtns = document.querySelectorAll('.fail-btn');
-    // let deleteBtns = document.querySelectorAll('.success-btn');
-    // let classNumber;// 수업 pk
-    // let imageSrc;  // 찜 버튼 src속성
-    // let categoryBig;
-    // let categorySmall = document.querySelector('input[name="category"]');
-    // let pageNo;
-    // let pageSize;
-
-    // for(let index = 0; index < saveBtns.length; index++){
-    // saveBtns[index].addEventListener("click", e=> {
-    //     e.preventDefault();
-    //     categoryBig = document.querySelector('input[name="categoryBig"]');
-    //     classNumber = document.querySelector('input[name="classNumber"]').value;
-    // 수업 찜 버튼을 클릭했을 때, 현재 선택된 pageNo, pageSize를 불러온다.
-    // pageNo = document.querySelector('.pagination > .page-item.active > a').textContent;
-    //
-    // const pageLink = document.querySelector('.pagination > .page-item.active > a');
-    // const pageHref = pageLink.getAttribute("href");
-    // const params = new URLSearchParams(pageHref);
-    // pageSize = params.get("pageSize");
-    //
-    // console.log(typeof pageNo);
-    // console.log(typeof pageSize);
-
-    // 클릭된 버튼요소의 부모의 부모의 자식요소로 접근하여 수업 pk를 가져온다.
-    // imageSrc = e.currentTarget.children[0].src;
-
-
-    // 즐겨찾기 되지 않은 수업이라면
-    //         if (imageSrc.indexOf('pick_n') !== -1) {
-    //
-    //             const form = document.createElement('form');
-    //             const indexInput = document.createElement('input');
-    //             const pageNoInput = document.createElement('input');
-    //             const pageSizeInput = document.createElement('input');
-    //
-    //             pageNoInput.name = 'pageNo';
-    //             pageNoInput.type = 'hidden';
-    //             pageNoInput.value = pageNo;
-    //
-    //             pageSizeInput.name = 'pageSize';
-    //             pageSizeInput.type = 'hidden';
-    //             pageSizeInput.value = pageSize;
-    //
-    //             indexInput.name = 'buttonIndex';
-    //             indexInput.type = 'hidden';
-    //             indexInput.value = index;
-    //
-    //             form.append(categoryBig);
-    //             form.append(categorySmall);
-    //             form.append(pageNoInput);
-    //             form.append(pageSizeInput);
-    //             form.append(indexInput);
-    //
-    //             // console.log(form);
-    //             form.method = 'post';
-    //             form.action = '/ParentMyPage/insertSaveClass/' + classNumber;
-    //             document.body.appendChild(form);
-    //             form.submit();
-    //
-    //         }
-    //     });
-    // }
-
-    // 이미 추가된 찜 목록 버튼들 중 하나를 클릭하면
-    // for(let index = 0; index < deleteBtns.length; index++){
-    //     deleteBtns[index].addEventListener("click", e =>{
-    //         e.preventDefault();
-    //
-    //         categoryBig = document.querySelector('input[name="categoryBig"]');
-    //
-    //         // 수업 찜 버튼을 클릭했을 때, 현재 선택된 pageNo, pageSize를 불러온다.
-    //         pageNo = document.querySelector('.pagination > .page-item.active > a').textContent;
-    //
-    //         const pageLink = document.querySelector('.pagination > .page-item.active > a');
-    //         const pageHref = pageLink.getAttribute("href");
-    //         const params = new URLSearchParams(pageHref);
-    //         pageSize = params.get("pageSize");
-    //
-    //         console.log(typeof pageNo);
-    //         console.log(typeof pageSize);
-    //
-    //         // 클릭된 버튼요소의 부모의 부모의 자식요소로 접근하여 수업 pk를 가져온다.
-    //         imageSrc = e.currentTarget.children[0].src;
-    //
-    //         if (imageSrc.indexOf('pick_y') !== -1) {
-    //             const form = document.createElement('form');
-    //             const indexInput = document.createElement('input');
-    //             const pageNoInput = document.createElement('input');
-    //             const pageSizeInput = document.createElement('input');
-    //
-    //             pageNoInput.name = 'pageNo';
-    //             pageNoInput.type = 'hidden';
-    //             pageNoInput.value = pageNo;
-    //
-    //             pageSizeInput.name = 'pageSize';
-    //             pageSizeInput.type = 'hidden';
-    //             pageSizeInput.value = pageSize;
-    //
-    //             indexInput.name = 'buttonIndex';
-    //             indexInput.type = 'hidden';
-    //             indexInput.value = index;
-    //
-    //             form.append(categoryBig);
-    //             form.append(categorySmall);
-    //             form.append(pageNoInput);
-    //             form.append(pageSizeInput);
-    //             form.append(indexInput);
-    //
-    //             // console.log(form);
-    //             form.method = 'get';
-    //             form.action = '/ParentMyPage/deleteSaveClass/' + classNumber;
-    //             document.body.appendChild(form);
-    //             form.submit();
-    //
-    //         }
-    //
-    //     });
-    // }
-    // =============================== 이근 추가 부분 =============================== //
 
 });
 
@@ -184,8 +57,6 @@ window.onload = function(){
     // 첫 페이지 지정
     getList(1);
 
-    // 수업 찜 목록 추가, 삭제 버튼 비동기 구현
-    // addClassSave();
 }
 
 function getList(page){
@@ -201,12 +72,16 @@ function getList(page){
         },
         success: function (data){
             // 리스트 뿌려주는 함수
+            console.log(data.content);
             renderBoard(data.content)
             Pagination(data)
 
             console.log(data.totalElements);
 
             document.getElementById('totalCount').textContent = data.totalElements
+
+            // 수업 찜 목록 추가/삭제 비동기 구현 메서드
+            addClassSave();
 
         },
         error: function (data){
@@ -226,6 +101,8 @@ function renderBoard(classLists){
 
         let classListRow = `  
                 <tr class="class_item">
+                    <input type="hidden" name="classNumber" value="${classList.classNumber}" />
+                     <input type="hidden" name="proNumber" value="${classList.proNumber}" />
                     <td><img src="/images/${classList.proProfileImageUrl}"></td>
                     <td>
                         <div>
@@ -239,12 +116,13 @@ function renderBoard(classLists){
                         <p>${classList.classRegisterDate}</p>
                     </td>
                     <td>
-                        <!-- 찜하기 버튼 -->
+                        <!-- 찜하기 버튼 --> 
                         <!-- 수업 찜 추가하면 마이 페이지의 찜 목록으로 이동 -->
-                        <button type="submit" class="save-btn"><img th:src="@{/images/class_list_pick_n.png}"></button>
+                        <button type="submit" class="save-btn"><img src="/images/class_list_pick_n.png"></button>
                         <!--자세기 보기를 누르면 수업 상세 페이지로 이동-->
                         <!-- 이근 수정 부분 -->
-                        <p><a href="#">자세히 보기</a></p>
+                        <p><button class="detail-btn" onclick="goClassDetail(event)">자세히 보기</button></p>
+<!--                        <p><a href="@{/class/detail(classNumber=*{classNumber}, proNumber=*{proNumber})}">자세히 보기</a></p>-->
                     </td>
                 </tr>
             `
@@ -304,73 +182,99 @@ function saveKeyword(){
     getList(1)
 }
 
-// function addClassSave(){
-//     let saveBtns = document.querySelectorAll('.save-btn');
-//     console.log(saveBtns);
-//     let classNumber; // 수업 pk
-//     let imageSrc;  // 찜 버튼 src속성
-//     let parentNumber = document.querySelector('input[name="parentNumber"]').value;
-//     const classList = document.querySelectorAll('tbody > .class_item');
-//     console.log(classList);
+function addClassSave(){
+    let saveBtns = document.querySelectorAll('.save-btn');
+    // console.log(saveBtns);
+    let classNumber; // 수업 pk
+    let classItem; // 수업 하나
+    let image;  // 찜 버튼 src속성
+    let parentNumber = document.querySelector('input[name="parentNumber"]').value;
+    // console.log(parentNumber);
+    const classList = document.querySelectorAll('tbody > .class_item');
+    // console.log(classList);
 
-// saveBtns.forEach(saveBtn =>{
-//     saveBtn.addEventListener("click", e=>{
-//         e.preventDefault();
-//         classNumber = e.currentTarget.parentElement.parentElement.children[0].value;
-//         console.log(classNumber);
-//         imageSrc = e.currentTarget.children[0].src;
-//         console.log(imageSrc);
-//
-//         if(imageSrc.indexOf('pick_n') !== -1){
-//             console.log("수업 찜 목록 추가 실행!!");
-//
-//             $.ajax({
-//                 method: 'post',
-//                 url: '/restList',
-//                 data: {
-//                     classNumber : classNumber,
-//                     parentNumber : parentNumber
-//                 },
-//                 success: function(data){
-//                     console.log("수업 찜 목록 추가 성공시 : " + data);
-//                     if(data === 1){
-//                         // 색상이 채워진 이미지로 변경
-//                         imageSrc = '/images/class_list_pick_y.png';
-//                         console.log(imageSrc);
-//                     }
-//
-//                 },
-//                 error: function(data){
-//                     console.log("에러 메세지 : " + data);
-//                 }
-//             });
-//
-//         }else{
-//
-//             $.ajax({
-//                 method: 'delete',
-//                 url: '/restList',
-//                 data: {
-//                     classNumber : classNumber,
-//                     parentNumber : parentNumber
-//                 },
-//                 success: function(data){
-//                     console.log("수업 찜 목록 삭제 성공시 : " + data);
-//                     // 색상이 채워진 이미지로 변경
-//                     if(data === 1){
-//                         imageSrc = '/images/class_list_pick_n.png';
-//                         console.log(imageSrc);
-//                     }
-//
-//                 },
-//                 error: function(data){
-//                     console.log("에러 메세지 : " + data);
-//                 }
-//             });
-//
-//         }
-//
-//     })
-// })
+    saveBtns.forEach(saveBtn =>{
+        saveBtn.addEventListener("click", e=>{
+            e.preventDefault();
+            classItem = e.currentTarget.parentElement.parentElement;
+            classNumber = classItem.querySelector('input[name="classNumber"]').value;
+            // console.log(classNumber);
+            image = e.currentTarget.children[0];
+            console.log(image);
 
-//}
+            if(image.src.indexOf('pick_n') !== -1){
+                console.log("수업 찜 목록 추가 실행!!");
+
+                $.ajax({
+                    method: 'post',
+                    url: '/restList',
+                    data: {
+                        classNumber : classNumber,
+                        parentNumber : parentNumber
+                    },
+                    success: function(data){
+                        console.log("수업 찜 목록 추가 성공시 : " + data);
+                        if(data === 1){
+                            // 색상이 채워진 이미지로 변경
+                            image.src = '/images/class_list_pick_y.png';
+                        }
+
+                    },
+                    error: function(data){
+                        console.log("에러 메세지 : " + data);
+                    }
+                });
+
+            }else{
+
+                $.ajax({
+                    method: 'delete',
+                    url: '/restList',
+                    data: {
+                        classNumber : classNumber,
+                        parentNumber : parentNumber
+                    },
+                    success: function(data){
+                        console.log("수업 찜 목록 삭제 성공시 : " + data);
+                        // 색상이 채워진 이미지로 변경
+                        if(data === 1){
+                            image.src = '/images/class_list_pick_n.png';
+                        }
+
+                    },
+                    error: function(data){
+                        console.log("에러 메세지 : " + data);
+                    }
+                });
+
+            }
+
+        })
+    })
+}
+
+// 수업 상세보기 페이지로 이동하는 메서드
+function goClassDetail(e){
+    console.log("자세히 보기 버튼 클릭!!");
+    console.log(e.currentTarget);
+
+    const form = document.createElement('form');
+    const classItem = e.currentTarget.parentElement.parentElement.parentElement;
+    const classNumber = classItem.querySelector('input[name="classNumber"]');
+    const proNumber = classItem.querySelector('input[name="proNumber"]');
+
+    console.log(classNumber);
+    console.log(proNumber);
+
+    form.method = 'get';
+    form.action = '/class/detail';
+    form.append(classNumber);
+    form.append(proNumber);
+
+    document.body.append(form);
+
+    form.submit();
+
+
+
+}
