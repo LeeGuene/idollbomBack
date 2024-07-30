@@ -26,6 +26,9 @@ public class ClassListRestController {
                                                                     @RequestParam String searchWord) {
         System.out.println(category);
 
+        System.out.println(searchType);
+        System.out.println(searchWord);
+
         return ResponseEntity.ok(classListService.searchClassList(searchType, searchWord, category, pageNo, pageSize));
     }
 

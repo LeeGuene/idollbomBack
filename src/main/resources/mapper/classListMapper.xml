@@ -74,21 +74,23 @@
                 p.PRO_ADDRESS,
                 c.CLASS_REGISTER_DATE
                     FROM PRO p
-                    JOIN CLASS c ON p.PRO_NUMBER = c.PRO_NUMBER AND c.CLASS_CATEGORY_SMALL = #{category}
-                    WHERE
-                    <if test="searchWord != null">
-                        <choose>
-                            <when test="searchType == 'title'">
-                                c.CLASS_NAME LIKE '%' || #{searchWord} || '%'
-                            </when>
-                            <when test="searchType == 'content'">
-                                c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
-                            </when>
-                            <when test="searchType == 'all'">
-                                c.CLASS_NAME LIKE '%' || #{searchWord} || '%' OR c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
-                            </when>
-                        </choose>
-                    </if>
+                    JOIN CLASS c ON p.PRO_NUMBER = c.PRO_NUMBER
+                    <where>
+                        AND c.CLASS_CATEGORY_SMALL = #{category}
+                        <if test="searchWord != null">
+                            <choose>
+                                <when test="searchType == 'title'">
+                                   and c.CLASS_NAME LIKE '%' || #{searchWord} || '%'
+                                </when>
+                                <when test="searchType == 'content'">
+                                    and c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
+                                </when>
+                                <when test="searchType == 'all'">
+                                    and c.CLASS_NAME LIKE '%' || #{searchWord} || '%' OR c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
+                                </when>
+                            </choose>
+                        </if>
+                    </where>
                     ) c
                 WHERE rownum &lt;= #{endRow}
                 )
@@ -99,24 +101,20 @@
     <!-- 검색결과에 따른 갯수를 가져오는 select -->
     <select id="countClasses">
         SELECT COUNT(*)
-        FROM CLASS c
-        JOIN PRO p ON p.PRO_NUMBER = c.PRO_NUMBER
-        LEFT JOIN REVIEW r ON r.CLASS_NUMBER = c.CLASS_NUMBER
-        and c.CLASS_CATEGORY_SMALL = #{category}
-        <where>
-            <if test="searchWord != null">
-                <choose>
-                    <when test="searchType == 'title'">
-                        AND c.CLASS_NAME LIKE '%' || #{searchWord} || '%'
-                    </when>
-                    <when test="searchType == 'content'">
-                        AND c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
-                    </when>
-                    <when test="searchType == 'all'">
-                        AND (c.CLASS_NAME LIKE '%' || #{searchWord} || '%' OR c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%')
-                    </when>
-                </choose>
-            </if>
-        </where>
+        FROM CLASS
+        WHERE CLASS_CATEGORY_SMALL = #{category}
+        <if test="searchWord != null">
+            <choose>
+                <when test="searchType == 'title'">
+                    AND CLASS_NAME LIKE '%' || #{searchWord} || '%'
+                </when>
+                <when test="searchType == 'content'">
+                    AND CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
+                </when>
+                <when test="searchType == 'all'">
+                    AND CLASS_NAME LIKE '%' || #{searchWord} || '%' OR CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
+                </when>
+            </choose>
+        </if>
     </select>
 </mapper>

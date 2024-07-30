@@ -179,11 +179,13 @@ window.onload = function(){
     searchWord = $('input[name="searchWord"]').val()
     category = $('input[name="category"]').val()
 
+    console.log(category)
+
     // 첫 페이지 지정
     getList(1);
     
     // 수업 찜 목록 추가, 삭제 버튼 비동기 구현
-    addClassSave();
+    // addClassSave();
 }
 
 function getList(page){
@@ -199,6 +201,7 @@ function getList(page){
         },
         success: function (data){
             // 리스트 뿌려주는 함수
+            renderBoard(data.content)
             Pagination(data)
 
         },
@@ -207,6 +210,42 @@ function getList(page){
             console.log(category)
             console.log(data)
         }
+    })
+}
+
+// 리스트 데이터를 받아서 렌더링 하는 함수
+function renderBoard(classLists){
+    const boardContainer = $('.table tbody')
+    boardContainer.empty()
+
+    classLists.forEach(function (classList){
+
+        let classListRow = `  
+                <tr class="class_item">
+                    <td><img src="/images/${classList.proProfileImageUrl}"></td>
+                    <td>
+                        <div>
+                            <p>${classList.proName}</p>
+                            <!--리뷰 점수와 갯수만 보여주자-->
+                            <p>(${classList.reviewCount})</p>
+                        </div>
+                        <p>${classList.className}</p>
+                        <p>${classList.classIntro}</p>
+                        <p>${classList.proAddress}</p>
+                        <p>${classList.classRegisterDate}</p>
+                    </td>
+                    <td>
+                        <!-- 찜하기 버튼 -->
+                        <!-- 수업 찜 추가하면 마이 페이지의 찜 목록으로 이동 -->
+                        <button type="submit" class="save-btn"><img th:src="@{/images/class_list_pick_n.png}"></button>
+                        <!--자세기 보기를 누르면 수업 상세 페이지로 이동-->
+                        <!-- 이근 수정 부분 -->
+                        <p><a href="#">자세히 보기</a></p>
+                    </td>
+                </tr>
+            `
+
+        boardContainer.append(classListRow)
     })
 }
 
@@ -261,14 +300,14 @@ function saveKeyword(){
     getList(1)
 }
 
-function addClassSave(){
-    let saveBtns = document.querySelectorAll('.save-btn');
-    console.log(saveBtns);
-    let classNumber; // 수업 pk
-    let imageSrc;  // 찜 버튼 src속성
-    let parentNumber = document.querySelector('input[name="parentNumber"]').value;
-    const classList = document.querySelectorAll('tbody > .class_item');
-    console.log(classList);
+// function addClassSave(){
+//     let saveBtns = document.querySelectorAll('.save-btn');
+//     console.log(saveBtns);
+//     let classNumber; // 수업 pk
+//     let imageSrc;  // 찜 버튼 src속성
+//     let parentNumber = document.querySelector('input[name="parentNumber"]').value;
+//     const classList = document.querySelectorAll('tbody > .class_item');
+//     console.log(classList);
 
     // saveBtns.forEach(saveBtn =>{
     //     saveBtn.addEventListener("click", e=>{
@@ -330,7 +369,7 @@ function addClassSave(){
     //     })
     // })
 
-}
+//}
 
 
 
