@@ -25,8 +25,6 @@ public class parentMyPageRestController {
 
     private final kidsService kidsService;
     private final noteService noteService;
-    private final classSaveService classSaveService;
-    private final ParentMapper parentMapper;
     private final parentInfoService parentInfoService;
 
 //  아이정보 넘기기
@@ -60,10 +58,17 @@ public class parentMyPageRestController {
         return noteService.selectOneMail(mailId);
     }
 
+//  내정보 이미지 업데이트
     @PutMapping("/updateImg")
     public String updateImg(@RequestParam("file") MultipartFile files){
         log.info(String.valueOf(files));
         return parentInfoService.updateImg(files);
+    }
+
+//   내정보 비밀번호 업데이트
+    @PutMapping("/updatePassword")
+    public void updatePassword(@RequestParam("password") String password){
+        parentInfoService.updatePassword(password);
     }
 }
 

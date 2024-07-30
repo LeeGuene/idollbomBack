@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class ParentDTO {
-
     private String parentEmail;
     private String parentPassword;
     private String parentName;
@@ -14,4 +13,5 @@ public class ParentDTO {
     private String parentProfileImageUrl;
     private Long parentReportCount;
     private String role;
+    private Long parentNumber;
 }

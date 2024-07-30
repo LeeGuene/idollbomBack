@@ -32,16 +32,23 @@ function test() {
         alert("현재 비밀번호와 같습니다");
         return false;
     } else {
-        var newPassword = document.getElementById('hiddenPassword');
-        newPassword.value = p2;
-        console.log(p2);
-
-
-        const btnSubmitModal=document.querySelector('.regist-btn');
-        btnSubmitModal.addEventListener("click", ()=>{
-            modal.style.display="none";
+        const btnSubmitModal = document.querySelector('.regist-btn');
+        btnSubmitModal.addEventListener("click", () => {
+            modal.style.display = "none";
         });
-        alert("성공적으로 수정되었습니다.");
+
+        $.ajax({
+            url: '/ParentMyPageRest/updatePassword',
+            type: 'PUT',
+            data: { password: p2 },
+            success: function(response) {
+                alert("비밀번호가 업데이트 되었습니다");
+                console.log(response);
+            },
+            error: function(err) {
+                alert("비밀번호 업데이트에 실패했습니다");
+            }
+        });
     }
     document.getElementById('childName').value = '';
     document.getElementById('presentNew').value = '';
