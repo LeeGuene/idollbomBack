@@ -122,7 +122,6 @@ function renderBoard(classLists){
                         <!--자세기 보기를 누르면 수업 상세 페이지로 이동-->
                         <!-- 이근 수정 부분 -->
                         <p><button class="detail-btn" onclick="goClassDetail(event)">자세히 보기</button></p>
-<!--                        <p><a href="@{/class/detail(classNumber=*{classNumber}, proNumber=*{proNumber})}">자세히 보기</a></p>-->
                     </td>
                 </tr>
             `
@@ -182,6 +181,7 @@ function saveKeyword(){
     getList(1)
 }
 
+// 수업 찜 목록 추가/삭제 비동기 구현
 function addClassSave(){
     let saveBtns = document.querySelectorAll('.save-btn');
     // console.log(saveBtns);

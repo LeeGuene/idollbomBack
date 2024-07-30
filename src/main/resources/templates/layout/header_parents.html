@@ -16,7 +16,8 @@
                 <ul class="gnb">
                     <li>
                         <a th:href="@{/parentmain}">부모님</a>
-                        <ul>
+                        <!-- 부모가 로그인 한 것이 아니라면 화면에 표시 X -->
+                        <ul th:if="${role == 'parent'}">
                             <li><a th:href="@{/match}">매칭</a></li>
                         </ul>
                     </li>

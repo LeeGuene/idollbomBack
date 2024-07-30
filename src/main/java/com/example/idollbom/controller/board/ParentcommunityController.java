@@ -2,7 +2,6 @@ package com.example.idollbom.controller.board;
 
 import com.example.idollbom.domain.dto.boarddto.CommunityDTO;
 import com.example.idollbom.domain.dto.boarddto.CommunityDetailDTO;
-import com.example.idollbom.domain.dto.boarddto.CommunityListDTO;
 import com.example.idollbom.domain.dto.boarddto.ParentFileDTO;
 import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
 import com.example.idollbom.domain.vo.ParentVO;
@@ -13,13 +12,11 @@ import com.example.idollbom.service.boardservice.ParentReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.security.SecureRandom;
 import java.util.List;
 
 @Controller
@@ -37,20 +34,25 @@ public class ParentcommunityController {
     public String community(Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String currentUserName = userDetails.getUsername();
 
-        // 현재 로그인이 되어있는지
-        // 만약, 전문가로 로그인이 되어있다면 게시판 보는 것을 막을 수 있음
-        CustomUserDTO p = ((CustomUserDTO) authentication.getPrincipal());
-        String userRole = p.getRole();
+        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
+            // 현재 로그인이 되어있는지
+            // 만약, 전문가로 로그인이 되어있다면 게시판 보는 것을 막을 수 있음
+            CustomUserDTO p = ((CustomUserDTO) authentication.getPrincipal());
+            String parentId = p.getEmail();
+            String userRole = p.getRole();
 
-        System.out.println(userRole);
-        model.addAttribute("userRole", userRole);
+            ParentVO parent = parentMapper.selectOne(parentId);
 
+            System.out.println(userRole);
+            model.addAttribute("userRole", userRole);
 
-        ParentVO parent_info = parentMapper.selectOne(currentUserName);
-        model.addAttribute("parent_info", parent_info);
+            model.addAttribute("role", parent.getRole());
+            model.addAttribute("parentNumber", parent.getParentNumber());
+        }else{
+            model.addAttribute("parentName", "Guest");
+            model.addAttribute("role", "Guest");
+        }
 
         return "html/board/parent/community_parent";
     }
