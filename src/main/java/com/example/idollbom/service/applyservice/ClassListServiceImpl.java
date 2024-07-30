@@ -36,19 +36,13 @@ public class ClassListServiceImpl implements ClassListService {
         int totalPages = 0;
 
         if(searchType.isEmpty() || searchWord.isEmpty()){
-            System.out.println(".......");
             totalBoards = classListMapper.classCount(category);
         }
         else{
-            System.out.println(";;;;;;;;;;;;;;;;;");
             totalBoards = classListMapper.countClasses(category, searchType, searchWord);
         }
 
         totalPages = (int) Math.ceil((double) totalBoards / pageSize);
-        System.out.println("------ service -----");
-        System.out.println(searchType);
-        System.out.println(searchWord);
-        System.out.println(category);
         List<ClassListDTO> classLisDTO = classListMapper.searchClassList(searchWord, searchType, category, startRow, endRow);
 
         return new PagedResponse<>(classLisDTO, page, totalPages, pageSize, totalBoards);

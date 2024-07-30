@@ -70,35 +70,6 @@ public class RegisterFormServiceImpl implements RegisterFormService {
 
     @Override
     public void saveFile(Long classNumber, MultipartFile file) {
-//        String imgName = file.getOriginalFilename();
-//        String imgUrl = UUID.randomUUID().toString().replaceAll("-", "") + "_" + imgName;
-//
-//        System.out.println(imgUrl);
-//
-//        try {
-//            // 수업 썸네일 저장 경로
-//            Path directoryPath = Paths.get("src/main/resources/static/backImage/class/");
-//            if (!Files.exists(directoryPath)) {
-//                Files.createDirectories(directoryPath); // 폴더가 없으면 생성
-//            }
-//
-//            // 파일 저장
-//            Path filePath = directoryPath.resolve(imgUrl);
-//            Files.copy(file.getInputStream(), filePath);
-//
-//            // 이미지 URL은 상대 경로로 설정
-//            String imageUrl = "/backImage/class/" + imgUrl;
-//
-//
-//            ClassImgDTO fileDTO = new ClassImgDTO();
-//            fileDTO.setClassNumber(classNumber);
-//            fileDTO.setImageFileUrl(imageUrl);
-//
-//            registerFormMapper.imageInsert(fileDTO); // 파일 정보 저장
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         String imgName = file.getOriginalFilename();
 
         if (imgName == null || imgName.trim().isEmpty()) {
@@ -128,6 +99,7 @@ public class RegisterFormServiceImpl implements RegisterFormService {
             Path filePath = directoryPath.resolve(imgName);
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
+            // url 지정
             String imageUrl = "/backImage/class/" + imgName;
 
             ClassImgDTO fileDTO = new ClassImgDTO();
