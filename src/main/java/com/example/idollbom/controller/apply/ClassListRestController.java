@@ -30,7 +30,7 @@ public class ClassListRestController {
         return ResponseEntity.ok(classListService.searchClassList(searchType, searchWord, category, pageNo, pageSize));
     }
 
-    // 찜 목록 추가/삭제 비동기 구현
+    // 찜 목록 추가 비동기 구현
     @PostMapping
     public ResponseEntity<?> insertClassSave(@RequestParam("classNumber") Long classNumber,
                                              @RequestParam("parentNumber") Long parentNumber){
@@ -50,7 +50,8 @@ public class ClassListRestController {
 
         return ResponseEntity.ok().build();
     }
-
+    
+    // 찜 목록 삭제 비동기 구현
     @DeleteMapping
     public ResponseEntity<?> deleteClassSave(@RequestParam("classNumber") Long classNumber,
                                              @RequestParam("parentNumber") Long parentNumber){
