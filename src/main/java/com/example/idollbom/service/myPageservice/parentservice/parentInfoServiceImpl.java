@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Console;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -49,11 +50,14 @@ public class parentInfoServiceImpl implements parentInfoService {
 //      parent VO 찾아서 아이디 찾기
         ParentVO parent = parentMapper.selectOne(currentUserName);
 
+        parentDTO.setParentNumber(parent.getParentNumber());
         parentDTO.setParentEmail(parent.getParentEmail());
+        parentDTO.setParentPassword(parent.getParentPassword());
+        parentDTO.setParentProfileImageUrl(parent.getParentProfileImageUrl());
         parentDTO.setParentReportCount(parent.getParentReportCount());
+        log.info(parentDTO.getParentAddress());
+        log.info(parentDTO.getParentName());
         parentMapper.updateInfo(ParentVO.toEntity(parentDTO));
-
-
     }
 
     @Override

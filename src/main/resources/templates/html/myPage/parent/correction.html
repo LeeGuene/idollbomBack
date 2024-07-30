@@ -72,7 +72,7 @@
                 </div>
                 <!-- 내정보수정 -->
                 <div class="mainbox">
-                    <form  method="post" th:action="@{/ParentMyPage/updateMyInfo}" class="reset-form" enctype="multipart/form-data" th:object="${parentInfo}">
+                    <form  method="post" th:action="@{/ParentMyPage/updateMyInfo}" class="reset-form"  th:object="${parentInfo}">
 
                         <input type="hidden" id="hiddenPassword" th:field="*{password}">
                         <div class="reset">
@@ -114,8 +114,7 @@
                         </div>
                         <div class="submit">
                             <!-- 내 정보를 수정하면 어느 페이지로 이동해야 되나?? -->
-
-                                <button class="submit-button" type="submit">제출</button>
+                            <button class="submit-button" type="submit">제출</button>
 
                         </div>
                     </form>
