@@ -4,7 +4,7 @@
 <mapper namespace="com.example.idollbom.mapper.loginmapper.ProMapper">
     <!-- 프로 정보를 가져오기 위함 -->
       <select id="selectPro">
-          select *from pro
+          select * from pro
           where pro_email = #{proEmail}
       </select>
      <!-- 회원가입 -->

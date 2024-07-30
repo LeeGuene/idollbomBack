@@ -4,10 +4,15 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" th:href="@{/css/parent/prolist.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}" />
     <title>전문가 리스트</title>
 </head>
 
 <body>
+
+    <!-- 헤더 -->
+    <div th:replace="~{/layout/header_parents :: header_parents}"></div>
+
     <div id="container">
         <div class="notice">
             <h2>전문가</h2>

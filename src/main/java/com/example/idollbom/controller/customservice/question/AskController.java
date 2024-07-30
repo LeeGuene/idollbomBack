@@ -2,6 +2,7 @@ package com.example.idollbom.controller.customservice.question;
 
 import com.example.idollbom.domain.dto.customservice.question.QuestionDTO;
 import com.example.idollbom.domain.dto.customservice.question.QuestionListDTO;
+import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
 import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.service.customserviceservice.question.QuestionService;
@@ -9,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,10 +33,20 @@ public class AskController {
                       Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String currentUserName = userDetails.getUsername();
 
-        ParentVO parent_info = parentMapper.selectOne(currentUserName);
+        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
+            CustomUserDTO parent_info = ((CustomUserDTO) authentication.getPrincipal());
+            String parentId = parent_info.getEmail();
+
+            ParentVO parent = parentMapper.selectOne(parentId);
+
+//            model.addAttribute("parentName", parent.getParentName());
+            model.addAttribute("role", parent.getRole());
+            model.addAttribute("parentNumber", parent.getParentNumber());
+        }else{
+            model.addAttribute("parentName", "Guest");
+            model.addAttribute("role", "Guest");
+        }
 
         int totalQuestions = questionService.countQuestion();
         int totalPages = (int) Math.ceil((double) totalQuestions / pageSize);
@@ -57,7 +67,6 @@ public class AskController {
         int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
         int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
 
-        model.addAttribute("parent_info", parent_info);
         model.addAttribute("questionList", questionList);
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("pageSize", pageSize);
@@ -73,12 +82,21 @@ public class AskController {
     public String goWriteForm(Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String currentUserName = userDetails.getUsername();
 
-        ParentVO parent_info = parentMapper.selectOne(currentUserName);
+        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
+            CustomUserDTO parent_info = ((CustomUserDTO) authentication.getPrincipal());
+            String parentId = parent_info.getEmail();
 
-        model.addAttribute("parent_info", parent_info);
+            ParentVO parent = parentMapper.selectOne(parentId);
+
+            model.addAttribute("parentName", parent.getParentName());
+            model.addAttribute("role", parent.getRole());
+            model.addAttribute("parentNumber", parent.getParentNumber());
+        }else{
+            model.addAttribute("parentName", "Guest");
+            model.addAttribute("role", "Guest");
+        }
+
         model.addAttribute("question", new QuestionDTO());
         return "/html/customerService/question/inqueryBoardForm";
     }

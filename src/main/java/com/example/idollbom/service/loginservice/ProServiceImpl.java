@@ -21,11 +21,11 @@ public class ProServiceImpl implements ProService {
 
     // 전문가 회원가입 서비스
     @Override
-    public void savePro(ProDTO proDTO) {
+    public int savePro(ProDTO proDTO) {
         // 비밀번호 암호화
         proDTO.setProPassword(bCryptPasswordEncoder.encode(proDTO.getProPassword()));
 
         ProVO pro = ProVO.toEntity(proDTO);
-        proMapper.insert(pro);
+        return proMapper.insert(pro);
     }
 }

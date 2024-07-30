@@ -32,7 +32,7 @@
                         돌봄과 배움을 함께, 우리아이 단짝쌤 찾기 <br>
                         아이에게 필요한 모든것을 추천합니다.
                     </p>
-                    <a class="login" th:href="@{/match}" th:if="${parent_info.role == 'parent'}" sec:authorize="isAuthenticated()">자세히 보기<span>+</span></a>
+                    <a class="login" th:href="@{/match}" sec:authorize="isAuthenticated()">자세히 보기<span>+</span></a>
                     <a class="check" sec:authorize="!isAuthenticated()">자세히 보기<span>+</span></a>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                         <p><b>위치</b>서울특별시 마포구 마포대로 122 1층</p>
                         <p><b>이용 연령</b>4세 ~ 13세(일반인 이용가능)</p>
                         <p><b>이용 시간</b>평일 9:00 ~ 19:00</p>
-                        <p><a href="https://map.naver.com/v5/entry/place/1783319321?placePath=%2Fticket&c=15,0,0,0,dh">키즈존 예약하기</a></p>
+                        <p><a href="https://map.naver.com/v5/entry/place/1783319321?placePath=%2Fticket&c=15,0,0,0,dh" target="_blank">키즈존 예약하기</a></p>
                     </div>
                 </li>
                 <li>
@@ -74,7 +74,7 @@
                         <p><b>위치</b>서울특별시 강남구 역삼로 172 2층</p>
                         <p><b>이용 연령</b>4세 ~ 13세(일반인 이용가능)</p>
                         <p><b>이용 시간</b>평일 9:00 ~ 19:00</p>
-                        <p><a href="https://map.naver.com/v5/entry/place/1035617695?placePath=%2Fhome">키즈존 예약하기</a></p>
+                        <p><a href="https://map.naver.com/v5/entry/place/1035617695?placePath=%2Fhome" target="_blank">키즈존 예약하기</a></p>
                     </div>
                 </li>
             </ul>
