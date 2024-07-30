@@ -1,4 +1,5 @@
 package com.example.idollbom.controller.myPage;
+
 import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
 import com.example.idollbom.domain.dto.prodto.proReportDTO;
 import com.example.idollbom.domain.vo.ProPostVO;

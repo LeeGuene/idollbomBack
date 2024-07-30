@@ -4,42 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/layout/header.css">
-    <link rel="stylesheet" href="/css/layout/footer.css">
-    <link rel="stylesheet" href="/css/myPage/pro/propage_hate.css">
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/myPage/pro/propage_hate.css}">
     <title>전문가 신고목록 페이지</title>
 </head>
 
 <body>
     <!-- 프로 메인 네비바 -->
-    <header id="header">
-        <div class="header_wrap">
-            <h1><a href="../../html/main/index_pro.html"><img src="../../images/logo.png" alt="IDOLL봄"></a></h1>
-
-            <nav>
-                <ul class="gnb">
-                    <li>
-                        <a href="#">수업등록</a>
-                    </li>
-                    <li>
-                        <a href="#">아이찾기</a>
-                    </li>
-                    <li>
-                        <a href="#">신청하기</a>
-                    </li>
-                    <li>
-                        <a href="#">공지사항</a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="side">
-                <p><button><img src="../../images/Alarm.png" alt="알림"></button></p>
-                <p><a href="#">마이페이지</a></p>
-                <p><a href="#">로그인 /</a></p>
-                <p><a href="#">회원가입</a></p>
-            </div>
-        </div>
-    </header>
+    <div th:replace="~{/layout/header_pro :: header_pro}"></div>
 
     <div class="container">
         <div class="inincontainer">
@@ -112,41 +85,8 @@
     </script>
 
     <!-- footer -->
-    <footer id="footer">
-        <div class="footer_wrap">
-            <img src="../../images/footer_logo.png" alt="IDOLL봄">
+    <div th:replace="~{/layout/footer :: footer}"></div>
 
-            <div>
-                <div>
-                    <p>사업자등록번호 779-81-00425</p>
-                    <p>통신판매업신고 2021-서울강남04707</p>
-                </div>
-                <address><b>본사</b> : 서울특별시 강남구 테헤란로 152 강남파이낸스센터빌딩 40층 자란다</address>
-                <div>
-                    <p>(주)자란다 대표 김성환</p>
-                    <p>개인정보보호책임자 김택주</p>
-                </div>
-            </div>
-
-            <div>
-                <ul>
-                    <li><a href="#">이용약관</a></li>
-                    <li><a href="#">개인정보처리방침</a></li>
-                    <li><a href="#">고객지원</a></li>
-                    <li><a href="#">운영관리방침</a></li>
-                    <li><a href="#">이메일주소</a></li>
-                </ul>
-                <ul>
-                    <li><a href="https://blog.naver.com/jaranblog" target="_blank"><img
-                                src="../../images/footer_social_blog.png" alt="블로그 바로가기"></a></li>
-                    <li><a href="https://www.instagram.com/jaranda__official" target="_blank"><img
-                                src="../../images/footer_social_insta.png" alt="인스타그램 바로가기"></a></li>
-                    <li><a href="https://www.youtube.com/channel/UCTXkxn1OlVvljxEe-hbd3Vg" target="_blank"><img
-                                src="../../images/footer_social_youtube.png" alt="유튜브 바로가기"></a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
 </body>
 
 </html>

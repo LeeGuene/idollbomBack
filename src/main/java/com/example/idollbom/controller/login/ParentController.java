@@ -2,7 +2,7 @@ package com.example.idollbom.controller.login;
 
 import com.example.idollbom.domain.dto.logindto.ParentDTO;
 import com.example.idollbom.domain.dto.logindto.ProDTO;
-import com.example.idollbom.domain.vo.ProVO;
+import com.example.idollbom.mapper.loginmapper.ProMapper;
 import com.example.idollbom.service.loginservice.ParentService;
 import com.example.idollbom.service.loginservice.ProService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ public class ParentController {
 
     private final ParentService parentService;
     private final ProService proService;
+    private final ProMapper proMapper;
 
 //  부모 로그인화면이동
     @GetMapping("/login")
@@ -57,17 +59,15 @@ public class ParentController {
 //  ============================= 전문가 관련 컨트롤러 ============================= //
 //  프로 회원가입폼 이동
     @GetMapping("/proSignup")
-    public String proSignupForm(ProVO proVO) {
-
+    public String proSignupForm(Model model) {
+        model.addAttribute("pro", new ProDTO());
         return "html/login/proRegisterPage"; // 프로 회원가입 페이지
     }
 
 //  프로 회원가입폼 제출
     @PostMapping("/proSignup")
-    public String proSignup(ProDTO pro) {
-
-        // DB에 전문가 회원정보 등록
-        proService.savePro(pro);
+    public String proSignup(ProDTO proDTO) {
+        proService.savePro(proDTO);
         
         return "redirect:/user/login"; // 회원가입 후 로그인 페이지로 리디렉션
     }

@@ -57,6 +57,7 @@
         <table>
             <tbody>
             <!-- 실제로는 반복돌릴 리스트 보기 편하게 다 붙여놓음 -->
+            <input type="hidden" name="parentNumber" th:if="${role == 'parent'}" th:value="${parentNumber}" />
             <tr th:each="classList : ${classLists}" th:object="${classList}">
                 <input type="hidden" th:value="*{classCategoryBig}" name="categoryBig" />
                 <input name="classNumber" type="hidden" th:value="*{classNumber}" />

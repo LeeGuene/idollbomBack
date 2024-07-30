@@ -11,5 +11,5 @@ public interface ProService {
     ProVO selectPro(String proId);
 
     // 전문가 회원가입 서비스
-    void savePro(ProDTO proDTO);
+    int savePro(ProDTO proDTO);
 }

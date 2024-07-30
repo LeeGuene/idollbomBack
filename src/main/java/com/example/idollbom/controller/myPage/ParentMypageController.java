@@ -12,9 +12,6 @@ import com.example.idollbom.service.applyservice.ClassListService;
 import com.example.idollbom.service.myPageservice.parentservice.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -47,13 +44,6 @@ public class ParentMypageController {
 //  kid 페이지로 이동
     @GetMapping("/kids")
     public String getKids(Model model){
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String currentUserName = userDetails.getUsername();
-
-        ParentVO parent_info = parentMapper.selectOne(currentUserName);
-        model.addAttribute("parent_info", parent_info);
 
         List<kidVO> kids = kidsService.selectKidsList();
         model.addAttribute("kid", new kidDTO());
@@ -138,13 +128,6 @@ public class ParentMypageController {
 //    쪽지 목록으로 이동
     @GetMapping("/myNote")
     public String selectMyNoteList(Model model){
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String currentUserName = userDetails.getUsername();
-
-        ParentVO parent_info = parentMapper.selectOne(currentUserName);
-        model.addAttribute("parent_info", parent_info);
 
         List<mailDTO> noteList = noteService.selectAllMyNote();
         model.addAttribute("myNotes", noteList);

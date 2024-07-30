@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ProMapper {
 
     // 전문가 회원가입
-    void insert(ProVO proVO);
+    int insert(ProVO proVO);
 
     // 프로 pk 가져오기
     ProVO selectPro(String proId);

@@ -1,5 +1,6 @@
 package com.example.idollbom.controller.main;
 
+import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
 import com.example.idollbom.domain.dto.parentdto.ProListDTO;
 import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
@@ -8,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,21 +23,26 @@ import java.util.List;
 @Slf4j
 public class ParentMainController {
 
-    private final ParentMapper parentMapper;
     private final ProDetailService proDetailService;
+    private final ParentMapper parentMapper;
 
     //   부모 메인페이지로 이동
     @GetMapping
     public String parentmain(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String currentUserName = userDetails.getUsername();
 
-        ParentVO parent_info = parentMapper.selectOne(currentUserName);
-        log.info("parent_info : " + parent_info);
-        log.info("parent_role : " + parent_info.getRole());
-        // 로그인 한 회원(부모)의 정보를 메인 페이지 이동할 때 전달
-        model.addAttribute("parent_info", parent_info);
+        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
+            CustomUserDTO parent_info = ((CustomUserDTO) authentication.getPrincipal());
+            String parentId = parent_info.getEmail();
+
+            ParentVO parent = parentMapper.selectOne(parentId);
+
+            model.addAttribute("parentName", parent.getParentName());
+            model.addAttribute("role", parent.getRole());
+        }else{
+            model.addAttribute("parentName", "Guest");
+            model.addAttribute("role", "Guest");
+        }
 
         return "/html/main/index_parents";
     }

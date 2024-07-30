@@ -69,11 +69,12 @@ public class SecurityConfig {
             ParentDTO parentDTO = parentMapper.selectOneDTO(email);
             ProDetailDTO proDetailDTO = proDetailMapper.selectOneDTO(email);
             System.out.println(parentDTO);
+
             if (parentDTO != null) {
                 System.out.println("부모");
                 return new CustomUserDTO(parentDTO.getParentEmail(), parentDTO.getParentPassword(), parentDTO.getRole());
             }
-            else {
+            else{
                 System.out.println("프로");
                 return new CustomUserDTO(proDetailDTO.getProEmail(), proDetailDTO.getProPassword(), proDetailDTO.getRole());
             }
@@ -102,7 +103,7 @@ public class SecurityConfig {
             if(userDTO.getRole().equals("parent")){
                 response.sendRedirect("/parentmain");
             }
-            else {
+            else{
                 response.sendRedirect("/promain");
             }
 

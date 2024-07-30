@@ -36,26 +36,26 @@
         <div class="line"></div>
     </div>
     <!-- 폼로그인 -->
-    <form id="signupForm" onsubmit="return validateForm()">
+    <form id="signupForm" method="post" th:object="${pro}" th:action="@{/user/proSignup}">
 
-        <input type="text" id="username" placeholder="이름" required>
+        <input type="text" th:field="*{proName}" id="username" placeholder="이름" required>
 
-        <input type="text" id="nickname" placeholder="별명" required>
+        <input type="text" th:field="*{proNickName}" id="nickname" placeholder="별명" required>
 
         <!-- 틀리면 나올 경고 -->
         <div class="error-message" style="display: none;" id="nicknameError">
             <img src="../../images/warning.png" alt="Warning" class="error-icon"> 이미 가입된 닉네임입니다
         </div>
 
-        <input type="text" id="phoneNumber" placeholder="전화번호" required>
+        <input type="text" th:field="*{proPhoneNumber}" id="phoneNumber" placeholder="전화번호" required>
 
-        <input type="text" id="" name="proAddress" placeholder="주소" required>
+        <input type="text" th:field="*{proAddress}" name="proAddress" placeholder="주소" required>
 
         <div class="form">
-            <input type="email" id="email" placeholder="Email" required>
+            <input type="email" th:field="*{proEmail}" id="email" placeholder="Email" required>
         </div>
 
-        <input type="password" id="password" placeholder="비밀번호" required>
+        <input type="password" th:field="*{proPassword}" id="password" placeholder="비밀번호" required>
 
         <!-- 틀리면 나올 경고 -->
         <div class="error-message" style="display: none;" id="passwordError">
@@ -68,10 +68,10 @@
             <img src="../../images/warning.png" alt="Warning" class="error-icon"> 비밀번호가 일치하지 않습니다
         </div>
 
-        <input type="file" class="file" name="proFile" />
+        <input type="file" class="file" th:field="*{proFile}" name="proFile" />
 
         <div class="form">
-            <textarea class="myprofile" type="email" id="proIntro" name="proIntro" placeholder="Email" required></textarea>
+            <textarea class="myprofile" th:field="*{proIntro}" type="email" id="proIntro" name="proIntro" placeholder="Email" required></textarea>
         </div>
 
         <!-- 서비스 이용약관 -->

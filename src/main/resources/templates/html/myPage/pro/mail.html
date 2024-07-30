@@ -4,18 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/myPage/parent/mypage_payment.css">
-    <link rel="stylesheet" href="/css/layout/header.css">
-    <link rel="stylesheet" href="/css/layout/footer.css">
-    <link rel="stylesheet" href="/css/modal/modalstyle.css" />
-    <link rel="stylesheet" href="/css/modal/letter.css" />
-    <script src="/js/mail.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/myPage/parent/mypage_payment.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/modal/modalstyle.css}">
+    <link rel="stylesheet" th:href="@{/css/modal/letter.css}">
     <title>iDollbom_마이페이지</title>
 </head>
 
 <body>
-<div id="header" th:replace="~{/layout/header_parents :: header_parents}"></div>
+<div th:replace="~{/layout/header_pro :: header_pro}"></div>
 
 <div class="container">
         <div class="inincontainer">
@@ -115,8 +113,11 @@
         </div>
     </div>
 
-<div id="footer" th:replace="~{/layout/footer :: footer}"></div>
+    <!-- 푸터 -->
+    <div id="footer" th:replace="~{/layout/footer :: footer}"></div>
 
+    <script th:src="@{/js/mail.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 
 </html>

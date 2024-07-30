@@ -60,9 +60,11 @@
                     <p><a th:href="@{/user/signup}">회원가입</a></p>
                 </div>
 
-                <div sec:authorize="isAuthenticated()" class="login-status">
-                    <!--                    <span th:text="${parent_info.parentName}"></span>-->
-                    <!--                    <span style="font-size: 16px;">님</span>-->
+                <div th:if="${role == 'parent'}" sec:authorize="isAuthenticated()" class="login-status">
+                    <div th:if="${parentName != null}">
+                        <span th:text="${parentName}"></span>
+                        <span style="font-size: 16px;">님</span>
+                    </div>
                     <!-- 로그인 기본페이지와 동일하게 마이페이지도 아이등록 페이지로 이동 -->
                     <p><a th:href="@{/ParentMyPage/kids}">마이페이지</a></p>
                     <p><a th:href="@{/user/logout}">로그아웃</a></p>

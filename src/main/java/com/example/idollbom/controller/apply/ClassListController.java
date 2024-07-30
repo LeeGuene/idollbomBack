@@ -2,6 +2,7 @@ package com.example.idollbom.controller.apply;
 
 import com.example.idollbom.domain.dto.applydto.ClassDetailDTO;
 import com.example.idollbom.domain.dto.applydto.ClassListDTO;
+import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
 import com.example.idollbom.domain.dto.parentdto.ReservationInfoDTO;
 import com.example.idollbom.domain.dto.parentdto.ReviewOneListDTO;
 import com.example.idollbom.domain.vo.ParentVO;
@@ -13,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,11 +45,21 @@ public class ClassListController {
                             Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String currentUserName = userDetails.getUsername();
 
-        ParentVO parent_info = parentMapper.selectOne(currentUserName);
-        model.addAttribute("parent_info", parent_info);
+        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
+            CustomUserDTO parent_info = ((CustomUserDTO) authentication.getPrincipal());
+            String parentId = parent_info.getEmail();
+
+            ParentVO parent = parentMapper.selectOne(parentId);
+
+            // model.addAttribute("parentName", parent.getParentName());
+            model.addAttribute("role", parent.getRole());
+            model.addAttribute("parentNumber", parent.getParentNumber());
+        }else{
+            model.addAttribute("parentName", "Guest");
+            model.addAttribute("role", "Guest");
+        }
+
         model.addAttribute("category", category);
 
         // 페이징 처리를 위한 코드
@@ -88,11 +98,20 @@ public class ClassListController {
                              Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String currentUserName = userDetails.getUsername();
 
-        ParentVO parent_info = parentMapper.selectOne(currentUserName);
-        model.addAttribute("parent_info", parent_info);
+        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
+            CustomUserDTO parent_info = ((CustomUserDTO) authentication.getPrincipal());
+            String parentId = parent_info.getEmail();
+
+            ParentVO parent = parentMapper.selectOne(parentId);
+
+            // model.addAttribute("parentName", parent.getParentName());
+            model.addAttribute("role", parent.getRole());
+            model.addAttribute("parentNumber", parent.getParentNumber());
+        }else{
+            model.addAttribute("parentName", "Guest");
+            model.addAttribute("role", "Guest");
+        }
 
         // 페이징 처리를 위한 코드
         int count = classListService.classCount(category);
@@ -127,11 +146,20 @@ public class ClassListController {
                                      Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String currentUserName = userDetails.getUsername();
 
-        ParentVO parent_info = parentMapper.selectOne(currentUserName);
-        model.addAttribute("parent_info", parent_info);
+        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
+            CustomUserDTO parent_info = ((CustomUserDTO) authentication.getPrincipal());
+            String parentId = parent_info.getEmail();
+
+            ParentVO parent = parentMapper.selectOne(parentId);
+
+            // model.addAttribute("parentName", parent.getParentName());
+            model.addAttribute("role", parent.getRole());
+            model.addAttribute("parentNumber", parent.getParentNumber());
+        }else{
+            model.addAttribute("parentName", "Guest");
+            model.addAttribute("role", "Guest");
+        }
 
         // 페이징 처리를 위한 코드
         int count = classListService.classCount(category);
@@ -166,11 +194,20 @@ public class ClassListController {
                              Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String currentUserName = userDetails.getUsername();
 
-        ParentVO parent_info = parentMapper.selectOne(currentUserName);
-        model.addAttribute("parent_info", parent_info);
+        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
+            CustomUserDTO parent_info = ((CustomUserDTO) authentication.getPrincipal());
+            String parentId = parent_info.getEmail();
+
+            ParentVO parent = parentMapper.selectOne(parentId);
+
+            // model.addAttribute("parentName", parent.getParentName());
+            model.addAttribute("role", parent.getRole());
+            model.addAttribute("parentNumber", parent.getParentNumber());
+        }else{
+            model.addAttribute("parentName", "Guest");
+            model.addAttribute("role", "Guest");
+        }
 
         // 페이징 처리를 위한 코드
         int count = classListService.classCount(category);
@@ -255,10 +292,21 @@ public class ClassListController {
         log.info("수업 pk : " + classNumber);
         log.info("전문가 pk : " + proNumber);
 
-        // 부모 정보를 받아오는 코드
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String currentUserName = userDetails.getUsername();
+
+        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
+            CustomUserDTO parent_info = ((CustomUserDTO) authentication.getPrincipal());
+            String parentId = parent_info.getEmail();
+
+            ParentVO parent = parentMapper.selectOne(parentId);
+
+            // model.addAttribute("parentName", parent.getParentName());
+            model.addAttribute("role", parent.getRole());
+            model.addAttribute("parentNumber", parent.getParentNumber());
+        }else{
+            model.addAttribute("parentName", "Guest");
+            model.addAttribute("role", "Guest");
+        }
         
         // 특정 수업에 대한 상세정보
         ClassDetailDTO class_info = classDetailService.findClassDetail(proNumber, classNumber);
@@ -269,13 +317,9 @@ public class ClassListController {
         // 특정 수업에 대한 모든 예약날짜 및 시간정보
         List<ReservationInfoDTO> reservation_infos = classDetailService.findReservation(classNumber);
 
-        // 수업 찜 목록 추가할 때, parentNumber 필요!!
-        ParentVO parent_info = parentMapper.selectOne(currentUserName); // 수업 상세보기로 넘어갈 때부터 parentNumber 를 넘기기 위한 조치
-
         model.addAttribute("class_info", class_info);
         model.addAttribute("reservation_infos", reservation_infos);
         model.addAttribute("reviews", reviews);
-        model.addAttribute("parent_info", parent_info);
 
         return "/html/parent/studyDetail";
     }

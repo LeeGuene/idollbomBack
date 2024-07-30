@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
             window.location.href = '/user/login';
         })
     }
-    
+
     // 추천 전문가 리스트 페이징 처리
 
     const pageSize = 3; // 한 페이지 내에 보여줄 추천 전문가 목록개수

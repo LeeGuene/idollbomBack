@@ -49,6 +49,12 @@ window.onload = function(){
 
 };
 
+function goBack() {
+    // js에서 제공해주는 이전 페이지로 가는 메소드
+    // button은 꼭 type="button" 선언 필수!
+    window.history.back();
+}
+
 // ===========================================================
 // 더 보기 버튼 및 내용에 관련된 js.
 

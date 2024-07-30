@@ -1,22 +1,11 @@
 package com.example.idollbom.controller.pro;
 
-import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
 import com.example.idollbom.domain.dto.prodto.ClassDTO;
-import com.example.idollbom.domain.dto.prodto.ClassImgDTO;
 import com.example.idollbom.domain.dto.prodto.ReservationDateDTO;
-import com.example.idollbom.domain.dto.prodto.ReservationTimeDTO;
-import com.example.idollbom.domain.vo.ParentVO;
-import com.example.idollbom.domain.vo.ProVO;
-import com.example.idollbom.domain.vo.classVO;
-import com.example.idollbom.service.loginservice.ProService;
 import com.example.idollbom.service.proService.RegisterFormService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cglib.core.Local;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
