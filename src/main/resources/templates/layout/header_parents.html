@@ -55,6 +55,11 @@
                     </button>
                 </p>
 
+                <div sec:authorize="!isAuthenticated()" class="logout-status">
+                    <p><a th:href="@{/user/login}">로그인</a></p>
+                    <p><a th:href="@{/user/signup}">회원가입</a></p>
+                </div>
+
                 <div sec:authorize="isAuthenticated()" class="login-status">
                     <!--                    <span th:text="${parent_info.parentName}"></span>-->
                     <!--                    <span style="font-size: 16px;">님</span>-->
