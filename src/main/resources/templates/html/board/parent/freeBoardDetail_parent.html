@@ -21,7 +21,7 @@
 
     <!-- 목록 보기 버튼 -->
     <div class="list-btn-wrap">
-      <a href="/parentcommunity">목록 보기</a>
+      <button type="button" onclick="back()">목록 보기</button>
     <!-- 신고하기 버튼은 작성자와 다를때만 표시 -->
       <a class="report-btn btn-open-modal" style="display: flex" th:if="${parentId!=community.parentNumber}">신고하기</a>
     </div>
@@ -130,11 +130,7 @@
             <h3 id="title">신고하기</h3>
             <button type="button" id="close-btn"><img class="x-btn" src="../../images/closebtn.png" alt="닫기버튼"></button>
           </div>
-<!--          <div class="mb-3">-->
-<!--            &lt;!&ndash; 게시글의 번호를 가져올까? 아니면 제목 &ndash;&gt;-->
-<!--            <label for="writeForm" class="form-label">게시글</label>-->
-<!--            <input type="text" id="writeForm" class="form-control" readonly>-->
-<!--          </div>-->
+
           <div class="mb-3">
             <label for="reportType" class="form-label">신고유형</label>
             <select id="reportType" class="selectBox form-control" name="reportType">

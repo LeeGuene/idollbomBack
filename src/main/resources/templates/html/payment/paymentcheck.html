@@ -31,7 +31,8 @@
                     <div class="class-image-section">
                         <label class="image-label">수업이미지</label>
                         <!-- 이미지를 제대로 못 불러옴 -->
-                        <img class="image" th:src="@{/backImage/class/{filename}(filename=${proInfo.imageFileUrl})}" alt="수업이미지">
+<!--                        <img class="image" th:src="@{/backImage/class/{filename}(filename=${proInfo.imageFileUrl})}" alt="수업이미지">-->
+                        <img class="image" th:src="@{${proInfo.imageFileUrl}}" alt="수업이미지">
                     </div>
 
                     <!-- 실제 선택한 수업 가져오는 div -->

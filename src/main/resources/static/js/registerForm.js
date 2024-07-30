@@ -99,12 +99,16 @@ function addToSelectedList() {
   // "====시간 선택====" 옵션이 선택된 경우, 선택을 초기화
   if (selectedOption.value === "none") {
     alert('시간을 선택해주세요.')
-    currentTimes = ""
-    return;
+    return
   }
 
+  // 중복 값이 존재한다면
   if (currentTimes !== "") {
-    currentTimes += ", ";
+    if(currentTimes.includes(selectedText)){
+      alert('이미 선택된 시간입니다.')
+      return
+    }
+    currentTimes += ", "
   }
 
   currentTimes += selectedText
@@ -117,56 +121,7 @@ function addToSelectedList() {
   hiddenInput.value = selectedTimesSpan.textContent;
 
   // 폼에 숨은 입력 필드 추가
-  document.getElementById("register-form").append(hiddenInput);
-}
-
-// 유효성 체크
-function validateForm() {
-  let isValid = true;
-  let message = "";
-
-  console.log('실행되니?')
-
-  // 수업 제목
-  const title = document.getElementById('title').value
-  const classTitle = document.getElementById('classTitle')
-  if (!title) {
-    classTitle.style.display="block"
-    isValid = false;
-  }
-
-  // 수업 소개
-  const intro = document.getElementById('intro').value;
-  const classIntro = document.getElementById('classIntro')
-  if (!intro) {
-    classIntro.style.display="block"
-    isValid = false;
-  }
-
-  // // 날짜 선택
-  // // 당일로 한다면, 등록하지 못하게 막기
-  // const dateSelect = document.getElementById('dateSelect').value;
-  // if (!dateSelect) {
-  //   message += "날짜를 선택해 주세요.\n";
-  //   isValid = false;
-  // }
-  //
-  // // 시간 선택
-  // const timeSelect = document.getElementById('timeSelect').value;
-  // if (timeSelect === "none") {
-  //   message += "시간을 선택해 주세요.\n";
-  //   isValid = false;
-  // }
-  //
-  // // 수업 사진
-  // const upload = document.getElementById('upload').files.length;
-  // if (upload === 0) {
-  //   message += "수업 사진을 업로드해 주세요.\n";
-  //   isValid = false;
-  // }
-
-  // 값이 true여야만 실행
-  return isValid
+  document.getElementById("registerForm").append(hiddenInput);
 }
 
 // 날짜 관련 js

@@ -47,7 +47,7 @@ public class UploadController {
             Files.copy(file.getInputStream(), filePath);
 
             // 저장된 파일의 URL 반환
-            String fileUrl = "/uploads/" + datePath + "/summernote/" + storedFileName;
+            String fileUrl = "/backImage/uploads/" + datePath + "/summernote/" + storedFileName;
             return ResponseEntity.ok(fileUrl);
 
         } catch (IOException e) {

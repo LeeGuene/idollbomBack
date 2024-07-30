@@ -70,7 +70,7 @@ button {
   column-gap: 20px;
 }
 
-.list-btn-wrap > a{
+.list-btn-wrap > a, button{
   padding: 10px 20px;
   border-radius: 10px;
   background-color: #014772ab;
@@ -78,7 +78,7 @@ button {
   transition: 0.3s;
 }
 
-.list-btn-wrap a:hover{
+.list-btn-wrap button:hover{
   background-color: #014772;
 }
 
