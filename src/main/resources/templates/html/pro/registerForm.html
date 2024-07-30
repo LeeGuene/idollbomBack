@@ -27,6 +27,8 @@
         <label for="title">수업 제목</label>
         <input id="title" type="text" name="className" placeholder="수업 제목">
       </div>
+      <!-- 이 부분은 유효성 검사 시 나오는 부분
+        버튼을 눌러야지만 나오고, 버튼을 눌러야지만 사라짐 -->
       <div class="extra-info">
         <p id="classTitle">수업 제목을 입력해주세요.</p>
       </div>
@@ -107,7 +109,9 @@
               <div class="year-select"></div>
               <input id="dateSelect" type="date" name="resDate">
             </nav>
-
+            <div class="extra-info">
+              <p id="classDate">당일 등록은 불가합니다.</p>
+            </div>
             <nav>
               <!-- 시간 선택 -->
               <!-- 시간 출력공간 -->
@@ -127,6 +131,9 @@
               <!-- 여러 선택된 시간  -->
               <p>선택된 시간: <span id="selectedTime"></span></p>
             </nav>
+            <div class="extra-info">
+              <p id="classDay">날짜를 선택해주세요.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -137,6 +144,9 @@
         <label for="upload" class="form-label"></label>
         <input type="file" class="file-input" id="upload" name="imageFileUrl">
       </div>
+      <div class="extra-info">
+        <p id="classImage">수업 이미지를 추가해주세요.</p>
+      </div>
 
       <!-- 썸머노트 -->
       <div class="summer-note">
@@ -144,11 +154,17 @@
         <label for="classContent"></label>
         <textarea class="form-control" id="classContent" placeholder="Content" name="classContent"></textarea>
       </div>
+      <div class="extra-info">
+        <p id="content">수업 내용을 입력해주세요.</p>
+      </div>
 
       <!-- 결제금액 영역 -->
       <div class="payment-wrap">
         <label for="payment-amount">결제 금액</label>
         <input id="payment-amount" type="text" name="classPaymentAccount">원
+      </div>
+      <div class="extra-info">
+        <p id="classMoney">결제 금액을 입력해주세요.</p>
       </div>
 
       <!-- 수업 등록 버튼 -->
