@@ -203,6 +203,9 @@ function getList(page){
             // 리스트 뿌려주는 함수
             renderBoard(data.content)
             Pagination(data)
+            console.log(data.totalElements);
+
+            document.getElementById('totalCount').textContent = data.totalElements
 
         },
         error: function (data){

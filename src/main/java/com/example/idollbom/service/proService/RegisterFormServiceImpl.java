@@ -16,9 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -72,31 +70,71 @@ public class RegisterFormServiceImpl implements RegisterFormService {
 
     @Override
     public void saveFile(Long classNumber, MultipartFile file) {
+//        String imgName = file.getOriginalFilename();
+//        String imgUrl = UUID.randomUUID().toString().replaceAll("-", "") + "_" + imgName;
+//
+//        System.out.println(imgUrl);
+//
+//        try {
+//            // 수업 썸네일 저장 경로
+//            Path directoryPath = Paths.get("src/main/resources/static/backImage/class/");
+//            if (!Files.exists(directoryPath)) {
+//                Files.createDirectories(directoryPath); // 폴더가 없으면 생성
+//            }
+//
+//            // 파일 저장
+//            Path filePath = directoryPath.resolve(imgUrl);
+//            Files.copy(file.getInputStream(), filePath);
+//
+//            // 이미지 URL은 상대 경로로 설정
+//            String imageUrl = "/backImage/class/" + imgUrl;
+//
+//
+//            ClassImgDTO fileDTO = new ClassImgDTO();
+//            fileDTO.setClassNumber(classNumber);
+//            fileDTO.setImageFileUrl(imageUrl);
+//
+//            registerFormMapper.imageInsert(fileDTO); // 파일 정보 저장
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         String imgName = file.getOriginalFilename();
-        String imgUrl = UUID.randomUUID().toString().replaceAll("-", "") + "_" + imgName;
 
-        System.out.println(imgUrl);
+        if (imgName == null || imgName.trim().isEmpty()) {
+            System.out.println("파일 이름이 유효하지 않습니다.");
+            return;
+        }
+
+        // 파일 이름에서 경로 구분 기호를 안전하게 처리
+        imgName = imgName.replaceAll("[/:*?\"<>|]", "_");
+
+        // 파일 이름 유효성 검사
+        try {
+            Paths.get(imgName); // 파일 이름이 유효한지 검사
+        } catch (InvalidPathException e) {
+            System.out.println("유효하지 않은 파일 이름입니다: " + imgName);
+            return;
+        }
+
+        System.out.println(imgName);
 
         try {
-            // 수업 썸네일 저장 경로
             Path directoryPath = Paths.get("src/main/resources/static/backImage/class/");
             if (!Files.exists(directoryPath)) {
-                Files.createDirectories(directoryPath); // 폴더가 없으면 생성
+                Files.createDirectories(directoryPath);
             }
 
-            // 파일 저장
-            Path filePath = directoryPath.resolve(imgUrl);
-            Files.copy(file.getInputStream(), filePath);
+            Path filePath = directoryPath.resolve(imgName);
+            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-            // 이미지 URL은 상대 경로로 설정
-            String imageUrl = "/backImage/class/" + imgUrl;
-
+            String imageUrl = "/backImage/class/" + imgName;
 
             ClassImgDTO fileDTO = new ClassImgDTO();
             fileDTO.setClassNumber(classNumber);
             fileDTO.setImageFileUrl(imageUrl);
 
-            registerFormMapper.imageInsert(fileDTO); // 파일 정보 저장
+            registerFormMapper.imageInsert(fileDTO);
 
         } catch (IOException e) {
             e.printStackTrace();

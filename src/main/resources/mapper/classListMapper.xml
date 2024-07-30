@@ -50,52 +50,50 @@
     <select id="searchClassList">
         SELECT *
         FROM (
-        SELECT rownum AS rnum,
-            PRO_NUMBER,
-            PRO_PROFILE_IMAGE_URL,
-            PRO_NAME,
-            CLASS_NUMBER,
-            CLASS_NAME,
-            CLASS_INTRO,
-            CLASS_CONTENT,
-            CLASS_CATEGORY_SMALL,
-            PRO_ADDRESS,
-            TO_CHAR(CLASS_REGISTER_DATE, 'YYYY"년 "MM"월 "DD"일') AS CLASS_REGISTER_DATE,
-            COALESCE((SELECT COUNT(CLASS_NUMBER) FROM REVIEW WHERE CLASS_NUMBER = c.CLASS_NUMBER), 0) AS REVIEW_COUNT
-                FROM (
+            SELECT rownum AS rnum,
+                PRO_NUMBER,
+                PRO_PROFILE_IMAGE_URL,
+                PRO_NAME,
+                CLASS_NUMBER,
+                CLASS_NAME,
+                CLASS_INTRO,
+                CLASS_CONTENT,
+                CLASS_CATEGORY_SMALL,
+                PRO_ADDRESS,
+                TO_CHAR(CLASS_REGISTER_DATE, 'YYYY"년 "MM"월 "DD"일') AS CLASS_REGISTER_DATE,
+                COALESCE((SELECT COUNT(CLASS_NUMBER) FROM REVIEW WHERE CLASS_NUMBER = c.CLASS_NUMBER), 0) AS REVIEW_COUNT
+            FROM (
                 SELECT p.PRO_NUMBER,
-                p.PRO_PROFILE_IMAGE_URL,
-                p.PRO_NAME,
-                c.CLASS_NUMBER,
-                c.CLASS_NAME,
-                c.CLASS_INTRO,
-                c.CLASS_CONTENT,
-                c.CLASS_CATEGORY_SMALL,
-                p.PRO_ADDRESS,
-                c.CLASS_REGISTER_DATE
-                    FROM PRO p
-                    JOIN CLASS c ON p.PRO_NUMBER = c.PRO_NUMBER
-                    <where>
-                        AND c.CLASS_CATEGORY_SMALL = #{category}
-                        <if test="searchWord != null">
-                            <choose>
-                                <when test="searchType == 'title'">
-                                   and c.CLASS_NAME LIKE '%' || #{searchWord} || '%'
-                                </when>
-                                <when test="searchType == 'content'">
-                                    and c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
-                                </when>
-                                <when test="searchType == 'all'">
-                                    and c.CLASS_NAME LIKE '%' || #{searchWord} || '%' OR c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
-                                </when>
-                            </choose>
-                        </if>
-                    </where>
-                    ) c
-                WHERE rownum &lt;= #{endRow}
-                )
-            WHERE rnum &gt; #{startRow}
-            ORDER BY CLASS_REGISTER_DATE DESC
+                    p.PRO_PROFILE_IMAGE_URL,
+                    p.PRO_NAME,
+                    c.CLASS_NUMBER,
+                    c.CLASS_NAME,
+                    c.CLASS_INTRO,
+                    c.CLASS_CONTENT,
+                    c.CLASS_CATEGORY_SMALL,
+                    p.PRO_ADDRESS,
+                    c.CLASS_REGISTER_DATE
+                FROM PRO p
+                JOIN CLASS c ON p.PRO_NUMBER = c.PRO_NUMBER
+                WHERE c.CLASS_CATEGORY_SMALL = #{category}
+                <if test="searchWord != null and searchWord != ''">
+                    <choose>
+                        <when test="searchType == 'title'">
+                           and c.CLASS_NAME LIKE '%' || #{searchWord} || '%'
+                        </when>
+                        <when test="searchType == 'content'">
+                            and c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
+                        </when>
+                        <when test="searchType == 'all'">
+                            and (c.CLASS_NAME LIKE '%' || #{searchWord} || '%' OR c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%')
+                        </when>
+                    </choose>
+                </if>
+                ) c
+            WHERE rownum &lt;= #{endRow}
+            )
+        WHERE rnum &gt; #{startRow}
+        ORDER BY CLASS_REGISTER_DATE DESC
     </select>
 
     <!-- 검색결과에 따른 갯수를 가져오는 select -->

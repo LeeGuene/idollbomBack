@@ -262,5 +262,9 @@ document.addEventListener("DOMContentLoaded", function() {
         postContainer.style.display = "none"; // 게시글 숨기기
         // 또는 다른 스타일을 적용할 수도 있습니다.
     }
-});
+})
 
+// 목록보기 함수
+function back(){
+    window.history.back();
+}

@@ -99,12 +99,15 @@ function addToSelectedList() {
   // "====시간 선택====" 옵션이 선택된 경우, 선택을 초기화
   if (selectedOption.value === "none") {
     alert('시간을 선택해주세요.')
-    currentTimes = ""
-    return;
+    return
   }
 
   if (currentTimes !== "") {
-    currentTimes += ", ";
+    if(currentTimes.includes(selectedText)){
+      alert('이미 선택된 시간입니다.')
+      return
+    }
+    currentTimes += ", "
   }
 
   currentTimes += selectedText
@@ -117,7 +120,7 @@ function addToSelectedList() {
   hiddenInput.value = selectedTimesSpan.textContent;
 
   // 폼에 숨은 입력 필드 추가
-  document.getElementById("register-form").append(hiddenInput);
+  document.getElementById("registerForm").append(hiddenInput);
 }
 
 // 유효성 체크
