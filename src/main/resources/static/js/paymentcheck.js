@@ -59,7 +59,15 @@ async function kakaoPay() {
 
 // 결제하기 버튼을 누르면 함수 실행
 $(".kakaoPay").on("click", function () {
-    kakaoPay();
+    let selectBox = document.getElementById('childLists')
+
+    // 만약 아이를 선택하지 않았다면
+    if(selectBox.value === 'none'){
+        alert('아이를 선택해주세요.')
+    }
+    else{
+        kakaoPay();
+    }
 })
 
 // 뒤로가기 버튼을 눌렀을 때

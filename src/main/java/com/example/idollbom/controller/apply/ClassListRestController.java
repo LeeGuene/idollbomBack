@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,7 +25,6 @@ public class ClassListRestController {
                                                                     @RequestParam(value = "category", defaultValue = "등/하원") String category,
                                                                     @RequestParam String searchType,
                                                                     @RequestParam String searchWord) {
-        System.out.println(category);
 
         return ResponseEntity.ok(classListService.searchClassList(searchType, searchWord, category, pageNo, pageSize));
     }
