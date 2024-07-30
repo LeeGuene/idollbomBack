@@ -14,11 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
+@Data
 //spring 시큐리티의 userDeatils 권한을 지정받아
 //해당 객채를 사용하여 사용자의 인증 및 권한을 처리할 수 있다.
 public class ParentVO implements UserDetails {
 
-    private Long parentNumber;
     private String parentEmail;
     private String parentPassword;
     private String parentName;
@@ -28,9 +28,11 @@ public class ParentVO implements UserDetails {
     private String parentProfileImageUrl;
     private Long parentReportCount;
     private String role;
+    private Long parentNumber;
 
     public static ParentVO toEntity(ParentDTO parentDTO){
         return ParentVO.builder()
+                .parentNumber(parentDTO.getParentNumber())
                 .parentEmail(parentDTO.getParentEmail())
                 .parentPassword(parentDTO.getParentPassword())
                 .parentName(parentDTO.getParentName())

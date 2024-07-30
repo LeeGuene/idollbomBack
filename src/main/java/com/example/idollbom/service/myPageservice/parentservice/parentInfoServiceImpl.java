@@ -10,9 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Console;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,6 +28,7 @@ public class parentInfoServiceImpl implements parentInfoService {
     private final ParentMapper parentMapper;
     private final infoMapper infoMapper;
     private final ParentFileMapper parentFileMapper;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     @Override
     public ParentVO selectParentInfo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -47,11 +50,14 @@ public class parentInfoServiceImpl implements parentInfoService {
 //      parent VO 찾아서 아이디 찾기
         ParentVO parent = parentMapper.selectOne(currentUserName);
 
+        parentDTO.setParentNumber(parent.getParentNumber());
         parentDTO.setParentEmail(parent.getParentEmail());
+        parentDTO.setParentPassword(parent.getParentPassword());
+        parentDTO.setParentProfileImageUrl(parent.getParentProfileImageUrl());
         parentDTO.setParentReportCount(parent.getParentReportCount());
+        log.info(parentDTO.getParentAddress());
+        log.info(parentDTO.getParentName());
         parentMapper.updateInfo(ParentVO.toEntity(parentDTO));
-
-
     }
 
     @Override
@@ -92,4 +98,16 @@ public class parentInfoServiceImpl implements parentInfoService {
             }
         return null;
     }
+
+    @Override
+    public void updatePassword(String password) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String currentUserName = userDetails.getUsername();
+
+//      parent VO 찾아서 아이디 찾기
+        ParentVO parent = parentMapper.selectOne(currentUserName);
+
+        infoMapper.updatePassword(parent.getParentNumber(),bCryptPasswordEncoder.encode(password));
     }
+}

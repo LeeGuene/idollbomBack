@@ -12,4 +12,6 @@ public interface parentInfoService {
     public void update(ParentDTO parentDTO);
 
     public String updateImg(MultipartFile file);
+
+    public void updatePassword(String password);
 }
