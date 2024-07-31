@@ -28,7 +28,7 @@
 .study-title {
   display: flex;
   align-items: center;
-  margin-bottom: 20px; /* 입력 필드와 그 아래 요소 사이의 간격을 조정 */
+  /*margin-bottom: 10px; !* 입력 필드와 그 아래 요소 사이의 간격을 조정 *!*/
 }
 
 .study-title > label {
@@ -47,11 +47,13 @@
 
 .extra-info {
   display: none;
-  margin-top: 10px; /* <p> 태그와 이전 요소 사이의 간격을 조정 */
   margin-left: 150px;
-  color: red;
 }
 
+.extra-info p{
+  color: red;
+  font-size: 15px;
+}
 .study-title{}
 /* =============================================== */
 /* 카테고리(대) css */
