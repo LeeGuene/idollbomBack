@@ -12,6 +12,7 @@ import com.example.idollbom.service.boardservice.ParentReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,19 @@ public class ParentcommunityController {
     // 게시글 목록 띄어주는 컨트롤러
     @GetMapping()
     public String community(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
+            CustomUserDTO p = ((CustomUserDTO) authentication.getPrincipal());
+
+            String userRole = p.getRole();
+            String parentId = p.getEmail();
+
+            System.out.println(userRole);
+            model.addAttribute("userRole", userRole);
+            ParentVO parent = parentMapper.selectOne(parentId);
+            model.addAttribute("parentNumber", parent.getParentNumber());
+        }
 
         return "html/board/parent/community_parent";
     }
