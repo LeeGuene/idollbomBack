@@ -45,7 +45,7 @@ public class ParentcommunityController {
 
             System.out.println(userRole);
             model.addAttribute("userRole", userRole);
-            
+git 
             ParentVO parent = parentMapper.selectOne(parentId);
             model.addAttribute("parentNumber", parent.getParentNumber());
         }
