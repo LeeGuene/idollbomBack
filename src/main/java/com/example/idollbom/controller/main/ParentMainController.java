@@ -29,6 +29,7 @@ public class ParentMainController {
     //   부모 메인페이지로 이동
     @GetMapping
     public String parentmain(Model model){
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {

@@ -2,7 +2,6 @@ package com.example.idollbom.controller.board;
 
 import com.example.idollbom.domain.dto.boarddto.CommunityDTO;
 import com.example.idollbom.domain.dto.boarddto.CommunityDetailDTO;
-import com.example.idollbom.domain.dto.boarddto.CommunityListDTO;
 import com.example.idollbom.domain.dto.boarddto.ParentFileDTO;
 import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
 import com.example.idollbom.domain.vo.ParentVO;
@@ -19,7 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.security.SecureRandom;
 import java.util.List;
 
 @Controller

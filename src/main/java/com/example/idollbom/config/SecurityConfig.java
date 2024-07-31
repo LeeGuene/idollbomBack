@@ -44,7 +44,11 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/match/**"),
                                 new AntPathRequestMatcher("/class/**"),
                                 new AntPathRequestMatcher("/parentmain/**"),
-                                new AntPathRequestMatcher("/promain/**")
+                                new AntPathRequestMatcher("/promain/**"),
+                                new AntPathRequestMatcher("/parentcommunity/**"),
+                                new AntPathRequestMatcher("/ask/**"),
+                                new AntPathRequestMatcher("/rest/**"),
+                                new AntPathRequestMatcher("/restList/**")
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

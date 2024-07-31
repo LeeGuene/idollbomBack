@@ -26,12 +26,7 @@ public class AskController {
     private final ParentMapper parentMapper;
     private final QuestionService questionService;
 
-    // 문의하기 페이지 불러오기
-    @GetMapping("/list")
-    public String ask(@RequestParam(value="pageNo", defaultValue = "1") int pageNo,
-                      @RequestParam(value="pageSize", defaultValue = "3") int pageSize,
-                      Model model) {
-
+    public void getRole(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
@@ -40,13 +35,22 @@ public class AskController {
 
             ParentVO parent = parentMapper.selectOne(parentId);
 
-//            model.addAttribute("parentName", parent.getParentName());
+            // model.addAttribute("parentName", parent.getParentName());
             model.addAttribute("role", parent.getRole());
             model.addAttribute("parentNumber", parent.getParentNumber());
         }else{
             model.addAttribute("parentName", "Guest");
             model.addAttribute("role", "Guest");
         }
+    }
+
+    // 문의하기 페이지 불러오기
+    @GetMapping("/list")
+    public String ask(@RequestParam(value="pageNo", defaultValue = "1") int pageNo,
+                      @RequestParam(value="pageSize", defaultValue = "3") int pageSize,
+                      Model model) {
+
+        getRole(model);
 
         int totalQuestions = questionService.countQuestion();
         int totalPages = (int) Math.ceil((double) totalQuestions / pageSize);
@@ -81,21 +85,7 @@ public class AskController {
     @GetMapping("/write")
     public String goWriteForm(Model model) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
-            CustomUserDTO parent_info = ((CustomUserDTO) authentication.getPrincipal());
-            String parentId = parent_info.getEmail();
-
-            ParentVO parent = parentMapper.selectOne(parentId);
-
-            model.addAttribute("parentName", parent.getParentName());
-            model.addAttribute("role", parent.getRole());
-            model.addAttribute("parentNumber", parent.getParentNumber());
-        }else{
-            model.addAttribute("parentName", "Guest");
-            model.addAttribute("role", "Guest");
-        }
+        getRole(model);
 
         model.addAttribute("question", new QuestionDTO());
         return "/html/customerService/question/inqueryBoardForm";
