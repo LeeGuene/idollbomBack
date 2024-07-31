@@ -35,9 +35,9 @@ public class ParentcommunityController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+        // 현재 로그인이 되어있는지
+        // 만약, 전문가로 로그인이 되어있다면 게시판 보는 것을 막을 수 있음
         if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
-            // 현재 로그인이 되어있는지
-            // 만약, 전문가로 로그인이 되어있다면 게시판 보는 것을 막을 수 있음
             CustomUserDTO p = ((CustomUserDTO) authentication.getPrincipal());
             String parentId = p.getEmail();
             String userRole = p.getRole();
@@ -47,7 +47,7 @@ public class ParentcommunityController {
             System.out.println(userRole);
             model.addAttribute("userRole", userRole);
 
-            model.addAttribute("role", parent.getRole());
+//            model.addAttribute("role", parent.getRole());
             model.addAttribute("parentNumber", parent.getParentNumber());
         }else{
             model.addAttribute("parentName", "Guest");

@@ -17,7 +17,7 @@
                     <li>
                         <a th:href="@{/parentmain}">부모님</a>
                         <!-- 부모가 로그인 한 것이 아니라면 화면에 표시 X -->
-                        <ul th:if="${role == 'parent'}">
+                        <ul th:if="${role == 'parent'} or ${userRole == 'parent'}">
                             <li><a th:href="@{/match}">매칭</a></li>
                         </ul>
                     </li>
@@ -61,7 +61,7 @@
                     <p><a th:href="@{/user/signup}">회원가입</a></p>
                 </div>
 
-                <div th:if="${role == 'parent'}" sec:authorize="isAuthenticated()" class="login-status">
+                <div th:if="${role == 'parent'} or ${userRole == 'parent'}" sec:authorize="isAuthenticated()" class="login-status">
                     <div th:if="${parentName != null}">
                         <span th:text="${parentName}"></span>
                         <span style="font-size: 16px;">님</span>

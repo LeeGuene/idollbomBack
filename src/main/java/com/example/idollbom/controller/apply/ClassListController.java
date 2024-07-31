@@ -33,14 +33,7 @@ public class ClassListController {
     private final ClassReviewService classReviewService;
     private final ParentMapper parentMapper;
 
-    // 페이지 전부 페이징 처리 구현하기
-    // 돌봄 페이지, default는 등하원으로
-    @GetMapping("/classcare")
-    public String classCare(@RequestParam(value = "category", defaultValue = "등/하원") String category,
-                            @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
-                            @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
-                            Model model) {
-
+    public void getRole(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
@@ -56,6 +49,17 @@ public class ClassListController {
             model.addAttribute("parentName", "Guest");
             model.addAttribute("role", "Guest");
         }
+    }
+
+    // 페이지 전부 페이징 처리 구현하기
+    // 돌봄 페이지, default는 등하원으로
+    @GetMapping("/classcare")
+    public String classCare(@RequestParam(value = "category", defaultValue = "등/하원") String category,
+                            @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
+                            @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
+                            Model model) {
+
+        getRole(model);
 
         model.addAttribute("category", category);
 
@@ -94,21 +98,7 @@ public class ClassListController {
                              @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                              Model model) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
-            CustomUserDTO parent_info = ((CustomUserDTO) authentication.getPrincipal());
-            String parentId = parent_info.getEmail();
-
-            ParentVO parent = parentMapper.selectOne(parentId);
-
-            // model.addAttribute("parentName", parent.getParentName());
-            model.addAttribute("role", parent.getRole());
-            model.addAttribute("parentNumber", parent.getParentNumber());
-        }else{
-            model.addAttribute("parentName", "Guest");
-            model.addAttribute("role", "Guest");
-        }
+        getRole(model);
 
         // 페이징 처리를 위한 코드
         int count = classListService.classCount(category);
@@ -142,21 +132,7 @@ public class ClassListController {
                                      @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                                      Model model) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
-            CustomUserDTO parent_info = ((CustomUserDTO) authentication.getPrincipal());
-            String parentId = parent_info.getEmail();
-
-            ParentVO parent = parentMapper.selectOne(parentId);
-
-            // model.addAttribute("parentName", parent.getParentName());
-            model.addAttribute("role", parent.getRole());
-            model.addAttribute("parentNumber", parent.getParentNumber());
-        }else{
-            model.addAttribute("parentName", "Guest");
-            model.addAttribute("role", "Guest");
-        }
+        getRole(model);
 
         // 페이징 처리를 위한 코드
         int count = classListService.classCount(category);
@@ -190,21 +166,7 @@ public class ClassListController {
                              @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                              Model model) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
-            CustomUserDTO parent_info = ((CustomUserDTO) authentication.getPrincipal());
-            String parentId = parent_info.getEmail();
-
-            ParentVO parent = parentMapper.selectOne(parentId);
-
-            // model.addAttribute("parentName", parent.getParentName());
-            model.addAttribute("role", parent.getRole());
-            model.addAttribute("parentNumber", parent.getParentNumber());
-        }else{
-            model.addAttribute("parentName", "Guest");
-            model.addAttribute("role", "Guest");
-        }
+        getRole(model);
 
         // 페이징 처리를 위한 코드
         int count = classListService.classCount(category);
@@ -239,21 +201,7 @@ public class ClassListController {
         log.info("수업 pk : " + classNumber);
         log.info("전문가 pk : " + proNumber);
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
-            CustomUserDTO parent_info = ((CustomUserDTO) authentication.getPrincipal());
-            String parentId = parent_info.getEmail();
-
-            ParentVO parent = parentMapper.selectOne(parentId);
-
-            // model.addAttribute("parentName", parent.getParentName());
-            model.addAttribute("role", parent.getRole());
-            model.addAttribute("parentNumber", parent.getParentNumber());
-        }else{
-            model.addAttribute("parentName", "Guest");
-            model.addAttribute("role", "Guest");
-        }
+        getRole(model);
         
         // 특정 수업에 대한 상세정보
         ClassDetailDTO class_info = classDetailService.findClassDetail(proNumber, classNumber);

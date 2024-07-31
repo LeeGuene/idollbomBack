@@ -93,6 +93,13 @@ h2 {
     outline: none;
 }
 
+.community_search > p > a{
+    background-color: #048D3B;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;"
+}
+
 .community_search > div form {
     width: 430px;
     height: 35px;
