@@ -33,22 +33,20 @@ public class ParentcommunityController {
     // 게시글 목록 띄어주는 컨트롤러
     @GetMapping()
     public String community(Model model) {
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String currentUserName = userDetails.getUsername();
 
-        // 현재 로그인이 되어있는지
-        // 만약, 전문가로 로그인이 되어있다면 게시판 보는 것을 막을 수 있음
-        CustomUserDTO p = ((CustomUserDTO) authentication.getPrincipal());
-        String userRole = p.getRole();
+        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
+            CustomUserDTO p = ((CustomUserDTO) authentication.getPrincipal());
 
-        System.out.println(userRole);
-        model.addAttribute("userRole", userRole);
+            String userRole = p.getRole();
+            String parentId = p.getEmail();
 
-
-        ParentVO parent_info = parentMapper.selectOne(currentUserName);
-        model.addAttribute("parent_info", parent_info);
+            System.out.println(userRole);
+            model.addAttribute("userRole", userRole);
+git 
+            ParentVO parent = parentMapper.selectOne(parentId);
+            model.addAttribute("parentNumber", parent.getParentNumber());
+        }
 
         return "html/board/parent/community_parent";
     }
