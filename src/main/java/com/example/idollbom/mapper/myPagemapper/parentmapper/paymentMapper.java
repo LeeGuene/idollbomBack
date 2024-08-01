@@ -12,4 +12,7 @@ public interface paymentMapper {
 
     // 결제하기
     void payInsert(PayDTO payDTO);
+
+    // 결제한 시간 update
+    void payStatus(Long reservationTimeNumber);
 }
