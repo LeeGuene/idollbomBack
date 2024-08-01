@@ -32,7 +32,8 @@ public class ClassListController {
     private final ClassDetailService classDetailService;
     private final ClassReviewService classReviewService;
     private final ParentMapper parentMapper;
-
+    
+    // 부모 role, parentNumber를 받아오는 메서드
     public void getRole(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -58,7 +59,7 @@ public class ClassListController {
                             @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
                             @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                             Model model) {
-
+    
         getRole(model);
 
         model.addAttribute("category", category);

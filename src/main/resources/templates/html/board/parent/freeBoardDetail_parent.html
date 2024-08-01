@@ -74,10 +74,10 @@
         <h1>첨부파일</h1>
         <!-- 첨부파일 영역 -->
         <ul class="file-area">
-          <li th:each="file : ${files}" th:object="${file}">
-            <a th:href="@{/download/{parentFileNumber}(parentFileNumber=*{parentFileNumber})}" th:text="*{parentFileOriginName}"></a>
-            <span th:text="*{parentFileSize / 1024 + 'KB'}"></span>
-          </li>
+<!--          <li th:each="file : ${files}" th:object="${file}">-->
+<!--            <a th:href="@{/download/{parentFileNumber}(parentFileNumber=*{parentFileNumber})}" th:text="*{parentFileOriginName}"></a>-->
+<!--            <span th:text="*{parentFileSize / 1024 + 'KB'}"></span>-->
+<!--          </li>-->
         </ul>
       </div>
     </div>

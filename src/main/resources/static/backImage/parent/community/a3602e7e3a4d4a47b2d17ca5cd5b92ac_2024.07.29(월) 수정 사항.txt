@@ -1,0 +1,7 @@
+1. header_pro.html, header_parents.html 추가 (메인에서만 로그인 계정 이름 뿌려주는 헤더 사용)
+	>> 나머지 페이지에는 이름을 뿌려주지 않는 헤더를 사용
+	>> 헤더 안에서 이름을 보여주는 부분만 th:if 로 처리 ( 헤더 만들 필요 X ) 
+
+2. prolist.html 내에 헤더 추가 (header_parents) - 수정 완료
+
+

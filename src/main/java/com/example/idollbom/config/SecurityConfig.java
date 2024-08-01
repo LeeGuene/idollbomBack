@@ -46,6 +46,7 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/parentmain/**"),
                                 new AntPathRequestMatcher("/promain/**"),
                                 new AntPathRequestMatcher("/parentcommunity/**"),
+                                new AntPathRequestMatcher("/parentcommunity/detail"),
                                 new AntPathRequestMatcher("/ask/**"),
                                 new AntPathRequestMatcher("/rest/**"),
                                 new AntPathRequestMatcher("/restList/**")

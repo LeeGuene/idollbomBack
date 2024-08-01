@@ -25,6 +25,19 @@ function getList(page){
             renderBoard(data.content)
             renderPagination(data)
 
+            const detailBtns = document.querySelectorAll('.table tbody > tr a');
+            const userRole = document.querySelector('input[name="userRole"]').value;
+            console.log(detailBtns);
+            console.log(userRole);
+
+            detailBtns.forEach(detailBtn=>{
+                detailBtn.addEventListener("click", e=>{
+                    if(userRole !== 'parent'){
+                        alert("로그인을 해 주세요!!");
+                    }
+                })
+            })
+
         },
         error: function (data){
             console.log('실패')
