@@ -4,7 +4,7 @@
 <mapper namespace="com.example.idollbom.mapper.boardmapper.ParentFileMapper">
     <!-- 첨부파일 추가 -->
     <insert id="insertFile">
-        INSERT INTO PARENT_FILE (PARENT_FILE_NUMBER, PARENT_FILE_NAME, PARENT_FILE_SIZE, PARENT_FILE_URL, PARENT_FILE_UPLOAD_TIME, PARENT_POST_NUMBER)
+        INSERT INTO PARENT_FILE (PARENT_FILE_NUMBER, PARENT_FILE_NAME, PARENT_FILE_SIZE, PARENT_FILE_ORIGIN_NAME, PARENT_FILE_UPLOAD_TIME, PARENT_POST_NUMBER)
         VALUES (seq_project.nextval, #{parentFileName}, #{parentFileSize}, #{parentFileOriginName}, sysdate, #{parentPostNumber})
     </insert>
 

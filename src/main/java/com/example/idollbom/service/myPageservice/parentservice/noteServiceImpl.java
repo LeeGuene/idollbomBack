@@ -1,8 +1,8 @@
 package com.example.idollbom.service.myPageservice.parentservice;
 
+import com.example.idollbom.domain.dto.myPagedto.parentdto.NoteListDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.mailDTO;
 import com.example.idollbom.domain.vo.ParentVO;
-import com.example.idollbom.domain.vo.noteVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.mapper.myPagemapper.parentmapper.noteMapper;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +19,9 @@ import java.util.List;
 public class noteServiceImpl implements noteService {
     private final noteMapper noteMapper;
     private final  ParentMapper parentMapper;
+
     @Override
-    public  List<mailDTO> selectAllMyNote() {
+    public List<mailDTO> selectAllMyNote() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String currentUserName = userDetails.getUsername();
@@ -34,5 +35,22 @@ public class noteServiceImpl implements noteService {
     @Override
     public mailDTO selectOneMail(Long mailId) {
         return noteMapper.selectNoteByNoteId(mailId);
+    }
+
+    // 전문가 쪽지 목록 조회 서비스
+    @Override
+    public List<NoteListDTO> findAllMyProNote(Long proNumber) {
+        return noteMapper.selectNoteByProId(proNumber);
+    }
+
+    // 전문가 쪽지 목록 카운트
+    @Override
+    public int countProNoteList(Long proNumber) {
+        return noteMapper.countProNoteList(proNumber);
+    }
+
+    @Override
+    public int countParentNoteList(Long parentNumber) {
+        return noteMapper.countParentNoteList(parentNumber);
     }
 }

@@ -3,8 +3,6 @@ package com.example.idollbom.controller.myPage;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.mailDTO;
 import com.example.idollbom.domain.vo.kidVO;
-import com.example.idollbom.mapper.loginmapper.ParentMapper;
-import com.example.idollbom.service.myPageservice.parentservice.classSaveService;
 import com.example.idollbom.service.myPageservice.parentservice.kidsService;
 import com.example.idollbom.service.myPageservice.parentservice.noteService;
 import com.example.idollbom.service.myPageservice.parentservice.parentInfoService;
