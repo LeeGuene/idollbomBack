@@ -10,9 +10,9 @@ import com.example.idollbom.service.boardservice.CommunityService;
 import com.example.idollbom.service.boardservice.ParentFileService;
 import com.example.idollbom.service.boardservice.ParentReportService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +23,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/parentcommunity")
 @RequiredArgsConstructor
+@Slf4j
 public class ParentcommunityController {
 
     private final CommunityService communityService;
@@ -43,7 +44,6 @@ public class ParentcommunityController {
 
             System.out.println(userRole);
             model.addAttribute("userRole", userRole);
-git 
             ParentVO parent = parentMapper.selectOne(parentId);
             model.addAttribute("parentNumber", parent.getParentNumber());
         }
@@ -93,6 +93,8 @@ git
     // 게시글 상세보기
     @GetMapping("/detail/{parentPostNumber}")
     public String detail(@PathVariable("parentPostNumber") Long parentPostNumber, Model model){
+
+        log.info("parentPostNumber(게시글 pk) : " + parentPostNumber);
 
         Long parentId = findParentPK();
         System.out.println(parentId);

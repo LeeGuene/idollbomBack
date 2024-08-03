@@ -22,42 +22,33 @@
             <div class="incontainer">
                 <div class="menu-bar">
                     <div class="menu-bar-option">
-                        <a th:href="@{/ParentMyPage/kids}">아이정보 추가</a>
-                    </div>
-                    <div class="menu-bar-option">
-                        <a th:href="@{/ParentMyPage/myInformation}">내정보 수정</a>
+                        <a th:href="@{/proMyPage/profile}">내정보 수정</a>
                     </div>
                     <hr class="custom-hr">
                     <div class="menu-bar-option">
-                        <a th:href="@{/ParentMyPage/reportPage}">신고 목록</a>
+                        <a th:href="@{/proMyPage/proClass}">내 수업 목록</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a th:href="@{/ParentMyPage/classSave}">수업찜 목록</a>
+                        <a th:href="@{/proMyPage/report}">신고 목록</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a th:href="@{/ParentMyPage/myPost}">내가쓴 게시글</a>
-                    </div>
-                    <div class="menu-bar-option">
-                        <a th:href="@{/ParentMyPage/myAsk}"></a>
-                    </div>
-                    <div class="menu-bar-option">
-                        <a th:href="@{/ParentMyPage/Review}">내 리뷰</a>
+                        <a th:href="@{/proMyPage/MyPost}">내가 쓴 게시글</a>
                     </div>
                     <hr class="custom-hr">
                     <div class="menu-bar-option">
-                        <a th:href="@{/ParentMyPage/myPayment}">결제 내역</a>
+                        <p>캘린더</p>
                     </div>
                     <div class="menu-bar-option">
-                        <a th:href="@{/ParentMyPage/myNote}">쪽지함</a>
+                        <a th:href="@{/proMyPage/myNote}">쪽지함</a>
                     </div>
-                    <!-- 프로필 -->
                     <div class="myprofile">
                         <div class="profileimage">
-                            <img src="../../images/ff581d78778b7.png" alt="profileImage" class="img">
+                            <img src="../../images/class_list_pro 2.png" alt="profileImage" class="img">
                         </div>
                         <div class="Nickname">
                             닉네임
                         </div>
+
                         <div class="buttonbox">
                             <a href="#">
                                 <button class="btn-block" type="button">로그아웃</button>
@@ -73,22 +64,25 @@
                             <thead>
                                 <tr>
                                     <th>번호</th>
-                                    <th>강사 이름</th>
+                                    <th>부모 이름</th>
                                     <th>쪽지 내용</th>
                                     <th>전송 날짜</th>
                                 </tr>
                             </thead>
-                            <tbody th:if="${not #lists.isEmpty(myNotes)}" >
-                            <tr th:each="note, stat : ${myNotes}" th:value="${note.parentNoteNumber}" class="mail"
-                                th:data-mail-number="${note.parentNoteNumber}" onclick="openModal(this)">
-
-                                    <td th:text="${stat.count}"></td>
-                                    <td th:text="${note.proName}"></td>
+                            <tbody th:if="${not #lists.isEmpty(noteList)}" >
+                                <tr th:each="note, i : ${noteList}"
+                                    th:value="${note.parentNoteNumber}" class="mail"
+                                    th:data-mail-number="${note.parentNoteNumber}" onclick="openModal(this)"
+                                    th:if="${i.index < 5}"
+                                >
+                                    <td th:text="${i.count}"></td>
+                                    <td th:text="${note.parentName}"></td>
                                     <td th:text="${note.parentNoteContent}"></td>
                                     <td th:text="${#temporals.format(note.parentNoteSendTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 </tr>
                             </tbody>
                         </table>
+                        <a href="#">더 보기</a>
                     </div>
                 </div>
                     <div class="modal" >
