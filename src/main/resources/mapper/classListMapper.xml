@@ -4,9 +4,11 @@
 <mapper namespace="com.example.idollbom.mapper.applymapper.ClassListMapper">
     <!-- 현재 소카에 대한 COUNT -->
     <select id="classCount">
-        select count(*)
-        from class
-        where class_category_small = #{category}
+        SELECT COUNT(*)
+        FROM CLASS c JOIN RESERVATION_DATE rd
+        ON c.CLASS_NUMBER = rd.CLASS_NUMBER
+        WHERE c.CLASS_CATEGORY_SMALL = #{category}
+        AND rd.RESERVATION_DATE > SYSDATE
     </select>
 
     <!-- 소카에 대한 전문가 수업 가져오는 페이징 처리 select -->
@@ -14,39 +16,45 @@
         SELECT *
         FROM (
             SELECT rownum AS rnum,
-            PRO_NUMBER,
-            PRO_PROFILE_IMAGE_URL,
-            PRO_NAME,
-            CLASS_NUMBER,
-            CLASS_NAME,
-            CLASS_INTRO,
-            CLASS_CONTENT,
-            CLASS_CATEGORY_SMALL,
-            PRO_ADDRESS,
-            TO_CHAR(CLASS_REGISTER_DATE, 'YYYY"년 "MM"월 "DD"일') AS CLASS_REGISTER_DATE,
-            COALESCE((SELECT COUNT(CLASS_NUMBER) FROM REVIEW WHERE CLASS_NUMBER = c.CLASS_NUMBER), 0) AS REVIEW_COUNT
+                PRO_NUMBER,
+                PRO_PROFILE_IMAGE_URL,
+                PRO_NAME,
+                CLASS_NUMBER,
+                CLASS_NAME,
+                CLASS_INTRO,
+                CLASS_CONTENT,
+                CLASS_CATEGORY_SMALL,
+                PRO_ADDRESS,
+                RESERVATION_DATE,
+                TO_CHAR(CLASS_REGISTER_DATE, 'YYYY"년 "MM"월 "DD"일') AS CLASS_REGISTER_DATE,
+                COALESCE((SELECT COUNT(CLASS_NUMBER) FROM REVIEW WHERE CLASS_NUMBER = c.CLASS_NUMBER), 0) AS REVIEW_COUNT
             FROM (
-                SELECT p.PRO_NUMBER,
-                p.PRO_PROFILE_IMAGE_URL,
-                p.PRO_NAME,
-                c.CLASS_NUMBER,
-                c.CLASS_NAME,
-                c.CLASS_INTRO,
-                c.CLASS_CONTENT,
-                c.CLASS_CATEGORY_SMALL,
-                p.PRO_ADDRESS,
-                c.CLASS_REGISTER_DATE
-                FROM PRO p
-                JOIN CLASS c ON p.PRO_NUMBER = c.PRO_NUMBER
-                WHERE c.CLASS_CATEGORY_SMALL = #{category}
-                ) c
-                WHERE rownum &lt;= #{endRow}
-            )
+                    SELECT
+                        p.PRO_NUMBER,
+                        p.PRO_PROFILE_IMAGE_URL,
+                        p.PRO_NAME,
+                        c.CLASS_NUMBER,
+                        c.CLASS_NAME,
+                        c.CLASS_INTRO,
+                        c.CLASS_CONTENT,
+                        c.CLASS_CATEGORY_SMALL,
+                        p.PRO_ADDRESS,
+                        c.CLASS_REGISTER_DATE,
+                        rd.RESERVATION_DATE
+                    FROM PRO p
+                    JOIN CLASS c ON p.PRO_NUMBER = c.PRO_NUMBER
+                    JOIN RESERVATION_DATE rd ON c.CLASS_NUMBER = rd.CLASS_NUMBER
+                    WHERE c.CLASS_CATEGORY_SMALL =  #{category}
+                    AND rd.RESERVATION_DATE > SYSDATE
+                    ) c
+                    WHERE rownum &lt;= #{endRow}
+                )
         WHERE rnum &gt; #{startRow}
         ORDER BY CLASS_REGISTER_DATE DESC
     </select>
 
-    <!-- 검색 기능을 구현하는 select -->
+    <!-- 검색 기능을 구현하는 select
+         전문가가 등록한 시간이 지나면 보이지 않게 하는 구문 추가 -->
     <select id="searchClassList">
         SELECT *
         FROM (
@@ -60,10 +68,12 @@
                 CLASS_CONTENT,
                 CLASS_CATEGORY_SMALL,
                 PRO_ADDRESS,
+                RESERVATION_DATE,
                 TO_CHAR(CLASS_REGISTER_DATE, 'YYYY"년 "MM"월 "DD"일') AS CLASS_REGISTER_DATE,
                 COALESCE((SELECT COUNT(CLASS_NUMBER) FROM REVIEW WHERE CLASS_NUMBER = c.CLASS_NUMBER), 0) AS REVIEW_COUNT
             FROM (
-                SELECT p.PRO_NUMBER,
+                SELECT
+                    p.PRO_NUMBER,
                     p.PRO_PROFILE_IMAGE_URL,
                     p.PRO_NAME,
                     c.CLASS_NUMBER,
@@ -72,10 +82,13 @@
                     c.CLASS_CONTENT,
                     c.CLASS_CATEGORY_SMALL,
                     p.PRO_ADDRESS,
-                    c.CLASS_REGISTER_DATE
+                    c.CLASS_REGISTER_DATE,
+                    rd.RESERVATION_DATE
                 FROM PRO p
                 JOIN CLASS c ON p.PRO_NUMBER = c.PRO_NUMBER
-                WHERE c.CLASS_CATEGORY_SMALL = #{category}
+                JOIN RESERVATION_DATE rd ON c.CLASS_NUMBER = rd.CLASS_NUMBER
+                WHERE c.CLASS_CATEGORY_SMALL =  #{category}
+                AND rd.RESERVATION_DATE > SYSDATE
                 <if test="searchWord != null and searchWord != ''">
                     <choose>
                         <when test="searchType == 'title'">
@@ -99,8 +112,10 @@
     <!-- 검색결과에 따른 갯수를 가져오는 select -->
     <select id="countClasses">
         SELECT COUNT(*)
-        FROM CLASS
-        WHERE CLASS_CATEGORY_SMALL = #{category}
+        FROM CLASS c JOIN RESERVATION_DATE rd
+        ON c.CLASS_NUMBER = rd.CLASS_NUMBER
+        WHERE c.CLASS_CATEGORY_SMALL = #{category}
+        AND rd.RESERVATION_DATE > SYSDATE
         <if test="searchWord != null">
             <choose>
                 <when test="searchType == 'title'">
