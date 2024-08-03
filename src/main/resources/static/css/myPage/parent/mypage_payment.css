@@ -261,16 +261,24 @@ hr.custom-hr{
 
 .payment_container {
     height: 500px;
-    padding: 20px;
+    padding: 30px 20px;
     width: 500px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    text-align: right;
 }
 
 h1 {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
+}
+
+.payment_container > a{
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: green;
+    color: #fff;
 }
 
 .payment-table {

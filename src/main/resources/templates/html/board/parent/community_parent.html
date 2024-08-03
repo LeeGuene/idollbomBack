@@ -20,7 +20,7 @@
 
             <div class="community_search">
                 <input type="hidden" name="userRole" th:value="${userRole}">
-                <p><a th:href="@{/parentcommunity/write}">작성하기</a></p>
+                <p><a th:if="${userRole == 'parent'}" th:href="@{/parentcommunity/write}">작성하기</a></p>
 
                 <div>
                     <form id="searchForm">
@@ -46,8 +46,8 @@
                     <th class="writer">작성자</th>
                 </tr>
                 </thead>
-                    <!-- 처음 리스트를 불러올 때도 비동기로 불러오자 -->
                 <tbody>
+                    <!-- 처음 리스트를 불러올 때도 비동기로 불러오자 -->
 
                 </tbody>
             </table>

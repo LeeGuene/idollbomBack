@@ -43,3 +43,4 @@ function openModal(element) {
         modal.style.display = 'none';
     });
 }
+

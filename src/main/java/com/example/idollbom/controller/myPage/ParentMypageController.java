@@ -1,5 +1,6 @@
 package com.example.idollbom.controller.myPage;
 
+import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
 import com.example.idollbom.domain.dto.logindto.ParentDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.classSaveDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
@@ -12,6 +13,8 @@ import com.example.idollbom.service.applyservice.ClassListService;
 import com.example.idollbom.service.myPageservice.parentservice.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,13 +44,27 @@ public class ParentMypageController {
     private final ParentMapper parentMapper;
     private final ClassListService classListService;
 
+    public Long parentNumber(){
+        // 현재 로그인한 부모 pk 가져오기
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDTO p = ((CustomUserDTO) authentication.getPrincipal());
+        String parentId = p.getEmail();
+
+        ParentVO parent = parentMapper.selectOne(parentId);
+        System.out.println(parent.getParentNumber());
+
+        return parent.getParentNumber();
+    }
+
 //  kid 페이지로 이동
     @GetMapping("/kids")
     public String getKids(Model model){
-
+        Long parentId = parentNumber();
+        int count = noteService.countParentNoteList(parentId);
         List<kidVO> kids = kidsService.selectKidsList();
         model.addAttribute("kid", new kidDTO());
         model.addAttribute("kids", kids);
+        model.addAttribute("count", count);
         return "html/myPage/parent/myKids";
     }
 

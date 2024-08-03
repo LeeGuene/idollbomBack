@@ -41,7 +41,7 @@
     <!-- 게시글 작성 쿼리문 -->
     <insert id="saveCommunity">
         insert into parent_post
-        values(#{parentPostNumber}, #{parentPostTitle}, #{parentPostContent}, 0, sysdate, sysdate, #{parentNumber})
+        values(#{parentPostNumber}, #{parentPostTitle}, #{parentPostContent}, 0, sysdate, sysdate, #{parentNumber}, 0)
     </insert>
 
     <!--  게시글 상세보기  -->

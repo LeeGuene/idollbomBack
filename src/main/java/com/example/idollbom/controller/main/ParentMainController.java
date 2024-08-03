@@ -4,6 +4,7 @@ import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
 import com.example.idollbom.domain.dto.parentdto.ProListDTO;
 import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
+import com.example.idollbom.service.myPageservice.parentservice.noteService;
 import com.example.idollbom.service.proService.ProDetailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,7 @@ public class ParentMainController {
 
     private final ProDetailService proDetailService;
     private final ParentMapper parentMapper;
+    private final noteService noteService;
 
     //   부모 메인페이지로 이동
     @GetMapping
@@ -38,11 +40,11 @@ public class ParentMainController {
 
             ParentVO parent = parentMapper.selectOne(parentId);
 
+            int count = noteService.countParentNoteList(parent.getParentNumber());
+
+            model.addAttribute("count", count);
             model.addAttribute("parentName", parent.getParentName());
             model.addAttribute("role", parent.getRole());
-        }else{
-            model.addAttribute("parentName", "Guest");
-            model.addAttribute("role", "Guest");
         }
 
         return "/html/main/index_parents";

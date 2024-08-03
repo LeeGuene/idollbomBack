@@ -1,12 +1,21 @@
 package com.example.idollbom.controller.pro;
 
+import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
 import com.example.idollbom.domain.dto.prodto.ClassDTO;
 import com.example.idollbom.domain.dto.prodto.ReservationDateDTO;
+import com.example.idollbom.domain.vo.ProVO;
+import com.example.idollbom.service.loginservice.ProService;
 import com.example.idollbom.service.proService.RegisterFormService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
@@ -25,10 +34,27 @@ import java.util.List;
 public class RegisterFormController {
 
     private final RegisterFormService registerFormService;
+    private final ProService proService;
 
     // 수업등록하는 화면으로 이동 컨트롤러
     @GetMapping("/register")
-    public String registerFromController() {
+    public String registerFromController(Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
+
+            CustomUserDTO pro = ((CustomUserDTO) authentication.getPrincipal());
+            String proId = pro.getEmail();
+
+            ProVO pro_info = proService.selectPro(proId);
+
+            String role = pro_info.getRole();
+            System.out.println(role);
+
+            model.addAttribute("role", role);
+        }
+
         return "/html/pro/registerForm";
     }
 

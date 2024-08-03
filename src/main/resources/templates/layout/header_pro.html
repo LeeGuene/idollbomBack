@@ -31,9 +31,11 @@
             <div class="side">
                 <p>
                     <!-- 전문가 마이 페이지에 쪽지 목록 보는 페이지 없어서 보류 -->
-                    <button onclick="goProProfile()">
+                    <a th:href="@{/proMyPage/myNote}">
+                        <!-- 쪽지함(아이콘)에 쪽지 목록 카운트한 거 보여줌. -->
+                        <input th:if="${role == 'pro'}" type="text" th:value="${count}" />
                         <img th:src="@{/images/Alarm.png}" alt="알림">
-                    </button>
+                    </a>
                 </p>
 
                 <div sec:authorize="!isAuthenticated()" class="logout-status">
@@ -41,10 +43,12 @@
                     <p><a th:href="@{/user/proSignup}">회원가입</a></p>
                 </div>
 
-                <div sec:authorize="isAuthenticated()" class="login-status">
+                <div th:if="${role == 'pro'}" sec:authorize="isAuthenticated()" class="login-status">
                     <!-- 전문가 메인 페이지로 이동할 때, 전문가 정보를 받아와서 뿌려줘야 함. -->
-<!--                    <span th:text="${pro_info.proName}"></span>-->
-<!--                    <span style="font-size: 16px;">님</span>-->
+                    <div th:if="${proName != null}">
+                        <span th:text="${proName}"></span>
+                        <span style="font-size: 16px;">님</span>
+                    </div>
                     <!-- 전문가 마이페이지의 기본 페이지는 나의 프로필 보기로 설정 -->
                     <p><a th:href="@{/proMyPage/profile}">마이페이지</a></p>
                     <p><a th:href="@{/user/logout}">로그아웃</a></p>
@@ -53,6 +57,11 @@
         </div>
     </header>
 </body>
-<script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
+    <script>
+        function goMyProNote(){
+            console.log("실행!!");
 
+        }
+    </script>
 </html>

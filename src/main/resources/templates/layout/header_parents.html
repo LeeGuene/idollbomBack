@@ -22,7 +22,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a th:onclick="goPromain()">전문가</a>
+                        <a th:href="@{/promain}">전문가</a>
                     </li>
                     <li>
                         <!-- 신청하기 기본 페이지 : 돌봄 -->
@@ -52,6 +52,8 @@
             <div class="side">
                 <p>
                     <button onclick="goMynote()">
+                        <!-- 쪽지함(아이콘)에 쪽지 목록 카운트한 거 보여줌. -->
+                        <input th:if="${role == 'parent'}" type="text" th:value="${count}" />
                         <img th:src="@{/images/Alarm.png}" alt="알림">
                     </button>
                 </p>

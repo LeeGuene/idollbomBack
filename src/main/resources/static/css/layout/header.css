@@ -104,9 +104,55 @@ button {
     margin-left: 10px;
 }
 
-.side button {
+/* 전문가 헤더에만 적용되는 css */
+.side > p > a {
     display: block;
     height: 100px;
+    margin-top: 10px;
+    position: relative;
+}
+
+/* 부모 헤더에만 적용되는 css */
+.side > p > button{
+    display: block;
+    height: 100px;
+    position: relative;
+}
+
+.side > p > a > img{
+    display: inline;
+}
+
+/* 헤더 쪽지함 css (전문가) */
+.side > p > a > input{
+    font-size: 14px;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: none;
+    border: 1px solid #eee;
+    top: 45px;
+    left: -10px;
+    z-index: 2;
+    color: #fff;
+    background-color: red;
+}
+
+/* 헤더 쪽지함 css (부모) */
+.side > p > button > input{
+    font-size: 14px;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    border: 1px solid #eee;
+    top: 50px;
+    left: -10px;
+    z-index: 2;
+    color: #fff;
+    background-color: red;
 }
 
 .side img {

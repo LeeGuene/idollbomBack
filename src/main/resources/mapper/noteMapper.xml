@@ -15,4 +15,28 @@
         where parent_note_number = #{parentNoteNumber}
     </select>
 
+    <!-- 쪽지 목록 조회 (전문가) -->
+    <select id="selectNoteByProId" resultType="NoteListDTO">
+        SELECT PN.PARENT_NOTE_NUMBER,
+               P.PARENT_NAME,
+               PN.PARENT_NOTE_CONTENT,
+               PN.PARENT_NOTE_SEND_TIME
+        FROM PARENT P JOIN PARENT_NOTE PN ON P.PARENT_NUMBER = PN.PARENT_NUMBER
+                      JOIN PRO PR ON PR.PRO_NUMBER = PN.PRO_NUMBER
+        WHERE PN.PRO_NUMBER = #{proNumber}
+    </select>
+
+    <!-- 쪽지 목록 카운트 (전문가) -->
+    <select id="countProNoteList">
+        select count(*)
+        from PARENT_NOTE
+        where PRO_NUMBER = #{proNumber}
+    </select>
+
+    <!-- 쪽지 목록 카운트 (부모) -->
+    <select id="countParentNoteList">
+        select count(*)
+        from PARENT_NOTE
+        where PARENT_NUMBER = #{parentNumber}
+    </select>
 </mapper>
