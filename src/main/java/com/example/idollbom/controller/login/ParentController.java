@@ -30,6 +30,7 @@ public class ParentController {
 //  부모 로그인화면이동
     @GetMapping("/login")
     public String login() {
+
         return "html/login/loginpage";
 
     }
