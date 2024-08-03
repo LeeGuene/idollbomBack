@@ -24,7 +24,7 @@
     <!-- 수업 시간 insert -->
     <insert id="classTimeInsert">
         insert into reservation_time
-        values (seq_project.NEXTVAL, #{reservationTime}, #{reservationDateNumber})
+        values (seq_project.NEXTVAL, #{reservationTime}, #{reservationDateNumber}, 0)
     </insert>
 
     <!-- 수업에 대한 이미지 insert -->

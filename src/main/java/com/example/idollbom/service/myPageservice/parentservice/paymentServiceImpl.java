@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,8 +39,15 @@ public class paymentServiceImpl implements paymentService {
         return payment;
     }
 
+    // 트랜잭션 넣어줘야함 UPDATE문 필요
     @Override
+    @Transactional
     public void payInsert(PayDTO payDTO) {
+        System.out.println(payDTO.getReservationTimeNumber());
+
+        // 결제내역 테이블 insert
         paymentMapper.payInsert(payDTO);
+        // 결제완료된 시간 pk 가져와서 update
+        paymentMapper.payStatus(payDTO.getReservationTimeNumber());
     }
 }
