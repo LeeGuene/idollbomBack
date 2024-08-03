@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.idollbom.mapper.boardmapper.ProReportMapper">
+    <!-- 신고하기 눌렀을 때 -->
+    <!-- 신고테이블 insert -->
+    <insert id="insertProReport">
+        INSERT INTO PRO_REPORT(PRO_REPORT_NUMBER, PRO_REPORT_TYPE, PRO_REPORT_CONTENT, PRO_REPORT_REGISTER_DATE, PRO_POST_NUMBER)
+        VALUES(SEQ_PROJECT.nextval, #{proReportType}, #{proReportContent}, sysdate, #{proPostNumber})
+    </insert>
+
+    <!-- 해당 게시글의 작성자pk를 가지고 오기 위한 select -->
+    <select id="selectProById">
+        SELECT PRO_NUMBER
+        FROM PRO_POST
+        WHERE PRO_POST_NUMBER = #{proPostNumber}
+    </select>
+
+    <!-- 해당 게시글 신고횟수 +1 -->
+    <update id="plusProPost">
+        UPDATE PRO_POST
+        SET PRO_POST_REPORTCOUNT = PRO_POST_REPORTCOUNT + 1
+        WHERE pro_POST_NUMBER = #{proPostNumber}
+    </update>
+
+    <!-- 해당 게시글을 작성한 작성자 신고횟수 +1 -->
+    <update id="plusProReport">
+        UPDATE PRO
+        SET PRO_REPORT_COUNT = PRO_REPORT_COUNT + 1
+        WHERE PRO_NUMBER = #{proNumber}
+    </update>
+</mapper>

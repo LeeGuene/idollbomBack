@@ -121,7 +121,7 @@
     </div>
 
     <!-- 신고하기 모달창 -->
-    <form th:action="@{/parentcommunity/report}" method="post">
+    <form id="reportForm" th:action="@{/parentcommunity/report}" method="post">
       <input type="hidden" name="parentPostNumber" th:value="${community.parentPostNumber}">
       <div class="modal">
         <div class="modal-body profile-body">
@@ -144,10 +144,13 @@
             <label for="textarea" class="form-label reporttext">신고내용</label>
             <textarea id="textarea" name="reportForm" class="form-control" placeholder="신고내용을 적어주세요." rows="6"></textarea>
           </div>
+          <div class="extra-info">
+            <p id="reportContent">내용을 입력해주세요.</p>
+          </div>
           <div class="modal-btn">
             <!-- 추가하기를 누르면 새로운 페이지로 이동 -->
             <button type="button" class="close-btn btn">취소하기</button>
-            <button class="add-btn btn" type="submit">신고하기</button>
+            <button class="add-btn btn" type="button" onclick="parentReport()">신고하기</button>
           </div>
         </div>
       </div>
