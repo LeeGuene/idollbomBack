@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -93,8 +94,6 @@ public class ParentcommunityController {
     // 게시글 상세보기
     @GetMapping("/detail/{parentPostNumber}")
     public String detail(@PathVariable("parentPostNumber") Long parentPostNumber, Model model){
-
-        log.info("parentPostNumber(게시글 pk) : " + parentPostNumber);
 
         Long parentId = findParentPK();
         System.out.println(parentId);

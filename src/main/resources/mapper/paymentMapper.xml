@@ -26,4 +26,11 @@
         values (#{reservationDateNumber}, #{reservationTimeNumber}, #{parentNumber}, #{childNumber}, 0)
     </insert>
 
+    <!-- 결제한 시간 상태 update
+         결제가 안되었다면 default 0 -->
+    <update id="payStatus">
+        UPDATE RESERVATION_TIME
+        SET RESERVATION_STATUS = 1
+        WHERE RESERVATION_TIME_NUMBER = #{reservationTimeNumber}
+    </update>
 </mapper>

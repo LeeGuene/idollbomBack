@@ -41,21 +41,20 @@
 
     <!-- 특정 수업에 대한 특정 예약날짜 정보와 모든 예약시간 정보 조회 -->
     <select id="selectReservation" resultType="ReservationInfoDTO">
-        SELECT *
-        FROM(
-                SELECT
-                    D.RESERVATION_DATE_NUMBER,
-                    D.CLASS_NUMBER,
-                    D.RESERVATION_DATE,
-                    T.RESERVATION_TIME_NUMBER,
-                    TO_CHAR(T.RESERVATION_TIME, 'HH24') AS RESERVATION_TIME
-                FROM RESERVATION_DATE D JOIN RESERVATION_TIME T
-                    ON D.RESERVATION_DATE_NUMBER = T.RESERVATION_DATE_NUMBER
-            )
-        WHERE CLASS_NUMBER = #{classNumber}
+        SELECT
+            D.RESERVATION_DATE_NUMBER,
+            D.CLASS_NUMBER,
+            D.RESERVATION_DATE,
+            T.RESERVATION_TIME_NUMBER,
+            TO_CHAR(T.RESERVATION_TIME, 'HH24') AS RESERVATION_TIME
+        FROM RESERVATION_DATE D JOIN RESERVATION_TIME T
+        ON D.RESERVATION_DATE_NUMBER = T.RESERVATION_DATE_NUMBER
+        WHERE D.CLASS_NUMBER = #{classNumber}
+        AND T.RESERVATION_STATUS = 0
     </select>
 
     <!-- 예약 날짜 및 시간 정보 하나만 가져오는 쿼리문 -->
+    <!-- 결제확인창 넘어갈 때 실행되는 select   -->
     <select id="selectReservationInfo">
         SELECT
             D.RESERVATION_DATE_NUMBER,

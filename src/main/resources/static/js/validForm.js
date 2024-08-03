@@ -29,7 +29,7 @@ const upload = document.getElementById('upload')
 const classImage = document.getElementById('classImage').parentNode
 
 // 수업 내용
-const content = document.getElementById('content')
+const content = document.getElementById('summerNote')
 const classContent = document.getElementById('content').parentNode
 
 // 결제 금액
@@ -65,9 +65,12 @@ function validForm() {
         isValid = false
     }
 
-    if(content.value === ''){
-        classContent.style.display="flex"
+    if(document.getElementsByClassName('note-editable')[0].textContent === ''){
+        classContent.style.display='flex'
         isValid = false
+    }
+    else{
+        classContent.style.display='none'
     }
 
     if(money.value === '') {
@@ -106,4 +109,3 @@ upload.addEventListener("change", function(e){
 money.addEventListener("change", function (){
     classMoney.style.display= 'none'
 })
-
