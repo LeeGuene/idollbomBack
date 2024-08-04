@@ -9,6 +9,7 @@ import com.example.idollbom.domain.vo.classVO;
 import com.example.idollbom.service.loginservice.ProService;
 import com.example.idollbom.service.myPageservice.parentservice.noteService;
 import com.example.idollbom.service.myPageservice.proservice.classService;
+import com.example.idollbom.service.myPageservice.proservice.proUpdateService;
 import com.example.idollbom.service.proService.ProDetailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -30,6 +33,7 @@ public class proMypageController {
     private final ProDetailService proDetailService;
     private final ProService proService;
     private final noteService noteService;
+    private final proUpdateService proUpdateService;
     
     // 전문가 pk, 이름, role을 넘기는 메서드
     public void getRole(Model model){
@@ -150,5 +154,6 @@ public class proMypageController {
     public String selectCalender(){
         return "html/myPage/pro/calender";
     }
+
 
 }
