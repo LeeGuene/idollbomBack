@@ -24,11 +24,11 @@
 
         <!-- 뭐가 눌려졌는지에 따라 데이터가 뿌려지는 게 다르다 -->
         <ul class="category">
-            <li><a id="one" th:href="@{/class/classsport(category='초등국어')}">초등국어</a></li>
-            <li><a id="two" th:href="@{/class/classsport(category='초등수학')}">초등수학</a></li>
-            <li><a id="three" th:href="@{/class/classsport(category='초등영어')}">초등영어</a></li>
-            <li><a id="four" th:href="@{/class/classsport(category='초등과학')}">초등과학</a></li>
-            <li><a id="five" th:href="@{/class/classsport(category='코딩')}">코딩</a></li>
+            <li><a id="one" th:href="@{/class/classstudy(category='초등국어')}">초등국어</a></li>
+            <li><a id="two" th:href="@{/class/classstudy(category='초등수학')}">초등수학</a></li>
+            <li><a id="three" th:href="@{/class/classstudy(category='초등영어')}">초등영어</a></li>
+            <li><a id="four" th:href="@{/class/classstudy(category='초등과학')}">초등과학</a></li>
+            <li><a id="five" th:href="@{/class/classstudy(category='코딩')}">코딩</a></li>
         </ul>
         <div class="class_list_search">
             <p>전체 <span id="totalCount" th:text="${count}"></span>건의 게시글이 있습니다.</p>
