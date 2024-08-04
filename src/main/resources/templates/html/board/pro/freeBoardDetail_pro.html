@@ -23,49 +23,49 @@
   <div class="list-btn-wrap">
     <button type="button" onclick="back()">목록 보기</button>
     <!-- 신고하기 버튼은 작성자와 다를때만 표시 -->
-    <a class="report-btn btn-open-modal" style="display: flex" th:if="${parentId!=community.parentNumber}">신고하기</a>
+    <a class="report-btn btn-open-modal" style="display: flex" th:if="${proId!=pro.proNumber}">신고하기</a>
   </div>
-  <div class="board-form" id="postContainer" th:object="${community}">
+  <div class="board-form" id="postContainer" th:object="${pro}">
     <!-- 현재 작성자의 신고횟수 -->
     <input type="hidden" id="reportCount" name="reportCount" th:value="${reportCount}">
 
     <!-- 현재 작성자가 누구인지 -->
-    <input type="hidden" name="parentNumber" th:value="${community.parentNumber}" readonly>
+    <input type="hidden" name="proNumber" th:value="${pro.proNumber}" readonly>
     <!-- 게시글 번호 -->
     <div class="post-number-wrap">
       <h1>번호</h1>
-      <input type="text" name="parentPostNumber" th:value="*{parentPostNumber}" readonly>
+      <input type="text" name="proPostNumber" th:value="*{proPostNumber}" readonly>
     </div>
 
     <!-- 게시글 제목 -->
     <div class="post-title-wrap">
       <h1>제목</h1>
-      <input type="text" th:value="*{parentPostTitle}" readonly>
+      <input type="text" th:value="*{proPostTitle}" readonly>
     </div>
 
     <!-- 게시글 내용 -->
     <div class="post-content-wrap">
       <h1>내용</h1>
-      <textarea th:text="*{parentPostContent}" readonly></textarea>
+      <textarea th:text="*{proPostContent}" readonly></textarea>
     </div>
 
     <!-- 게시글 작성자 -->
     <div class="post-writer-wrap">
       <h1>작성자</h1>
-      <input type="text" th:value="*{parentNickName}" readonly />
+      <input type="text" th:value="*{proNickName}" readonly />
     </div>
 
     <!-- 게시글 작성일 -->
     <div class="post-RegisterDate-wrap">
       <h1>작성일</h1>
-      <input type="text" th:if="*{parentPostRegisterDate == parentPostUpdateDate}" th:value="${#temporals.format(community.parentPostUpdateDate, 'yy년 M월 d일 HH시 mm분')}" readonly />
-      <input type="text" th:unless="*{parentPostRegisterDate == parentPostUpdateDate}" th:value="${#temporals.format(community.parentPostUpdateDate, 'yy년 M월 d일 HH시 mm분')} + '(수정됨)'" readonly />
+      <input type="text" th:if="*{proPostRegisterDate == proPostUpdateDate}" th:value="${#temporals.format(pro.proPostUpdateDate, 'yy년 M월 d일 HH시 mm분')}" readonly />
+      <input type="text" th:unless="*{proPostRegisterDate == proPostUpdateDate}" th:value="${#temporals.format(pro.proPostUpdateDate, 'yy년 M월 d일 HH시 mm분')} + '(수정됨)'" readonly />
     </div>
 
     <!-- 게시글 조회수 -->
     <div class="post-views-wrap">
       <h1>조회수</h1>
-      <input type="text" th:value="*{parentPostViews}" readonly />
+      <input type="text" th:value="*{proPostViews}" readonly />
     </div>
 
     <!-- 게시글 첨부파일(다운로드 가능) -->
@@ -75,17 +75,17 @@
       <!-- 첨부파일 영역 -->
       <ul class="file-area">
         <li th:each="file : ${files}" th:object="${file}">
-          <a th:href="@{/download/{parentFileNumber}(parentFileNumber=*{parentFileNumber})}" th:text="*{parentFileOriginName}"></a>
-          <span th:text="*{parentFileSize / 1024 + 'KB'}"></span>
+          <a th:href="@{/downloadFile/{proFileNumber}(proFileNumber=*{proFileNumber})}" th:text="*{proFileOriginName}"></a>
+          <span th:text="*{proFileSize / 1024 + 'KB'}"></span>
         </li>
       </ul>
     </div>
   </div>
 
   <!-- 현재 로그인한 id값을 넘겨주기 위함    -->
-  <input type="hidden" name="loginId" th:value="${parentId}">
+  <input type="hidden" name="loginId" th:value="${proId}">
   <!-- 게시글 수정 및 삭제 버튼 -->
-  <div class="btn-style" style="display: flex" th:if="${parentId==community.parentNumber}">
+  <div class="btn-style" style="display: flex" th:if="${proId==pro.proNumber}">
     <div class="post-btn-wrap">
       <button class="update" onclick="goUpdate()">수정</button>
       <button class="delete" onclick="goDelete()">삭제</button>
@@ -121,8 +121,8 @@
 </div>
 
 <!-- 신고하기 모달창 -->
-<form th:action="@{/parentcommunity/report}" method="post">
-  <input type="hidden" name="parentPostNumber" th:value="${community.parentPostNumber}">
+<form id="reportForm" th:action="@{/procommunity/proReport}" method="post">
+  <input type="hidden" name="proPostNumber" th:value="${pro.proPostNumber}">
   <div class="modal">
     <div class="modal-body profile-body">
       <div class="header">
@@ -144,17 +144,19 @@
         <label for="textarea" class="form-label reporttext">신고내용</label>
         <textarea id="textarea" name="reportForm" class="form-control" placeholder="신고내용을 적어주세요." rows="6"></textarea>
       </div>
+      <div class="extra-info">
+        <p id="reportContent">내용을 입력해주세요.</p>
+      </div>
       <div class="modal-btn">
         <!-- 추가하기를 누르면 새로운 페이지로 이동 -->
         <button type="button" class="close-btn btn">취소하기</button>
-        <button class="add-btn btn" type="submit">신고하기</button>
+        <button class="add-btn btn" type="button" onclick="report()">신고하기</button>
       </div>
     </div>
   </div>
 </form>
-</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script th:src="@{/js/report.js}"></script>
-<script th:src="@{/js/detail.js}"></script>
+<script th:src="@{/js/prodetail.js}"></script>
 </body>
 </html>

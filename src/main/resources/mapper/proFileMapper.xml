@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.idollbom.mapper.boardmapper.ProFileMapper">
+    <!-- 첨부파일 추가 -->
+    <insert id="insertProFile">
+        INSERT INTO PRO_FILE (PRO_FILE_NUMBER, PRO_FILE_NAME, PRO_FILE_SIZE, PRO_FILE_ORIGIN_NAME, PRO_FILE_UPLOAD_TIME, PRO_POST_NUMBER)
+        VALUES (seq_project.nextval, #{proFileName}, #{proFileSize}, #{proFileOriginName}, sysdate, #{proPostNumber})
+    </insert>
+
+    <!-- 게시글 삭제 시, 첨부파일 삭제 -->
+    <delete id="deleteProFile">
+        DELETE FROM PRO_FILE
+        WHERE PRO_POST_NUMBER = #{proPostNumber}
+    </delete>
+
+    <!-- 게시글 번호로 첨부파일 가져오기 -->
+    <select id="selectProFileList">
+        SELECT
+            PRO_FILE_NUMBER,
+            PRO_FILE_ORIGIN_NAME,
+            PRO_FILE_NAME,
+            PRO_FILE_SIZE,
+            PRO_FILE_UPLOAD_TIME,
+            PRO_POST_NUMBER
+        FROM PRO_FILE
+        WHERE PRO_POST_NUMBER = #{ProPostNumber}
+    </select>
+
+    <!-- 파일 다운로드를 위한 select -->
+    <select id="getFileProById">
+        SELECT
+            PRO_FILE_NUMBER,
+            PRO_FILE_ORIGIN_NAME,
+            PRO_FILE_NAME,
+            PRO_FILE_SIZE,
+            PRO_FILE_UPLOAD_TIME,
+            PRO_POST_NUMBER
+        FROM PRO_FILE
+        WHERE PRO_FILE_NUMBER = #{proFileNumber}
+    </select>
+
+<!--    &lt;!&ndash; 부모정보 사진update   &ndash;&gt;-->
+<!--    <update id="updatePic">-->
+<!--        UPDATE PRO-->
+<!--        SET PRO_profile_image_url = #{PROProfileImageUrl}-->
+<!--        WHERE PRO_number = #{PRONumber}-->
+<!--    </update>-->
+</mapper>

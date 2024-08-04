@@ -2,12 +2,12 @@
 function goDelete() {
     if (confirm('게시글을 삭제하시겠습니까?')) {
         // 사용자가 '확인'을 선택했을 경우, 삭제 절차 진행
-        var parentPostNumber = document.querySelector('input[name="parentPostNumber"]').value;
-        var parentNumber = document.querySelector('input[name="parentNumber"]').value;
+        var proPostNumber = document.querySelector('input[name="proPostNumber"]').value;
+        var proNumber = document.querySelector('input[name="proNumber"]').value;
         // Form을 통해 POST 요청으로 서버에 삭제를 요청하도록 변경
         var form = document.createElement('form');
         form.method = 'post';
-        form.action = '/parentcommunity/delete/' + parentPostNumber + '/' + parentNumber;
+        form.action = '/procommunity/delete/' + proPostNumber + '/' + proNumber;
         document.body.appendChild(form);
         form.submit();
     }
@@ -20,9 +20,9 @@ function goUpdate() {
         return; // 사용자가 취소를 선택한 경우 아무 것도 하지 않습니다.
     }
 
-    var parentPostNumber = document.querySelector('input[name="parentPostNumber"]').value;
-    var parentNumber = document.querySelector('input[name="parentNumber"]').value;
-    window.location.href = '/parentcommunity/edit/' + parentPostNumber + '/' + parentNumber;
+    var proPostNumber = document.querySelector('input[name="proPostNumber"]').value;
+    var proNumber = document.querySelector('input[name="proNumber"]').value;
+    window.location.href = '/procommunity/edit/' + proPostNumber + '/' + proNumber;
 }
 
 // 댓글 관련 ajax
@@ -64,17 +64,15 @@ const loginId = parseInt($('input[name="loginId"]').val())
 
 // 페이지가 처음 로드될 때 댓글 목록 조회 함수가 실행되도록 한다.
 $(document).ready(function (){
-    let parentPostNumber = $('input[name="parentPostNumber"]').val()
-    getComments(parentPostNumber)
-    console.log(loginId)
-    console.log(parentPostNumber)
+    let proPostNumber = $('input[name="proPostNumber"]').val()
+    getComments(proPostNumber)
 })
 
 // 댓글 목록 조회 함수
-function getComments(parentPostNumber){
+function getComments(proPostNumber){
     $.ajax({
         method: 'get',
-        url: '/comments/' + parentPostNumber,
+        url: '/proComments/' + proPostNumber,
         success: function(data){ // 200이 넘어온다면
             let commentListArea = $('.comment-list')
 
@@ -93,37 +91,34 @@ function getComments(parentPostNumber){
 
             // 댓글이 존재한다면 목록을 뿌려줄 반복문
             data.forEach(function (comment){
-                let commentDate = formatDate(comment.parentCommentRegisterDate)
+                let commentDate = formatDate(comment.proCommentRegisterDate)
                 let buttons = ''
                 let editStr = ''
-                console.log(typeof loginId)
-                console.log(typeof comment.parentNumber)
-                console.log(loginId === comment.parentNumber)
 
                 // 작성일과 수정일을 비교해서 html에  (수정) 을 뿌려주기 위해서
-                if(comment.parentCommentUpdateDate !== comment.parentCommentRegisterDate){
-                    commentDate = formatDate(comment.parentCommentUpdateDate)
+                if(comment.proCommentUpdateDate !== comment.proCommentRegisterDate){
+                    commentDate = formatDate(comment.proCommentUpdateDate)
                     editStr = '(수정)'
                 }
 
                 // 현재 로그인된 계정과 댓글 작성자가 동일하다면 버튼 생성
-                if(loginId === comment.parentNumber){
+                if(loginId === comment.proNumber){
                     buttons = `
                         <!-- 수정, 삭제 버튼 -->
                          <div class="comment-actions">
-                            <button onclick="updateComment(${comment.parentCommentNumber})">수정</button>
-                            <button onclick="deleteComment(${comment.parentCommentNumber})">삭제</button>
+                            <button onclick="updateComment(${comment.proCommentNumber})">수정</button>
+                            <button onclick="deleteComment(${comment.proCommentNumber})">삭제</button>
                         </div>
                    `
                 }
 
                 // 종합적으로 뿌려주는 댓글 부분
                 let commentElement = `
-               <div class="comment-card" id="comment-${comment.parentCommentNumber}">
+               <div class="comment-card" id="comment-${comment.proCommentNumber}">
                     <div class="comment-body">
-                        <div class="comment-title">${comment.parentNickName}</div>
+                        <div class="comment-title">${comment.proNickName}</div>
                         <div class="comment-subtitle">${commentDate}${editStr}</div>
-                        <p class="comment-text">${comment.parentCommentContent}</p>
+                        <p class="comment-text">${comment.proCommentContent}</p>
                         <!-- 수정, 삭제 버튼 -->
                         ${buttons}
                     </div>
@@ -142,28 +137,28 @@ function getComments(parentPostNumber){
 
 // 댓글 추가
 function addComment(){
-    let parentPostNumber = $('input[name="parentPostNumber"]').val()
-    let parentCommentContent = $('#commentContent').val()
+    let proPostNumber = $('input[name="proPostNumber"]').val()
+    let proCommentContent = $('#commentContent').val()
 
     // textarea 비어있으면 경고
-    if(!parentCommentContent){
+    if(!proCommentContent){
         alert('내용을 입력하세오.')
         return
     }
 
     $.ajax({
         method: 'post',
-        url: '/comments',
+        url: '/proComments',
         // 데이터를 json 형태로 읽을게~
         contentType: 'application/json',
         data: JSON.stringify({
-            parentPostNumber: parentPostNumber,
-            parentCommentContent: parentCommentContent,
-            parentNumber: loginId
+            proPostNumber: proPostNumber,
+            proCommentContent: proCommentContent,
+            proNumber: loginId
         }),
         success: function (data){
             $('#commentContent').val('')
-            getComments(parentPostNumber)
+            getComments(proPostNumber)
         },
         error: function (data){
             alert('왜 안되는거야?')
@@ -173,21 +168,17 @@ function addComment(){
 }
 
 // 댓글 삭제
-function deleteComment(parentCommentNumber){
-    // 매개 변수로 pk 잘 넘어왔는지 확인.
-    // alert(commentId)
-     console.log(parentCommentNumber)
-
+function deleteComment(proCommentNumber){
     if(!confirm('정말로 삭제하시겠습니까?')){
         return;
     }
 
     $.ajax({
         method : 'delete',
-        url : '/comments/' + parentCommentNumber,
+        url : '/proComments/' + proCommentNumber,
         success : function(data) {
             console.log(data, '삭제 성공')
-            getComments($('input[name="parentPostNumber"]').val());
+            getComments($('input[name="proPostNumber"]').val());
         },
         error : function(data) {
             console.error(data, '삭제 실패')
@@ -196,41 +187,41 @@ function deleteComment(parentCommentNumber){
 }
 
 // 댓글 수정 폼 생성 함수
-function createEditForm(parentCommentNumber, currentContent){
+function createEditForm(proCommentNumber, currentContent){
     return `
         <div class="mb-3">
             <textarea class="form-control comment-edit-content" style="resize: none" rows="3">${currentContent}</textarea>
         </div>
-        <button class="update" onClick="editComment(${parentCommentNumber})">수정완료</button>
+        <button class="update" onClick="editComment(${proCommentNumber})">수정완료</button>
         <button class="delete" onClick="cancelEdit()">취소</button>
     `
 }
 
 // 수정 삭제 버튼 중 수정을 눌렀을 때
-function updateComment(parentCommentNumber) {
+function updateComment(proCommentNumber) {
     // 기존 댓글 내용을 가지고 와서, 수정 폼에 넣는다.
-    let comment = $(`#comment-${parentCommentNumber}`);
+    let comment = $(`#comment-${proCommentNumber}`);
     let content = comment.find('.comment-text').text()
-    comment.find('.comment-body').html(createEditForm(parentCommentNumber, content))
+    comment.find('.comment-body').html(createEditForm(proCommentNumber, content))
 }
 
 // 수정 완료 버튼 눌렀을 때
-function editComment(parentCommentNumber){
-    let comment = $(`#comment-${parentCommentNumber}`);
+function editComment(proCommentNumber){
+    let comment = $(`#comment-${proCommentNumber}`);
     // textarea 는 속성이 두 개 존재
     // 데이터를 뿌려줄 때는 text, 입력한 데이터를 가져올 때는 value
     let updateContent = comment.find('.comment-edit-content').val()
 
     $.ajax({
         method : 'put',
-        url : '/comments/' + parentCommentNumber,
+        url : '/proComments/' + proCommentNumber,
         contentType: 'application/json',
         data: JSON.stringify({
-            parentCommentContent : updateContent
+            proCommentContent : updateContent
         }),
         success : function(data) {
             console.log('수정 성공')
-            getComments($('input[name="parentPostNumber"]').val());
+            getComments($('input[name="proPostNumber"]').val());
         },
         error : function(data) {
             console.log('수정 삭제')
@@ -240,7 +231,7 @@ function editComment(parentCommentNumber){
 
 // 취소 버튼 눌렀을 때
 function cancelEdit(){
-    getComments($('input[name="parentPostNumber"]').val());
+    getComments($('input[name="proPostNumber"]').val());
 }
 
 // 신고횟수에 따른 게시글 스타일 수정
@@ -264,8 +255,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 })
 
+
 // 신고하기 버튼을 눌렀을 때
-function parentReport(){
+function report(){
     const content = document.getElementById('textarea')
     const report = document.getElementById('reportContent').parentNode
 
@@ -278,26 +270,26 @@ function parentReport(){
             isValid = false
         }
 
-        return isValid;
+        return isValid
     }
 
     // 텍스트 영역의 변경 이벤트를 처리하여 오류 메시지 숨김
     content.addEventListener('input', function() {
         report.style.display = 'none'
-    });
+    })
 
     // 유효성 검사 및 확인 절차
     if (reportValid()) {
-        const userConfirmed = confirm('정말로 신고하시겠습니까?');
+        const userConfirmed = confirm('정말로 신고하시겠습니까?')
 
         if (userConfirmed) {
             // 사용자가 확인 버튼을 클릭하면 폼을 제출
-            document.getElementById('reportForm').submit();
+            document.getElementById('reportForm').submit()
         }
     }
 }
 
 // 목록보기 함수
 function back(){
-    window.history.back();
+    window.history.back()
 }
