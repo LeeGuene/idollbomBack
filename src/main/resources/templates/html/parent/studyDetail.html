@@ -18,6 +18,7 @@
   <div id="main-wrapper">
     <!-- 뒤로가기 버튼 -->
     <button onclick="goBack()"><</button>
+    <input th:value="${role}" name="role" type="hidden" />
     <!-- 왼쪽 수업 상세정보 영역 -->
     <div class="detail-left-area">
       <div id="top">이동버튼 도착지</div>
@@ -104,7 +105,7 @@
           <!-- 수업 결제, 수업 찜하기 버튼 -->
           <div class="payment-button-wrap">
             <div>
-              <button type="submit" class="payment-btn">수업 결제하기</button>
+              <button onclick="payCheckAlarm(event)" type="submit" class="payment-btn">수업 결제하기</button>
               <a th:href="@{/ParentMyPage/insertSaveClass(classNumber=*{classNumber}, parentNumber=${parentNumber}, proNumber=*{proNumber})}">
                 수업 찜하기
               </a>

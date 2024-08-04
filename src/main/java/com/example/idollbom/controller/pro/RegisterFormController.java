@@ -5,6 +5,7 @@ import com.example.idollbom.domain.dto.prodto.ClassDTO;
 import com.example.idollbom.domain.dto.prodto.ReservationDateDTO;
 import com.example.idollbom.domain.vo.ProVO;
 import com.example.idollbom.service.loginservice.ProService;
+import com.example.idollbom.service.myPageservice.parentservice.noteService;
 import com.example.idollbom.service.proService.RegisterFormService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +36,7 @@ public class RegisterFormController {
 
     private final RegisterFormService registerFormService;
     private final ProService proService;
+    private final noteService noteService;
 
     // 수업등록하는 화면으로 이동 컨트롤러
     @GetMapping("/register")
@@ -47,15 +49,22 @@ public class RegisterFormController {
             CustomUserDTO pro = ((CustomUserDTO) authentication.getPrincipal());
             String proId = pro.getEmail();
 
-            ProVO pro_info = proService.selectPro(proId);
+            // 부모에서 로그인하고 전문가 페이지로 넘어갔을 때, 수업 등록을 막아주기 위한 코드
+            if (pro.getRole().equals("pro")) {
+                ProVO pro_info = proService.selectPro(proId);
+                String role = pro_info.getRole();
+                Long proNumber = pro_info.getProNumber();
+                int count = noteService.countProNoteList(proNumber);
 
-            String role = pro_info.getRole();
-            System.out.println(role);
+                System.out.println(role);
+                model.addAttribute("count", count);
+                model.addAttribute("role", role);
+                model.addAttribute("proNumber", proNumber);
 
-            model.addAttribute("role", role);
+                return "/html/pro/registerForm";
+            }
         }
-
-        return "/html/pro/registerForm";
+        return "redirect:/user/login"; // 전문가가 아니면 로그인 페이지로 이동
     }
 
     // 수업 등록을 눌렀을 때

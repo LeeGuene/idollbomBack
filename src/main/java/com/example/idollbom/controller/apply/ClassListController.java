@@ -10,6 +10,7 @@ import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.service.applyservice.ClassDetailService;
 import com.example.idollbom.service.applyservice.ClassListService;
 import com.example.idollbom.service.applyservice.ClassReviewService;
+import com.example.idollbom.service.myPageservice.parentservice.noteService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -31,6 +32,7 @@ public class ClassListController {
     private final ClassListService classListService;
     private final ClassDetailService classDetailService;
     private final ClassReviewService classReviewService;
+    private final noteService noteService;
     private final ParentMapper parentMapper;
     
     // 부모 role, parentNumber를 받아오는 메서드
@@ -43,7 +45,10 @@ public class ClassListController {
 
             ParentVO parent = parentMapper.selectOne(parentId);
 
-            // model.addAttribute("parentName", parent.getParentName());
+            // 부모 정보를 받아와서 쪽지목록 개수를 계산해서 html로 전달
+            int count = noteService.countParentNoteList(parent.getParentNumber());
+
+            model.addAttribute("noteCount", count);
             model.addAttribute("role", parent.getRole());
             model.addAttribute("parentNumber", parent.getParentNumber());
         }else{
@@ -59,7 +64,7 @@ public class ClassListController {
                             @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
                             @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                             Model model) {
-    
+
         getRole(model);
 
         model.addAttribute("category", category);
@@ -111,7 +116,6 @@ public class ClassListController {
         int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
         int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
 
-
         model.addAttribute("count", count);
         model.addAttribute("category", category);
         model.addAttribute("classLists", classListDTO);
@@ -144,7 +148,6 @@ public class ClassListController {
         int pageGroupSize = 3;
         int startPage = ((pageNo - 1) / pageGroupSize) * pageGroupSize + 1;
         int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
-
 
         model.addAttribute("count", count);
         model.addAttribute("category", category);
@@ -203,7 +206,7 @@ public class ClassListController {
         log.info("전문가 pk : " + proNumber);
 
         getRole(model);
-        
+
         // 특정 수업에 대한 상세정보
         ClassDetailDTO class_info = classDetailService.findClassDetail(proNumber, classNumber);
 
