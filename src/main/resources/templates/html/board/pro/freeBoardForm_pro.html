@@ -12,40 +12,48 @@
   <!-- 페이지 전체 제목 -->
   <div class="page-title-wrap">
     <h1>자유 게시판</h1>
-    <p>아이의 부모들이 자유롭게 게시글을 작성할 수 있는 게시판입니다.</p>
+    <p>전문가들이 자유롭게 게시글을 작성할 수 있는 게시판입니다.</p>
   </div>
 
   <!-- 목록 보기 버튼 -->
   <div class="list-btn-wrap">
-    <a href="/parentcommunity" class="btn btn-primary">목록 보기</a>
+    <a href="/procommunity" class="btn btn-primary">목록 보기</a>
   </div>
 
-  <form class="board-form" th:action="@{/parentcommunity/write}" method="post" enctype="multipart/form-data" th:object="${community}">
-    <input type="hidden" th:field="*{parentNumber}">
-    <input type="hidden" th:field="*{parentPostNumber}">
+  <form class="board-form" th:action="@{/procommunity/proWrite}" method="post" enctype="multipart/form-data" th:object="${pro}" onsubmit="return proCommunityForm()">
+    <input type="hidden" th:field="*{proNumber}">
+    <input type="hidden" th:field="*{proPostNumber}">
     <!-- 게시글 제목 -->
     <div class="post-title-wrap form-group">
-      <label for="parentPostTitle">제목</label>
-      <input type="text" id="parentPostTitle" class="form-control" name="parentPostTitle" th:field="*{parentPostTitle}" required>
+      <label for="proPostTitle">제목</label>
+      <input type="text" id="proPostTitle" class="form-control" name="proPostTitle" th:field="*{proPostTitle}">
+    </div>
+    <div class="extra-info">
+      <p id="communityTitle">제목을 입력해주세요.</p>
     </div>
 
     <!-- 게시글 내용 -->
     <div class="post-content-wrap form-group">
-      <label for="parentPostContent">내용</label>
-      <textarea id="parentPostContent" class="form-control" style="resize: none;" name="parentPostContent" rows="6" th:field="*{parentPostContent}" required></textarea>
+      <label for="proPostContent">내용</label>
+      <textarea id="proPostContent" class="form-control" style="resize: none;" name="proPostContent" rows="6" th:field="*{proPostContent}"></textarea>
     </div>
+    <div class="extra-info">
+      <p id="communityContent">내용을 입력해주세요.</p>
+    </div>
+
 
     <!-- 첨부파일 -->
     <div class="attachment-wrap form-group">
-      <label for="parentFiles">첨부파일</label>
-      <input type="file" id="parentFiles" class="form-control-file" name="parentFiles" multiple requiredb>
+      <label for="proFiles">첨부파일</label>
+      <input type="file" id="proFiles" class="form-control-file" name="proFiles" multiple>
     </div>
 
     <!-- 게시글 등록 버튼 -->
     <div class="post-submitBtn-wrap form-group">
-      <button type="submit" class="btn btn-success" th:text="${community.parentNumber != null} ? '수정하기' : '등록하기'">등록하기</button>
+      <button type="submit" class="btn btn-success" th:text="${pro.proNumber != null} ? '수정하기' : '등록하기'">등록하기</button>
     </div>
   </form>
 </div>
+<script th:src="@{/js/proCommunityValid.js}"></script>
 </body>
 </html>

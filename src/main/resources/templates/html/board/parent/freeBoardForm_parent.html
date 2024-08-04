@@ -20,25 +20,32 @@
     <a href="/parentcommunity" class="btn btn-primary">목록 보기</a>
   </div>
 
-  <form class="board-form" th:action="@{/parentcommunity/write}" method="post" enctype="multipart/form-data" th:object="${community}">
+  <form class="board-form" th:action="@{/parentcommunity/write}" method="post" enctype="multipart/form-data" th:object="${community}" onsubmit="return parentCommunityForm()">
     <input type="hidden" th:field="*{parentNumber}">
     <input type="hidden" th:field="*{parentPostNumber}">
     <!-- 게시글 제목 -->
     <div class="post-title-wrap form-group">
       <label for="parentPostTitle">제목</label>
-      <input type="text" id="parentPostTitle" class="form-control" name="parentPostTitle" th:field="*{parentPostTitle}" required>
+      <input type="text" id="parentPostTitle" class="form-control" name="parentPostTitle" th:field="*{parentPostTitle}">
+    </div>
+    <div class="extra-info">
+      <p id="parentCommunityTitle">제목을 입력해주세요.</p>
     </div>
 
     <!-- 게시글 내용 -->
     <div class="post-content-wrap form-group">
       <label for="parentPostContent">내용</label>
-      <textarea id="parentPostContent" class="form-control" style="resize: none;" name="parentPostContent" rows="6" th:field="*{parentPostContent}" required></textarea>
+      <textarea id="parentPostContent" class="form-control" style="resize: none;" name="parentPostContent" rows="6" th:field="*{parentPostContent}"></textarea>
     </div>
+    <div class="extra-info">
+      <p id="parentCommunityContent">내용을 입력해주세요.</p>
+    </div>
+
 
     <!-- 첨부파일 -->
     <div class="attachment-wrap form-group">
       <label for="parentFiles">첨부파일</label>
-      <input type="file" id="parentFiles" class="form-control-file" name="parentFiles" multiple requiredb>
+      <input type="file" id="parentFiles" class="form-control-file" name="parentFiles" multiple>
     </div>
 
     <!-- 게시글 등록 버튼 -->
@@ -47,5 +54,6 @@
     </div>
   </form>
 </div>
+<script th:src="@{/js/parentCommunityValid.js}"></script>
 </body>
 </html>
