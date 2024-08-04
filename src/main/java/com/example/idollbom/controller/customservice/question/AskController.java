@@ -102,6 +102,8 @@ public class AskController {
         log.info("questionTitle(문의 제목) : " + question.getQuestionTitle());
         log.info("questionContent(문의 내용) : " + question.getQuestionContent());
 
+        log.info("모든 데이터 : " + question.toString());
+
         // 문의하기 추가 쿼리문 실행
         questionService.saveQuestion(question);
 

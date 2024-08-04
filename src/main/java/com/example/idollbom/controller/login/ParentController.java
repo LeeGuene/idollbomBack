@@ -2,7 +2,6 @@ package com.example.idollbom.controller.login;
 
 import com.example.idollbom.domain.dto.logindto.ParentDTO;
 import com.example.idollbom.domain.dto.logindto.ProDTO;
-import com.example.idollbom.mapper.loginmapper.ProMapper;
 import com.example.idollbom.service.loginservice.ParentService;
 import com.example.idollbom.service.loginservice.ProService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,12 +24,10 @@ public class ParentController {
 
     private final ParentService parentService;
     private final ProService proService;
-    private final ProMapper proMapper;
 
 //  부모 로그인화면이동
     @GetMapping("/login")
     public String login() {
-
         return "html/login/loginpage";
 
     }

@@ -27,10 +27,6 @@ public class RecommendServiceImpl implements RecommendService {
         int totalPros = recommendMapper.getCount();
         int totalPages = (int) Math.ceil((double) totalPros / pageSize);
 
-//        int pageGroupSize = 5;
-//        int startPage = ((page - 1) / pageGroupSize) * pageGroupSize + 1;
-//        int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
-
         // 추천 전문가에 대한 전체 리스트
         List<RecommendListDTO> pros = recommendMapper.recommend(startRow, endRow);
 
