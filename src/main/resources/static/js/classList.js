@@ -181,6 +181,17 @@ function saveKeyword(){
     getList(1)
 }
 
+// 엔터로 검색할 함수
+document.getElementById('searchEnter').addEventListener('keydown', async function(event){
+    if(event.key === 'Enter'){
+        event.preventDefault()
+        searchType = $('select[name="searchType"]').val()
+        searchWord = $('input[name="searchWord"]').val()
+        category = $('input[name="category"]').val()
+        getList(1)
+    }
+})
+
 // 수업 찜 목록 추가/삭제 비동기 구현
 function addClassSave(){
     let saveBtns = document.querySelectorAll('.save-btn');
@@ -274,7 +285,4 @@ function goClassDetail(e){
     document.body.append(form);
 
     form.submit();
-
-
-
 }
