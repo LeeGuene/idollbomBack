@@ -6,6 +6,7 @@ import com.example.idollbom.domain.dto.prodto.ProDetailDTO;
 import com.example.idollbom.domain.dto.prodto.ProReviewListDTO;
 import com.example.idollbom.domain.vo.ProVO;
 import com.example.idollbom.service.loginservice.ProService;
+import com.example.idollbom.service.myPageservice.parentservice.noteService;
 import com.example.idollbom.service.proService.ChildFindService;
 import com.example.idollbom.service.proService.ProDetailService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,7 @@ public class ProController {
     private final ProDetailService proDetailService;
     private final ChildFindService childFindService;
     private final ProService proService;
+    private final noteService noteService;
 
     // 1. 메인 페이지에서 전문가 프로필 클릭해서 넘어옴
     // 2. 수업 상세보기에서 프로필 보기를 통해 넘어옴
@@ -66,8 +68,11 @@ public class ProController {
             ProVO pro_info = proService.selectPro(proId);
 
             String role = pro_info.getRole();
+            int count = noteService.countProNoteList(pro_info.getProNumber());
+
             System.out.println(role);
 
+            model.addAttribute("count", count);
             model.addAttribute("role", role);
         }
 

@@ -6,6 +6,7 @@ import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
 import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.service.customserviceservice.question.QuestionService;
+import com.example.idollbom.service.myPageservice.parentservice.noteService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -25,6 +26,7 @@ public class AskController {
 
     private final ParentMapper parentMapper;
     private final QuestionService questionService;
+    private final noteService noteService;
 
     public void getRole(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -34,13 +36,12 @@ public class AskController {
             String parentId = parent_info.getEmail();
 
             ParentVO parent = parentMapper.selectOne(parentId);
-
-            // model.addAttribute("parentName", parent.getParentName());
+            log.info("부모 정보 : " + parent.toString());
+            int count = noteService.countParentNoteList(parent.getParentNumber());
+            log.info("count : " + count);
+            model.addAttribute("count", count);
             model.addAttribute("role", parent.getRole());
             model.addAttribute("parentNumber", parent.getParentNumber());
-        }else{
-            model.addAttribute("parentName", "Guest");
-            model.addAttribute("role", "Guest");
         }
     }
 
@@ -100,6 +101,8 @@ public class AskController {
         log.info("parentNumber(부모 pk) : " + question.getParentNumber());
         log.info("questionTitle(문의 제목) : " + question.getQuestionTitle());
         log.info("questionContent(문의 내용) : " + question.getQuestionContent());
+
+        log.info("모든 데이터 : " + question.toString());
 
         // 문의하기 추가 쿼리문 실행
         questionService.saveQuestion(question);

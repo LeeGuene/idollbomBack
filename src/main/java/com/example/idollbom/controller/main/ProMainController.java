@@ -30,23 +30,26 @@ public class ProMainController {
 
         if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
             CustomUserDTO pro = ((CustomUserDTO) authentication.getPrincipal());
+            log.info("인증하러 들어옴!!");
+            log.info("role : " + pro.getRole());
             String proId = pro.getEmail();
 
-            ProVO pro_info = proService.selectPro(proId);
+            if (!pro.getRole().equals("parent")) {
+                ProVO pro_info = proService.selectPro(proId);
+                String role = pro_info.getRole();
+                Long proNumber = pro_info.getProNumber();
+                String proName = pro_info.getProName();
 
-            Long proNumber = pro_info.getProNumber();
-            String role = pro_info.getRole();
-            String proName = pro_info.getProName();
+                int count = noteService.countProNoteList(proNumber);
 
-            int count = noteService.countProNoteList(proNumber);
+                System.out.println(proNumber);
+                log.info("role : " + role);
 
-            System.out.println(proNumber);
-            System.out.println(role);
-
-            model.addAttribute("count", count);
-            model.addAttribute("proName", proName);
-            model.addAttribute("role", role);
-            model.addAttribute("proNumber", proNumber);
+                model.addAttribute("count", count);
+                model.addAttribute("proName", proName);
+                model.addAttribute("role", role);
+                model.addAttribute("proNumber", proNumber);
+            }
         }
 
         return "/html/main/index_pro.html";

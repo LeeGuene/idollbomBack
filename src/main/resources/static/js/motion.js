@@ -2,11 +2,11 @@ let answer; // 문의 답변내용을 담는 변수
 
 $(document).ready(function(){
     const answerContents = document.querySelectorAll('.answer_content');
-    console.log(answerContents);
+    // console.log(answerContents);
 
     answerContents.forEach(answerContent=>{
         if(answerContent.textContent != null){
-            answer = answerContent;
+            answer = answerContent.textContent;
         }
     })
 

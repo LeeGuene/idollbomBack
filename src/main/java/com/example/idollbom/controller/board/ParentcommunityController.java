@@ -9,11 +9,11 @@ import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.service.boardservice.CommunityService;
 import com.example.idollbom.service.boardservice.ParentFileService;
 import com.example.idollbom.service.boardservice.ParentReportService;
+import com.example.idollbom.service.myPageservice.parentservice.noteService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +31,10 @@ public class ParentcommunityController {
     private final ParentFileService parentFileService;
     private final ParentReportService parentReportService;
     private final ParentMapper parentMapper;
+    private final noteService noteService;
 
     // 게시글 목록 띄어주는 컨트롤러
-    @GetMapping()
+    @GetMapping
     public String community(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -46,9 +47,15 @@ public class ParentcommunityController {
             System.out.println(userRole);
             model.addAttribute("userRole", userRole);
             ParentVO parent = parentMapper.selectOne(parentId);
-            model.addAttribute("parentNumber", parent.getParentNumber());
-        }
 
+            // 부모 정보를 받아와서 쪽지목록 개수를 계산해서 html로 전달
+            int count = noteService.countParentNoteList(parent.getParentNumber());
+
+            log.info("count : " + count);
+            model.addAttribute("count", count);
+            model.addAttribute("parentNumber", parent.getParentNumber());
+
+        }
         return "html/board/parent/community_parent";
     }
 

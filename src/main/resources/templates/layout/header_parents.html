@@ -54,6 +54,7 @@
                     <button onclick="goMynote()">
                         <!-- 쪽지함(아이콘)에 쪽지 목록 카운트한 거 보여줌. -->
                         <input th:if="${role == 'parent'}" type="text" th:value="${count}" />
+                        <input th:if="${role == 'parent'} and ${noteCount != null}" th:value="${noteCount}" />
                         <img th:src="@{/images/Alarm.png}" alt="알림">
                     </button>
                 </p>
