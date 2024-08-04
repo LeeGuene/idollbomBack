@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.idollbom.mapper.boardmapper.ProCommentMapper">
+    <!-- 특정 게시글의 모든 댓글 조회 -->
+    <select id="selectCommentByPro">
+        SELECT p.PRO_NICKNAME, pc.*
+        FROM PRO p JOIN PRO_COMMENT pc
+           ON p.PRO_NUMBER = pc.PRO_NUMBER
+           AND PRO_POST_NUMBER = #{proPostNumber}
+        ORDER BY PRO_COMMENT_UPDATE_DATE DESC
+    </select>
+
+    <!-- 댓글추가 -->
+    <insert id="insertProComment">
+        INSERT INTO PRO_COMMENT(PRO_COMMENT_NUMBER, PRO_COMMENT_CONTENT, PRO_COMMENT_REGISTER_DATE,
+                                PRO_COMMENT_UPDATE_DATE, PRO_POST_NUMBER, PRO_NUMBER)
+        VALUES (SEQ_PROJECT.nextval, #{proCommentContent}, sysdate, sysdate, #{proPostNumber}, #{proNumber})
+    </insert>
+
+    <!-- 댓글 삭제 -->
+    <delete id="deleteProComment">
+        delete from PRO_COMMENT
+        where pro_comment_number = #{proCommentNumber}
+    </delete>
+
+    <!-- 댓글 수정 -->
+    <update id="updateProComment">
+        update pro_comment
+        set pro_comment_content = #{proCommentContent}, pro_comment_update_date = sysdate
+        where pro_comment_number = #{proCommentNumber}
+    </update>
+</mapper>

@@ -72,7 +72,7 @@ body {
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .form-group label {
@@ -117,4 +117,13 @@ body {
 
 .post-submitBtn-wrap button:hover {
   background-color: #218838;
+}
+
+.extra-info{
+  display: none;
+}
+
+.extra-info > p{
+  color: red;
+  font-size: 15px;
 }

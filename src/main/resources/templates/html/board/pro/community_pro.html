@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div th:replace="~{/layout/header_parents :: header_parents}"></div>
+    <div th:replace="~{/layout/header_pro :: header_pro}"></div>
     <div id="container">
         <div class="community">
             <h2>자유게시판</h2>
@@ -19,7 +19,7 @@
 
             <div class="community_search">
                 <input type="hidden" name="userRole" th:value="${userRole}">
-                <p><a th:href="@{/parentcommunity/write}">작성하기</a></p>
+                <p><a th:if="${userRole == 'pro'}" th:href="@{/procommunity/proWrite}">작성하기</a></p>
 
                 <div>
                     <form id="searchForm">
@@ -64,6 +64,6 @@
 <!--비동기 처리를 위한 js 추가-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script th:src="@{/js/motion.js}"></script>
-<script th:src="@{/js/parentCommunity.js}"></script>
+<script th:src="@{/js/proCommunity.js}"></script>
 
 </html>

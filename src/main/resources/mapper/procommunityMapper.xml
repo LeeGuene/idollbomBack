@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.idollbom.mapper.boardmapper.ProCommunityMapper">
+    <!--  다음 시퀀스를 가져오는 쿼리문  -->
+    <!--  community insert 시 사용할 예정  -->
+    <select id="getProSeq" resultType="int">
+        select SEQ_PROJECT.nextval from dual
+    </select>
+
+    <!-- 게시글 작성 쿼리문 -->
+    <insert id="saveProCommunity">
+        insert into pro_post(PRO_POST_NUMBER, PRO_POST_TITLE, PRO_POST_CONTENT, PRO_POST_VIEWS, PRO_POST_REGISTER_DATE,
+                             PRO_POST_UPDATE_DATE, PRO_NUMBER, PRO_POST_REPORTCOUNT)
+        values(#{proPostNumber}, #{proPostTitle}, #{proPostContent}, 0, sysdate, sysdate, #{proNumber}, 0)
+    </insert>
+
+    <!--  게시글 상세보기  -->
+    <select id="selectProCommunityDetail" resultType="ProCommunityDetailDTO">
+        SELECT
+            P.PRO_POST_NUMBER,
+            P.PRO_POST_TITLE,
+            P.PRO_POST_CONTENT,
+            U.PRO_NICKNAME,
+            U.PRO_NUMBER,
+            P.PRO_POST_VIEWS,
+            P.PRO_POST_REGISTER_DATE,
+            P.PRO_POST_UPDATE_DATE,
+            (SELECT COUNT(*) FROM PRO_FILE PF WHERE PF.PRO_POST_NUMBER = P.PRO_POST_NUMBER) AS FILE_COUNT
+        FROM
+            PRO_POST P JOIN PRO U ON U.PRO_NUMBER = P.PRO_NUMBER
+        where p.PRO_POST_NUMBER = #{proPostNumber}
+    </select>
+
+    <!--  조회 수 +1  -->
+    <update id="plusProView">
+        update pro_post
+        set pro_post_views = pro_post_views + 1
+        where pro_post_number = #{proPostNumber}
+    </update>
+
+    <!-- 게시글 삭제하기 -->
+    <delete id="deleteProCommunity">
+        delete from pro_post
+        where pro_post_number = #{proPostNumber}
+    </delete>
+
+    <!-- 게시글 수정하기 -->
+    <update id="updateProCommunity">
+        update pro_post
+        set pro_post_title = #{proPostTitle}, pro_post_content = #{proPostContent}, pro_post_update_date = sysdate
+        where pro_post_number = #{proPostNumber}
+    </update>
+
+    <!-- 검색 기능 구현  -->
+    <select id="searchProCommunityList" resultType="ProCommunityListDTO">
+        SELECT *
+        FROM (
+             SELECT ROWNUM AS RN, BOARD.*
+             FROM (
+                SELECT
+                    p.PRO_POST_NUMBER,
+                    p.PRO_POST_TITLE,
+                    p.PRO_NUMBER,
+                    p.PRO_POST_REGISTER_DATE,
+                    p.PRO_POST_REPORTCOUNT,
+                    p1.PRO_NICKNAME,
+                    p1.PRO_PROFILE_IMAGE_URL
+                FROM pro_post p
+                JOIN PRO P1
+                ON p.PRO_NUMBER = p1.PRO_NUMBER
+                  <where>
+                      <if test="searchWord !=null">
+                        <choose>
+                            <when test="searchType == 'all'">
+                                p.PRO_POST_TITLE LIKE '%' || #{searchWord} || '%' OR p1.PRO_NICKNAME LIKE '%' || #{searchWord} || '%'
+                            </when>
+                            <when test="searchType == 'title'">
+                                p.PRO_POST_TITLE LIKE '%' || #{searchWord} || '%'
+                            </when>
+                            <otherwise>
+                                p1.PRO_NICKNAME LIKE '%' || #{searchWord} || '%'
+                            </otherwise>
+                        </choose>
+                      </if>
+                  </where>
+                  ORDER BY p.PRO_POST_REGISTER_DATE DESC
+              ) BOARD
+             WHERE ROWNUM &lt;= #{endRow}
+             )
+        WHERE rn &gt; #{startRow}
+    </select>
+
+    <!-- 검색 시 갯수를 가져오는 select (검색 페이징 처리를 위해) -->
+    <select id="countSearchProCommunity">
+        SELECT COUNT(*)
+        FROM PRO_POST p1 join PRO p
+        on p1.pro_number = p.pro_number
+        <where>
+            <if test="searchWord != null">
+                <choose>
+                    <when test="searchType == 'all'">
+                        PRO_POST_TITLE LIKE '%' || #{searchWord} || '%' OR p.PRO_NICKNAME LIKE '%' || #{searchWord} || '%'
+                    </when>
+                    <when test="searchType == 'title'">
+                        PRO_POST_TITLE LIKE '%' || #{searchWord} || '%'
+                    </when>
+                    <otherwise>
+                        p.PRO_NICKNAME LIKE '%' || #{searchWord} || '%'
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+    </select>
+</mapper>
