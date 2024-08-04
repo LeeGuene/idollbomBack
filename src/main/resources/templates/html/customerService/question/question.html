@@ -26,6 +26,7 @@
                     <!-- 문의하기 제목 -->
                     <!-- 비공개 글이면 답변을 조회할 수 있도록 css 적용 -->
                     <dt th:classappend="${!visibleList.contains(question.questionNumber)} ? 'disabled' : ''">
+                        <input type="hidden" th:value="${question.answerNumber}" />
                         <span>Q.</span>
                         <span
                                 th:text="${!visibleList.contains(question.questionNumber)} ? '비공개 글입니다.' : *{questionContent}"
@@ -33,7 +34,9 @@
                         >
                         </span>
                         <!-- 문의하기 상태에 따라 출력되는 글자를 다르게 적용 -->
-                        <button th:text="*{answerNumber != null} ? '답변 중' : '답변 완료'"></button>
+                        <button th:text="*{answerNumber != null} ? '답변 완료' : '답변 중'"
+                                th:style="*{answerNumber != null} ? '' : 'opacity: 0.5;'"
+                        ></button>
                         <button th:text="${!visibleList.contains(question.questionNumber)} ? '비공개' : '공개'"
                                 th:style="${!visibleList.contains(question.questionNumber)} ? 'background-color: red;' : 'background-color: blue;'"
                         >
@@ -43,7 +46,7 @@
 
                     <!-- 문의 답변 내용 -->
                     <!-- 공개 글이더라도 작성자와 로그인 한 회원이 일치하는 경우에만 문의답변을 조회할 수 있도록 설정 -->
-                    <dd th:if="${parentNumber == question.parentNumber} and *{answerContent != null}">
+                    <dd th:if="${parentNumber == question.parentNumber} and *{answerContent}">
                         <span>A.</span>
                         <span class="answer_content" th:text="*{answerContent}"></span>
                     </dd>

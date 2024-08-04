@@ -21,7 +21,8 @@
 
     <!-- 수업등록 폼 -->
     <form id="registerForm" th:action="@{/pro/register}" enctype="multipart/form-data" method="post" onsubmit="return validForm()">
-
+`     <!-- 수업 등록을 하면서 아이찾기 메뉴 클릭해서 넘어가기 위해 proNumber를 넘김. -->
+      <input type="hidden" name="proNumber" th:value="${proNumber} "/>
       <!-- 수업 제목 -->
       <div class="study-title">
         <label for="title">수업 제목</label>

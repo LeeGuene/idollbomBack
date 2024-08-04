@@ -4,6 +4,7 @@ import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
 import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.service.matchservice.MatchingService;
+import com.example.idollbom.service.myPageservice.parentservice.noteService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -21,6 +22,7 @@ public class MatchingController {
 
     private final MatchingService matchingService;
     private final ParentMapper parentMapper;
+    private final noteService noteService;
 
     // 자동매칭 들어가는 첫 화면
     @GetMapping
@@ -34,7 +36,9 @@ public class MatchingController {
 
             ParentVO parent = parentMapper.selectOne(parentId);
 
-            // model.addAttribute("parentName", parent.getParentName());
+            int count = noteService.countParentNoteList(parent.getParentNumber());
+
+            model.addAttribute("count", count);
             model.addAttribute("role", parent.getRole());
             model.addAttribute("parentNumber", parent.getParentNumber());
         }else{

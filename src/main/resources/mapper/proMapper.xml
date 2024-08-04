@@ -7,6 +7,7 @@
           select * from pro
           where pro_email = #{proEmail}
       </select>
+
      <!-- 회원가입 -->
     <insert id="insert">
         insert into PRO (PRO_NUMBER, PRO_EMAIL, PRO_PASSWORD, PRO_NAME, PRO_NICKNAME, PRO_PHONE_NUMBER, PRO_ADDRESS,

@@ -7,8 +7,8 @@ import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.domain.vo.kidVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.service.applyservice.ClassDetailService;
-import com.example.idollbom.service.loginservice.ParentService;
 import com.example.idollbom.service.myPageservice.parentservice.kidsService;
+import com.example.idollbom.service.myPageservice.parentservice.noteService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -34,7 +34,9 @@ public class PaymentCheckController {
     // 수업 상세보기 가져오기 위한 의존성 주입
     private final ClassDetailService classDetailService;
     private final ParentMapper parentMapper;
-
+    
+    // 쪽지함 목록개수를 가져오기 위한 의존성 주입
+    private final noteService noteService;
 
     // 결제확인창 컨틀롤러
     // 이때 로그인한 부모의 pk와 수업pk를 가져와서 데이터를 뿌려줘야한다.
@@ -52,6 +54,12 @@ public class PaymentCheckController {
 
         ParentVO parent_info = parentMapper.selectOne(parentName);
         Long parentId = parent_info.getParentNumber();
+        
+        // 쪽지 목록개수 조회
+        int count = noteService.countParentNoteList(parentId);
+        model.addAttribute("count", count);
+        model.addAttribute("role", parent_info.getRole());
+
         model.addAttribute("parent_info", parent_info);
         model.addAttribute("parentId", parentId);
 

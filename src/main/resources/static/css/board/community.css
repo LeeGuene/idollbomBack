@@ -52,6 +52,12 @@ h2{font-size: 35px; text-align: center; margin: 100px 0 50px 0;}
 .community table tr td:nth-of-type(3) a{display: block; width: 100%; height: 80px; line-height: 80px; color: #048D3B; font-family: 'GmarketSansBold'; background: url(../images/comu_more.png)no-repeat right 20px top 35px;}
 .community table tr td:nth-of-type(3) a::after{content: ''; display: block; position: absolute; margin: -20px 0 0 32px; width: 70px; border-bottom: 2px solid #D7D7D7;}
 .community table tr td:nth-of-type(4){color: #CDCDCD;}
+/* 부모 이미지 크기 css */
+.community table tr td > img{
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+}
 
 /* 페이지 버튼 */
 .community_btn{width: 300px; height: 40px; margin: 0 auto 200px auto; display: flex;}
