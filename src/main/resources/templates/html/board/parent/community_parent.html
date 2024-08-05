@@ -19,8 +19,8 @@
             <p>우리 아이에게 필요한 소식을 자유롭게 공유합니다.</p>
 
             <div class="community_search">
-                <input type="hidden" name="userRole" th:value="${userRole}">
-                <p><a th:if="${userRole == 'parent'}" th:href="@{/parentcommunity/write}">작성하기</a></p>
+                <input type="hidden" name="userRole" th:value="${role}">
+                <p><a th:if="${role == 'parent'}" th:href="@{/parentcommunity/write}">작성하기</a></p>
 
                 <div>
                     <form id="searchForm">
