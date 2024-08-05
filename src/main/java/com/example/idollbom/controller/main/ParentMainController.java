@@ -32,21 +32,26 @@ public class ParentMainController {
     public String getRole(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+        log.info("부모 로그인 없이 들어옴!!");
+
         if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
             CustomUserDTO parent_info = ((CustomUserDTO) authentication.getPrincipal());
-            String parentId = parent_info.getEmail();
 
-            ParentVO parent = parentMapper.selectOne(parentId);
+            log.info("회원 role 정보 : " + parent_info.getRole());
+            if (parent_info.getRole().equals("parent")) {
+                String parentId = parent_info.getEmail();
+                ParentVO parent = parentMapper.selectOne(parentId);
 
-            log.info("부모 정보 : " + parent.toString());
+                log.info("부모 정보 : " + parent.toString());
 
-            // 부모 정보를 받아와서 쪽지목록 개수를 계산해서 html로 전달
-            int count = noteService.countParentNoteList(parent.getParentNumber());
+                // 부모 정보를 받아와서 쪽지목록 개수를 계산해서 html로 전달
+                int count = noteService.countParentNoteList(parent.getParentNumber());
 
-            model.addAttribute("noteCount", count);
-            model.addAttribute("role", parent.getRole());
-            model.addAttribute("parentNumber", parent.getParentNumber());
-            return parent.getParentName();
+                model.addAttribute("noteCount", count);
+                model.addAttribute("role", parent.getRole());
+                model.addAttribute("parentNumber", parent.getParentNumber());
+                return parent.getParentName();
+            }
         }
         return null;
     }

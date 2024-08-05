@@ -36,13 +36,16 @@ public class AskController {
             CustomUserDTO parent_info = ((CustomUserDTO) authentication.getPrincipal());
             String parentId = parent_info.getEmail();
 
-            ParentVO parent = parentMapper.selectOne(parentId);
-            log.info("부모 정보 : " + parent.toString());
-            int count = noteService.countParentNoteList(parent.getParentNumber());
-            log.info("count : " + count);
-            model.addAttribute("count", count);
-            model.addAttribute("role", parent.getRole());
-            model.addAttribute("parentNumber", parent.getParentNumber());
+            if(parent_info.getRole().equals("parent")){
+                ParentVO parent = parentMapper.selectOne(parentId);
+                log.info("부모 정보 : " + parent.toString());
+                int count = noteService.countParentNoteList(parent.getParentNumber());
+                log.info("count : " + count);
+                model.addAttribute("count", count);
+                model.addAttribute("role", parent.getRole());
+                model.addAttribute("parentNumber", parent.getParentNumber());
+            }
+
         }
     }
 

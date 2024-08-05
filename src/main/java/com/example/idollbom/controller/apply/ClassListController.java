@@ -43,14 +43,16 @@ public class ClassListController {
             CustomUserDTO parent_info = ((CustomUserDTO) authentication.getPrincipal());
             String parentId = parent_info.getEmail();
 
-            ParentVO parent = parentMapper.selectOne(parentId);
+            if (parent_info.getRole().equals("parent")) {
+                ParentVO parent = parentMapper.selectOne(parentId);
 
-            // 부모 정보를 받아와서 쪽지목록 개수를 계산해서 html로 전달
-            int count = noteService.countParentNoteList(parent.getParentNumber());
+                // 부모 정보를 받아와서 쪽지목록 개수를 계산해서 html로 전달
+                int count = noteService.countParentNoteList(parent.getParentNumber());
 
-            model.addAttribute("noteCount", count);
-            model.addAttribute("role", parent.getRole());
-            model.addAttribute("parentNumber", parent.getParentNumber());
+                model.addAttribute("noteCount", count);
+                model.addAttribute("role", parent.getRole());
+                model.addAttribute("parentNumber", parent.getParentNumber());
+            }
         }
     }
 

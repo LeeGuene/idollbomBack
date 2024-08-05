@@ -40,21 +40,21 @@ public class ParentcommunityController {
 
         if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
             CustomUserDTO p = ((CustomUserDTO) authentication.getPrincipal());
-
-            String userRole = p.getRole();
             String parentId = p.getEmail();
+            String userRole = p.getRole();
 
-            System.out.println(userRole);
-            model.addAttribute("userRole", userRole);
-            ParentVO parent = parentMapper.selectOne(parentId);
+            if (p.getRole().equals("parent")) {
+                System.out.println(userRole);
+                model.addAttribute("userRole", userRole);
+                ParentVO parent = parentMapper.selectOne(parentId);
 
-            // 부모 정보를 받아와서 쪽지목록 개수를 계산해서 html로 전달
-            int count = noteService.countParentNoteList(parent.getParentNumber());
+                // 부모 정보를 받아와서 쪽지목록 개수를 계산해서 html로 전달
+                int count = noteService.countParentNoteList(parent.getParentNumber());
 
-            log.info("count : " + count);
-            model.addAttribute("count", count);
-            model.addAttribute("parentNumber", parent.getParentNumber());
-
+                log.info("count : " + count);
+                model.addAttribute("count", count);
+                model.addAttribute("parentNumber", parent.getParentNumber());
+            }
         }
         return "html/board/parent/community_parent";
     }
