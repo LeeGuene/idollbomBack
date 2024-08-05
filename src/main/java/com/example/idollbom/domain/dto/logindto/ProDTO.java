@@ -17,5 +17,4 @@ public class ProDTO {
     private String proFile;
     private String proIntro;
     private String role;
-
 }
