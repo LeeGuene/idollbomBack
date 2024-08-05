@@ -45,6 +45,7 @@
                                     A.ANSWER_CONTENT
                                 FROM QUESTION Q LEFT JOIN ANSWER A
                                 ON Q.QUESTION_NUMBER = A.QUESTION_NUMBER
+                                ORDER BY Q.QUESTION_REGISTER_DATE DESC
                         ) QUES JOIN PARENT P
                         ON QUES.PARENT_NUMBER = P.PARENT_NUMBER
                 )

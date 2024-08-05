@@ -131,7 +131,6 @@ public class proMypageController {
     public String selectNoteList(Model model) {
 
         getRole(model);
-
         Long proId = proNumber();
 
         // 쪽지함 목록 카운트 (헤더에 보여줄 쪽지 목록 개수)
