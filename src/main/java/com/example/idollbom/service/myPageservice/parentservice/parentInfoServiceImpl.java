@@ -126,4 +126,9 @@ public class parentInfoServiceImpl implements parentInfoService {
 
         infoMapper.updatePassword(parent.getParentNumber(),bCryptPasswordEncoder.encode(password));
     }
+
+    @Override
+    public ParentVO selectParent(Long parentNumber) {
+        return null;
+    }
 }

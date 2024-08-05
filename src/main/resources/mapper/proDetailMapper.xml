@@ -131,9 +131,23 @@
         WHERE pro_number = #{proNumber}
     </update>
 
-    <update id="update" parameterType="proVO">
-        update pro
-        SET pro_name = #{proName}, pro_phone_number=#{proPhoneNumber}, pro_nickname=#{proNickname}, pro_intro=#{proIntro}, pro_file=#{proFile}
+    <!-- 전체 업데이트   -->
+    <update id="update">
+        update PRO
+        SET pro_name = #{proName},
+            pro_phone_number = #{proPhoneNumber},
+            pro_nickname = #{proNickname},
+            pro_intro = #{proIntro}
         WHERE pro_number = #{proNumber}
     </update>
+    <!-- 전문가 파일 업데이트   -->
+    <update id="updateFile">
+        update PRO
+        SET pro_file = #{proFile}
+        WHERE pro_number = #{proNumber}
+    </update>
+
+    <select id="selectPrifile">
+        select * from pro
+    </select>
 </mapper>

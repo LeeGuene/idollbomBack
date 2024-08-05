@@ -1,6 +1,7 @@
 package com.example.idollbom.controller.myPage;
 
 import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
+import com.example.idollbom.domain.dto.logindto.ParentDTO;
 import com.example.idollbom.domain.dto.logindto.ProDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.NoteListDTO;
 import com.example.idollbom.domain.dto.prodto.proReportDTO;
@@ -11,6 +12,7 @@ import com.example.idollbom.service.loginservice.ProService;
 import com.example.idollbom.service.myPageservice.parentservice.noteService;
 import com.example.idollbom.service.myPageservice.proservice.classService;
 import com.example.idollbom.service.myPageservice.proservice.proUpdateService;
+import com.example.idollbom.service.myPageservice.proservice.proselectService;
 import com.example.idollbom.service.proService.ProDetailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -32,6 +35,7 @@ public class proMypageController {
     private final ProService proService;
     private final noteService noteService;
     private final proUpdateService proUpdateService;
+    private final proselectService proselectService;
     
     // 전문가 pk, 이름, role을 넘기는 메서드
     public void getRole(Model model){
@@ -81,6 +85,8 @@ public class proMypageController {
         int count = noteService.countProNoteList(proId);
 
         List<classVO> classVO = classService.selectMyClass(proId);
+        ProVO proinfo = proselectService.selectPro();
+        model.addAttribute("proInfo", proinfo);
         model.addAttribute("class",  classVO );
         model.addAttribute("count", count);
         return "html/myPage/pro/class";
@@ -95,6 +101,8 @@ public class proMypageController {
         // 쪽지함 목록 카운트 (헤더에 보여줄 쪽지 목록 개수)
         int count = noteService.countProNoteList(proId);
         List<proReportDTO> proReportVOS = classService.selectReport(proId);
+        ProVO proinfo = proselectService.selectPro();
+        model.addAttribute("proInfo", proinfo);
         model.addAttribute("report",  proReportVOS );
         model.addAttribute("count", count);
         return "html/myPage/pro/hateUser";
@@ -109,6 +117,8 @@ public class proMypageController {
         // 쪽지함 목록 카운트 (헤더에 보여줄 쪽지 목록 개수)
         int count = noteService.countProNoteList(proId);
         List<ProPostVO> proPostVOS = proDetailService.selectProPost(proId);
+        ProVO proinfo = proselectService.selectPro();
+        model.addAttribute("proInfo", proinfo);
         model.addAttribute("posts",  proPostVOS );
         model.addAttribute("count", count);
         return "html/myPage/pro/Post";
@@ -123,8 +133,10 @@ public class proMypageController {
         // 쪽지함 목록 카운트 (헤더에 보여줄 쪽지 목록 개수)
         int count = noteService.countProNoteList(proId);
         ProVO proPrivate = proDetailService.selectProPrivate(proId);
+        ProVO proinfo = proselectService.selectPro();
         model.addAttribute("pro", proPrivate);
         model.addAttribute("count", count);
+        model.addAttribute("proInfo", proinfo);
         return "html/myPage/pro/profile";
     }
 
@@ -140,8 +152,9 @@ public class proMypageController {
 
         // 전문가 쪽지 목록 조회
         List<NoteListDTO> noteList = noteService.findAllMyProNote(proId);
-
+        ProVO proinfo = proselectService.selectPro();
         model.addAttribute("count", count);
+        model.addAttribute("proInfo", proinfo);
         model.addAttribute("noteList", noteList);
         return "html/myPage/pro/mail";
     }
@@ -152,10 +165,10 @@ public class proMypageController {
         return "html/myPage/pro/calender";
     }
 
-
+    // 내 정보 수정
     @PostMapping("/update")
-    public String updateInfo(ProDTO proDTO){
-        proUpdateService.update(proDTO);
+    public String updateInfo(@ModelAttribute ProDTO proDTO, @RequestParam("file") MultipartFile file){
+        proUpdateService.update(proDTO , file);
         return "redirect:/proMyPage/profile";
     }
 }
