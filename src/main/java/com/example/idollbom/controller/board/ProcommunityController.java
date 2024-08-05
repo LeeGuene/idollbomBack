@@ -4,7 +4,6 @@ import com.example.idollbom.domain.dto.boarddto.ProCommunityDTO;
 import com.example.idollbom.domain.dto.boarddto.ProCommunityDetailDTO;
 import com.example.idollbom.domain.dto.boarddto.ProFileDTO;
 import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
-import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.domain.vo.ProVO;
 import com.example.idollbom.mapper.loginmapper.ProMapper;
 import com.example.idollbom.service.boardservice.ProCommunityService;

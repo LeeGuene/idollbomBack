@@ -47,7 +47,7 @@ public class ProMainController {
                 // log.info("role : " + role);
 
                 model.addAttribute("count", count);
-                // model.addAttribute("proName", proName);
+                model.addAttribute("proName", proName);
                 model.addAttribute("role", role);
                 model.addAttribute("proNumber", proNumber);
             }
