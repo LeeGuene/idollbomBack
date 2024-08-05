@@ -27,6 +27,8 @@ const classDay = document.getElementById('classDay').parentNode
 // 수업 사진
 const upload = document.getElementById('upload')
 const classImage = document.getElementById('classImage').parentNode
+const image = document.getElementById('image').parentNode
+const allowedExtensions = ['jpg', 'jpeg', 'png'];
 
 // 수업 내용
 const content = document.getElementById('summerNote')
@@ -41,71 +43,82 @@ function validForm() {
     let isValid = true
 
     if (title.value === '') {
-        classTitle.style.display="flex"
+        classTitle.style.display = "flex"
         isValid = false
     }
 
     if (intro.value === '') {
-        classIntro.style.display="flex"
+        classIntro.style.display = "flex"
         isValid = false
     }
 
     if (dateSelect.value === formattedDate) {
-        classDate.style.display="flex"
+        classDate.style.display = "flex"
         isValid = false
     }
 
     if (timeSelect.value === "none") {
-        classDay.style.display="flex"
+        classDay.style.display = "flex"
         isValid = false
     }
 
+    // 이미지 파일만 저장할 수 있게 검증해야함
     if (upload.files.length === 0) {
-        classImage.style.display="flex"
+        classImage.style.display = "flex"
         isValid = false
     }
+    else { // 이미지가 아닌 다른 파일을 업로드 했을 때
+        // 단일 파일 형식 검증
+        const file = upload.files[0];
+        const fileExtension = file.name.split('.').pop().toLowerCase();
 
-    if(document.getElementsByClassName('note-editable')[0].textContent === ''){
-        classContent.style.display='flex'
-        isValid = false
-    }
-    else{
-        classContent.style.display='none'
-    }
-
-    if(money.value === '') {
-        classMoney.style.display = "flex"
-        isValid = false
+        if (!allowedExtensions.includes(fileExtension)) {
+            image.style.display = 'flex';
+            isValid = false;
+        }
     }
 
-    // 값이 true여야만 실행
-    return isValid
+        if (document.getElementsByClassName('note-editable')[0].textContent === '') {
+            classContent.style.display = 'flex'
+            isValid = false
+        } else {
+            classContent.style.display = 'none'
+        }
+
+        if (money.value === '') {
+            classMoney.style.display = "flex"
+            isValid = false
+        }
+
+        // 값이 true여야만 실행
+        return isValid
 }
 
 
 // 수업 제목이 채워졌다면
-title.addEventListener("change", function(e){
+title.addEventListener("input", function(e){
     classTitle.style.display = 'none'
 })
 
 // 수업 소개가 채워졌다면
-intro.addEventListener("change", function(e){
+intro.addEventListener("input", function(e){
     classIntro.style.display = 'none'
 })
 
 // 수업 날짜가 금일 날짜와 다르다면
-dateSelect.addEventListener("change", function(e){
+dateSelect.addEventListener("input", function(e){
     classDate.style.display = 'none'
 })
 
-timeSelect.addEventListener("change", function(e){
+timeSelect.addEventListener("input", function(e){
     classDay.style.display = 'none'
 })
 
-upload.addEventListener("change", function(e){
+upload.addEventListener("input", function(e){
     classImage.style.display = 'none'
+    image.style.display='none'
 })
 
-money.addEventListener("change", function (){
+money.addEventListener("input", function (){
     classMoney.style.display= 'none'
 })

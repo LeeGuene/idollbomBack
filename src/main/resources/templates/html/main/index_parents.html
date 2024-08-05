@@ -15,10 +15,25 @@
     <div th:replace="~{/layout/header_parents :: header_parents}"></div>
 
     <div id="container">
-        <!-- 부모 메인페이지 비쥬얼 이미지 -->
+        <!-- 부모 메인페이지 비쥬얼  이미지 -->
         <section class="visual">
-            <div>
-                <img th:src="@{/images/main_visual-rebranded.webp}">
+            <div class="carousel-container">
+                <ul class="slider-box">
+                    <li class="slider-item">
+                        <img th:src="@{/images/index_pro_find.jpg}" alt="slider-img4" />
+                    </li>
+                    <li class="slider-item">
+                        <img th:src="@{/images/main_visual-rebranded.webp}" alt="slider-img1" />
+                    </li>
+                    <li class="slider-item">
+                        <img th:src="@{/images/content-img1.jpg}" alt="slider-img2" />
+                    </li>
+                    <li class="slider-item">
+                        <img th:src="@{/images/content-img2.jpg}" alt="slider-img3">
+                    </li>
+                </ul>
+                <button class="left slider-btn"><</button>
+                <button class="right slider-btn">></button>
             </div>
         </section>
 

@@ -102,7 +102,7 @@ function renderBoard(classLists){
         let classListRow = `  
                 <tr class="class_item">
                     <input type="hidden" name="classNumber" value="${classList.classNumber}" />
-                     <input type="hidden" name="proNumber" value="${classList.proNumber}" />
+                    <input type="hidden" name="proNumber" value="${classList.proNumber}" />
                     <td><img src="/images/${classList.proProfileImageUrl}"></td>
                     <td>
                         <div>
@@ -181,6 +181,17 @@ function saveKeyword(){
     getList(1)
 }
 
+// 엔터로 검색할 함수
+document.getElementById('searchEnter').addEventListener('keydown', async function(event){
+    if(event.key === 'Enter'){
+        event.preventDefault()
+        searchType = $('select[name="searchType"]').val()
+        searchWord = $('input[name="searchWord"]').val()
+        category = $('input[name="category"]').val()
+        getList(1)
+    }
+})
+
 // 수업 찜 목록 추가/삭제 비동기 구현
 function addClassSave(){
     let saveBtns = document.querySelectorAll('.save-btn');
@@ -257,6 +268,7 @@ function addClassSave(){
 function goClassDetail(e){
     console.log("자세히 보기 버튼 클릭!!");
     console.log(e.currentTarget);
+    e.preventDefault();
 
     const form = document.createElement('form');
     const classItem = e.currentTarget.parentElement.parentElement.parentElement;
@@ -274,7 +286,4 @@ function goClassDetail(e){
     document.body.append(form);
 
     form.submit();
-
-
-
 }

@@ -58,6 +58,7 @@ public class ParentController {
 //  프로 회원가입폼 이동
     @GetMapping("/proSignup")
     public String proSignupForm(Model model) {
+        // 프로 회원가입 페이지에서 회원정보를 받아오기 위해 DTO 전달
         model.addAttribute("pro", new ProDTO());
         return "html/login/proRegisterPage"; // 프로 회원가입 페이지
     }
@@ -65,6 +66,7 @@ public class ParentController {
 //  프로 회원가입폼 제출
     @PostMapping("/proSignup")
     public String proSignup(ProDTO proDTO) {
+        // DB에 프로 회원정보 저장
         proService.savePro(proDTO);
         
         return "redirect:/user/login"; // 회원가입 후 로그인 페이지로 리디렉션

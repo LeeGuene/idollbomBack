@@ -33,12 +33,14 @@
       <div class="post-title-wrap">
         <label for="title-input">제목</label>
         <input type="text" th:field="*{questionTitle}" id="title-input" required />
+        <p class="err-msg" id="title-err-msg"></p>
       </div>
 
       <!-- 게시글 내용 -->
       <div class="post-content-wrap">
         <label for="content-input">내용</label>
         <textarea th:field="*{questionContent}" id="content-input" required></textarea>
+<!--        <p class="err-msg" id="title-err-msg"></p>-->
       </div>
 
       <!-- 공개, 비공개 여부 체크박스 -->
@@ -78,6 +80,7 @@
 
   <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
   <script th:src="@{/js/motion.js}"></script>
+  <script th:src="@{/js/askForm.js}"></script>
 </body>
 
 </html>

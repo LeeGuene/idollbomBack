@@ -28,6 +28,7 @@ public class AskController {
     private final QuestionService questionService;
     private final noteService noteService;
 
+    // 부모 role, parentNumber(부모 pk), count(쪽지 목록 개수) View에 전달하는 메서드
     public void getRole(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -51,8 +52,10 @@ public class AskController {
                       @RequestParam(value="pageSize", defaultValue = "3") int pageSize,
                       Model model) {
 
+        // 부모 role, parentNumber(부모 pk), count(쪽지 목록 개수) View에 전달
         getRole(model);
 
+        // 페이징 처리
         int totalQuestions = questionService.countQuestion();
         int totalPages = (int) Math.ceil((double) totalQuestions / pageSize);
         List<QuestionListDTO> questionList = questionService.findQuestionAll(pageNo, pageSize);
@@ -86,8 +89,10 @@ public class AskController {
     @GetMapping("/write")
     public String goWriteForm(Model model) {
 
+        // 부모 role, parentNumber(부모 pk), count(쪽지 목록 개수) View에 전달
         getRole(model);
-
+        
+        // 문의하기 작성 폼에서 데이터를 받아오기 위해 DTO 전달
         model.addAttribute("question", new QuestionDTO());
         return "/html/customerService/question/inqueryBoardForm";
     }
@@ -97,7 +102,7 @@ public class AskController {
 
         log.info("View에서 넘어온 데이터들 : ");
         log.info("questionReadingCheck(열람가능 여부) : " + question.getQuestionReadingCheck());
-//        log.info("questionNumber(문의 pk) : " + question.getQuestionNumber());
+        // log.info("questionNumber(문의 pk) : " + question.getQuestionNumber());
         log.info("parentNumber(부모 pk) : " + question.getParentNumber());
         log.info("questionTitle(문의 제목) : " + question.getQuestionTitle());
         log.info("questionContent(문의 내용) : " + question.getQuestionContent());

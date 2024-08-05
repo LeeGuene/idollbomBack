@@ -35,7 +35,6 @@ button {
     font-style: normal;
 }
 
-
 /*전문가 index*/
 #container {
     padding-top: 100px;
@@ -53,8 +52,67 @@ h2 {
     margin-bottom: 200px;
 }
 
-.visual img {
+/* 이미지 슬라이드 css */
+.carousel-container{
+    margin: 0 auto;
     width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider-box{
+    transition: 1s;
+    display: flex;
+    transform: translateX(-100%);
+    height: 100%; /* 500px */
+}
+
+.slider-item{
+    width: 100%; /* 700px */
+    flex-shrink: 0;
+}
+
+.slider-item > img{
+    width: 100%;
+    height: 100%;
+}
+
+/* 이미지 슬라이드 버튼 css */
+.slider-btn{
+    /* style */
+    border-radius: 50%;
+    background-color: #f93271b7;
+    font-size: 24px;
+    color: #fff;
+
+    /* layout */
+    width: 80px;
+    height: 80px;
+    padding-top: 5px;
+
+    /* position */
+    position: absolute;
+    top: 50%;
+    z-index: 0;
+
+    transform: translateY(-50%);
+    transition: 0.3s;
+}
+
+.slider-btn:hover{
+    font-weight: bold;
+    background-color: #F93270;
+}
+
+.slider-btn.left{
+    left: 20px;
+    padding-right: 5px;
+}
+
+.slider-btn.right{
+    right: 20px;
+    padding-left: 5px;
 }
 
 /*matching*/
@@ -274,3 +332,4 @@ h2 {
     line-height: 150%;
     color: rgba(0, 0, 0, 0.7);
 }
+

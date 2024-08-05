@@ -44,7 +44,7 @@ public class ParentMypageController {
     private final ParentMapper parentMapper;
     private final ClassListService classListService;
 
-    public Long parentNumber(){
+    public void getNoteCount(Model model){
         // 현재 로그인한 부모 pk 가져오기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDTO p = ((CustomUserDTO) authentication.getPrincipal());
@@ -53,18 +53,22 @@ public class ParentMypageController {
         ParentVO parent = parentMapper.selectOne(parentId);
         System.out.println(parent.getParentNumber());
 
-        return parent.getParentNumber();
+        int count = noteService.countParentNoteList(parent.getParentNumber());
+        String role = parent.getRole();
+
+        model.addAttribute("role", role);
+        model.addAttribute("count", count);
     }
 
 //  kid 페이지로 이동
     @GetMapping("/kids")
     public String getKids(Model model){
-        Long parentId = parentNumber();
-        int count = noteService.countParentNoteList(parentId);
+        // 쪽지 목록개수 view에 전달
+        getNoteCount(model);
+
         List<kidVO> kids = kidsService.selectKidsList();
         model.addAttribute("kid", new kidDTO());
         model.addAttribute("kids", kids);
-        model.addAttribute("count", count);
         return "html/myPage/parent/myKids";
     }
 
@@ -99,7 +103,10 @@ public class ParentMypageController {
     // 신고목록 페이지 이동
     @GetMapping("/reportPage")
     public String selectReport(Model model){
-      List<reportVO> reportUser = reportService.selectReportList();
+        // 쪽지 목록개수 view에 전달
+        getNoteCount(model);
+
+        List<reportVO> reportUser = reportService.selectReportList();
         model.addAttribute("reportUser", reportUser);
         return "html/myPage/parent/hateUser";
     }
@@ -107,6 +114,9 @@ public class ParentMypageController {
     // 문의목록 페이지 이동
     @GetMapping("/askPage")
     public String selectAsk(Model model){
+        // 쪽지 목록개수 view에 전달
+        getNoteCount(model);
+
         List<askVO> askList = askService.selectAskList();
         model.addAttribute("askList",askList );
         return "html/myPage/parent/myAsk";
@@ -115,6 +125,9 @@ public class ParentMypageController {
     //내가쓴 글 페이지 이동
     @GetMapping("/myPost")
     public String selectMyPostList(Model model){
+        // 쪽지 목록개수 view에 전달
+        getNoteCount(model);
+
         List<myPostVO> postList = myPostService.selectPostList();
         model.addAttribute("myPost", postList);
         return "html/myPage/parent/myPost";
@@ -123,6 +136,9 @@ public class ParentMypageController {
     //내가쓴 리뷰 페이지로 이동
     @GetMapping("/Review")
     public String selectReviewList(Model model){
+        // 쪽지 목록개수 view에 전달
+        getNoteCount(model);
+
         List<reviewVO> reviewList = reviewService.selectRiviewList();
 //        for(int i=0; i<reviewList.size(); i++){
 //            Long parentId = reviewList.get(i).getParentNumber();
@@ -135,6 +151,9 @@ public class ParentMypageController {
     //찜한 목록으로 이동
     @GetMapping("/classSave")
     public String selectClassList(Model model){
+        // 쪽지 목록개수 view에 전달
+        getNoteCount(model);
+
         List<classSaveDTO> classList = classSaveService.selectClassList();
 
         model.addAttribute("saveClass", classList);
@@ -145,6 +164,8 @@ public class ParentMypageController {
 //    쪽지 목록으로 이동
     @GetMapping("/myNote")
     public String selectMyNoteList(Model model){
+        // 쪽지 목록개수 view에 전달
+        getNoteCount(model);
 
         List<mailDTO> noteList = noteService.selectAllMyNote();
         model.addAttribute("myNotes", noteList);
@@ -154,6 +175,9 @@ public class ParentMypageController {
     //  내정보 받아오기
     @GetMapping("/myInformation")
     public String selectMailId(Model model){
+        // 쪽지 목록개수 view에 전달
+        getNoteCount(model);
+
        ParentVO parentInfo = parentInfoService.selectParentInfo();
        model.addAttribute("parentInfo", parentInfo);
         return "html/myPage/parent/correction";
@@ -186,7 +210,10 @@ public class ParentMypageController {
 
     //  수업 찜 목록 삭제
     @GetMapping("/deleteFavorite/{classNumber}")
-    public String deleteFavorite(@PathVariable(name = "classNumber") Long classNumber){
+    public String deleteFavorite(@PathVariable(name = "classNumber") Long classNumber, Model model){
+        // 쪽지 목록개수 view에 전달
+        getNoteCount(model);
+
         classSaveService.deleteClass(classNumber);
         return "redirect:/ParentMyPage/classSave";
     }
@@ -194,6 +221,9 @@ public class ParentMypageController {
     //  결제한 수업내역 보기
     @GetMapping("/myPayment")
     public String selectMyPayment(Model model){
+        // 쪽지 목록개수 view에 전달
+        getNoteCount(model);
+
         List<paymentDTO> payment = paymentService.paymentList();
         model.addAttribute("review", new ReviewDTO());
         model.addAttribute("Mypayment",  payment);
