@@ -1,6 +1,7 @@
 package com.example.idollbom.controller.myPage;
 
 import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
+import com.example.idollbom.domain.dto.logindto.ProDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.NoteListDTO;
 import com.example.idollbom.domain.dto.prodto.proReportDTO;
 import com.example.idollbom.domain.vo.ProPostVO;
@@ -17,10 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -156,4 +154,9 @@ public class proMypageController {
     }
 
 
+    @PostMapping("/update")
+    public String updateInfo(ProDTO proDTO){
+        proUpdateService.update(proDTO);
+        return "redirect:/proMyPage/profile";
+    }
 }

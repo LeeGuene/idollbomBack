@@ -123,4 +123,17 @@
         select * from pro
         where pro_email = #{proEmail}
     </select>
+
+    <!-- 전문가 프로필 update   -->
+    <update id="updateImg">
+        update pro
+        SET pro_profile_image_url = #{proProfileImageUrl}
+        WHERE pro_number = #{proNumber}
+    </update>
+
+    <update id="update" parameterType="proVO">
+        update pro
+        SET pro_name = #{proName}, pro_phone_number=#{proPhoneNumber}, pro_nickname=#{proNickname}, pro_intro=#{proIntro}, pro_file=#{proFile}
+        WHERE pro_number = #{proNumber}
+    </update>
 </mapper>

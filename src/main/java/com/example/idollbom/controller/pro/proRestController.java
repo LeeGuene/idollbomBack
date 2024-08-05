@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/proRestController")
@@ -17,5 +18,10 @@ public class proRestController {
     @PutMapping("/updatePassword")
     public void updatePassword(@RequestParam("password") String password){
         proUpdateService.proPasswordUpdate(password);
+    }
+
+    @PutMapping("/proUpdateImg")
+    public void updateImg(@RequestParam("file") MultipartFile file){
+        proUpdateService.proImgUpdate(file);
     }
 }
