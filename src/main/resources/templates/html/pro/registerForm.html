@@ -21,7 +21,7 @@
 
     <!-- 수업등록 폼 -->
     <form id="registerForm" th:action="@{/pro/register}" enctype="multipart/form-data" method="post" onsubmit="return validForm()">
-`     <!-- 수업 등록을 하면서 아이찾기 메뉴 클릭해서 넘어가기 위해 proNumber를 넘김. -->
+     <!-- 수업 등록을 하면서 아이찾기 메뉴 클릭해서 넘어가기 위해 proNumber를 넘김. -->
       <input type="hidden" name="proNumber" th:value="${proNumber} "/>
       <!-- 수업 제목 -->
       <div class="study-title">
@@ -143,10 +143,16 @@
       <div class="classphoto">
         <h1>수업 사진</h1>
         <label for="upload" class="form-label"></label>
-        <input type="file" class="file-input" id="upload" name="imageFileUrl">
+        <input type="file" class="file-input" id="upload" name="imageFileUrl" accept=".jpg, .jpeg, .png">
       </div>
+      <!-- 수업 이미지를 추가하지 않았을 경우 -->
       <div class="extra-info">
         <p id="classImage">수업 이미지를 추가해주세요.</p>
+      </div>
+
+      <!-- 이미지 파일이 아닌 다른 파일을 추가했을 때 -->
+      <div class="extra-info">
+        <p id="image">이미지 파일만 추가 가능합니다. (.jpg .jpeg .png)</p>
       </div>
 
       <!-- 썸머노트 -->
@@ -181,6 +187,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
 <script th:src="@{/js/registerForm.js}"></script>
-  <script th:src="@{/js/validForm.js}"></script>
+<script th:src="@{/js/validForm.js}"></script>
 </body>
 </html>

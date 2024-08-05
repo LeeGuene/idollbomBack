@@ -65,7 +65,7 @@ function proRenderBoard(pros){
 
         let communityRow = `
         <tr>
-            <td><img src="/images/${pro.proProfileUrl}" alt="프로필"></td>
+            <td><img src="/backImage/pro/profile/${pro.proProfileUrl}" alt="프로필"></td>
             <td>${pro.proPostTitle}</td>
             <td>${linkHtml}</td>
             <td>${pro.proNickname}</td>
@@ -131,3 +131,13 @@ function saveKeyword(){
     searchWord = $('input[name="searchWord"]').val()
     getList(1)
 }
+
+// 엔터로 검색할 함수
+document.getElementById('searchEnter').addEventListener('keydown', async function(event){
+    if(event.key === 'Enter'){
+        event.preventDefault()
+        searchType = $('select[name="searchType"]').val()
+        searchWord = $('input[name="searchWord"]').val()
+        getList(1)
+    }
+})
