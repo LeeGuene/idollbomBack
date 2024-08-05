@@ -102,7 +102,7 @@ function renderBoard(classLists){
         let classListRow = `  
                 <tr class="class_item">
                     <input type="hidden" name="classNumber" value="${classList.classNumber}" />
-                     <input type="hidden" name="proNumber" value="${classList.proNumber}" />
+                    <input type="hidden" name="proNumber" value="${classList.proNumber}" />
                     <td><img src="/images/${classList.proProfileImageUrl}"></td>
                     <td>
                         <div>
@@ -257,6 +257,7 @@ function addClassSave(){
 function goClassDetail(e){
     console.log("자세히 보기 버튼 클릭!!");
     console.log(e.currentTarget);
+    e.preventDefault();
 
     const form = document.createElement('form');
     const classItem = e.currentTarget.parentElement.parentElement.parentElement;

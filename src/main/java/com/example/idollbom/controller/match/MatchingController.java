@@ -28,6 +28,7 @@ public class MatchingController {
     @GetMapping
     public String match(Model model) {
 
+        // 부모 parentNumber, role 및 쪽지 목록 개수를 view에 전달하는 코드 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
@@ -41,9 +42,6 @@ public class MatchingController {
             model.addAttribute("count", count);
             model.addAttribute("role", parent.getRole());
             model.addAttribute("parentNumber", parent.getParentNumber());
-        }else{
-            model.addAttribute("parentName", "Guest");
-            model.addAttribute("role", "Guest");
         }
 
         return "/html/match/matching";

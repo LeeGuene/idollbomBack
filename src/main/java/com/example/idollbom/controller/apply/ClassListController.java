@@ -35,7 +35,7 @@ public class ClassListController {
     private final noteService noteService;
     private final ParentMapper parentMapper;
     
-    // 부모 role, parentNumber를 받아오는 메서드
+    // 부모 role, parentNumber, 쪽지 목록 개수를 받아오는 메서드
     public void getRole(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -51,9 +51,6 @@ public class ClassListController {
             model.addAttribute("noteCount", count);
             model.addAttribute("role", parent.getRole());
             model.addAttribute("parentNumber", parent.getParentNumber());
-        }else{
-            model.addAttribute("parentName", "Guest");
-            model.addAttribute("role", "Guest");
         }
     }
 
@@ -65,6 +62,7 @@ public class ClassListController {
                             @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                             Model model) {
 
+        // 부모 role, parentNumber, 쪽지 목록 개수를 받아오는 메서드
         getRole(model);
 
         model.addAttribute("category", category);
@@ -104,6 +102,7 @@ public class ClassListController {
                              @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                              Model model) {
 
+        // 부모 role, parentNumber, 쪽지 목록 개수를 받아오는 메서드
         getRole(model);
 
         // 페이징 처리를 위한 코드
@@ -137,6 +136,7 @@ public class ClassListController {
                                      @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                                      Model model) {
 
+        // 부모 role, parentNumber, 쪽지 목록 개수를 받아오는 메서드
         getRole(model);
 
         // 페이징 처리를 위한 코드
@@ -170,6 +170,7 @@ public class ClassListController {
                              @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
                              Model model) {
 
+        // 부모 role, parentNumber, 쪽지 목록 개수를 받아오는 메서드
         getRole(model);
 
         // 페이징 처리를 위한 코드
@@ -202,13 +203,16 @@ public class ClassListController {
                               @RequestParam("proNumber") Long proNumber,
                               Model model) {
 
-        log.info("수업 pk : " + classNumber);
-        log.info("전문가 pk : " + proNumber);
+        // log.info("수업 pk : " + classNumber);
+        // log.info("전문가 pk : " + proNumber);
 
+        // 부모 role, parentNumber, 쪽지 목록 개수를 받아오는 메서드
         getRole(model);
 
         // 특정 수업에 대한 상세정보
         ClassDetailDTO class_info = classDetailService.findClassDetail(proNumber, classNumber);
+
+        // log.info("수업 정보 : " + class_info.toString());
 
         // 특정 수업에 대한 전체리뷰 조회
         List<ReviewOneListDTO> reviews = classReviewService.findOneReviewList(classNumber);

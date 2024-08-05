@@ -28,10 +28,8 @@ public class ParentMainController {
     private final ParentMapper parentMapper;
     private final noteService noteService;
 
-    //   부모 메인페이지로 이동
-    @GetMapping
-    public String parentmain(Model model){
-
+    // 부모 role, parentNumber, 쪽지 목록 개수를 받아오는 메서드
+    public void getRole(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
@@ -40,12 +38,21 @@ public class ParentMainController {
 
             ParentVO parent = parentMapper.selectOne(parentId);
 
+            // 부모 정보를 받아와서 쪽지목록 개수를 계산해서 html로 전달
             int count = noteService.countParentNoteList(parent.getParentNumber());
 
-            model.addAttribute("count", count);
-            model.addAttribute("parentName", parent.getParentName());
+            model.addAttribute("noteCount", count);
             model.addAttribute("role", parent.getRole());
+            model.addAttribute("parentNumber", parent.getParentNumber());
         }
+    }
+
+    //   부모 메인페이지로 이동
+    @GetMapping
+    public String parentmain(Model model){
+
+        // 부모 role, parentNumber, 쪽지 목록 개수를 받아와서 view에 전달
+        getRole(model); 
 
         return "/html/main/index_parents";
     }
@@ -56,10 +63,14 @@ public class ParentMainController {
                             @RequestParam(value = "pageSize", defaultValue = "3") int pageSize,
                             Model model){
 
-        log.info("View에서 받아온 정보 : ");
-        log.info("pageNo" + pageNo);
-        log.info("pageSize" + pageSize);
+        // log.info("View에서 받아온 정보 : ");
+        // log.info("pageNo" + pageNo);
+        // log.info("pageSize" + pageSize);
 
+        // 부모 role, parentNumber, 쪽지 목록 개수를 받아와서 view에 전달
+        getRole(model);
+
+        // 페이징 처리
         int totalPros = proDetailService.getProCount();
         int totalPages = (int) Math.ceil((double) totalPros / pageSize);
 

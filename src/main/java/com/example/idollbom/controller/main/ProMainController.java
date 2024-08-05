@@ -30,10 +30,11 @@ public class ProMainController {
 
         if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
             CustomUserDTO pro = ((CustomUserDTO) authentication.getPrincipal());
-            log.info("인증하러 들어옴!!");
-            log.info("role : " + pro.getRole());
+            // log.info("인증하러 들어옴!!");
+            // log.info("role : " + pro.getRole());
             String proId = pro.getEmail();
 
+            // 로그인 한 계정이 부모가 아니라면 ( 전문가 라면 )
             if (!pro.getRole().equals("parent")) {
                 ProVO pro_info = proService.selectPro(proId);
                 String role = pro_info.getRole();
@@ -43,10 +44,10 @@ public class ProMainController {
                 int count = noteService.countProNoteList(proNumber);
 
                 System.out.println(proNumber);
-                log.info("role : " + role);
+                // log.info("role : " + role);
 
                 model.addAttribute("count", count);
-                model.addAttribute("proName", proName);
+                // model.addAttribute("proName", proName);
                 model.addAttribute("role", role);
                 model.addAttribute("proNumber", proNumber);
             }

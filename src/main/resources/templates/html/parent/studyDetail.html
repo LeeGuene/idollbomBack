@@ -26,7 +26,7 @@
       <div class="carousel-container">
         <ul class="slider-box">
           <li class="slider-item">
-            <img th:src="@{ ${class_info.imageFileUrl}}" alt="slider-img4" />
+            <img th:src="@{${class_info.imageFileUrl}}" alt="slider-img4" />
           </li>
         </ul>
       </div>
@@ -105,7 +105,7 @@
           <!-- 수업 결제, 수업 찜하기 버튼 -->
           <div class="payment-button-wrap">
             <div>
-              <button onclick="payCheckAlarm(event)" type="submit" class="payment-btn">수업 결제하기</button>
+              <button type="submit" class="payment-btn">수업 결제하기</button>
               <a th:href="@{/ParentMyPage/insertSaveClass(classNumber=*{classNumber}, parentNumber=${parentNumber}, proNumber=*{proNumber})}">
                 수업 찜하기
               </a>
