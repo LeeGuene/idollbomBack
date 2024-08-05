@@ -29,7 +29,7 @@ public class ParentMainController {
     private final noteService noteService;
 
     // 부모 role, parentNumber, 쪽지 목록 개수를 받아오는 메서드
-    public void getRole(Model model){
+    public String getRole(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
@@ -38,13 +38,17 @@ public class ParentMainController {
 
             ParentVO parent = parentMapper.selectOne(parentId);
 
+            log.info("부모 정보 : " + parent.toString());
+
             // 부모 정보를 받아와서 쪽지목록 개수를 계산해서 html로 전달
             int count = noteService.countParentNoteList(parent.getParentNumber());
 
             model.addAttribute("noteCount", count);
             model.addAttribute("role", parent.getRole());
             model.addAttribute("parentNumber", parent.getParentNumber());
+            return parent.getParentName();
         }
+        return null;
     }
 
     //   부모 메인페이지로 이동
@@ -52,7 +56,9 @@ public class ParentMainController {
     public String parentmain(Model model){
 
         // 부모 role, parentNumber, 쪽지 목록 개수를 받아와서 view에 전달
-        getRole(model); 
+        String parentName = getRole(model);
+
+        model.addAttribute("parentName", parentName);
 
         return "/html/main/index_parents";
     }
