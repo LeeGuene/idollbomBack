@@ -58,8 +58,8 @@ function proRenderBoard(pros){
         // 현재 로그인한 사람이 누구인지
         linkHtml = `<a href="/procommunity/detail/${pro.proPostNumber}">자세히보기</a>`
 
-        // 해당 게시글 신고횟수가 3회 이상이면 게시글 막기
-        if(pro.proPostReportCount >= 3){
+        // 해당 게시글 신고횟수가 1회 이상이면 게시글 막기
+        if(pro.proPostReportCount >= 1){
             linkHtml = `<a style="cursor: not-allowed"<span class="disabled-link" data-message="해당 게시글은 볼 수 없습니다.">자세히 보기</span></a>`
         }
 
