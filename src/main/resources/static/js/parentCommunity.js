@@ -58,14 +58,14 @@ function renderBoard(communities){
         // 현재 로그인한 사람이 누구인지
         linkHtml = `<a href="/parentcommunity/detail/${community.parentPostNumber}">자세히보기</a>`
 
-        // 해당 게시글 신고횟수가 3회 이상이면 게시글 막기
-        if(community.parentPostReportCount >= 3){
+        // 해당 게시글 신고횟수가 1회 이상이면 게시글 막기
+        if(community.parentPostReportCount >= 1){
             linkHtml = `<a style="cursor: not-allowed"<span class="disabled-link" data-message="해당 게시글은 볼 수 없습니다.">자세히 보기</span></a>`
         }
 
         let communityRow = `
         <tr>
-            <td><img src="/backImage/parent/prifile/${community.parentProfileImageUrl}" alt="프로필"></td>
+            <td><img src="/backImage/parent/profile/${community.parentProfileImageUrl}" alt="프로필"></td>
             <td>${community.parentPostTitle}</td>
             <td>${linkHtml}</td>
             <td>${community.parentNickname}</td>
