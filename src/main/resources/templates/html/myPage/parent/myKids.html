@@ -25,7 +25,7 @@
             <div class="incontainer">
                 <div class="menu-bar">
                     <div class="menu-bar-option">
-                        <a th:href="@{/ParentMyPage/kids}">아이정보 추가</a>
+                        <p>아이정보 추가</p>
                     </div>
                     <div class="menu-bar-option">
                         <a th:href="@{/ParentMyPage/myInformation}">내정보 수정</a>
@@ -41,7 +41,7 @@
                         <a th:href="@{/ParentMyPage/myPost}">내가쓴 게시글</a>
                     </div>
                     <div class="menu-bar-option">
-                        <p>내 문의</p>
+                        <a th:href="@{/ParentMyPage/askPage}">내 문의</a>
                     </div>
                     <div class="menu-bar-option">
                         <a th:href="@{/ParentMyPage/Review}">내 리뷰</a>
@@ -55,19 +55,12 @@
                     </div>
                     <hr class="custom-hr">
                     <!-- 프로필 -->
-                    <div class="myprofile">
+                    <div class="myprofile" th:object="${parentInfo}">
                         <div class="profileimage">
-                            <img src="../../images/ff581d78778b7.png" alt="profileImage" class="img">
+                            <img  src="#" class="img" id="profile" th:src="*{parentProfileImageUrl}">
                         </div>
-                        <div class="Nickname">
-                            닉네임
+                        <div class="Nickname" th:text="*{parentNickname}">
                         </div>
-                        <div class="buttonbox">
-                            <a href="#">
-                                <button class="btn-block" type="button">로그아웃</button>
-                            </a>
-                        </div>
-
                     </div>
                 </div>
 <!--             아이 한명도 없을때 보여줄것-->

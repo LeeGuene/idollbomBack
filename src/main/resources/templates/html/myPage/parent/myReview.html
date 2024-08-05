@@ -38,10 +38,10 @@
                         <a th:href="@{/ParentMyPage/myPost}">내가쓴 게시글</a>
                     </div>
                     <div class="menu-bar-option">
-                        <p>내 문의</p>
+                        <a th:href="@{/ParentMyPage/askPage}">내 문의</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a th:href="@{/ParentMyPage/Review}">내 리뷰</a>
+                        <p>내 리뷰</p>
                     </div>
                     <hr class="custom-hr">
                     <div class="menu-bar-option">
@@ -51,18 +51,11 @@
                         <a th:href="@{/ParentMyPage/myNote}">쪽지함</a>
                     </div>
                     <!-- 프로필 -->
-                    <div class="myprofile">
+                    <div class="myprofile" th:object="${parentInfo}">
                         <div class="profileimage">
-                            <img src="../../images/ff581d78778b7.png" alt="profileImage" class="img">
+                            <img  src="#" class="img" id="profile" th:src="*{parentProfileImageUrl}">
                         </div>
-                        <div class="Nickname">
-                            닉네임
-                        </div>
-
-                        <div class="buttonbox">
-                            <a href="#">
-                                <button class="btn-block" type="button">로그아웃</button>
-                            </a>
+                        <div class="Nickname" th:text="*{parentNickname}">
                         </div>
                     </div>
                 </div>
