@@ -17,5 +17,8 @@ public class ProDTO {
     private String proFile;                 // 첨부파일
     private String proIntro;                // 전문가 소개
     private String role;
+<<<<<<< HEAD
     private Long proReportCount;
+=======
+>>>>>>> a7767c93fbc71e867f72ae13c5b90819ee5e6485
 }
