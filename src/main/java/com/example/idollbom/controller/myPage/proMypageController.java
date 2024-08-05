@@ -1,6 +1,7 @@
 package com.example.idollbom.controller.myPage;
 
 import com.example.idollbom.domain.dto.logindto.CustomUserDTO;
+import com.example.idollbom.domain.dto.logindto.ProDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.NoteListDTO;
 import com.example.idollbom.domain.dto.prodto.proReportDTO;
 import com.example.idollbom.domain.vo.ProPostVO;
@@ -9,6 +10,7 @@ import com.example.idollbom.domain.vo.classVO;
 import com.example.idollbom.service.loginservice.ProService;
 import com.example.idollbom.service.myPageservice.parentservice.noteService;
 import com.example.idollbom.service.myPageservice.proservice.classService;
+import com.example.idollbom.service.myPageservice.proservice.proUpdateService;
 import com.example.idollbom.service.proService.ProDetailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class proMypageController {
     private final ProDetailService proDetailService;
     private final ProService proService;
     private final noteService noteService;
+    private final proUpdateService proUpdateService;
     
     // 전문가 pk, 이름, role을 넘기는 메서드
     public void getRole(Model model){
@@ -150,4 +152,10 @@ public class proMypageController {
         return "html/myPage/pro/calender";
     }
 
+
+    @PostMapping("/update")
+    public String updateInfo(ProDTO proDTO){
+        proUpdateService.update(proDTO);
+        return "redirect:/proMyPage/profile";
+    }
 }

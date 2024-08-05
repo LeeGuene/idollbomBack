@@ -1,5 +1,6 @@
 package com.example.idollbom.mapper.proMapper;
 
+import com.example.idollbom.domain.dto.logindto.ProDTO;
 import com.example.idollbom.domain.dto.parentdto.ProListDTO;
 import com.example.idollbom.domain.dto.prodto.ProDetailDTO;
 import com.example.idollbom.domain.dto.prodto.ProReviewListDTO;
@@ -8,6 +9,8 @@ import com.example.idollbom.domain.vo.ProPostVO;
 import com.example.idollbom.domain.vo.ProVO;
 import com.example.idollbom.domain.vo.classVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -42,4 +45,9 @@ public interface ProDetailMapper {
 
     // 전문가 총 인원수 조회
     int getProCount();
+
+    // 전문가 이미지 업데이트
+    void updateImg(@Param("proNumber") Long proNumber, @Param("proProfileImageUrl") String proProfileImageUrl);
+
+    void update(@Param("proVO") ProVO proVO);
 }

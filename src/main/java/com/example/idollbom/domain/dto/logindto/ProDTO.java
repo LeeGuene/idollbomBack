@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 public class ProDTO {
-
+    private Long proNumber;
     private String proEmail;
     private String proPassword;
     private String proName;
