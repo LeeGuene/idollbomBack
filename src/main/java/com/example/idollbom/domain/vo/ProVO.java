@@ -1,10 +1,7 @@
 package com.example.idollbom.domain.vo;
 
 import com.example.idollbom.domain.dto.logindto.ProDTO;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Component
-@Getter
+@Data
 @ToString
 @NoArgsConstructor
 public class ProVO implements UserDetails {
@@ -23,41 +20,44 @@ public class ProVO implements UserDetails {
     private String proEmail;                // 이메일(아이디)
     private String proPassword;             // 비밀번호
     private String proName;                 // 이름
-    private String proNickName;             // 별명
+    private String proNickname;             // 별명
     private String proPhoneNumber;          // 휴대 전화
     private String proAddress;              // 주소
     private String proProfileImageUrl;      // 전문가 이미지
     private String proFile;                 // 첨부파일
     private String proIntro;                // 전문가 소개
     private String role;
-
+    private Long proReportCount;
     @Builder
-    public ProVO (Long proNumber, String proEmail, String proPassword, String proName, String proNickName, String proPhoneNumber, String proAddress, String proProfileImageUrl, String proFile, String proIntro, String role) {
+    public ProVO (Long proNumber, String proEmail, String proPassword, String proName, String proNickname, String proPhoneNumber, String proAddress, String proProfileImageUrl, String proFile, String proIntro, String role, Long proReportCount) {
         this.proNumber = proNumber;
         this.proEmail = proEmail;
         this.proPassword = proPassword;
         this.proName = proName;
-        this.proNickName = proNickName;
+        this.proNickname = proNickname;
         this.proPhoneNumber = proPhoneNumber;
         this.proAddress = proAddress;
         this.proProfileImageUrl = proProfileImageUrl;
         this.proFile = proFile;
         this.proIntro = proIntro;
         this.role = role;
+        this.proReportCount = proReportCount;
     }
 
     public static ProVO toEntity(ProDTO dto){
         return ProVO.builder()
+                .proNumber(dto.getProNumber())
                 .proEmail(dto.getProEmail())
                 .proPassword(dto.getProPassword())
                 .proName(dto.getProName())
-                .proNickName(dto.getProNickName())
+                .proNickname(dto.getProNickname())
                 .proPhoneNumber(dto.getProPhoneNumber())
                 .proAddress(dto.getProAddress())
                 .proProfileImageUrl(dto.getProProfileImageUrl())
                 .proFile(dto.getProFile())
                 .proIntro(dto.getProIntro())
                 .role(dto.getRole())
+                .proReportCount(dto.getProReportCount())
                 .build();
     }
 
@@ -100,7 +100,5 @@ public class ProVO implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-
 
 }

@@ -36,4 +36,10 @@
         where PARENT_NUMBER =#{parentNumber}
     </update>
 
+    <!-- 부모 정보 불러오기   -->
+    <select id="selectParent">
+        select * from parent
+        where PARENT_NUMBER = #{parentNumber}
+    </select>
+
 </mapper>

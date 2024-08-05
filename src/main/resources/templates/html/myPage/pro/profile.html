@@ -46,19 +46,14 @@
                     <div class="menu-bar-option">
                         <a th:href="@{/proMyPage/myNote}">쪽지함</a>
                     </div>
-                    <div class="myprofile">
+                    <div class="myprofile" th:object="${proInfo}">
                         <div class="profileimage">
-                            <img src="../../images/class_list_pro 2.png" alt="profileImage" class="img">
+                            <img src="#" alt="profileImage" class="img" th:src="*{proProfileImageUrl}" />
                         </div>
                         <div class="Nickname">
-                            닉네임
+                            <div th:text="*{proNickname}"></div>
                         </div>
 
-                        <div class="buttonbox">
-                            <a href="#">
-                                <button class="btn-block" type="button">로그아웃</button>
-                            </a>
-                        </div>
                     </div>
                 </div>
 
@@ -69,17 +64,17 @@
                         <input type="hidden" id="hiddenPassword">
                         <div class="reset">
                             <div> 이름</div>
-                            <input th:field="*{proName}">
+                            <input th:field="*{proName}" readonly>
                         </div>
 
                         <div class="reset">
                             <div>휴대폰번호</div>
-                            <input th:field="*{proPhoneNumber}">
+                            <input th:field="*{proPhoneNumber}" readonly>
                         </div>
 
                         <div class="reset">
                             <div> 별명</div>
-                            <input  th:field="*{proNickName}">
+                            <input  th:field="*{proNickname}">
                         </div>
 
                         <div class="reset">
@@ -115,9 +110,8 @@
                             </div>
                             <div class="attachment-wrap">
                                 <div>이력서</div>
-<!--                                <input class="upload-name" placeholder="첨부파일" />-->
                                 <label for="file">첨부파일</label>
-                                <input type="file" id="file" name="file" />
+                                <input type="file" id="file" name="file"/>
                             </div>
                         </div>
 
