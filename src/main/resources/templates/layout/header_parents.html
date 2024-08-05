@@ -60,10 +60,10 @@
                 </p>
 
                 <!-- 로그인하지 않고 들어갈 때 보여줄 div -->
-                <div sec:authorize="!isAuthenticated()" class="logout-status">
-                    <p><a th:href="@{/user/login}">로그인</a></p>
-                    <p><a th:href="@{/user/signup}">회원가입</a></p>
-                </div>
+<!--                <div sec:authorize="!isAuthenticated()" class="logout-status">-->
+<!--                    <p><a th:href="@{/user/login}">로그인</a></p>-->
+<!--                    <p><a th:href="@{/user/signup}">회원가입</a></p>-->
+<!--                </div>-->
 
                 <!-- 전문가 로그인 한 후 넘어올 때 보여줄 div -->
                 <div th:if="${role != 'parent'}" class="logout-status">
