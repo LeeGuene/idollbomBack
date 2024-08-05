@@ -13,4 +13,5 @@ public interface ParentMapper {
 
      void updateInfo(ParentVO parentVO);
 
+     ParentVO selectParent(Long parentNumber);
 }

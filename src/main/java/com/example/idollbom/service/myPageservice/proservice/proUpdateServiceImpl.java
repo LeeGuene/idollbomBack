@@ -1,4 +1,5 @@
 package com.example.idollbom.service.myPageservice.proservice;
+import com.example.idollbom.domain.dto.boarddto.ProFileDTO;
 import com.example.idollbom.domain.dto.logindto.ProDTO;
 import com.example.idollbom.domain.vo.ProVO;
 import com.example.idollbom.mapper.loginmapper.ProMapper;
@@ -14,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.List;
+import java.util.UUID;
 
 import static com.example.idollbom.domain.vo.ProVO.toEntity;
 
@@ -68,7 +71,7 @@ public class proUpdateServiceImpl implements proUpdateService {
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
             // url 지정
-            String imageUrl = "/backImage/parent/profile" + imgName;
+            String imageUrl = "/backImage/parent/profile/" + imgName;
 
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -84,18 +87,60 @@ public class proUpdateServiceImpl implements proUpdateService {
         }
     }
 
+
     @Override
-    public void update(ProDTO proDTO) {
+    public void update(ProDTO proDTO, MultipartFile file) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String currentUserName = userDetails.getUsername();
 
         //      pro VO 찾아서 아이디 찾기
         ProVO pro = proMapper.selectPro(currentUserName);
+        log.info(String.valueOf(pro.getProNumber()));
+        log.info(proDTO.getProName());
 
         proDTO.setProNumber(pro.getProNumber());
+        proDTO.setProEmail(pro.getProEmail());
+        proDTO.setProPassword(pro.getProPassword());
+        proDTO.setProProfileImageUrl(pro.getProProfileImageUrl());
+        proDTO.setRole(pro.getRole());
+        proDTO.setProFile(pro.getProFile());
+        proDTO.setProReportCount(pro.getProReportCount());
 
+        saveProFile(pro.getProNumber(), file);
         proDetailMapper.update(toEntity(proDTO));
     }
-}
+
+    // 첨부파일 update
+    @Override
+    public void saveProFile(Long proNumber, MultipartFile profiles) {
+
+            if (profiles.isEmpty())
+                return;
+
+            String originalFileName = profiles.getOriginalFilename();
+            String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + "_" + originalFileName;
+            Long fileSize = profiles.getSize();
+
+            try {
+                // 파일 저장 경로 설정
+                Path directoryPath = Paths.get("src/main/resources/static/backImage/pro/file");
+                if (!Files.exists(directoryPath)) {
+                    Files.createDirectories(directoryPath); // 폴더가 없으면 생성
+                }
+                Path filePath = directoryPath.resolve(storedFileName);
+                // 파일 저장
+                Files.copy(profiles.getInputStream(), filePath);
+
+                String fileUrl = directoryPath + "/" + storedFileName;
+
+                proDetailMapper.updateFile(proNumber, fileUrl);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 

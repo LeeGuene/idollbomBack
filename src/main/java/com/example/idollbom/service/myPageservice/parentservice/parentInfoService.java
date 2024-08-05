@@ -14,4 +14,6 @@ public interface parentInfoService {
     public String updateImg(MultipartFile file);
 
     public void updatePassword(String password);
+
+    public ParentVO selectParent(Long parentNumber);
 }

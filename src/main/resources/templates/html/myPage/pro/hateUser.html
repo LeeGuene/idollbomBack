@@ -39,19 +39,14 @@
                     <div class="menu-bar-option">
                         <a th:href="@{/proMyPage/myNote}">쪽지함</a>
                     </div>
-                    <div class="myprofile">
+                    <div class="myprofile" th:object="${proInfo}">
                         <div class="profileimage">
-                            <img src="../../images/class_list_pro 2.png" alt="profileImage" class="img">
+                            <img src="#" alt="profileImage" class="img" th:src="*{proProfileImageUrl}" />
                         </div>
                         <div class="Nickname">
-                            닉네임
+                            <div th:text="*{proNickname}"></div>
                         </div>
 
-                        <div class="buttonbox">
-                            <a href="#">
-                                <button class="btn-block" type="button">로그아웃</button>
-                            </a>
-                        </div>
                     </div>
                 </div>
 
