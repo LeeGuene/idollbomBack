@@ -1,6 +1,7 @@
 package com.example.idollbom.service.myPageservice.parentservice;
 
 import com.example.idollbom.domain.dto.logindto.ParentDTO;
+import com.example.idollbom.domain.dto.prodto.ClassImgDTO;
 import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.mapper.boardmapper.ParentFileMapper;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
@@ -16,9 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Console;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.UUID;
 
 @Service
@@ -66,31 +65,48 @@ public class parentInfoServiceImpl implements parentInfoService {
             throw new IllegalArgumentException("Uploaded file is empty");
         }
 
-            String originalFileName = file.getOriginalFilename();
-            String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + "_" + originalFileName;
-            Long fileSize = file.getSize();
+        String imgName = file.getOriginalFilename();
 
-            try {
-                // 파일 저장 경로 설정
-                Path directoryPath = Paths.get("src/main/resources/static/backImage/parent/prifile");
-                if (!Files.exists(directoryPath)) {
-                    Files.createDirectories(directoryPath); // 폴더가 없으면 생성
-                }
-                Path filePath = directoryPath.resolve(storedFileName);
-                // 파일 저장
-                Files.copy(file.getInputStream(), filePath);
+        if (imgName == null || imgName.trim().isEmpty()) {
+            System.out.println("파일 이름이 유효하지 않습니다.");
+            return null;
+        }
 
+        // 파일 이름에서 경로 구분 기호를 안전하게 처리
+        imgName = imgName.replaceAll("[/:*?\"<>|]", "_");
+
+        // 파일 이름 유효성 검사
+        try {
+            Paths.get(imgName); // 파일 이름이 유효한지 검사
+        } catch (InvalidPathException e) {
+            System.out.println("유효하지 않은 파일 이름입니다: " + imgName);
+            return null;
+        }
+
+        System.out.println(imgName);
+
+        try {
+            Path directoryPath = Paths.get("src/main/resources/static/backImage/parent/profile/");
+            if (!Files.exists(directoryPath)) {
+                Files.createDirectories(directoryPath);
+            }
+
+            Path filePath = directoryPath.resolve(imgName);
+            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+            // url 지정
+            String imageUrl = "/backImage/parent/profile/" + imgName;
+
+            //      parent VO 찾아서 아이디 찾기
                 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
                 UserDetails userDetails = (UserDetails) authentication.getPrincipal();
                 String currentUserName = userDetails.getUsername();
 
-                //      parent VO 찾아서 아이디 찾기
                 ParentVO parent = parentMapper.selectOne(currentUserName);
-                String parentPrifileImageUrl= directoryPath + "/" + storedFileName;
 
-                parentFileMapper.updatePic(parentPrifileImageUrl,parent.getParentNumber());
+                parentFileMapper.updatePic(imageUrl,parent.getParentNumber());
 
-                return "/backImage/parent/prifile/" + storedFileName;
+                return imageUrl;
 
 
             } catch (IOException e) {

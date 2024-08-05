@@ -65,7 +65,7 @@
 
                 <!-- 정보 수정을 누르면 나오는 페이지 -->
                 <div class="mainbox">
-                    <form class="reset-form" th:object="${pro}">
+                    <form class="reset-form" th:object="${pro}" th:action="@{/proMyPage/update}" method="post" enctype="multipart/form-data">
                         <input type="hidden" id="hiddenPassword">
                         <div class="reset">
                             <div> 이름</div>
@@ -94,7 +94,18 @@
 
                         <div class="reset" id="pro-add">
                             <div>주소지</div>
-                            <button type="button" class="address">주소지 변경</button>
+                            <button type="button" class="address" onclick="execPostCode();">주소지 변경</button>
+                        </div>
+                        <!--            주소담는곳-->
+                        <div class="form-group">
+                            <input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="addr1" id="addr1" type="text" readonly="readonly" >
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" style="top: 5px;" placeholder="도로명 주소" name="addr2" id="addr2" type="text" readonly="readonly" th:field="*{proAddress}"/>
+                            <button type="button" class="btn btn-default" ><i class="fa fa-search"></i> 우편번호 찾기</button>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="상세주소" name="addr3" id="addr3" type="text"  />
                         </div>
 
                         <div class="reset-wrap">
@@ -104,9 +115,9 @@
                             </div>
                             <div class="attachment-wrap">
                                 <div>이력서</div>
-                                <input class="upload-name" placeholder="첨부파일" />
+<!--                                <input class="upload-name" placeholder="첨부파일" />-->
                                 <label for="file">첨부파일</label>
-                                <input type="file" id="file" />
+                                <input type="file" id="file" name="file" />
                             </div>
                         </div>
 
@@ -114,20 +125,20 @@
                         <div class="submit">
                             <!-- 내 정보를 수정하면 어느 페이지로 이동해야 되나?? -->
                             <a href="#">
-                                <button class="submit-button" type="button">제출</button>
+                                <button class="submit-button" type="submit">제출</button>
                             </a>
                         </div>
                     </form>
                 </div>
             </div>
             <!-- 비밀번호 변경 모달창 -->
-            <form action="#" method="get">
+            <form>
                 <div class="modal-pwd">
                     <div class="pwd-body">
                         <div class="header">
                             <img class="img" src="../../images/logo.png" alt="로고">
                             <h3 id="title">비밀번호 변경</h3>
-                            <button type="button" id="close-btn"><img class="x-btn" src="../../images/closebtn.png"
+                            <button type="button" id="close-btn"><img class="x-btn" src="/images/closebtn.png"
                                     alt="닫기버튼"></button>
                         </div>
                         <div class="mb-3">
@@ -157,22 +168,22 @@
                 <div class="modal-profile">
                     <div class="profile-center-body profile-modify-body">
                         <div class="header">
-                            <a href="#"><img class="img" src="../../images/logo.png" alt="로고"></a>
+                            <a href="#"><img class="img" src="/images/logo.png" alt="로고"></a>
                             <h3 id="title">프로필 등록</h3>
-                            <button id="close-profile-btn"><img class="x-btn" src="../../images/closebtn.png"
+                            <button id="close-profile-btn"><img class="x-btn" src="/images/closebtn.png"
                                     alt="닫기버튼"></button>
                         </div>
                         <!-- 이미지 미리보기 -->
                         <div class="profile-img-wrap">
                             <img id="preview" alt="미리보기" class="img-profile">
                             <label class="input-file-button" for="input-file">upload</label>
-                            <input type="file" id="input-file" onchange="prevImage(this)" style="display: none;" />
+                            <input type="file" id="input-file" onchange="prevImage(this)"  style="display: none;" multiple="multiple" name="file"/>
                         </div>
 
                         <div class="modal-btn">
                             <!-- 추가하기를 누르면 새로운 페이지로 이동 -->
                             <button class="close-profile-btn btn">취소하기</button>
-                            <button class="add-btn btn" type="submit">등록하기</button>
+                            <button class="add-btn btn" type="button" onclick="updateImg()">등록하기</button>
                         </div>
                     </div>
                 </div>
@@ -210,19 +221,95 @@
                 alert("현재 비밀번호와 같습니다");
                 return false;
             } else {
-                var newPassword = document.getElementById('hiddenPassword');
-                newPassword.value = p2;
-                console.log(p2);
-                alert("성공적으로 수정되었습니다.");
-                modal.style.display="none";
+                const btnSubmitModal = document.querySelector('.regist-btn');
+                btnSubmitModal.addEventListener("click", () => {
+                    modal.style.display = "none";
+                });
+
+                $.ajax({
+                    url: '/proRestController/updatePassword',
+                    type: 'PUT',
+                    data: { password: p2 },
+                    success: function(response) {
+                        alert("비밀번호가 업데이트 되었습니다");
+                        console.log(response);
+                    },
+                    error: function(err) {
+                        alert("비밀번호 업데이트에 실패했습니다");
+                    }
+                });
             }
             document.getElementById('childName').value = '';
             document.getElementById('presentNew').value = '';
             document.getElementById('childInstruct').value = '';
+            modal.style.display = "none";
+        }
+
+        function updateImg() {
+            const fileInput = document.getElementById('input-file');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert("파일을 선택해주세요.");
+                return;
+            }
+
+            const files = new FormData();
+            files.append("file", file);
+
+            $.ajax({
+                url: '/proRestController/proUpdateImg',
+                type: 'PUT',
+                data: files,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    alert("파일이 성공적으로 업로드되었습니다.");
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error(textStatus, errorThrown);
+                    alert("파일 업로드에 실패했습니다.");
+                }
+            });
+        }
+    </script>
+    <!--            주소api-->
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <script>
+        function execPostCode() {
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    var fullRoadAddr = data.roadAddress;
+                    var extraRoadAddr = '';
+
+                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                        extraRoadAddr += data.bname;
+                    }
+                    if (data.buildingName !== '' && data.apartment === 'Y') {
+                        extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    if (extraRoadAddr !== '') {
+                        extraRoadAddr = ' (' + extraRoadAddr + ')';
+                    }
+                    if (fullRoadAddr !== '') {
+                        fullRoadAddr += extraRoadAddr;
+                    }
+
+                    console.log(data.zonecode);
+                    console.log(fullRoadAddr);
+
+                    // 우편번호와 주소 정보를 해당 필드에 넣기
+                    document.getElementById('addr1').value = data.zonecode; // 우편번호
+                    document.getElementById('addr2').value = fullRoadAddr; // 도로명 주소
+                    document.getElementById('addr3').value = ''; // 상세주소 초기화
+
+                }
+            }).open();
         }
     </script>
     <script src="/js/password-modal.js"></script>
     <script src="/js/profile-modal.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 
 </html>
