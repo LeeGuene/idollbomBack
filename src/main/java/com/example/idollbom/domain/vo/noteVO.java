@@ -1,9 +1,12 @@
 package com.example.idollbom.domain.vo;
 
-import lombok.*;
+import com.example.idollbom.domain.dto.myPagedto.parentdto.NoteDTO;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @ToString
@@ -24,6 +27,17 @@ public class noteVO {
         this.parentNoteAlarmCheck = parentNoteAlarmCheck;
         this.parentNumber = parentNumber;
         this.proNumber = proNumber;
+    }
+
+    public static noteVO toEntity(NoteDTO note) {
+        return noteVO.builder()
+                .parentNoteNumber(note.getParentNoteNumber())
+                .parentNoteContent(note.getParentNoteContent())
+                .parentNoteSendTime(note.getParentNoteSendTime())
+                .parentNoteAlarmCheck(note.getParentNoteAlarmCheck())
+                .parentNumber(note.getParentNumber())
+                .proNumber(note.getProNumber())
+                .build();
     }
 
 }

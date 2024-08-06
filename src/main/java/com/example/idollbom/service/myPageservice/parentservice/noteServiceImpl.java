@@ -1,8 +1,10 @@
 package com.example.idollbom.service.myPageservice.parentservice;
 
+import com.example.idollbom.domain.dto.myPagedto.parentdto.NoteDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.NoteListDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.mailDTO;
 import com.example.idollbom.domain.vo.ParentVO;
+import com.example.idollbom.domain.vo.noteVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.mapper.myPagemapper.parentmapper.noteMapper;
 import lombok.RequiredArgsConstructor;
@@ -48,9 +50,16 @@ public class noteServiceImpl implements noteService {
     public int countProNoteList(Long proNumber) {
         return noteMapper.countProNoteList(proNumber);
     }
-
+    
+    // 부모 쪽지 목록 카운트
     @Override
     public int countParentNoteList(Long parentNumber) {
         return noteMapper.countParentNoteList(parentNumber);
+    }
+
+    // 부모 쪽지 목록 추가 ( 전문가가 쪽지 전송하면 )
+    @Override
+    public void insertNote(NoteDTO noteDTO) {
+        noteMapper.insertNote(noteVO.toEntity(noteDTO));
     }
 }

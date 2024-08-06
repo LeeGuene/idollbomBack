@@ -35,9 +35,10 @@
                 </tr>
             </thead>
             <tbody>
+            <input type="hidden" name="proNumber" th:value="${proNumber}" />
                 <tr th:each="save : ${saveList}" th:object="${save}">
                     <!-- 쪽지 보내기할 때, 필요할 것 같아서 추가 -->
-                    <input type="hidden" th:value="*{parentNumber}" />
+                    <input type="hidden" name="parentNumber" th:value="*{parentNumber}" />
                     <td th:text="*{className}"></td>
                     <td th:text="*{parentName}"></td>
                     <td><button class="btn-open-modal"><i class="fa-regular fa-envelope"></i></button></td>
@@ -67,7 +68,7 @@
         </div>
 
         <!-- 쪽지보내기 모달창 -->
-        <form action="#" method="get">
+        <form action="#" method="post">
             <div class="modal">
                 <div class="modal-body profile-body">
                     <div class="header">
@@ -96,10 +97,11 @@
     </div>
 
     <!-- 푸터 -->
-    <div th:replace="~{/layout/footer :: footer}"></div>
+<!--    <div th:replace="~{/layout/footer :: footer}"></div>-->
 
 </body>
 <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
 <script th:src="@{/js/modal.js}"></script>
+<script th:src="@{/js/sendNote.js}"></script>
 
 </html>

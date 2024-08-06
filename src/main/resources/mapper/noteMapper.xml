@@ -39,4 +39,11 @@
         from PARENT_NOTE
         where PARENT_NUMBER = #{parentNumber}
     </select>
+
+    <!-- 전문가가 보낸 쪽지 부모 쪽지 목록에 추가 -->
+    <insert id="insertNote">
+        insert into PARENT_NOTE (PARENT_NOTE_NUMBER, PARENT_NOTE_CONTENT, PARENT_NOTE_SEND_TIME, PARENT_NOTE_ALARM_CHECK,
+                                 PARENT_NUMBER, PRO_NUMBER)
+        values (SEQ_PROJECT.NEXTVAL, #{parentNoteContent}, sysdate, '미확인', #{parentNumber}, #{proNumber})
+    </insert>
 </mapper>
