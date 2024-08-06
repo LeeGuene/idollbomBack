@@ -18,5 +18,4 @@ public class ProDTO {
     private String proIntro;                // 전문가 소개
     private String role;
     private Long proReportCount;
-
 }
