@@ -89,6 +89,7 @@
 .post-content-wrap{
   display: flex;
   align-items: flex-start;
+  flex-wrap: wrap;
   column-gap: 7px;
 }
 
@@ -231,5 +232,13 @@ label[for="private"]:hover{
 
 .available-view-wrap input[type="radio"]:checked + .my-checkbox:after{
   content: '✔';
-} 
+}
+
+/* 문의하기 등록 버튼 css */
+/* 유효성 검사 완료 안되었을 경우에 적용되는 css */
+.post-submitBtn-wrap > button.disabled{
+  color: #ccc;
+  pointer-events: none;
+  border: 1px solid #ddd;
+}
 

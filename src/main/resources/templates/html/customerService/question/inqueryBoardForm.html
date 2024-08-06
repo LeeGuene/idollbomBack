@@ -32,14 +32,14 @@
       <!-- 게시글 제목 -->
       <div class="post-title-wrap">
         <label for="title-input">제목</label>
-        <input type="text" th:field="*{questionTitle}" id="title-input" required />
+        <input type="text" th:field="*{questionTitle}" id="title-input" />
         <p class="err-msg" id="title-err-msg"></p>
       </div>
 
       <!-- 게시글 내용 -->
       <div class="post-content-wrap">
         <label for="content-input">내용</label>
-        <textarea th:field="*{questionContent}" id="content-input" required></textarea>
+        <textarea th:field="*{questionContent}" id="content-input" ></textarea>
         <p class="err-msg" id="content-err-msg"></p>
       </div>
 
