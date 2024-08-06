@@ -48,7 +48,8 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/parentcommunity/detail"),
                                 new AntPathRequestMatcher("/ask/**"),
                                 new AntPathRequestMatcher("/rest/**"),
-                                new AntPathRequestMatcher("/restList/**")
+                                new AntPathRequestMatcher("/restList/**"),
+                                new AntPathRequestMatcher("/check/checkEmail")
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

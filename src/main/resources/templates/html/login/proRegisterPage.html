@@ -54,6 +54,7 @@
 
         <div class="form">
             <input type="email" th:field="*{proEmail}" id="email" placeholder="Email" required>
+            <button onclick="check()">중복확인</button>
         </div>
 
         <input type="password" th:field="*{proPassword}" id="password" placeholder="비밀번호" required>
@@ -86,7 +87,32 @@
     </form>
     <p class="signinAsk">이미 계정이 있나요 <a href="../../html/login/loginpage.html">Sign In</a></p>
 </div>
+<script>
+    function check() {
+        let email = document.getElementById('email').value;
+        $.ajax({
+            url: '/check/checkEmail',  // URL 수정
+            type: 'GET',
+            data: { email: email },
+            success: function(response) {
+                if(response !== "null") {
+                    console.log(response);
+                    alert("사용 불가능한 아이디입니다.");
+                    document.getElementById('email').value = '';  // 이메일 입력 필드를 비웁니다.
+                } else {
+                    alert("사용 가능한 아이디입니다.");
+                }
+            },
+            error: function(err) {
+                alert("이메일 확인에 실패했습니다.");
+            }
+        });
+    }
 
+
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:src="@{/js/registerpage.js}"></script>
 </body>
 </html>

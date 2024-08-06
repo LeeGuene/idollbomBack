@@ -7,4 +7,5 @@ import org.springframework.stereotype.Service;
 public interface ParentService {
     public void save(ParentDTO dto);
 
+    String selectEmail(String parentEmail);
 }
