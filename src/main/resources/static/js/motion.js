@@ -25,7 +25,7 @@ $(function(){
 
     $(".question dl dt").on("click",function(){
         // 문의답변 내용이 없으면 슬라이드 적용하지 않음
-        if (a==="down" && answer != null){
+        if (a==="down" && answer !== null){
              $(this).next().stop().slideDown().css({display:"flex"});
              $($(this)).css({background: "url(../images/question2.png)no-repeat right 30px center rgba(224,224,224,0.3"})
              $($(this)).next().css({background: "rgba(224,224,224,0.3"})

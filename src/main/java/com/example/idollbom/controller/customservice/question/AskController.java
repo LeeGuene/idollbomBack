@@ -63,9 +63,10 @@ public class AskController {
         int totalPages = (int) Math.ceil((double) totalQuestions / pageSize);
         List<QuestionListDTO> questionList = questionService.findQuestionAll(pageNo, pageSize);
         
-        // 공개 / 비공개 글임을 구분하는 문의하기 pk를 저장할 리스트 변수
+        // "공개 / 비공개" 글임을 구분하는 문의하기 pk를 저장할 리스트 변수
         List<Long> visibleList = new ArrayList<>();
 
+        // 열람가능 여부가 공개라면 리스트에 해당 문의하기 pk를 저장
         for(QuestionListDTO question : questionList) {
             if(question.getQuestionReadingCheck().equals("공개")){
                 visibleList.add(question.getQuestionNumber()); // 공개인 것만 추가
