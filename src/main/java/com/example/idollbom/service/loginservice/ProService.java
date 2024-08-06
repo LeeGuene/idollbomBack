@@ -17,4 +17,6 @@ public interface ProService {
     String proInsertImg(MultipartFile img);
 
     String proInsertFile(MultipartFile file);
+
+    String selectEmail(String proEmail);
 }

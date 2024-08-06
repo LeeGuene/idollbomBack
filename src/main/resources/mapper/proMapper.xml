@@ -28,4 +28,14 @@
         where parent_email = #{proEmail}
     </select>
 
+    <select id="selectEmail">
+        SELECT
+            CASE
+                WHEN COUNT(*) > 0 THEN #{proEmail}
+                ELSE NULL
+                END AS result
+        FROM pro
+        WHERE pro_email = #{proEmail}
+    </select>
+
 </mapper>
