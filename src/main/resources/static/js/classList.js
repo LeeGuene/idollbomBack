@@ -103,7 +103,7 @@ function renderBoard(classLists){
                 <tr class="class_item">
                     <input type="hidden" name="classNumber" value="${classList.classNumber}" />
                     <input type="hidden" name="proNumber" value="${classList.proNumber}" />
-                    <td><img src="/images/${classList.proProfileImageUrl}"></td>
+                    <td><img src="${classList.proProfileImageUrl}"></td>
                     <td>
                         <div>
                             <p>${classList.proName}</p>

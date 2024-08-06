@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <a href="#">
                     <input type="hidden" name="proNumber" value="${pro.proNumber}" />
                     <div class="proImg-box">
-                        <img src="/images/${pro.proProfileImageUrl}" />
+                        <img src="${pro.proProfileImageUrl}" />
                     </div>
                     <p>${pro.proName}</p>
                     <div>

@@ -127,10 +127,10 @@
               <div>
                 <p>작성자 : <span th:text="${review.parentName}"></span></p>
                 <div th:if="*{reviewRegisterDate == reviewUpdateDate}">
-                  <p>작성일 : <span th:text="*{#temporals.format(reviewRegisterDate, 'yy년 M월 d일 HH시 mm분')}"></span></p>
+                  <p>작성일 : <span th:text="*{#temporals.format(reviewRegisterDate, 'yy년 M월 d일')}"></span></p>
                 </div>
                 <div th:unless="*{reviewRegisterDate == reviewUpdateDate}">
-                  <p>작성일 : <span th:text="*{#temporals.format(reviewUpdateDate, 'yy년 M월 d일 HH시 mm분')} + ' (수정)' "></span></p>
+                  <p>작성일 : <span th:text="*{#temporals.format(reviewUpdateDate, 'yy년 M월 d일')} + ' (수정)' "></span></p>
                 </div>
               </div>
             </li>

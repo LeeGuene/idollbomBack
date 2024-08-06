@@ -29,7 +29,7 @@
                         <td th:text="*{proIntro}">저랑 함께 재밌는 수업을 해봐요.</td>
 
                         <!-- 전문가 이미지 -->
-                        <td><img th:src="@{/images/{proProfileImageUrl}(proProfileImageUrl=*{proProfileImageUrl})}" alt="강사이미지"></td>
+                        <td><img th:src="@{{proProfileImageUrl}(proProfileImageUrl=*{proProfileImageUrl})}" alt="강사이미지"></td>
 
                         <!-- 전문가 프로필 상세보기로 이동 -->
                         <td><a th:href="@{/pro/detail(proNumber=*{proNumber})}">더 보기</a></td>
