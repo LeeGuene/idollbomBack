@@ -95,10 +95,7 @@
                            and c.CLASS_NAME LIKE '%' || #{searchWord} || '%'
                         </when>
                         <when test="searchType == 'content'">
-                            and c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
-                        </when>
-                        <when test="searchType == 'all'">
-                            and (c.CLASS_NAME LIKE '%' || #{searchWord} || '%' OR c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%')
+                            and c.CLASS_INTRO LIKE '%' || #{searchWord} || '%'
                         </when>
                     </choose>
                 </if>
@@ -122,10 +119,7 @@
                     AND CLASS_NAME LIKE '%' || #{searchWord} || '%'
                 </when>
                 <when test="searchType == 'content'">
-                    AND CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
-                </when>
-                <when test="searchType == 'all'">
-                    AND CLASS_NAME LIKE '%' || #{searchWord} || '%' OR CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
+                    AND CLASS_INTRO LIKE '%' || #{searchWord} || '%'
                 </when>
             </choose>
         </if>

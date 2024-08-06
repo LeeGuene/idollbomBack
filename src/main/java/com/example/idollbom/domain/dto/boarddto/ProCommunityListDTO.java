@@ -10,6 +10,6 @@ public class ProCommunityListDTO {
     private String proPostTitle;
     private Long proNumber;
     private String proNickname;
-    private String proProfileUrl;
+    private String proProfileImageUrl;
     private int proPostReportCount;
 }
