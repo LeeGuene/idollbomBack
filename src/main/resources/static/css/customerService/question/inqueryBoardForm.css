@@ -78,6 +78,13 @@
   border-bottom: 2px solid #00B455;
 }
 
+/* 에러 메세지(게시글 제목, 내용 등등) css */
+.err-msg{
+  color: red;
+  margin: 15px 30px;
+  font-weight: bold;
+}
+
 /* 게시글 내용 css */
 .post-content-wrap{
   display: flex;
