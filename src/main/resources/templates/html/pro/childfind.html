@@ -35,7 +35,7 @@
                 </tr>
             </thead>
             <tbody>
-            <input type="hidden" name="proNumber" th:value="${proNumber}" />
+<!--                <input type="hidden" name="proNumber" th:value="${proNumber}" />-->
                 <tr th:each="save : ${saveList}" th:object="${save}">
                     <!-- 쪽지 보내기할 때, 필요할 것 같아서 추가 -->
                     <input type="hidden" name="parentNumber" th:value="*{parentNumber}" />
