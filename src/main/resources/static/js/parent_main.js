@@ -141,6 +141,15 @@ document.addEventListener("DOMContentLoaded", function() {
     const btns = document.querySelectorAll(".slider-btn");
     console.log(btns);
 
+    // 자동 슬라이드를 위한 시간 설정 ( 단위 : 밀리초(ms) )
+    const intervalTime = 3000;
+
+    // 자동 이미지 슬라이드 함수
+    function autoSlide() {
+        sliderBox.style.transform = 'translateX(-200%)';
+        sliderBox.style.transition = '1s';
+    }
+
     sliderBox.ontransitionend = ()=> {
         // 기준 위치인 transform(-100%) 에서 왼쪽 버튼은 0%로 이동, 오른쪽 버튼은 -200% 이동한다.
         if (sliderBox.style.transform === 'translateX(-200%)') {
@@ -161,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function() {
         sliderBox.style.transform = 'translateX(-100%)'; // 원래 기준위치로 이동
     }
 
-    // 이미지 슬라이드 관련됨.
+    // 수동 이미지 슬라이드 (버튼 클릭시 이동)
     btns.forEach(btn=>{
         btn.addEventListener("click", ()=>{
 
@@ -170,6 +179,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 sliderBox.style.transform = 'translateX(-200%)';
                 sliderBox.style.transition = '1s';
 
+                autoSlide();
             }
 
             if(btn.classList.contains("left")){
@@ -177,9 +187,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 sliderBox.style.transition = '1s';
 
             }
+
+            // 클릭 시, 자동 슬라이드 기능을 유지하기 위해 현재 인터벌을 clear 하고 재설정
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(autoSlide, intervalTime);
         });
     });
 
+    // 자동 슬라이드를 설정
+    let autoSlideInterval = setInterval(autoSlide, intervalTime);
 });
+
+
 
 

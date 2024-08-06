@@ -9,7 +9,9 @@ import com.example.idollbom.mapper.loginmapper.ProMapper;
 import com.example.idollbom.service.boardservice.ProCommunityService;
 import com.example.idollbom.service.boardservice.ProFileService;
 import com.example.idollbom.service.boardservice.ProReportService;
+import com.example.idollbom.service.myPageservice.parentservice.noteService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,28 +24,37 @@ import java.util.List;
 @Controller
 @RequestMapping("/procommunity")
 @RequiredArgsConstructor
+@Slf4j
 public class ProcommunityController {
 
     private final ProCommunityService proCommunityService;
     private final ProFileService proFileService;
     private final ProReportService proReportService;
     private final ProMapper proMapper;
+    private final noteService noteService;
 
     // 전문가 페이지이동 컨트롤러
-    @GetMapping()
+    @GetMapping
     public String proCommunity(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
             CustomUserDTO p = ((CustomUserDTO) authentication.getPrincipal());
-
-            String userRole = p.getRole();
+            String role = p.getRole();
             String proId = p.getEmail();
 
-            System.out.println(userRole);
-            model.addAttribute("userRole", userRole);
-            ProVO pro = proMapper.selectPro(proId);
-            model.addAttribute("proNumber", pro.getProNumber());
+            if (p.getRole().equals("pro")) {
+                System.out.println(role);
+                ProVO pro = proMapper.selectPro(proId);
+
+                // 부모 정보를 받아와서 쪽지목록 개수를 계산해서 html로 전달
+                int count = noteService.countProNoteList(pro.getProNumber());
+                log.info("count : " + count);
+
+                model.addAttribute("count", count);
+                model.addAttribute("role", role);
+                model.addAttribute("proNumber", pro.getProNumber());
+            }
         }
 
         return "/html/board/pro/community_pro";

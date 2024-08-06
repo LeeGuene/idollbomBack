@@ -18,8 +18,8 @@
             <p>전문가에게 필요한 소식을 자유롭게 공유합니다.</p>
 
             <div class="community_search">
-                <input type="hidden" name="userRole" th:value="${userRole}">
-                <p><a th:if="${userRole == 'pro'}" th:href="@{/procommunity/proWrite}">작성하기</a></p>
+                <input type="hidden" name="userRole" th:value="${role}">
+                <p><a th:if="${role == 'pro'}" th:href="@{/procommunity/proWrite}">작성하기</a></p>
 
                 <div>
                     <form id="searchForm">

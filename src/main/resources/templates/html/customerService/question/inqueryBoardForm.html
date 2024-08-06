@@ -32,21 +32,22 @@
       <!-- 게시글 제목 -->
       <div class="post-title-wrap">
         <label for="title-input">제목</label>
-        <input type="text" th:field="*{questionTitle}" id="title-input" required />
+        <input type="text" th:field="*{questionTitle}" id="title-input" />
         <p class="err-msg" id="title-err-msg"></p>
       </div>
 
       <!-- 게시글 내용 -->
       <div class="post-content-wrap">
         <label for="content-input">내용</label>
-        <textarea th:field="*{questionContent}" id="content-input" required></textarea>
-<!--        <p class="err-msg" id="title-err-msg"></p>-->
+        <textarea th:field="*{questionContent}" id="content-input" ></textarea>
+        <p class="err-msg" id="content-err-msg"></p>
       </div>
 
       <!-- 공개, 비공개 여부 체크박스 -->
       <div class="available-view-wrap">
         <h1>열람 가능여부 체크</h1>
         <div class="radio-btn-wrap">
+          <!-- 공개 -->
           <div>
             <input id="public" type="radio"
                    name="view-possible"
@@ -56,6 +57,8 @@
             <div class="my-checkbox"></div>
             <label for="public">공개</label>
           </div>
+
+          <!-- 비공개 -->
           <div>
             <input id="private" type="radio"
                    name="view-possible"
@@ -68,7 +71,7 @@
         </div>
       </div>
 
-      <!-- 게시글 등록 버튼 -->
+      <!-- 문의하기 등록 버튼 -->
       <div class="post-submitBtn-wrap">
         <button type="submit">문의하기</button>
       </div>

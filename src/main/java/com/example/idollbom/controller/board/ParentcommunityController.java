@@ -41,17 +41,18 @@ public class ParentcommunityController {
         if(authentication != null && authentication.getPrincipal() instanceof CustomUserDTO) {
             CustomUserDTO p = ((CustomUserDTO) authentication.getPrincipal());
             String parentId = p.getEmail();
-            String userRole = p.getRole();
+            String role = p.getRole();
 
             if (p.getRole().equals("parent")) {
-                System.out.println(userRole);
-                model.addAttribute("userRole", userRole);
+                System.out.println(role);
                 ParentVO parent = parentMapper.selectOne(parentId);
 
                 // 부모 정보를 받아와서 쪽지목록 개수를 계산해서 html로 전달
                 int count = noteService.countParentNoteList(parent.getParentNumber());
 
                 log.info("count : " + count);
+
+                model.addAttribute("role", role);
                 model.addAttribute("count", count);
                 model.addAttribute("parentNumber", parent.getParentNumber());
             }
