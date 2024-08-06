@@ -65,10 +65,12 @@ public class ProController {
             ProVO pro_info = proService.selectPro(proId);
 
             String role = pro_info.getRole();
+            // 쪽지 목록 개수 카운트
             int count = noteService.countProNoteList(pro_info.getProNumber());
 
             System.out.println(role);
 
+            model.addAttribute("proNumber", pro_info.getProNumber());
             model.addAttribute("count", count);
             model.addAttribute("role", role);
         }

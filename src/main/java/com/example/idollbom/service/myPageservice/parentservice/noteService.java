@@ -1,5 +1,6 @@
 package com.example.idollbom.service.myPageservice.parentservice;
 
+import com.example.idollbom.domain.dto.myPagedto.parentdto.NoteDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.NoteListDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.mailDTO;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,9 @@ public interface noteService {
 
     // 부모 쪽지 목록 카운트
     int countParentNoteList(Long parentNumber);
-    
+
+    // 전문가가 부모에게 쪽지 전송 시
+    // 부모의 쪽지 목록 추가되는 서비스
+    void insertNote(NoteDTO noteDTO);
+
 }

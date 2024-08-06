@@ -9,7 +9,6 @@ import com.example.idollbom.domain.dto.myPagedto.parentdto.paymentDTO;
 import com.example.idollbom.domain.dto.parentdto.ReviewDTO;
 import com.example.idollbom.domain.vo.*;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
-import com.example.idollbom.service.applyservice.ClassListService;
 import com.example.idollbom.service.myPageservice.parentservice.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -172,7 +171,7 @@ public class ParentMypageController {
         return "html/myPage/parent/myFavoriteClass";
     }
 
-//    쪽지 목록으로 이동
+    // 쪽지 목록으로 이동
     @GetMapping("/myNote")
     public String selectMyNoteList(Model model){
         // 쪽지 목록개수 view에 전달
@@ -184,6 +183,10 @@ public class ParentMypageController {
         model.addAttribute("parentInfo", parentInfo );
         return "html/myPage/parent/mail";
     }
+    
+    // 쪽지 목록 추가
+//    @PostMapping("/myNote")
+//    public String addNote(@ModelAttribute mailDTO dto){}
 
     //  내정보 받아오기
     @GetMapping("/myInformation")
