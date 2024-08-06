@@ -65,7 +65,7 @@ function renderBoard(communities){
 
         let communityRow = `
         <tr>
-            <td><img src="/backImage/parent/profile/${community.parentProfileImageUrl}" alt="프로필"></td>
+            <td><img src="${community.parentProfileImageUrl}" alt="프로필"></td>
             <td>${community.parentPostTitle}</td>
             <td>${linkHtml}</td>
             <td>${community.parentNickname}</td>

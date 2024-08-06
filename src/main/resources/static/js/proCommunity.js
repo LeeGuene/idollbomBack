@@ -65,7 +65,7 @@ function proRenderBoard(pros){
 
         let communityRow = `
         <tr>
-            <td><img src="/backImage/pro/profile/${pro.proProfileUrl}" alt="프로필"></td>
+            <td><img src="${pro.proProfileImageUrl}" alt="프로필"></td>
             <td>${pro.proPostTitle}</td>
             <td>${linkHtml}</td>
             <td>${pro.proNickname}</td>
