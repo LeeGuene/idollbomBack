@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/user")
@@ -65,9 +67,9 @@ public class ParentController {
 
 //  프로 회원가입폼 제출
     @PostMapping("/proSignup")
-    public String proSignup(ProDTO proDTO) {
+    public String proSignup(ProDTO proDTO, @RequestParam(value = "file") MultipartFile file, @RequestParam(value = "proImg") MultipartFile proImg) {
         // DB에 프로 회원정보 저장
-        proService.savePro(proDTO);
+        proService.savePro(proDTO,file,proImg);
         
         return "redirect:/user/login"; // 회원가입 후 로그인 페이지로 리디렉션
     }
