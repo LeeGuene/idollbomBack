@@ -2,6 +2,7 @@ package com.example.idollbom.service.loginservice;
 
 import com.example.idollbom.domain.dto.logindto.ProDTO;
 import com.example.idollbom.domain.vo.ProVO;
+import com.example.idollbom.mapper.loginmapper.ParentMapper;
 import com.example.idollbom.mapper.loginmapper.ProMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +18,7 @@ public class ProServiceImpl implements ProService {
 
     private final ProMapper proMapper;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final ParentMapper parentMapper;
 
     @Override
     public ProVO selectPro(String proId) {
@@ -115,5 +117,11 @@ public class ProServiceImpl implements ProService {
             e.printStackTrace();
         }
         return imageUrl;
+    }
+
+    @Override
+    public String selectEmail(String proEmail) {
+
+        return proMapper.selectEmail(proEmail);
     }
 }

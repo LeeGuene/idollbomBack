@@ -15,4 +15,6 @@ public interface ProMapper {
 
     // 전문가 정보 수정
     void updatePassword(@Param("proPassword") String proPassword, @Param("proNumber")Long proNumber);
+
+    String selectEmail(@Param("proEmail")String proEmail);
 }

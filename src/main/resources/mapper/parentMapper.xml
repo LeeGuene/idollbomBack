@@ -42,4 +42,14 @@
         where PARENT_NUMBER = #{parentNumber}
     </select>
 
+    <select id="selectParentEmail">
+        SELECT
+            CASE
+                WHEN COUNT(*) > 0 THEN #{parentEmail}
+                ELSE NULL
+                END AS result
+        FROM parent
+        WHERE parent_email = #{parentEmail}
+    </select>
+
 </mapper>

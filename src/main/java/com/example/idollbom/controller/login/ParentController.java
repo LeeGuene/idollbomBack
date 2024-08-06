@@ -3,6 +3,7 @@ package com.example.idollbom.controller.login;
 import com.example.idollbom.domain.dto.logindto.ParentDTO;
 import com.example.idollbom.domain.dto.logindto.ProDTO;
 import com.example.idollbom.service.loginservice.ParentService;
+import com.example.idollbom.service.loginservice.ParentServiceImpl;
 import com.example.idollbom.service.loginservice.ProService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -73,5 +74,6 @@ public class ParentController {
         
         return "redirect:/user/login"; // 회원가입 후 로그인 페이지로 리디렉션
     }
+
 
 }
