@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sign Up Form</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up Form</title>
   <link rel="stylesheet" th:href="@{/css/login/koregisterpage.css}">
 </head>
 <body>
@@ -29,14 +29,14 @@
       </a>
     </div>
   </div>
-<!-- 구분자 -->
+  <!-- 구분자 -->
   <div class="separator">
     <div class="line"></div>
     <p class="ortext">or</p>
     <div class="line"></div>
   </div>
-<!-- 폼로그인 -->
-  <form id="signupForm" th:action="@{/user/signup}" method="post">
+  <!-- 폼로그인 -->
+  <form id="signupForm" th:action="@{/user/signup}" method="post" onsubmit="validateForm(event)">
 
     <input type="text" id="username" placeholder="이름" name="parentName" required >
 
@@ -58,7 +58,7 @@
 
     <input type="password" id="password" placeholder="비밀번호"  name="parentPassword" required>
 
-     <!-- 틀리면 나올 경고 -->
+    <!-- 틀리면 나올 경고 -->
     <div class="error-message" style="display: none;" id="passwordError">
       <img src="/images/warning.png" alt="Warning" class="error-icon"> 비밀번호는 6자리 이상이어야 합니다
     </div>
@@ -70,36 +70,45 @@
       <img src="/images/warning.png" alt="Warning" class="error-icon"> 비밀번호가 일치하지 않습니다
     </div>
 
-<!-- 등록 -->
+    <!-- 등록 -->
     <button type="submit" class="signup-button">SIGN UP</button>
     <!-- sign in 으로 이동 -->
   </form>
   <p class="signinAsk">이미 계정이 있나요 <a th:href="@{user/login}">Sign In</a></p>
 </div>
-  <script>
-    function check() {
-      let email = document.getElementById('email').value;
-      $.ajax({
-        url: '/check/checkEmail',  // URL 수정
-        type: 'GET',
-        data: { email: email },
-        success: function(response) {
-          if(response !== "null") {
-            console.log(response);
-            alert("사용 불가능한 아이디입니다.");
-            document.getElementById('email').value = '';  // 이메일 입력 필드를 비웁니다.
-          } else {
-            alert("사용 가능한 아이디입니다.");
-          }
-        },
-        error: function(err) {
-          alert("이메일 확인에 실패했습니다.");
+<script>
+  let isEmailChecked = false;
+  function check() {
+    let email = document.getElementById('email').value;
+    $.ajax({
+      url: '/check/checkEmail',  // URL 수정
+      type: 'GET',
+      data: { email: email },
+      success: function(response) {
+        if(response !== "null") {
+          console.log(response);
+          alert("사용 불가능한 아이디입니다.");
+          document.getElementById('email').value = '';  // 이메일 입력 필드를 비웁니다.
+          isEmailChecked = false;
+        } else {
+          alert("사용 가능한 아이디입니다.");
+          isEmailChecked = true;
         }
-      });
+      },
+      error: function(err) {
+        alert("이메일 확인에 실패했습니다.");
+      }
+    });
+  }
+
+  function validateForm(event) {
+    if (!isEmailChecked) {
+      event.preventDefault(); // 중복 확인이 안 되었으면 폼 제출 방지
+      alert('중복 확인 버튼을 클릭해주세요.');
     }
-  </script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  }
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
-
-

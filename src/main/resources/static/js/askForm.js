@@ -47,9 +47,8 @@ document.addEventListener("DOMContentLoaded", function(){
         }
 
         if(!isChecked){
-            check = false;
+            check = false
         }
-
         return check;
     }
 
@@ -61,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function(){
             submitBtn.classList.add('disabled');
         }
     });
-
 
     form.addEventListener("submit", e=> {
         e.preventDefault();

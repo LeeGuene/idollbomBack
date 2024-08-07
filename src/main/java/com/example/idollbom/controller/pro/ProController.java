@@ -50,7 +50,7 @@ public class ProController {
 
     // 아이찾기 내 모든 나의 수업을 찜한 부모 목록 보여주기
     @GetMapping("/childlist")
-    public String goChildFind(@RequestParam(value="proNumber") Long proNumber,
+    public String goChildFind(@RequestParam(value = "proNumber") Long proNumber,
                               @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
                               @RequestParam(value = "pageSize", defaultValue = "2") int pageSize,
                               Model model){
