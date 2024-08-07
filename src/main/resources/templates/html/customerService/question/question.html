@@ -28,7 +28,7 @@
                     <!-- 공개, 비공개든 자신이 작성한 문의 글은 조회가 가능하도록 한다. -->
                     <!-- 단, 비공개라면 다른 사람이나 비회원을 조회가 불가능하도록 한다. -->
 <!--                    <dt th:classappend="${!visibleList.contains(question.questionNumber)} ? 'disabled' : ''">-->
-                    <dt>
+                    <dt th:classappend="*{answerNumber != null} ? '' : 'disabled'">
                         <input type="hidden" th:value="${question.answerNumber}" />
                         <span>Q.</span>
                         <!-- 작성자와 로그인 한 계정의 pk가 같다면 내용 보여주도록 -->

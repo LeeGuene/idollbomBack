@@ -22,35 +22,35 @@
             RESULT.CLASS_NUMBER,
             RESULT.CLASS_NAME
         FROM (
-                SELECT
-                    PA.PARENT_NAME,
-                    RE.REVIEW_NUMBER,
-                    RE.REVIEW_CONTENT,
-                    RE.REVIEW_REGISTER_DATE,
-                    RE.REVIEW_UPDATE_DATE,
-                    RE.PARENT_NUMBER,
-                    RE.CLASS_NUMBER,
-                    RE.CLASS_NAME,
-                    ROW_NUMBER() OVER (ORDER BY RE.REVIEW_REGISTER_DATE) AS RN
-                FROM(
-                        SELECT
-                            R.REVIEW_NUMBER,
-                            R.REVIEW_CONTENT,
-                            R.REVIEW_REGISTER_DATE,
-                            R.REVIEW_UPDATE_DATE,
-                            R.PARENT_NUMBER,
-                            R.CLASS_NUMBER,
-                            DETAIL.CLASS_NAME
-                        FROM (
-                                 SELECT *
-                                 FROM PRO P JOIN CLASS C
-                                    ON P.PRO_NUMBER = C.PRO_NUMBER
-                                    AND P.PRO_NUMBER = #{proNumber}
-                        ) DETAIL JOIN REVIEW R
-                        ON DETAIL.CLASS_NUMBER = R.CLASS_NUMBER
-                ) RE JOIN PARENT PA
-                ON RE.PARENT_NUMBER = PA.PARENT_NUMBER
-            ) RESULT
+                 SELECT
+                     PA.PARENT_NAME,
+                     RE.REVIEW_NUMBER,
+                     RE.REVIEW_CONTENT,
+                     RE.REVIEW_REGISTER_DATE,
+                     RE.REVIEW_UPDATE_DATE,
+                     RE.PARENT_NUMBER,
+                     RE.CLASS_NUMBER,
+                     RE.CLASS_NAME,
+                     ROW_NUMBER() OVER (ORDER BY RE.REVIEW_REGISTER_DATE) AS RN
+                 FROM(
+                         SELECT
+                             R.REVIEW_NUMBER,
+                             R.REVIEW_CONTENT,
+                             R.REVIEW_REGISTER_DATE,
+                             R.REVIEW_UPDATE_DATE,
+                             R.PARENT_NUMBER,
+                             R.CLASS_NUMBER,
+                             DETAIL.CLASS_NAME
+                         FROM (
+                                  SELECT *
+                                  FROM PRO P JOIN CLASS C
+                                                  ON P.PRO_NUMBER = C.PRO_NUMBER
+                                                      AND P.PRO_NUMBER = #{proNumber}
+                              ) DETAIL JOIN REVIEW R
+                                            ON DETAIL.CLASS_NUMBER = R.CLASS_NUMBER
+                     ) RE JOIN PARENT PA
+                               ON RE.PARENT_NUMBER = PA.PARENT_NUMBER
+             ) RESULT
         WHERE RESULT.RN &lt;= 3
     </select>
 
@@ -89,19 +89,19 @@
     <select id="selectAllProList" resultType="ProListDTO">
         SELECT *
         FROM (
-                SELECT ROWNUM AS RN, PRO_INFO.*
-                FROM (
-                    SELECT
-                        P.PRO_NUMBER,
-                        P.PRO_EMAIL,
-                        P.PRO_NAME,
-                        P.PRO_PROFILE_IMAGE_URL,
-                        P.PRO_FILE,
-                        P.PRO_INTRO
-                    FROM PRO P
-                ) PRO_INFO
-            WHERE ROWNUM &lt;= #{endRow}
-        )
+                 SELECT ROWNUM AS RN, PRO_INFO.*
+                 FROM (
+                          SELECT
+                              P.PRO_NUMBER,
+                              P.PRO_EMAIL,
+                              P.PRO_NAME,
+                              P.PRO_PROFILE_IMAGE_URL,
+                              P.PRO_FILE,
+                              P.PRO_INTRO
+                          FROM PRO P
+                      ) PRO_INFO
+                 WHERE ROWNUM &lt;= #{endRow}
+             )
         WHERE RN &gt; #{startRow}
     </select>
 
@@ -109,7 +109,7 @@
     <select id="getProCount">
         SELECT COUNT(DISTINCT P.PRO_NUMBER)
         FROM PRO P JOIN CLASS C ON P.PRO_NUMBER = C.PRO_NUMBER
-                 JOIN REVIEW R ON C.CLASS_NUMBER = R.CLASS_NUMBER
+                   JOIN REVIEW R ON C.CLASS_NUMBER = R.CLASS_NUMBER
         WHERE R.CLASS_NUMBER IS NOT NULL
     </select>
 
@@ -137,7 +137,8 @@
         SET pro_name = #{proName},
             pro_phone_number = #{proPhoneNumber},
             pro_nickname = #{proNickname},
-            pro_intro = #{proIntro}
+            pro_intro = #{proIntro},
+            pro_address = #{proAddress}
         WHERE pro_number = #{proNumber}
     </update>
     <!-- 전문가 파일 업데이트   -->
