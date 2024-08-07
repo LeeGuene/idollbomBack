@@ -37,7 +37,7 @@
         <div class="line"></div>
     </div>
     <!-- 폼로그인 -->
-    <form id="signupForm" method="post" th:object="${pro}" th:action="@{/user/proSignup}" enctype="multipart/form-data">
+    <form id="signupForm" method="post" th:object="${pro}" th:action="@{/user/proSignup}" enctype="multipart/form-data" onsubmit="validateForm(event)">
 
         <input type="text" th:field="*{proName}" id="username" placeholder="이름" required>
 
@@ -88,6 +88,7 @@
     <p class="signinAsk">이미 계정이 있나요 <a href="../../html/login/loginpage.html">Sign In</a></p>
 </div>
 <script>
+    let isEmailChecked = false;
     function check() {
         let email = document.getElementById('email').value;
         $.ajax({
@@ -99,8 +100,10 @@
                     console.log(response);
                     alert("사용 불가능한 아이디입니다.");
                     document.getElementById('email').value = '';  // 이메일 입력 필드를 비웁니다.
+                    isEmailChecked = false;
                 } else {
                     alert("사용 가능한 아이디입니다.");
+                    isEmailChecked = true;
                 }
             },
             error: function(err) {
@@ -109,7 +112,12 @@
         });
     }
 
-
+    function validateForm(event) {
+        if (!isEmailChecked) {
+            event.preventDefault(); // 중복 확인이 안 되었으면 폼 제출 방지
+            alert('중복 확인 버튼을 클릭해주세요.');
+        }
+    }
 
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

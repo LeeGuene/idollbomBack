@@ -102,7 +102,7 @@ function autoSubmit() {
                 <div class="random_pro">
                     <input type="hidden" value="${randomMatch.proNumber}">
                     <input type="hidden" value="${randomMatch.classNumber}">
-                    <img src="../images/${randomMatch.proProfileImageUrl}">
+                    <img src="${randomMatch.proProfileImageUrl}">
                     <div>
                         <p>${randomMatch.proName} (${randomMatch.reviewCount})</p>
                         <p>${randomMatch.className} (${randomMatch.classCategoryBig})</p>

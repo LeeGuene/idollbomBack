@@ -3,6 +3,9 @@
 
 <mapper namespace="com.example.idollbom.mapper.myPagemapper.parentmapper.ReportMapper">
     <select id="reportList">
-        select * from parent_report
+        SELECT pr.*
+        FROM parent_report pr
+        JOIN parent_post pp ON pr.parent_post_number = pp.parent_post_number
+        WHERE pp.parent_number = #{parentNumber}
     </select>
 </mapper>
