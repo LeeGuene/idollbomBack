@@ -24,11 +24,10 @@
                 <!-- 문의하기 전체 목록 -->
                 <dl class="question_item" th:each="question : ${questionList}" th:object="${question}">
                     <!-- 문의하기 제목 -->
-
                     <!-- 공개, 비공개든 자신이 작성한 문의 글은 조회가 가능하도록 한다. -->
                     <!-- 단, 비공개라면 다른 사람이나 비회원을 조회가 불가능하도록 한다. -->
 <!--                    <dt th:classappend="${!visibleList.contains(question.questionNumber)} ? 'disabled' : ''">-->
-                    <dt>
+                    <dt th:classappend="*{answerNumber != null} ? '' : 'disabled'">
                         <input type="hidden" th:value="${question.answerNumber}" />
                         <span>Q.</span>
                         <!-- 작성자와 로그인 한 계정의 pk가 같다면 내용 보여주도록 -->
@@ -53,9 +52,9 @@
                     <!-- 문의 답변 내용 -->
                     <!-- 1. 작성자와 로그인 한 계정이 일치하거나 공개 글이고 -->
                     <!-- 2. 문의 답변 내용이 있어야만 볼 수 있도록 한다. -->
-                    <dd th:if="${parentNumber == question.parentNumber} or
+                    <dd th:if='${parentNumber == question.parentNumber} or
                         ${visibleList.contains(question.questionNumber)} and
-                        *{answerContent != null}"
+                        *{answerContent != ""}'
                     >
                         <span>A.</span>
                         <span class="answer_content" th:text="*{answerContent}"></span>

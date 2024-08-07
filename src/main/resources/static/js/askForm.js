@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     function validateForm(){
         let check = true;
+        let isChecked = false;
 
         // 문의하기 제목 유효성 검사
         if(questionTitle.value === ""){
@@ -38,12 +39,17 @@ document.addEventListener("DOMContentLoaded", function(){
         }
 
         // 열람가능 여부 체크박스 유효성 검사
-        // for(let i = 0; i < viewCheckBoxs.length; i++){
-        //     if(!viewCheckBoxs[i].checked){
-        //         check = false;
-        //         break;
-        //     }
-        // }
+        for(let i = 0; i < viewCheckBoxs.length; i++){
+            if(viewCheckBoxs[i].checked){
+                isChecked = true;
+                break;
+            }
+        }
+
+        if(!isChecked){
+            check = false;
+        }
+
         return check;
     }
 
@@ -55,6 +61,7 @@ document.addEventListener("DOMContentLoaded", function(){
             submitBtn.classList.add('disabled');
         }
     });
+
 
     form.addEventListener("submit", e=> {
         e.preventDefault();
